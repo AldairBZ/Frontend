@@ -11,9 +11,9 @@ Este repositorio contendrá todo el código relacionado con la interfaz de usuar
 
 ## 🛠️ Tecnologías
 - 🌐 **HTML5**
-- 🎨 **CSS3 / SCSS**
-- ⚙️ **JavaScript (ES6+)**
-- 🚀 **Framework / Librería:** React / Angular / Vue (elige la que uses)
+- 🎨 **CSS**
+- ⚙️ **JavaScript**
+- 🚀 **Framework / Librería:** Angular
 
 ---
 
