@@ -7,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './avatar.css'
 })
 export class Avatar {
-
+  avatarImg = '';
+  esperanzaVida = 0;
+  estadoFisico = '';
 }

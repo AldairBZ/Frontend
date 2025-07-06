@@ -7,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './mundo.css'
 })
 export class Mundo {
-
+  aire = '';
+  agua = '';
+  biodiversidad = '';
+  co2 = '';
 }
