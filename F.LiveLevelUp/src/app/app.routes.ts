@@ -4,5 +4,6 @@ import { InicioComponent } from './componentes/inicio';
 
 export const routes: Routes = [
   { path: '', component: PantallaBienvenidaComponent },
-  { path: 'inicio', component: InicioComponent }
+  { path: 'inicio', component: InicioComponent },
+  { path: 'login', loadComponent: () => import('./pages/login').then(m => m.Login) }
 ];

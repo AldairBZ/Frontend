@@ -57,6 +57,7 @@ export class PantallaBienvenidaComponent implements OnInit, AfterViewInit {
     }));
 
     function dibujar() {
+      if (!ctx) return;
       ctx.clearRect(0, 0, width, height);
       // Estrellas
       for (const estrella of estrellas) {
