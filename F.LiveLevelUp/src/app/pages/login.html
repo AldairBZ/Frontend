@@ -1,0 +1,26 @@
+<div class="login-container">
+  <div class="login-forest-bg">
+    <div class="tree">
+      <div class="trunk"></div>
+      <div class="leaves"></div>
+    </div>
+    <div class="tree" style="left: 60vw; bottom: 140px; transform: scale(1.2);">
+      <div class="trunk"></div>
+      <div class="leaves"></div>
+    </div>
+    <div class="tree" style="left: 35vw; bottom: 110px; transform: scale(0.8);">
+      <div class="trunk"></div>
+      <div class="leaves"></div>
+    </div>
+    <div class="login-card">
+      <h2 class="login-title">Inicia sesión en el Bosque</h2>
+      <form (ngSubmit)="login()">
+        <label class="login-label">Usuario:</label>
+        <input type="text" [(ngModel)]="usuario" name="usuario" class="login-input" required />
+        <label class="login-label">Contraseña:</label>
+        <input type="password" [(ngModel)]="contrasena" name="contrasena" class="login-input" required />
+        <button type="submit" class="login-btn">Entrar</button>
+      </form>
+    </div>
+  </div>
+</div> 

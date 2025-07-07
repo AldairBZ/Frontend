@@ -1,0 +1,23 @@
+# Node modules
+node_modules/
+
+# Compiled output
+dist/
+out-tsc/
+
+# IDEs
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Env files
+.env
+.env.* 
+
+# Angular cache
+.angular/cache/
+
+# Misc
+.DS_Store
