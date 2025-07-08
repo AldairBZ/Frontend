@@ -1,0 +1,70 @@
+.avatar-minimal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem auto;
+  width: 120px;
+  height: 260px;
+}
+.avatar-cabeza {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #FFCECE;
+  box-shadow: 0 2px 8px #A0E7E5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 0.2rem;
+}
+.avatar-cara {
+  font-size: 2.2rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.avatar-tronco {
+  width: 30px;
+  height: 80px;
+  border-radius: 16px;
+  background: #FFCECE;
+  box-shadow: 0 2px 8px #B4F8C8;
+  margin-bottom: -10px;
+  z-index: 1;
+}
+.avatar-brazo {
+  position: absolute;
+  top: 80px;
+  height: 14px;
+  border-radius: 8px;
+  background: #FFCECE;
+  box-shadow: 0 2px 8px #A0E7E5;
+  z-index: 0;
+}
+.avatar-brazo-izq {
+  left: -40px;
+  transform: rotate(-18deg);
+}
+.avatar-brazo-der {
+  right: -40px;
+  transform: rotate(18deg);
+}
+.avatar-pierna {
+  position: absolute;
+  width: 16px;
+  border-radius: 10px;
+  background: #FFCECE;
+  box-shadow: 0 2px 8px #A0E7E5;
+  bottom: 0;
+  z-index: 0;
+}
+.avatar-pierna-izq {
+  left: 20px;
+}
+.avatar-pierna-der {
+  right: 20px;
+} 
