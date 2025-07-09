@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './LoginTriangle.css';
 import planetaGif from '../../assets/svg/planet.png';
+import FondoEspacioLogin from './FondoEspacioLogin';
 
 function PlanetAnimated({ className, style }) {
   return (
@@ -72,7 +73,8 @@ export default function LoginTriangle() {
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 20,
-    margin: '0 auto'
+    margin: '0 auto',
+    willChange: 'width, height'
   };
 
   // Escalado responsivo para canvas-fijo
@@ -93,19 +95,42 @@ export default function LoginTriangle() {
 
   return (
     <div className="triangle-bg">
+      <FondoEspacioLogin />
       <div className="triangle-stack-col" style={{zIndex: 30, position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', width: '100vw'}}>
         <h1 className={`triangle-title${showTriangle ? ' brillo' : ''}`} style={{marginBottom: '2.5rem'}}>
           <span className={showTriangle ? 'brillo-text' : ''}>LiveLevelUp</span>
         </h1>
         <div style={planetStyle}>
-          <PlanetAnimated className="planet-svg-triangle" style={{width: '100%', height: '100%'}} />
+          <div style={{position: 'relative', width: '100%', height: '100%'}}>
+            <PlanetAnimated 
+              className="planet-svg-triangle planeta-clickeable"
+              style={{width: '100%', height: '100%', pointerEvents: 'none', userSelect: 'none'}}
+            />
+            {!showTriangle && (
+              <button
+                className="boton-invisible-planeta"
+                aria-label="Abrir login"
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  zIndex: 2,
+                  padding: 0,
+                  margin: 0
+                }}
+                onClick={() => setShowTriangle(true)}
+              />
+            )}
+          </div>
         </div>
         <h2 className={`triangle-subtitle${showTriangle ? ' brillo' : ''}`} style={{marginTop: '2.5rem', marginBottom: '1.5rem'}}>
           <span className={showTriangle ? 'brillo-text' : ''}>Tu vida tiene más impacto del que imaginas...</span>
         </h2>
-        {!showTriangle && (
-          <button className="triangle-btn" style={{marginTop: '1.5rem'}} onClick={() => setShowTriangle(true)}>Entrar</button>
-        )}
       </div>
       {/* Overlay detrás de todo para oscurecer el fondo, sin tapar el planeta ni el login */}
       {showTriangle && <div className="triangle-overlay" style={{zIndex: 1}} />}

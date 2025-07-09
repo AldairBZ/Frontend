@@ -466,3 +466,9 @@ body {
   height: 100%;
   width: 100%;
 } 
+
+.planeta-clickeable:hover, .planeta-clickeable:focus {
+  transform: scale(1.07) drop-shadow(0 0 24px #00eaffcc);
+  filter: brightness(1.2) drop-shadow(0 0 24px #00eaffcc);
+  outline: none;
+} 
