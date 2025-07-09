@@ -178,6 +178,7 @@ body {
   z-index: 40;
   animation: fadeInRight 0.7s cubic-bezier(.23,1.12,.32,1) both;
   border: none;
+  overflow: hidden;
 }
 @keyframes fadeInRight {
   0% { opacity: 0; transform: translateY(-50%) translateX(60px) scale(0.95); }
