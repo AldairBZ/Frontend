@@ -3,7 +3,7 @@ import './LoginTriangle.css';
 import planetaGif from '../../assets/svg/planet.png';
 import FondoEspacioLogin from './FondoEspacioLogin';
 
-function PlanetAnimated({ className, style }) {
+function PlanetAnimated({ className = '', style = {} }) {
   return (
     <img src={planetaGif} alt="Planeta" className={className + ' planeta-animado'} style={style} />
   );
@@ -25,7 +25,7 @@ function SocialLogos() {
   );
 }
 
-function LoginForm({ onClose }) {
+function LoginForm({ onClose = () => {} }) {
   const [mode, setMode] = useState('login');
   return (
     <div className="triangle-form-content">

@@ -136,7 +136,6 @@ body {
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
-  pointer-events: none;
   z-index: 30;
   transition: right 0.7s cubic-bezier(.23,1.12,.32,1);
 }
@@ -175,10 +174,11 @@ body {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  z-index: 40;
   animation: fadeInRight 0.7s cubic-bezier(.23,1.12,.32,1) both;
   border: none;
   overflow: hidden;
+  z-index: 1000;
+  pointer-events: all;
 }
 @keyframes fadeInRight {
   0% { opacity: 0; transform: translateY(-50%) translateX(60px) scale(0.95); }
@@ -199,10 +199,14 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
+  z-index: 1001;
+  pointer-events: all;
 }
 .input-group {
   width: 100%;
   position: relative;
+  z-index: 1002;
+  pointer-events: all;
 }
 .input-group input {
   width: 100%;
@@ -216,6 +220,15 @@ body {
   outline: none;
   box-shadow: 0 2px 8px #1976d222;
   transition: background 0.2s, box-shadow 0.2s, border 0.2s;
+  z-index: 1003;
+  pointer-events: all;
+}
+.triangle-form-content button,
+.triangle-form-content input,
+.triangle-form-content select,
+.triangle-form-content textarea {
+  pointer-events: all !important;
+  z-index: 1003;
 }
 .input-group input:focus {
   background: #fff;
