@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import IntroCinematic from './components/IntroCinematic';
 import AvatarSVG from './components/AvatarSVG';
+import TimelineLife from './components/TimelineLife';
 
 export default function App() {
   const [showIntro, setShowIntro] = useState(true);
@@ -9,6 +10,14 @@ export default function App() {
   const [edad, setEdad] = useState(25);
   const [energia, setEnergia] = useState(80);
   const [animo, setAnimo] = useState('feliz');
+
+  const eventos = [
+    { emoji: '🎉', texto: 'Inicio' },
+    { emoji: '😴', texto: 'Dormir 8h' },
+    { emoji: '🥦', texto: 'Comer verduras' },
+    { emoji: '🏃', texto: 'Caminar 30min' },
+    { emoji: '🏆', texto: 'Primer logro' },
+  ];
 
   if (showIntro) {
     return <IntroCinematic onEnter={() => setShowIntro(false)} />;
@@ -46,6 +55,8 @@ export default function App() {
       <button style={{ marginTop: 32, fontSize: 18, background: '#ffe082', color: '#222', border: 'none', borderRadius: 24, padding: '0.8rem 2.5rem', fontWeight: 'bold', boxShadow: '0 4px 16px #ffe08255', cursor: 'pointer' }}>
         Guardar mi yo vital
       </button>
+      {/* Línea de vida */}
+      <TimelineLife eventos={eventos} />
     </div>
   );
 }
