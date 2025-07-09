@@ -1,0 +1,210 @@
+.sidepanel-bg {
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(ellipse at 60% 40%, #1a237e 60%, #0d133d 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+}
+.sidepanel-center-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+.planet-svg-side {
+  width: 180px;
+  height: 180px;
+  margin-bottom: 1.5rem;
+  animation: planet-spin 24s linear infinite;
+  filter: drop-shadow(0 0 32px #1976d2cc);
+}
+@keyframes planet-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.sidepanel-title {
+  font-size: 2.7rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.7rem;
+  text-align: center;
+  text-shadow: 0 2px 16px #1976d288;
+}
+.sidepanel-subtitle {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #e3f2fd;
+  margin-bottom: 2.2rem;
+  text-align: center;
+}
+.sidepanel-btn {
+  font-size: 1.3rem;
+  font-weight: 700;
+  padding: 1rem 3.2rem;
+  border-radius: 2rem;
+  border: none;
+  background: linear-gradient(90deg, #1976d2 60%, #64b5f6 100%);
+  color: #fff;
+  box-shadow: 0 2px 12px #1976d244;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+.sidepanel-btn:hover {
+  background: linear-gradient(90deg, #fff 60%, #90caf9 100%);
+  color: #1976d2;
+  box-shadow: 0 4px 24px #1976d288;
+  transform: scale(1.07);
+}
+.sidepanel-panel {
+  position: fixed;
+  top: 0;
+  right: -480px;
+  width: 420px;
+  max-width: 100vw;
+  height: 100vh;
+  background: linear-gradient(120deg, #1976d2 80%, #64b5f6 100%);
+  box-shadow: -8px 0 32px #1976d288, 0 2px 8px #fff2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+  transition: right 0.6s cubic-bezier(.23,1.12,.32,1);
+}
+.sidepanel-panel.show {
+  right: 0;
+}
+.auth-card-side {
+  width: 340px;
+  max-width: 90vw;
+  min-height: 420px;
+  background: #fff;
+  border-radius: 2.2rem;
+  box-shadow: 0 8px 32px #1976d288, 0 2px 8px #fff2;
+  padding: 2.5rem 2.2rem 2rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  animation: fadeInRight 0.7s cubic-bezier(.23,1.12,.32,1) both;
+}
+@keyframes fadeInRight {
+  0% { opacity: 0; transform: translateX(60px) scale(0.95); }
+  100% { opacity: 1; transform: translateX(0) scale(1); }
+}
+.auth-card-side h2 {
+  color: #1976d2;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  letter-spacing: 0.03em;
+  text-shadow: 0 2px 16px #1976d288;
+  width: 100%;
+  text-align: center;
+}
+.auth-form-side {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.input-group {
+  width: 100%;
+  position: relative;
+}
+.input-group input {
+  width: 100%;
+  padding: 1.1rem 1.2rem;
+  border-radius: 1.2rem;
+  border: 1.5px solid #90caf9;
+  background: #f8fcff;
+  color: #222;
+  font-size: 1.1rem;
+  font-weight: 500;
+  outline: none;
+  box-shadow: 0 2px 8px #1976d222;
+  transition: background 0.2s, box-shadow 0.2s, border 0.2s;
+}
+.input-group input:focus {
+  background: #fff;
+  border: 2px solid #1976d2;
+  box-shadow: 0 4px 16px #1976d244;
+}
+.form-btn-side {
+  width: 100%;
+  padding: 1rem 0;
+  border-radius: 1.2rem;
+  border: none;
+  background: linear-gradient(90deg, #1976d2 60%, #64b5f6 100%);
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 2px 12px #1976d244;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+.form-btn-side:hover {
+  background: linear-gradient(90deg, #fff 60%, #90caf9 100%);
+  color: #1976d2;
+  box-shadow: 0 4px 24px #1976d288;
+  transform: scale(1.04);
+}
+.switch-mode-side {
+  width: 100%;
+  text-align: center;
+  color: #1976d2;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+.switch-mode-side button {
+  background: none;
+  border: none;
+  color: #1976d2;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-left: 0.3rem;
+  transition: color 0.2s;
+}
+.switch-mode-side button:hover {
+  color: #64b5f6;
+}
+.sidepanel-close {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.1rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+.sidepanel-close:hover {
+  opacity: 1;
+}
+.sidepanel-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #0008;
+  z-index: 20;
+  animation: fadeInOverlay 0.4s;
+}
+@keyframes fadeInOverlay {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+} 

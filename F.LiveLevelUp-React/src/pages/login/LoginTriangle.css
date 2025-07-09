@@ -1,0 +1,320 @@
+html, body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: none;
+}
+body {
+  box-sizing: border-box;
+  background: none;
+}
+.triangle-bg {
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  min-width: 100vw;
+  background: radial-gradient(ellipse at 60% 40%, #1a237e 60%, #0d133d 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  box-sizing: border-box;
+}
+.triangle-center-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+.planet-wrap {
+  margin-bottom: 0;
+  transition: left 0.7s cubic-bezier(.23,1.12,.32,1), top 0.7s cubic-bezier(.23,1.12,.32,1), transform 0.7s cubic-bezier(.23,1.12,.32,1);
+  position: absolute;
+  left: 50%;
+  top: 38%;
+  transform: translate(-50%, 0);
+  z-index: 60;
+  pointer-events: none;
+}
+.planet-svg-triangle, .planeta-animado {
+  width: 180px;
+  height: 180px;
+  animation: planet-spin 24s linear infinite;
+  filter: drop-shadow(0 0 64px #1976d2cc);
+  border-radius: 50%;
+  object-fit: cover;
+  pointer-events: none;
+}
+@media (max-width: 700px) {
+  .planet-svg-triangle, .planeta-animado {
+    width: 120px;
+    height: 120px;
+  }
+}
+@keyframes planet-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.planet-pinned {
+  left: calc(100vw - 340px);
+  top: 54%;
+  transform: translate(-50%, -50%) scale(1.05);
+  transition: left 0.7s cubic-bezier(.23,1.12,.32,1), top 0.7s cubic-bezier(.23,1.12,.32,1), transform 0.7s cubic-bezier(.23,1.12,.32,1);
+}
+.triangle-title {
+  font-size: 2.1rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  text-shadow: 0 2px 16px #1976d288;
+  z-index: 2;
+  transition: opacity 0.6s, transform 0.6s;
+}
+.triangle-subtitle {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #e3f2fd;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  z-index: 2;
+  transition: opacity 0.6s, transform 0.6s;
+}
+.fade-out {
+  opacity: 0;
+  transform: translateY(-30px) scale(0.95);
+  pointer-events: none;
+}
+.triangle-btn {
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.8rem 2.2rem;
+  border-radius: 2rem;
+  border: none;
+  background: linear-gradient(90deg, #1976d2 60%, #64b5f6 100%);
+  color: #fff;
+  box-shadow: 0 2px 12px #1976d244;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+  z-index: 2;
+  margin-top: 90px;
+}
+.triangle-btn:hover {
+  background: linear-gradient(90deg, #fff 60%, #90caf9 100%);
+  color: #1976d2;
+  box-shadow: 0 4px 24px #1976d288;
+  transform: scale(1.07);
+}
+.triangle-panel-anim {
+  position: fixed;
+  top: 0;
+  right: -480px;
+  width: 400px;
+  max-width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  pointer-events: none;
+  z-index: 30;
+  transition: right 0.7s cubic-bezier(.23,1.12,.32,1);
+}
+.triangle-panel-anim.show {
+  right: 0;
+  pointer-events: all;
+}
+.triangle-panel-anim::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, #1976d2 80%, #64b5f6 100%);
+  clip-path: polygon(100% 0, 0 50%, 100% 100%);
+  z-index: 1;
+  box-shadow: none;
+  animation: triangleIn 0.7s cubic-bezier(.23,1.12,.32,1);
+}
+@keyframes triangleIn {
+  0% { clip-path: polygon(100% 0, 100% 50%, 100% 100%); }
+  100% { clip-path: polygon(100% 0, 0 50%, 100% 100%); }
+}
+.triangle-form-content {
+  position: absolute;
+  top: 50%;
+  right: 40px;
+  transform: translateY(-50%);
+  width: 300px;
+  background: rgba(255,255,255,0.97);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px #1976d288, 0 2px 8px #fff2;
+  padding: 1.5rem 1.2rem 1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 40;
+  animation: fadeInRight 0.7s cubic-bezier(.23,1.12,.32,1) both;
+  border: none;
+}
+@keyframes fadeInRight {
+  0% { opacity: 0; transform: translateY(-50%) translateX(60px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(-50%) translateX(0) scale(1); }
+}
+.triangle-form-content h2 {
+  color: #1976d2;
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.03em;
+  text-shadow: 0 2px 16px #1976d288;
+  width: 100%;
+  text-align: center;
+}
+.triangle-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.input-group {
+  width: 100%;
+  position: relative;
+}
+.input-group input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border-radius: 1.2rem;
+  border: none;
+  background: #f8fcff;
+  color: #222;
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+  box-shadow: 0 2px 8px #1976d222;
+  transition: background 0.2s, box-shadow 0.2s, border 0.2s;
+}
+.input-group input:focus {
+  background: #fff;
+  border: none;
+  box-shadow: 0 4px 16px #1976d244;
+}
+.form-btn-triangle {
+  width: 100%;
+  padding: 0.8rem 0;
+  border-radius: 1.2rem;
+  border: none;
+  background: linear-gradient(90deg, #1976d2 60%, #64b5f6 100%);
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  box-shadow: 0 2px 12px #1976d244;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+.form-btn-triangle:hover {
+  background: linear-gradient(90deg, #fff 60%, #90caf9 100%);
+  color: #1976d2;
+  box-shadow: 0 4px 24px #1976d288;
+  transform: scale(1.04);
+}
+.switch-mode-triangle {
+  width: 100%;
+  text-align: center;
+  color: #1976d2;
+  font-size: 0.95rem;
+  margin-top: 0.3rem;
+}
+.switch-mode-triangle button {
+  background: none;
+  border: none;
+  color: #1976d2;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-left: 0.3rem;
+  transition: color 0.2s;
+}
+.switch-mode-triangle button:hover {
+  color: #64b5f6;
+}
+.triangle-social-logos {
+  display: flex;
+  gap: 0.7rem;
+  margin-top: 0.7rem;
+  width: 100%;
+  justify-content: center;
+}
+.social-btn {
+  border: none;
+  background: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1.5px 8px #1976d222;
+  cursor: pointer;
+  transition: box-shadow 0.18s, transform 0.18s;
+  padding: 0;
+}
+.social-btn:hover {
+  box-shadow: 0 4px 16px #1976d244;
+  transform: scale(1.13);
+}
+.social-btn.google svg {
+  background: #fff;
+  border-radius: 50%;
+}
+.social-btn.github svg {
+  background: #fff;
+  border-radius: 50%;
+}
+.social-btn.facebook svg {
+  background: #fff;
+  border-radius: 50%;
+}
+.triangle-close {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #1976d2;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+.triangle-close:hover {
+  opacity: 1;
+}
+.triangle-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000a;
+  z-index: 1;
+  animation: fadeInOverlay 0.4s;
+}
+@keyframes fadeInOverlay {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+} 

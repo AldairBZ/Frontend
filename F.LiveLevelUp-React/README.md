@@ -41,7 +41,7 @@ LiveLevelUp es una web app gamificada que representa a una persona y al planeta 
 - Comer verduras 🥦
 - Dejar de fumar 🚭
 - Hidratarse 💧
-- Apagar el coche y caminar 🌍
+- Apagar el coche y caminar 🌍  
 
 Cada hábito activa un cambio en barras del personaje y muestra un consejo o logro nuevo.
 
