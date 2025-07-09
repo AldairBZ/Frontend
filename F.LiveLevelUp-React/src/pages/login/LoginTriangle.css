@@ -485,3 +485,11 @@ body {
   filter: brightness(1.2) drop-shadow(0 0 24px #00eaffcc);
   outline: none;
 } 
+
+.triangle-panel-anim,
+.triangle-panel-anim.show {
+  z-index: 2000 !important;
+}
+.triangle-form-content {
+  z-index: 2100 !important;
+} 
