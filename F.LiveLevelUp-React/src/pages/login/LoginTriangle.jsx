@@ -93,29 +93,25 @@ export default function LoginTriangle() {
 
   return (
     <div className="triangle-bg">
-      <div className="canvas-escala">
-        <div className={`canvas-fijo${showTriangle ? ' sin-marco' : ''}`} style={{ transform: `scale(${scale})` }}>
-          <div className="triangle-stack-col" style={{zIndex: 30, position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', width: '100%'}}>
-            <h1 className={`triangle-title${showTriangle ? ' brillo' : ''}`} style={{marginBottom: '2.5rem'}}>
-              <span className={showTriangle ? 'brillo-text' : ''}>LiveLevelUp</span>
-            </h1>
-            <div style={planetStyle}>
-              <PlanetAnimated className="planet-svg-triangle" style={{width: '100%', height: '100%'}} />
-            </div>
-            <h2 className={`triangle-subtitle${showTriangle ? ' brillo' : ''}`} style={{marginTop: '2.5rem', marginBottom: '1.5rem'}}>
-              <span className={showTriangle ? 'brillo-text' : ''}>Tu vida tiene más impacto del que imaginas...</span>
-            </h2>
-            {!showTriangle && (
-              <button className="triangle-btn" style={{marginTop: '1.5rem'}} onClick={() => setShowTriangle(true)}>Entrar</button>
-            )}
-          </div>
-          {/* Overlay detrás de todo para oscurecer el fondo, sin tapar el planeta ni el login */}
-          {showTriangle && <div className="triangle-overlay" style={{zIndex: 1}} />}
-          {/* Contenido principal del login */}
-          <div className={`triangle-panel-anim ${showTriangle ? 'show' : ''}`} style={{zIndex: 20}}>
-            {showTriangle && <LoginForm onClose={() => setShowTriangle(false)} />}
-          </div>
+      <div className="triangle-stack-col" style={{zIndex: 30, position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', width: '100vw'}}>
+        <h1 className={`triangle-title${showTriangle ? ' brillo' : ''}`} style={{marginBottom: '2.5rem'}}>
+          <span className={showTriangle ? 'brillo-text' : ''}>LiveLevelUp</span>
+        </h1>
+        <div style={planetStyle}>
+          <PlanetAnimated className="planet-svg-triangle" style={{width: '100%', height: '100%'}} />
         </div>
+        <h2 className={`triangle-subtitle${showTriangle ? ' brillo' : ''}`} style={{marginTop: '2.5rem', marginBottom: '1.5rem'}}>
+          <span className={showTriangle ? 'brillo-text' : ''}>Tu vida tiene más impacto del que imaginas...</span>
+        </h2>
+        {!showTriangle && (
+          <button className="triangle-btn" style={{marginTop: '1.5rem'}} onClick={() => setShowTriangle(true)}>Entrar</button>
+        )}
+      </div>
+      {/* Overlay detrás de todo para oscurecer el fondo, sin tapar el planeta ni el login */}
+      {showTriangle && <div className="triangle-overlay" style={{zIndex: 1}} />}
+      {/* Contenido principal del login */}
+      <div className={`triangle-panel-anim ${showTriangle ? 'show' : ''}`} style={{zIndex: 20}}>
+        {showTriangle && <LoginForm onClose={() => setShowTriangle(false)} />}
       </div>
     </div>
   );
