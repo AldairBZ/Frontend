@@ -1,9 +1,13 @@
 html, body {
   width: 100vw;
   height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  overflow: auto;
   background: none;
 }
 body {
@@ -15,6 +19,9 @@ body {
   height: 100vh;
   min-height: 100vh;
   min-width: 100vw;
+  max-width: 100vw;
+  max-height: 100vh;
+  overflow: hidden;
   background: radial-gradient(ellipse at 60% 40%, #1a237e 60%, #0d133d 100%);
   display: flex;
   align-items: center;
@@ -22,7 +29,6 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  overflow: hidden;
   font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
   box-sizing: border-box;
 }
@@ -57,8 +63,8 @@ body {
 }
 @media (max-width: 700px) {
   .planet-svg-triangle, .planeta-animado {
-    width: 120px;
-    height: 120px;
+    width: 180px;
+    height: 180px;
   }
 }
 @keyframes planet-spin {
@@ -72,24 +78,22 @@ body {
   transition: left 0.7s cubic-bezier(.23,1.12,.32,1), top 0.7s cubic-bezier(.23,1.12,.32,1), transform 0.7s cubic-bezier(.23,1.12,.32,1);
 }
 .triangle-title {
-  font-size: 2.1rem;
+  font-size: 2.7rem;
   font-weight: 900;
+  letter-spacing: 0.06em;
   color: #fff;
-  letter-spacing: 0.04em;
-  margin-bottom: 0.5rem;
-  text-align: center;
-  text-shadow: 0 2px 16px #1976d288;
-  z-index: 2;
-  transition: opacity 0.6s, transform 0.6s;
+  text-shadow: 0 4px 32px #1976d2cc, 0 1px 0 #fff, 0 0px 8px #64b5f6cc;
+  margin-bottom: 2.5rem;
+  transition: color 0.4s, text-shadow 0.4s;
 }
 .triangle-subtitle {
-  font-size: 1rem;
-  font-weight: 400;
+  font-size: 1.25rem;
+  font-weight: 500;
   color: #e3f2fd;
+  text-shadow: 0 2px 12px #1976d2aa, 0 1px 0 #fff;
+  margin-top: 2.5rem;
   margin-bottom: 1.5rem;
-  text-align: center;
-  z-index: 2;
-  transition: opacity 0.6s, transform 0.6s;
+  transition: color 0.4s, text-shadow 0.4s;
 }
 .fade-out {
   opacity: 0;
@@ -317,4 +321,141 @@ body {
 @keyframes fadeInOverlay {
   0% { opacity: 0; }
   100% { opacity: 1; }
+}
+
+/* Efecto de brillo animado para los textos cuando el login está abierto */
+.triangle-title, .triangle-subtitle {
+  position: relative;
+  overflow: hidden;
+}
+.triangle-title.brillo, .triangle-subtitle.brillo {
+  background: linear-gradient(90deg, #fff 0%, #e3f2fd 40%, #90caf9 60%, #fff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  animation: shine-move 2.2s linear infinite;
+  filter: drop-shadow(0 2px 16px #1976d2cc);
+}
+@keyframes shine-move {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Mejorar la apariencia de los textos */
+.triangle-title {
+  font-size: 2.7rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  color: #fff;
+  text-shadow: 0 4px 32px #1976d2cc, 0 1px 0 #fff, 0 0px 8px #64b5f6cc;
+  margin-bottom: 2.5rem;
+  transition: color 0.4s, text-shadow 0.4s;
+}
+.triangle-subtitle {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #e3f2fd;
+  text-shadow: 0 2px 12px #1976d2aa, 0 1px 0 #fff;
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+  transition: color 0.4s, text-shadow 0.4s;
+}
+
+/* Efecto light sweep realista para los textos con la clase 'brillo' */
+.triangle-title.brillo, .triangle-subtitle.brillo {
+  position: relative;
+  background: none;
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: initial;
+  background-clip: initial;
+  text-fill-color: initial;
+  overflow: hidden;
+}
+.triangle-title.brillo::after, .triangle-subtitle.brillo::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%);
+  pointer-events: none;
+  animation: light-sweep 2.2s linear infinite;
+  z-index: 2;
+  /* Solo sobre el texto, no fondo */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+@keyframes light-sweep {
+  0% { left: -75%; }
+  100% { left: 120%; }
+} 
+
+.brillo-text {
+  display: inline-block;
+  background: linear-gradient(120deg, #fff 0%, #e3f2fd 40%, #90caf9 60%, #fff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  animation: shine-move 2.2s linear infinite;
+  filter: drop-shadow(0 2px 16px #1976d2cc);
+}
+@keyframes shine-move {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+} 
+
+.canvas-escala {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 10;
+}
+.canvas-fijo {
+  width: 1280px;
+  height: 720px;
+  max-width: 1280px;
+  max-height: 720px;
+  min-width: 1280px;
+  min-height: 720px;
+  background: none;
+  margin: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 32px;
+  box-shadow: 0 8px 48px #1976d244, 0 2px 8px #fff2;
+  z-index: 10;
+  overflow: visible;
+  transform-origin: center center;
+  /* El scale se aplicará por JS o inline */
+}
+.canvas-fijo.sin-marco {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: none !important;
+}
+.triangle-stack-col {
+  height: 100%;
+  width: 100%;
 } 
