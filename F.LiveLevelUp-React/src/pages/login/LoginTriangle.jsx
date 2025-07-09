@@ -66,27 +66,27 @@ export default function LoginTriangle() {
   const planetStyle = showTriangle
     ? {
         position: 'fixed',
-        left: 'calc(100vw - 400px)', // Más cerca de la punta del triángulo
-        top: 'calc(50vh - 90px)', // Centrado verticalmente respecto al planeta
-        transform: 'translateX(-100%)', // El borde derecho del planeta toca la punta
+        left: 'calc(100vw - 400px)',
+        top: 'calc(50vh - 130px)',
+        transform: 'translateX(-100%)',
         zIndex: 25,
         pointerEvents: 'none',
-        transition: 'left 0.7s cubic-bezier(.23,1.12,.32,1), top 0.7s cubic-bezier(.23,1.12,.32,1), transform 0.7s cubic-bezier(.23,1.12,.32,1)',
-        width: '180px',
-        height: '180px',
+        transition: 'left 0.7s cubic-bezier(.23,1.12,.32,1), top 0.7s cubic-bezier(.23,1.12,.32,1), transform 0.7s cubic-bezier(.23,1.12,.32,1), width 0.7s cubic-bezier(.23,1.12,.32,1), height 0.7s cubic-bezier(.23,1.12,.32,1)',
+        width: '260px',
+        height: '260px',
         opacity: 1,
         filter: 'drop-shadow(0 0 64px #1976d2cc)'
       }
     : {
         position: 'fixed',
-        left: '50%',
-        top: '48%',
-        transform: 'translate(-50%, -50%)',
-        zIndex: 30,
+        left: 'calc(100vw - 400px)',
+        top: 'calc(50vh - 75px)',
+        transform: 'translateX(-100%)',
+        zIndex: 25,
         pointerEvents: 'none',
-        transition: 'left 0.7s cubic-bezier(.23,1.12,.32,1), top 0.7s cubic-bezier(.23,1.12,.32,1), transform 0.7s cubic-bezier(.23,1.12,.32,1)',
-        width: '180px',
-        height: '180px',
+        transition: 'left 0.7s cubic-bezier(.23,1.12,.32,1), top 0.7s cubic-bezier(.23,1.12,.32,1), transform 0.7s cubic-bezier(.23,1.12,.32,1), width 0.7s cubic-bezier(.23,1.12,.32,1), height 0.7s cubic-bezier(.23,1.12,.32,1)',
+        width: '150px',
+        height: '150px',
         opacity: 1,
         filter: 'drop-shadow(0 0 64px #1976d2cc)'
       };
