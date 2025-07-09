@@ -61,52 +61,35 @@ function LoginForm({ onClose }) {
 export default function LoginTriangle() {
   const [showTriangle, setShowTriangle] = useState(false);
 
-  // Coordenadas para la punta del triángulo (ajustar según el layout)
-  // Calculamos top y left para la esquina superior izquierda del panel de login
-  const planetStyle = showTriangle
-    ? {
-        position: 'fixed',
-        left: 'calc(100vw - 400px)',
-        top: 'calc(50vh - 130px)',
-        transform: 'translateX(-100%)',
-        zIndex: 25,
-        pointerEvents: 'none',
-        transition: 'left 0.7s cubic-bezier(.23,1.12,.32,1), top 0.7s cubic-bezier(.23,1.12,.32,1), transform 0.7s cubic-bezier(.23,1.12,.32,1), width 0.7s cubic-bezier(.23,1.12,.32,1), height 0.7s cubic-bezier(.23,1.12,.32,1)',
-        width: '260px',
-        height: '260px',
-        opacity: 1,
-        filter: 'drop-shadow(0 0 64px #1976d2cc)'
-      }
-    : {
-        position: 'fixed',
-        left: 'calc(100vw - 400px)',
-        top: 'calc(50vh - 75px)',
-        transform: 'translateX(-100%)',
-        zIndex: 25,
-        pointerEvents: 'none',
-        transition: 'left 0.7s cubic-bezier(.23,1.12,.32,1), top 0.7s cubic-bezier(.23,1.12,.32,1), transform 0.7s cubic-bezier(.23,1.12,.32,1), width 0.7s cubic-bezier(.23,1.12,.32,1), height 0.7s cubic-bezier(.23,1.12,.32,1)',
-        width: '150px',
-        height: '150px',
-        opacity: 1,
-        filter: 'drop-shadow(0 0 64px #1976d2cc)'
-      };
+  // Tamaño del planeta: pequeño al inicio, grande al mostrar el login
+  const planetSize = showTriangle ? 420 : 260;
+  const planetStyle = {
+    position: 'relative',
+    width: planetSize + 'px',
+    height: planetSize + 'px',
+    transition: 'width 0.7s cubic-bezier(.23,1.12,.32,1), height 0.7s cubic-bezier(.23,1.12,.32,1)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 20,
+    margin: '0 auto'
+  };
 
   return (
     <div className="triangle-bg">
-      {/* Planeta animado, centro en intro y punta del triángulo en login */}
-      <div style={planetStyle}>
-        <PlanetAnimated className="planet-svg-triangle" style={{width: '100%', height: '100%'}} />
+      <div className="triangle-stack-col" style={{zIndex: 30, position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', width: '100vw'}}>
+        <h1 className="triangle-title" style={{marginBottom: '2.5rem'}}>LiveLevelUp</h1>
+        <div style={planetStyle}>
+          <PlanetAnimated className="planet-svg-triangle" style={{width: '100%', height: '100%'}} />
+        </div>
+        <h2 className="triangle-subtitle" style={{marginTop: '2.5rem', marginBottom: '1.5rem'}}>Tu vida tiene más impacto del que imaginas...</h2>
+        {!showTriangle && (
+          <button className="triangle-btn" style={{marginTop: '1.5rem'}} onClick={() => setShowTriangle(true)}>Entrar</button>
+        )}
       </div>
       {/* Overlay detrás de todo para oscurecer el fondo, sin tapar el planeta ni el login */}
       {showTriangle && <div className="triangle-overlay" style={{zIndex: 1}} />}
-      {/* Contenido principal */}
-      <div className="triangle-center-content" style={{zIndex: 10}}>
-        <h1 className={`triangle-title${showTriangle ? ' fade-out' : ''}`}>LiveLevelUp</h1>
-        <h2 className={`triangle-subtitle${showTriangle ? ' fade-out' : ''}`}>Tu vida tiene más impacto del que imaginas...</h2>
-        {!showTriangle && (
-          <button className="triangle-btn" onClick={() => setShowTriangle(true)}>Entrar</button>
-        )}
-      </div>
+      {/* Contenido principal del login */}
       <div className={`triangle-panel-anim ${showTriangle ? 'show' : ''}`} style={{zIndex: 20}}>
         {showTriangle && <LoginForm onClose={() => setShowTriangle(false)} />}
       </div>
