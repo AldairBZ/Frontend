@@ -1,0 +1,144 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #fafafa;
+}
+
+header {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  padding: 0 0 0 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px;
+  height: 80px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+.menu {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.menu li a {
+  text-decoration: none;
+  color: #222;
+  font-weight: 500;
+  font-size: 1.05rem;
+  transition: color 0.2s;
+}
+.menu li a:hover {
+  color: #e6b800;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.actions button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  padding: 8px 16px;
+  margin-left: 4px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+.actions button:last-child {
+  background: #ffd600;
+  color: #222;
+  font-weight: bold;
+  border: none;
+}
+.actions button:hover {
+  background: #f5f5f5;
+}
+.actions button:last-child:hover {
+  background: #ffe066;
+}
+
+main {
+  max-width: 1400px;
+  margin: 40px auto 0 auto;
+  padding: 0 32px;
+}
+.articles {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  width: 370px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #eee;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.13);
+  transform: translateY(-4px) scale(1.01);
+}
+.card-image {
+  background: #eaeaea;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: #888;
+}
+.card-content {
+  padding: 28px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.category {
+  color: #888;
+  font-size: 0.95rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+.card-content h2 {
+  font-size: 1.45rem;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  color: #111;
+}
+.read-link {
+  color: #222;
+  font-size: 1.05rem;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  transition: color 0.2s;
+}
+.read-link:hover {
+  color: #e6b800;
+} 
