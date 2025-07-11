@@ -60,30 +60,40 @@ nav {
   display: flex;
   gap: 48px;
   list-style: none;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
-  /* Eliminar width y justify-content para que quede alineado a la izquierda */
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: static;
 }
 .menu li {
-  /* Sin estilos especiales para cuadraditos */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .menu li a {
   text-decoration: none;
   color: #f5f9fb;
   font-weight: 500;
-  font-size: 0.95rem;
-  transition: color 0.2s;
-  background: none;
+  font-size: 1.08rem;
+  transition: color 0.2s, background 0.2s, box-shadow 0.2s;
+  background: rgba(255,255,255,0.10);
   border: none;
-  box-shadow: none;
-  border-radius: 0;
-  padding: 0;
-  margin: 0;
+  border-radius: 16px;
+  padding: 10px 36px;
+  margin: 0 2px;
+  box-shadow: 0 4px 24px 0 rgba(91,156,200,0.10), 0 1.5px 0 #81ca57;
+  cursor: pointer;
+  display: inline-block;
+  backdrop-filter: blur(2px);
+  /* Efecto de brillo sutil */
+  box-shadow: 0 2px 16px 0 rgba(91,156,200,0.18), 0 0px 8px #fff2, 0 1px 0 #fff2;
 }
 .menu li a:hover {
-  color: #141414;
-  background: none;
-  box-shadow: none;
+  color: #1976d2;
+  background: rgba(255,255,255,0.22);
+  box-shadow: 0 8px 32px 0 #91c1e0, 0 0px 12px #fff4;
 }
 .actions {
   display: flex;
