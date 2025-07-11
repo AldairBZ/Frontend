@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './LoginTriangle.css';
 import planetaGif from '../../assets/svg/planet.png';
 import FondoEspacioLogin from './FondoEspacioLogin';
 
 function PlanetAnimated({ className = '', style = {} }) {
   return (
-    <img src={planetaGif} alt="Planeta" className={className + ' planeta-animado'} style={style} />
+    <img src={planetaGif} alt="Planeta" className={className + ' planeta-animado'} style={{width: '340px', height: '340px', filter: 'drop-shadow(0 0 64px #1976d2cc)', ...style}} />
   );
 }
 
@@ -25,13 +26,21 @@ function SocialLogos() {
   );
 }
 
-function LoginForm({ onClose = () => {} }) {
+function LoginForm() {
   const [mode, setMode] = useState('login');
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Simulación de login exitoso. Aquí irá la llamada real al backend.
+    // Cuando conectes con backend, reemplaza la simulación por la llamada real y navega a /home si es exitoso.
+    navigate('/home');
+  };
+
   return (
     <div className="triangle-form-content">
-      <button className="triangle-close" onClick={onClose}>×</button>
-      <h2>{mode === 'login' ? 'Iniciar Sesión' : 'Crear Cuenta'}</h2>
-      <form className="triangle-form">
+      <h2 className="login-title">Iniciar Sesión</h2>
+      <form className="triangle-form" onSubmit={handleSubmit}>
         {mode === 'register' && (
           <div className="input-group">
             <input type="text" required placeholder="Nombre de usuario" />
@@ -60,83 +69,20 @@ function LoginForm({ onClose = () => {} }) {
 }
 
 export default function LoginTriangle() {
-  const [showTriangle, setShowTriangle] = useState(false);
-
-  // Tamaño del planeta: pequeño al inicio, grande al mostrar el login
-  const planetSize = showTriangle ? 420 : 260;
-  const planetStyle = {
-    position: 'relative',
-    width: planetSize + 'px',
-    height: planetSize + 'px',
-    transition: 'width 0.7s cubic-bezier(.23,1.12,.32,1), height 0.7s cubic-bezier(.23,1.12,.32,1)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 20,
-    margin: '0 auto',
-    willChange: 'width, height'
-  };
-
-  // Escalado responsivo para canvas-fijo
-  const [scale, setScale] = useState(1);
-  useEffect(() => {
-    function handleResize() {
-      const ww = window.innerWidth;
-      const wh = window.innerHeight;
-      const sw = 1280;
-      const sh = 720;
-      const scale = Math.min(ww / sw, wh / sh);
-      setScale(scale);
-    }
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   return (
-    <div className="triangle-bg">
+    <div className="triangle-bg" style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0}}>
       <FondoEspacioLogin />
-      <div className="triangle-stack-col" style={{zIndex: 30, position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', width: '100vw'}}>
-        <h1 className={`triangle-title${showTriangle ? ' brillo' : ''}`} style={{marginBottom: '2.5rem'}}>
-          <span className={showTriangle ? 'brillo-text' : ''}>LiveLevelUp</span>
-        </h1>
-        <div style={planetStyle}>
-          <div style={{position: 'relative', width: '100%', height: '100%'}}>
-            <PlanetAnimated 
-              className="planet-svg-triangle planeta-clickeable"
-              style={{width: '100%', height: '100%', pointerEvents: 'none', userSelect: 'none'}}
-            />
-            {!showTriangle && (
-              <button
-                className="boton-invisible-planeta"
-                aria-label="Abrir login"
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                  background: 'transparent',
-                  border: 'none',
-                  cursor: 'pointer',
-                  zIndex: 2,
-                  padding: 0,
-                  margin: 0
-                }}
-                onClick={() => setShowTriangle(true)}
-              />
-            )}
-          </div>
-        </div>
-        <h2 className={`triangle-subtitle${showTriangle ? ' brillo' : ''}`} style={{marginTop: '2.5rem', marginBottom: '1.5rem'}}>
-          <span className={showTriangle ? 'brillo-text' : ''}>Tu vida tiene más impacto del que imaginas...</span>
-        </h2>
+      {/* Centro: bloque vertical con título, planeta y subtítulo */}
+      <div style={{flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh'}}>
+        <h1 className="triangle-title" style={{fontFamily: 'Montserrat, Segoe UI, Arial, sans-serif', fontWeight: 900, fontSize: '3.2rem', letterSpacing: '0.06em', color: '#b6eaff', textShadow: '0 4px 32px #1976d2cc, 0 0px 8px #64b5f6cc, 0 1px 0 #fff', marginBottom: '2.2rem'}}>LiveLevelUp</h1>
+        <PlanetAnimated className="planet-svg-triangle" />
+        <h2 className="triangle-subtitle" style={{fontFamily: 'Montserrat, Segoe UI, Arial, sans-serif', fontWeight: 500, fontSize: '1.3rem', color: '#e3f2fd', textShadow: '0 2px 12px #1976d2aa, 0 1px 0 #fff', marginTop: '2.2rem', marginBottom: '1.5rem'}}>Tu vida tiene más impacto del que imaginas...</h2>
       </div>
-      {/* Overlay detrás de todo para oscurecer el fondo, sin tapar el planeta ni el login */}
-      {showTriangle && <div className="triangle-overlay" style={{zIndex: 1}} />}
-      {/* Contenido principal del login */}
-      <div className={`triangle-panel-anim ${showTriangle ? 'show' : ''}`} style={{zIndex: 20}}>
-        {showTriangle && <LoginForm onClose={() => setShowTriangle(false)} />}
+      {/* Panel de login a la derecha */}
+      <div style={{flex: '0 0 420px', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh'}}>
+        <div className="triangle-panel-anim show">
+          <LoginForm />
+        </div>
       </div>
     </div>
   );
