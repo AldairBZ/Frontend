@@ -1,21 +1,33 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styles from './Home.module.css';
 import logoLiveUp from '../../assets/imagenes-home/logoLiveUp.png';
+// Importación condicional del CSS de modo oscuro
 
 export default function Home() {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(false); // Por defecto, modo claro
   const profileBtnRef = useRef(null);
   const menuRef = useRef(null);
 
   useEffect(() => {
+    let darkThemeLink = document.getElementById('dark-theme-css');
     if (darkMode) {
-      document.body.classList.add('dark-mode');
+      if (!darkThemeLink) {
+        darkThemeLink = document.createElement('link');
+        darkThemeLink.rel = 'stylesheet';
+        darkThemeLink.id = 'dark-theme-css';
+        darkThemeLink.href = '/src/pages/home/dark-theme.css';
+        document.head.appendChild(darkThemeLink);
+      }
     } else {
-      document.body.classList.remove('dark-mode');
+      if (darkThemeLink) {
+        darkThemeLink.parentNode.removeChild(darkThemeLink);
+      }
     }
-    // Limpieza al desmontar
-    return () => document.body.classList.remove('dark-mode');
+    return () => {
+      const link = document.getElementById('dark-theme-css');
+      if (link) link.parentNode.removeChild(link);
+    };
   }, [darkMode]);
 
   useEffect(() => {
@@ -58,7 +70,7 @@ export default function Home() {
           <div style={{display:'flex',alignItems:'center',gap:'18px'}}>
             <div className={styles.options}>
               <label className={styles.switchLabel}>
-                <input type="checkbox" checked={darkMode} onChange={()=>setDarkMode(v=>!v)} className={styles.switchInput} />
+                <input type="checkbox" checked={darkMode} onChange={e => setDarkMode(e.target.checked)} className={styles.switchInput} />
                 <span className={styles.switchSlider}></span>
                 <span className={styles.switchText}>{darkMode ? '🌙' : '☀️'}</span>
               </label>
@@ -135,7 +147,6 @@ export default function Home() {
           </div>
         </div>
         <div className={styles['footer-bottom']}>
-          <span className={styles['footer-up']} onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}>⬆️</span>
         </div>
       </footer>
     </div>
