@@ -88,14 +88,14 @@ body {
   font-weight: 900;
   letter-spacing: 0.06em;
   color: #fff;
-  text-shadow: 0 4px 32px #1976d2cc, 0 1px 0 #fff, 0 0px 8px #64b5f6cc;
+  text-shadow: 0 4px 32px #1976d2cc, 0 0px 8px #64b5f6cc, 0 1px 0 #fff;
   margin-bottom: 2.5rem;
   transition: color 0.4s, text-shadow 0.4s;
 }
 .triangle-subtitle {
   font-size: 1.25rem;
   font-weight: 500;
-  color: #e3f2fd;
+  color: #fff;
   text-shadow: 0 2px 12px #1976d2aa, 0 1px 0 #fff;
   margin-top: 2.5rem;
   margin-bottom: 1.5rem;
@@ -368,23 +368,13 @@ body {
 }
 
 /* Mejorar la apariencia de los textos */
-.triangle-title {
-  font-size: 2.7rem;
-  font-weight: 900;
-  letter-spacing: 0.06em;
-  color: #fff;
-  text-shadow: 0 4px 32px #1976d2cc, 0 1px 0 #fff, 0 0px 8px #64b5f6cc;
-  margin-bottom: 2.5rem;
-  transition: color 0.4s, text-shadow 0.4s;
+.triangle-title, .triangle-title.brillo {
+  color: #fff !important;
+  text-shadow: 0 4px 32px #1976d2cc, 0 0px 8px #64b5f6cc, 0 1px 0 #fff !important;
 }
-.triangle-subtitle {
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: #e3f2fd;
-  text-shadow: 0 2px 12px #1976d2aa, 0 1px 0 #fff;
-  margin-top: 2.5rem;
-  margin-bottom: 1.5rem;
-  transition: color 0.4s, text-shadow 0.4s;
+.triangle-subtitle, .triangle-subtitle.brillo {
+  color: #fff !important;
+  text-shadow: 0 2px 12px #1976d2aa, 0 1px 0 #fff !important;
 }
 
 /* Efecto light sweep realista para los textos con la clase 'brillo' */
