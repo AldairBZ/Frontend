@@ -1,58 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styles from './Home.module.css';
-import planetLogo from '../../assets/svg/planet.png';
+import logoLiveUp from '../../assets/imagenes-home/logoLiveUp.png';
 
 export default function Home() {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const profileBtnRef = useRef(null);
   const menuRef = useRef(null);
-
-  // Drag state for Salud and Planeta
-  const [positions, setPositions] = useState({
-    salud: { x: -160, y: -10 },
-    planeta: { x: -70, y: -10 },
-  });
-  const dragging = useRef(null);
-  const offset = useRef({ x: 0, y: 0 });
-
-  const handleDragStart = (e, key) => {
-    dragging.current = key;
-    const rect = e.target.getBoundingClientRect();
-    offset.current = {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    };
-    document.body.style.userSelect = 'none';
-  };
-
-  const handleDrag = (e) => {
-    if (!dragging.current) return;
-    setPositions((prev) => ({
-      ...prev,
-      [dragging.current]: {
-        x: e.clientX - offset.current.x - e.target.parentNode.getBoundingClientRect().left,
-        y: e.clientY - offset.current.y - e.target.parentNode.getBoundingClientRect().top,
-      },
-    }));
-  };
-
-  const handleDragEnd = () => {
-    dragging.current = null;
-    document.body.style.userSelect = '';
-  };
-
-  useEffect(() => {
-    const onMouseMove = (e) => handleDrag(e);
-    const onMouseUp = () => handleDragEnd();
-    if (dragging.current) {
-      window.addEventListener('mousemove', onMouseMove);
-      window.addEventListener('mouseup', onMouseUp);
-    }
-    return () => {
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('mouseup', onMouseUp);
-    };
-  }, [dragging.current]);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -80,32 +33,14 @@ export default function Home() {
       <header className={styles.header}>
         <nav className={styles.nav}>
           <div className={styles.logo}>
-            <img src={planetLogo} alt="Logo LiveLevelUp" style={{height: 40, width: 40, borderRadius: '50%'}} />
+            <img src={logoLiveUp} alt="Logo LiveLevelUp" style={{height: 56, width: 56, objectFit: 'contain', background: 'none', marginRight: 10}} />
             <span>LiveLevelUp</span>
           </div>
           <ul className={styles.menu} style={{position: 'relative'}}>
-            <li
-              style={{
-                position: 'absolute',
-                left: `calc(0% + ${positions.salud.x}px)`,
-                top: `${positions.salud.y}px`,
-                cursor: 'grab',
-                zIndex: 10,
-              }}
-              onMouseDown={(e) => handleDragStart(e, 'salud')}
-            >
+            <li>
               <a href="#">Salud</a>
             </li>
-            <li
-              style={{
-                position: 'absolute',
-                left: `calc(50% + ${positions.planeta.x}px)`,
-                top: `${positions.planeta.y}px`,
-                cursor: 'grab',
-                zIndex: 10,
-              }}
-              onMouseDown={(e) => handleDragStart(e, 'planeta')}
-            >
+            <li>
               <a href="#">Planeta</a>
             </li>
           </ul>
@@ -137,7 +72,7 @@ export default function Home() {
         <section className={styles.articles}>
           <article className={styles.card} key={1}>
             <div className={styles['card-image']}>
-              <img src={planetLogo} alt={`Artículo 1`} style={{height: 80, width: 80, borderRadius: '50%'}} />
+              <img src={logoLiveUp} alt={`Artículo 1`} style={{height: 100, width: 100, objectFit: 'contain', background: 'none'}} />
             </div>
             <div className={styles['card-content']}>
               <span className={styles.category}>CATEGORÍA</span>
@@ -146,7 +81,7 @@ export default function Home() {
           </article>
           <article className={styles.card} key={3}>
             <div className={styles['card-image']}>
-              <img src={planetLogo} alt={`Artículo 3`} style={{height: 80, width: 80, borderRadius: '50%'}} />
+              <img src={logoLiveUp} alt={`Artículo 3`} style={{height: 100, width: 100, objectFit: 'contain', background: 'none'}} />
             </div>
             <div className={styles['card-content']}>
               <span className={styles.category}>CATEGORÍA</span>
