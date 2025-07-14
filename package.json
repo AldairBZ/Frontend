@@ -5,6 +5,7 @@
     "tailwindcss": "^3.4.3"
   },
   "dependencies": {
+    "gsap": "^3.13.0",
     "react-router-dom": "^7.6.3"
   }
 }

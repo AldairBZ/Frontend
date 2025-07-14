@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styles from './Home.module.css';
 import logoLiveUp from '../../assets/imagenes-home/logoLiveUp.png';
+import PanelesInteractivos from './PanelesInteractivos';
 // Importación condicional del CSS de modo oscuro
 
 export default function Home() {
@@ -75,52 +76,33 @@ export default function Home() {
                 <span className={styles.switchText}>{darkMode ? '🌙' : '☀️'}</span>
               </label>
             </div>
-            <div className={styles.actions}>
-              <button
-                ref={profileBtnRef}
-                style={{background: 'transparent', border: 'none', padding: 0, cursor: 'pointer', marginLeft: '-12px'}}
-                title="Usuario"
-                onClick={() => setShowProfileMenu((v) => !v)}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" viewBox="0 0 24 24" width="40" height="40">
-                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-                  <g id="SVGRepo_iconCarrier">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"></path>
-                  </g>
-                </svg>
-              </button>
-              {showProfileMenu && (
-                <div ref={menuRef} className={styles.profileMenu}>
-                  <button className={styles.profileMenuItem}>Editar perfil</button>
-                  <button className={styles.profileMenuItem}>Cerrar sesión</button>
-                </div>
-              )}
+          <div className={styles.actions}>
+            <button
+              ref={profileBtnRef}
+              style={{background: 'transparent', border: 'none', padding: 0, cursor: 'pointer', marginLeft: '-12px'}}
+              title="Usuario"
+              onClick={() => setShowProfileMenu((v) => !v)}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" viewBox="0 0 24 24" width="40" height="40">
+                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"></path>
+                </g>
+              </svg>
+            </button>
+            {showProfileMenu && (
+              <div ref={menuRef} className={styles.profileMenu}>
+                <button className={styles.profileMenuItem}>Editar perfil</button>
+                <button className={styles.profileMenuItem}>Cerrar sesión</button>
+              </div>
+            )}
             </div>
           </div>
         </nav>
       </header>
       <main className={styles.main}>
-        <section className={styles.articles}>
-          <article className={styles.card} key={1}>
-            <div className={styles['card-image']}>
-              <img src={logoLiveUp} alt={`Artículo 1`} style={{height: 100, width: 100, objectFit: 'contain', background: 'none'}} />
-            </div>
-            <div className={styles['card-content']}>
-              <span className={styles.category}>CATEGORÍA</span>
-              <h2>Salud y bienestar</h2>
-            </div>
-          </article>
-          <article className={styles.card} key={3}>
-            <div className={styles['card-image']}>
-              <img src={logoLiveUp} alt={`Artículo 3`} style={{height: 100, width: 100, objectFit: 'contain', background: 'none'}} />
-            </div>
-            <div className={styles['card-content']}>
-              <span className={styles.category}>CATEGORÍA</span>
-              <h2>Salud del planeta</h2>
-            </div>
-          </article>
-        </section>
+        <PanelesInteractivos />
       </main>
       <footer className={styles.footer}>
         <div className={styles['footer-container']}>

@@ -10,7 +10,6 @@ export default function App() {
         <Route path="/login" element={<LoginTriangle />} />
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
   );
