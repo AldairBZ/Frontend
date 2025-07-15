@@ -81,7 +81,12 @@ export default function Referentes() {
       }}>
         {referentesPlaneta.map((ref, i) => (
           <a key={i} href={ref.url} target="_blank" rel="noopener noreferrer" style={{display: 'block', textAlign: 'center', textDecoration: 'none', color: '#222', background: '#fff', borderRadius: 12, boxShadow: '0 2px 8px #0001', padding: 12}}>
-            <img src={ref.img} alt={ref.titulo} style={{width: imagenesGrandes.has(ref.img) ? 110 : 80, height: imagenesGrandes.has(ref.img) ? 110 : 80, objectFit: 'contain', marginBottom: 8}} />
+            <img src={ref.img} alt={ref.titulo} style={{
+              width: 120,
+              height: 120,
+              objectFit: 'contain',
+              marginBottom: 8
+            }} />
             <div style={{fontWeight: 600, fontSize: 16}}>{ref.titulo}</div>
           </a>
         ))}
