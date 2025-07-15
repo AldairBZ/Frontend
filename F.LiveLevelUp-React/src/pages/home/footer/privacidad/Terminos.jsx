@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Privacidad() {
+export default function Privacidad({ onClose }) {
   return (
     <div style={{maxWidth: 800, margin: '0 auto', padding: 24}}>
       <h1>Términos de Uso y Privacidad</h1>
@@ -10,8 +10,8 @@ export default function Privacidad() {
         Al registrarte y utilizar los servicios de LiveLevelUp, aceptas nuestras Políticas de Uso y Términos de Servicio, los cuales definen de manera clara y sencilla tus derechos, deberes y el compromiso de nuestra parte para proteger tus datos y asegurar un entorno sano y respetuoso. Puedes consultar estos documentos en cualquier momento desde el pie de página de nuestra webapp.
       </p>
       <div style={{display: 'flex', gap: 16, margin: '32px 0'}}>
-        <button style={{background: '#5b9cc8', color: '#fff', border: 'none', borderRadius: 8, padding: '10px 24px', fontWeight: 600, cursor: 'pointer'}}>Acepto</button>
-        <button style={{background: '#eee', color: '#333', border: 'none', borderRadius: 8, padding: '10px 24px', fontWeight: 600, cursor: 'pointer'}}>No acepto</button>
+        <button onClick={onClose} style={{background: '#5b9cc8', color: '#fff', border: 'none', borderRadius: 8, padding: '10px 24px', fontWeight: 600, cursor: 'pointer'}}>Acepto</button>
+        <button onClick={onClose} style={{background: '#eee', color: '#333', border: 'none', borderRadius: 8, padding: '10px 24px', fontWeight: 600, cursor: 'pointer'}}>No acepto</button>
       </div>
     </div>
   );

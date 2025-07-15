@@ -183,7 +183,7 @@ export default function Home() {
               }}
             >Cerrar ✕</button>
             {modalAbierto === 'equipo' && <QuienesSomos />}
-            {modalAbierto === 'privacidad' && <Privacidad />}
+            {modalAbierto === 'privacidad' && <Privacidad onClose={() => setModalAbierto(null)} />}
             {modalAbierto === 'referentes' && <Referentes />}
           </div>
         </div>
