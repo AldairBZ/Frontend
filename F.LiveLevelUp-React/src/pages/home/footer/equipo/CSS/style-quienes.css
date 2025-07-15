@@ -1,0 +1,98 @@
+:root {
+  --verde: #81ca57;
+  --negro: #141414;
+  --azul: #5b9cc8;
+  --blanco: #f8fafd;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+body {
+  background: var(--blanco);
+  color: var(--negro);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  background: var(--azul);
+  color: #fff;
+  padding: 24px 0 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+.logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 16px;
+}
+.titulo {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px 32px 16px;
+  background: var(--blanco);
+}
+.card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(91,156,200,0.08);
+  border: 2px solid var(--verde);
+  max-width: 600px;
+  padding: 40px 32px;
+  text-align: center;
+  transition: box-shadow 0.2s;
+}
+.card:hover {
+  box-shadow: 0 8px 32px rgba(91,156,200,0.15);
+}
+.card h1 {
+  color: var(--azul);
+  font-size: 2rem;
+  margin-bottom: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.card p {
+  color: var(--negro);
+  font-size: 1.13rem;
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+.card .firma {
+  color: var(--verde);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-top: 18px;
+}
+footer {
+  background: var(--azul);
+  color: #fff;
+  text-align: center;
+  padding: 18px 8px 10px 8px;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  margin-top: auto;
+}
+@media (max-width: 700px) {
+  .card {
+    padding: 24px 8px;
+  }
+  .titulo {
+    font-size: 1.3rem;
+  }
+  .card h1 {
+    font-size: 1.3rem;
+  }
+} 

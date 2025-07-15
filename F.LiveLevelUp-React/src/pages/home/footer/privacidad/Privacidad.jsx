@@ -1,0 +1,1 @@
+import '../privacidad/CSS/terminos.css'; 

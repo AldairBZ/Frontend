@@ -2,6 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import styles from './Home.module.css';
 import logoLiveUp from '../../assets/imagenes-home/logoLiveUp.png';
 import PanelesInteractivos from './PanelesInteractivos';
+import QuienesSomos from './footer/equipo/QuienesSomos.jsx';
+import Privacidad from './footer/privacidad/Terminos.jsx';
+import Referentes from './footer/referentes/Referentes.jsx';
 // Importación condicional del CSS de modo oscuro
 
 export default function Home() {
@@ -9,6 +12,8 @@ export default function Home() {
   const [darkMode, setDarkMode] = useState(false); // Por defecto, modo claro
   const profileBtnRef = useRef(null);
   const menuRef = useRef(null);
+  // Estado para controlar el modal del footer
+  const [modalAbierto, setModalAbierto] = useState(null); // 'equipo', 'privacidad', 'referentes' o null
 
   useEffect(() => {
     let darkThemeLink = document.getElementById('dark-theme-css');
@@ -109,21 +114,21 @@ export default function Home() {
           <div className={styles['footer-col']}>
             <h3>Uso de datos y privacidad</h3>
             <ul>
-              <li><a href="#">Política de privacidad</a></li>
+              <li><a href="#" onClick={e => {e.preventDefault(); setModalAbierto('privacidad');}}>Política de privacidad</a></li>
               <li><a href="#">Cookies</a></li>
             </ul>
           </div>
           <div className={styles['footer-col']}>
             <h3>Webs de confianza</h3>
             <ul>
-              <li><a href="#">Web oficial</a></li>
+              <li><a href="#" onClick={e => {e.preventDefault(); setModalAbierto('referentes');}}>Referentes</a></li>
               <li><a href="#">Partners</a></li>
             </ul>
           </div>
           <div className={styles['footer-col']}>
             <h3>Quiénes somos</h3>
             <ul>
-              <li><a href="#">Equipo</a></li>
+              <li><a href="#" onClick={e => {e.preventDefault(); setModalAbierto('equipo');}}>Equipo</a></li>
               <li><a href="#">Historia</a></li>
             </ul>
           </div>
@@ -131,6 +136,58 @@ export default function Home() {
         <div className={styles['footer-bottom']}>
         </div>
       </footer>
+      {/* Modal para mostrar los componentes */}
+      {modalAbierto && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          background: 'rgba(0,0,0,0.45)',
+          zIndex: 9999,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+          onClick={() => setModalAbierto(null)}
+        >
+          <div style={{
+            background: '#fff',
+            borderRadius: 16,
+            boxShadow: '0 4px 32px #0003',
+            padding: 0,
+            maxWidth: 900,
+            width: '95vw',
+            maxHeight: '90vh',
+            overflowY: 'auto',
+            position: 'relative',
+          }}
+            onClick={e => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setModalAbierto(null)}
+              style={{
+                position: 'absolute',
+                top: 12,
+                right: 16,
+                background: '#5b9cc8',
+                color: '#fff',
+                border: 'none',
+                borderRadius: 8,
+                padding: '6px 16px',
+                fontWeight: 600,
+                fontSize: 18,
+                cursor: 'pointer',
+                zIndex: 2
+              }}
+            >Cerrar ✕</button>
+            {modalAbierto === 'equipo' && <QuienesSomos />}
+            {modalAbierto === 'privacidad' && <Privacidad />}
+            {modalAbierto === 'referentes' && <Referentes />}
+          </div>
+        </div>
+      )}
     </div>
   );
 } 
