@@ -39,6 +39,16 @@ const referentesPlaneta = [
   { url: 'https://www.un.org/en/climatechange/science/climate-issues/health', img: image16, titulo: 'UN Climate & Health' },
 ];
 
+// Defino un set con los nombres de imagen a agrandar
+const imagenesGrandes = new Set([
+  image1, // World health organization
+  image6, // Healthline
+  image7, // Psychology today
+  image11, // National Geographic Environment
+  image14, // Greenpeace
+  image16, // UN Climate & Health
+]);
+
 export default function Referentes() {
   return (
     <div style={{maxWidth: 1100, margin: '0 auto', padding: 24}}>
@@ -52,7 +62,7 @@ export default function Referentes() {
       }}>
         {referentesSalud.map((ref, i) => (
           <a key={i} href={ref.url} target="_blank" rel="noopener noreferrer" style={{display: 'block', textAlign: 'center', textDecoration: 'none', color: '#222', background: '#fff', borderRadius: 12, boxShadow: '0 2px 8px #0001', padding: 12}}>
-            <img src={ref.img} alt={ref.titulo} style={{width: 80, height: 80, objectFit: 'contain', marginBottom: 8}} />
+            <img src={ref.img} alt={ref.titulo} style={{width: imagenesGrandes.has(ref.img) ? 110 : 80, height: imagenesGrandes.has(ref.img) ? 110 : 80, objectFit: 'contain', marginBottom: 8}} />
             <div style={{fontWeight: 600, fontSize: 16}}>{ref.titulo}</div>
           </a>
         ))}
@@ -66,7 +76,7 @@ export default function Referentes() {
       }}>
         {referentesPlaneta.map((ref, i) => (
           <a key={i} href={ref.url} target="_blank" rel="noopener noreferrer" style={{display: 'block', textAlign: 'center', textDecoration: 'none', color: '#222', background: '#fff', borderRadius: 12, boxShadow: '0 2px 8px #0001', padding: 12}}>
-            <img src={ref.img} alt={ref.titulo} style={{width: 80, height: 80, objectFit: 'contain', marginBottom: 8}} />
+            <img src={ref.img} alt={ref.titulo} style={{width: imagenesGrandes.has(ref.img) ? 110 : 80, height: imagenesGrandes.has(ref.img) ? 110 : 80, objectFit: 'contain', marginBottom: 8}} />
             <div style={{fontWeight: 600, fontSize: 16}}>{ref.titulo}</div>
           </a>
         ))}
