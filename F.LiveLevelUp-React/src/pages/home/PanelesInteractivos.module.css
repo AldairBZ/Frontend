@@ -31,6 +31,7 @@
   width: 100%;
   height: 60vh;
   transform: translate3d(0, 0, 0);
+  background: transparent;
 }
 @media (min-width: 630px) {
   .panelesMain {
@@ -38,6 +39,7 @@
     width: 100vw;
     height: 70vh;
     margin-left: 0;
+    background: transparent;
   }
 }
 .panelSection {
@@ -47,10 +49,11 @@
   min-height: 20vh;
   overflow: hidden;
   z-index: 1;
-  transition: flex-grow .2s, opacity .2s;
+  transition: flex-grow .12s, opacity .12s;
   display: flex;
   align-items: stretch;
   justify-content: stretch;
+  margin-right: 0;
 }
 .panelSection:before {
   content: "";
@@ -60,7 +63,7 @@
   background-position: center;
   background-size: cover;
   background-image: var(--panel-img);
-  transition: transform .2s, width .2s, background-image .2s;
+  transition: none;
   z-index: 0;
 }
 .hideImages .panelSection:before {
@@ -80,14 +83,14 @@
 }
 @media (min-width: 630px) {
   .panelSection {
-    width: 20%;
+    width: 20vw;
     height: 100%;
-    margin-right: -1px;
+    margin-right: -8px; /* Solapa los paneles para evitar bordes */
     transform: skewX(15deg) translateZ(0);
   }
   .panelSection:before {
-    left: -100%;
-    width: 400%;
+    left: -110%; /* Aumenta el solapamiento */
+    width: 420%;
     transform: skewX(-15deg);
   }
 }
@@ -152,6 +155,7 @@ h2 {
 .panelSectionMedio {
   pointer-events: none;
   cursor: default !important;
+  transition: none !important;
 }
 @media (min-width: 630px) {
   .panelSectionMedio {

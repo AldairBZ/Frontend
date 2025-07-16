@@ -10,14 +10,14 @@ html, body {
   overflow-x: hidden;
   overflow-y: auto;
   color: #141414 !important;
-  background: #fff;
+  background: #16281d;
 }
 
 .homeWrapper {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: #16281d;
 }
 
 body {
@@ -38,6 +38,7 @@ header {
   box-shadow: 0 4px 12px rgba(0,0,0,0.10);
   padding: 0;
   margin: 0;
+  height: 60px;
 }
 nav {
   display: flex;
@@ -140,11 +141,16 @@ nav {
 
 main {
   width: 100%;
-  margin: 40px 0 0 0;
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
   flex: 1 0 auto;
-  /* Permite que el main crezca y empuje el footer hacia abajo */
+  min-height: calc(100vh - 60px - 48px); /* 60px header, 48px footer */
+  height: calc(100vh - 60px - 48px);
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  background: transparent;
 }
 .articles {
   display: flex;
@@ -248,8 +254,8 @@ main {
 .footer {
   background: #5b9cc8;
   color: #fff;
-  padding: 16px 0 0 0;
-  margin-top: 0;
+  padding: 0;
+  margin: 0;
   font-size: 0.92rem;
   border-top: 1px solid rgba(255,255,255,0.2);
   border-image: linear-gradient(90deg, #b2d8f7 0%, #5b9cc8 50%, #b2d8f7 100%) 1;
