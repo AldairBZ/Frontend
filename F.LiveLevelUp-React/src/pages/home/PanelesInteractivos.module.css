@@ -113,7 +113,7 @@
 }
 .panelSection:first-child:after,
 .panelSection:last-child:after {
-  opacity: .5;
+  opacity: .18;
 }
 .panelSection:first-child .panelArticle,
 .panelSection:last-child .panelArticle {
@@ -148,4 +148,21 @@
 h2 {
   font-size: 32px;
   margin-bottom: 12px;
+}
+.panelSectionMedio {
+  pointer-events: none;
+  cursor: default !important;
+}
+@media (min-width: 630px) {
+  .panelSectionMedio {
+    /* No flex-grow en hover */
+    transition: none !important;
+  }
+}
+.panelSectionMedio:hover,
+.panelSectionMedio:active,
+.panelSectionMedio:focus {
+  flex: 1 !important;
+  opacity: 1 !important;
+  z-index: 1 !important;
 } 

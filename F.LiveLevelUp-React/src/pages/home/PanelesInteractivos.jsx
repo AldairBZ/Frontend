@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './PanelesInteractivos.module.css';
 import logoLiveUp from '../../assets/imagenes-home/logoLiveUp.png';
+import fondopanel from '../../assets/imagenes-home/fondopanel.jpg';
+import bienestar from '../../assets/imagenes-home/bienestar.jpg';
+import planeta from '../../assets/imagenes-home/planeta.jpg';
 
 // Personaliza aquí tus imágenes y rutas de destino
 const paneles = [
@@ -44,14 +47,25 @@ export default function PanelesInteractivos({ panelesCustom }) {
     <div className={styles.panelesWrapper}>
       <main className={styles.panelesMain}>
         {panelesToShow.map((panel, i) => (
-          <Link to={panel.ruta} key={i} className={styles.panelSection} style={{
-            '--panel-img': `url(${panel.imagen})`
-          }}>
-            <article className={styles.panelArticle}>
-              <h2>{panel.titulo}</h2>
-              <p>{panel.descripcion}</p>
-            </article>
-          </Link>
+          i === 2 ? (
+            <div key={i} className={styles.panelSection + ' ' + styles.panelSectionMedio} style={{
+              '--panel-img': `url(${fondopanel})`
+            }}>
+              <article className={styles.panelArticle}>
+                <h2>{panel.titulo}</h2>
+                <p>{panel.descripcion}</p>
+              </article>
+            </div>
+          ) : (
+            <Link to={panel.ruta} key={i} className={styles.panelSection} style={{
+              '--panel-img': (i === 0 || i === panelesToShow.length - 1) ? `url(${fondopanel})` : (i === 1 ? `url(${bienestar})` : (i === 3 ? `url(${planeta})` : 'none'))
+            }}>
+              <article className={styles.panelArticle}>
+                <h2>{panel.titulo}</h2>
+                <p>{panel.descripcion}</p>
+              </article>
+            </Link>
+          )
         ))}
       </main>
     </div>
