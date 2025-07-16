@@ -169,4 +169,10 @@ h2 {
   flex: 1 !important;
   opacity: 1 !important;
   z-index: 1 !important;
+}
+.panelSection.panelPlaneta {
+  background-position: left center !important;
+}
+.panelSection.panelPlaneta:before {
+  background-position: left center !important;
 } 
