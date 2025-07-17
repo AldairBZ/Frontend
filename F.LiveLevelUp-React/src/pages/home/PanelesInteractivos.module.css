@@ -94,6 +94,11 @@
     transform: skewX(-15deg);
   }
 }
+.panelSection:nth-child(2):before {
+  background-position: 30% center !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+}
 .panelSection:not(:first-child):not(:last-child):hover {
   flex: 2;
 }
