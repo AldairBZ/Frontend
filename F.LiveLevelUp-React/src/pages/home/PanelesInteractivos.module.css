@@ -182,4 +182,12 @@ h2 {
   background-position: 25% center !important;
   background-size: contain !important;
   background-repeat: no-repeat !important;
+}
+.panelSection.panelBienestar .panelArticle h2,
+.panelSection.panelBienestar .panelArticle p {
+  color: #fff !important;
+}
+.panelSection.panelPlaneta .panelArticle h2,
+.panelSection.panelPlaneta .panelArticle p {
+  color: #fff !important;
 } 

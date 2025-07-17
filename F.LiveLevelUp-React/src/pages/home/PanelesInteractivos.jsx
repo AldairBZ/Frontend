@@ -58,7 +58,7 @@ export default function PanelesInteractivos({ panelesCustom }) {
             </div>
           ) : (
             <Link to={panel.ruta} key={i} className={
-              styles.panelSection + (i === 3 ? ' ' + styles.panelPlaneta : '')
+              styles.panelSection + (i === 3 ? ' ' + styles.panelPlaneta : '') + (i === 1 ? ' ' + styles.panelBienestar : '')
             } style={{
               '--panel-img': (i === 0 || i === panelesToShow.length - 1) ? `url(${fondopanel})` : (i === 1 ? `url(${bienestar})` : (i === 3 ? `url(${planeta})` : 'none'))
             }}>

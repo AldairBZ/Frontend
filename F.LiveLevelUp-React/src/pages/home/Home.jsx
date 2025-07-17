@@ -62,8 +62,7 @@ export default function Home() {
       <header className={styles.header}>
         <nav className={styles.nav}>
           <div className={styles.logo}>
-            <img src={logoLiveUp} alt="Logo LiveLevelUp" style={{height: 56, width: 56, objectFit: 'contain', background: 'none', marginRight: 10}} />
-            <span>LifeLevelUp</span>
+            <span>LiveLevelUp</span>
           </div>
           <ul className={styles.menu}>
             <li>
@@ -115,7 +114,6 @@ export default function Home() {
             <h3>Uso de datos y privacidad</h3>
             <ul>
               <li><a href="#" onClick={e => {e.preventDefault(); setModalAbierto('privacidad');}}>Política de privacidad</a></li>
-              <li><a href="#">Cookies</a></li>
             </ul>
           </div>
           <div className={styles['footer-col']}>
@@ -129,7 +127,7 @@ export default function Home() {
             <h3>Quiénes somos</h3>
             <ul>
               <li><a href="#" onClick={e => {e.preventDefault(); setModalAbierto('equipo');}}>Equipo</a></li>
-              <li><a href="#">Historia</a></li>
+              <li><a href="#" onClick={e => {e.preventDefault(); setModalAbierto('historia');}}>Historia</a></li>
             </ul>
           </div>
         </div>
@@ -185,6 +183,30 @@ export default function Home() {
             {modalAbierto === 'equipo' && <QuienesSomos />}
             {modalAbierto === 'privacidad' && <Privacidad onClose={() => setModalAbierto(null)} />}
             {modalAbierto === 'referentes' && <Referentes />}
+            {(modalAbierto === 'cookies' || modalAbierto === 'historia') && (
+              <div style={{padding: 48, minHeight: 120, minWidth: 320}}>
+                <h1 style={{fontSize: 28, marginBottom: 24, color: '#232e43'}}>
+                  {modalAbierto === 'cookies' ? 'Cookies' : 'Historia'}
+                </h1>
+                {modalAbierto === 'historia' && (
+                  <div style={{fontSize: 18, color: '#232e43', lineHeight: 1.6}}>
+                    <p>🧬 <b>Nuestra Historia</b></p>
+                    <p>Todo empezó con una simple pregunta:<br/>
+                    ¿Y si nuestras decisiones diarias pudieran salvarnos… y salvar al planeta?</p>
+                    <p>LiveLevelUp nació como un proyecto que une tecnología, salud y conciencia colectiva. Queríamos algo más que una app informativa: queríamos una experiencia que te hiciera ver, sentir y actuar.</p>
+                    <p>Nos dimos cuenta de que muchas plataformas hablan de bienestar o sostenibilidad… pero pocas conectan ambas cosas de forma visual, educativa y accesible para todos.</p>
+                    <p>Así nació LiveLevelUp.<br/>
+                    Un espacio donde tu avatar evoluciona contigo, donde tus decisiones tienen consecuencias, y donde cada cambio cuenta —no solo para ti, sino para todos.</p>
+                    <p>Porque creemos que el cambio empieza en lo pequeño. En lo personal. En lo cotidiano.<br/>
+                    Y si muchas personas lo hacen a la vez... el mundo también mejora.</p>
+                    <p style={{marginTop: 32}}>
+                    Somos un equipo de jóvenes diseñadores, desarrolladores y soñadores comprometidos con el futuro.<br/>
+                    Y sí, también usamos LiveLevelUp cada día.<br/>
+                    — El equipo de LiveLevelUp</p>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       )}
