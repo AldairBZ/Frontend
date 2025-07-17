@@ -48,6 +48,7 @@ export default function PanelesInteractivos({ panelesCustom }) {
             }}>
               <article className={styles.panelArticle}>
                 <h2>{panel.titulo}</h2>
+                {/* No se agrega texto extra aquí */}
               </article>
             </div>
           ) : (
@@ -58,6 +59,12 @@ export default function PanelesInteractivos({ panelesCustom }) {
             }}>
               <article className={styles.panelArticle}>
                 <h2>{panel.titulo}</h2>
+                {panel.titulo === 'Salud y bienestar' && (
+                  <p style={{marginTop: 12, color: '#fff', fontWeight: 500, fontSize: 18, textShadow: '0 2px 8px #232e43cc'}}>Mejora tu calidad de vida &gt;</p>
+                )}
+                {panel.titulo === 'Salud del planeta' && (
+                  <p style={{marginTop: 12, color: '#fff', fontWeight: 500, fontSize: 18, textShadow: '0 2px 8px #232e43cc'}}>Mejora la calidad del entorno &gt;</p>
+                )}
               </article>
             </Link>
           )

@@ -53,6 +53,7 @@ export default function Referentes() {
   return (
     <div style={{maxWidth: 1100, margin: '0 auto', padding: 24}}>
       <h2 style={{marginBottom: 16}}>Salud y Bienestar</h2>
+      <p style={{marginBottom: 8, color: '#5b9cc8', fontWeight: 600, fontSize: 18}}>Mejora tu calidad de vida &gt;</p>
       <p style={{marginBottom: 24}}>La información sobre salud y bienestar personal ha sido recopilada de fuentes oficiales como la OMS y MedlinePlus. De estas páginas hemos extraído datos como la esperanza de vida media, los factores que la afectan (como la alimentación, el tabaquismo o el ejercicio físico), y hábitos recomendados para mejorarla. Esta base nos permite generar consejos personalizados y simulaciones orientativas dentro de la webapp.</p>
       <div style={{
         display: 'grid',
@@ -73,6 +74,7 @@ export default function Referentes() {
         ))}
       </div>
       <h2 style={{marginBottom: 16}}>Salud del Planeta</h2>
+      <p style={{marginBottom: 8, color: '#5b9cc8', fontWeight: 600, fontSize: 18}}>Mejora la calidad del entorno &gt;</p>
       <p style={{marginBottom: 24}}>La información sobre la salud del planeta y sostenibilidad ha sido recopilada de fuentes reconocidas como el Programa de Naciones Unidas para el Medio Ambiente (UNEP), el Banco Mundial y el Foro Económico Mundial. De estas webs hemos extraído datos sobre el estado actual del medio ambiente, el impacto de las actividades humanas y acciones recomendadas para mejorar la salud del planeta. Esta información fundamenta las evaluaciones y simuladores que ofrece nuestra webapp.</p>
       <div style={{
         display: 'grid',
