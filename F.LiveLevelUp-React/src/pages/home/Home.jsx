@@ -62,7 +62,7 @@ export default function Home() {
       <header className={styles.header}>
         <nav className={styles.nav}>
           <div className={styles.logo}>
-            <span>LiveLevelUp</span>
+            <span>LifeLevelUp</span>
           </div>
           <ul className={styles.menu}>
             <li>
@@ -193,16 +193,16 @@ export default function Home() {
                     <p>🧬 <b>Nuestra Historia</b></p>
                     <p>Todo empezó con una simple pregunta:<br/>
                     ¿Y si nuestras decisiones diarias pudieran salvarnos… y salvar al planeta?</p>
-                    <p>LiveLevelUp nació como un proyecto que une tecnología, salud y conciencia colectiva. Queríamos algo más que una app informativa: queríamos una experiencia que te hiciera ver, sentir y actuar.</p>
+                    <p>LifeLevelUp nació como un proyecto que une tecnología, salud y conciencia colectiva. Queríamos algo más que una app informativa: queríamos una experiencia que te hiciera ver, sentir y actuar.</p>
                     <p>Nos dimos cuenta de que muchas plataformas hablan de bienestar o sostenibilidad… pero pocas conectan ambas cosas de forma visual, educativa y accesible para todos.</p>
-                    <p>Así nació LiveLevelUp.<br/>
+                    <p>Así nació LifeLevelUp.<br/>
                     Un espacio donde tu avatar evoluciona contigo, donde tus decisiones tienen consecuencias, y donde cada cambio cuenta —no solo para ti, sino para todos.</p>
                     <p>Porque creemos que el cambio empieza en lo pequeño. En lo personal. En lo cotidiano.<br/>
                     Y si muchas personas lo hacen a la vez... el mundo también mejora.</p>
                     <p style={{marginTop: 32}}>
                     Somos un equipo de jóvenes diseñadores, desarrolladores y soñadores comprometidos con el futuro.<br/>
-                    Y sí, también usamos LiveLevelUp cada día.<br/>
-                    — El equipo de LiveLevelUp</p>
+                    Y sí, también usamos LifeLevelUp cada día.<br/>
+                    — El equipo de LifeLevelUp</p>
                   </div>
                 )}
               </div>

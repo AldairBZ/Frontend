@@ -72,7 +72,7 @@ export default function LoginSidePanel() {
     <div className="sidepanel-bg">
       <div className="sidepanel-center-content">
         <PlanetSVG />
-        <h1 className="sidepanel-title">LiveLevelUp</h1>
+        <h1 className="sidepanel-title">LifeLevelUp</h1>
         <h2 className="sidepanel-subtitle">Tu vida tiene más impacto del que imaginas...</h2>
         {!showPanel && (
           <button className="sidepanel-btn" onClick={() => setShowPanel(true)}>Entrar</button>

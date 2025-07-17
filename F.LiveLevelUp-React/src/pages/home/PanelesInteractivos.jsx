@@ -11,32 +11,27 @@ const paneles = [
   {
     imagen: logoLiveUp, // Cambia por tu imagen real 1
     ruta: '/ruta1',     // Cambia por la ruta de tu página 1
-    titulo: 'Panel 1',
-    descripcion: 'Este es un texto descriptivo para el panel 1.'
+    titulo: 'Panel 1'
   },
   {
     imagen: logoLiveUp, // Cambia por tu imagen real 2
     ruta: '/ruta2',
-    titulo: 'Panel 2',
-    descripcion: 'Este es un texto descriptivo para el panel 2.'
+    titulo: 'Salud y bienestar'
   },
   {
     imagen: logoLiveUp, // Cambia por tu imagen real 3
     ruta: '/ruta3',
-    titulo: 'Panel 3',
-    descripcion: 'Este es un texto descriptivo para el panel 3.'
+    titulo: 'Panel 3'
   },
   {
     imagen: logoLiveUp, // Cambia por tu imagen real 4
     ruta: '/ruta4',
-    titulo: 'Panel 4',
-    descripcion: 'Este es un texto descriptivo para el panel 4.'
+    titulo: 'Salud del planeta'
   },
   {
     imagen: logoLiveUp, // Cambia por tu imagen real 5
     ruta: '/ruta5',
-    titulo: 'Panel 5',
-    descripcion: 'Este es un texto descriptivo para el panel 5.'
+    titulo: 'Panel 5'
   }
 ];
 
@@ -53,7 +48,6 @@ export default function PanelesInteractivos({ panelesCustom }) {
             }}>
               <article className={styles.panelArticle}>
                 <h2>{panel.titulo}</h2>
-                <p>{panel.descripcion}</p>
               </article>
             </div>
           ) : (
@@ -64,7 +58,6 @@ export default function PanelesInteractivos({ panelesCustom }) {
             }}>
               <article className={styles.panelArticle}>
                 <h2>{panel.titulo}</h2>
-                <p>{panel.descripcion}</p>
               </article>
             </Link>
           )

@@ -5,7 +5,7 @@ export default function Layout({ children }) {
   return (
     <div className="layout-root">
       <header className="layout-header">
-        <span className="logo">🌱 LiveLevelUp</span>
+        <span className="logo">🌱 LifeLevelUp</span>
         <nav className="layout-nav">
           <a href="#avatar">Avatar</a>
           <a href="#habitos">Hábitos</a>

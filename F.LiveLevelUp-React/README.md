@@ -1,6 +1,6 @@
-# 🌱 LiveLevelUp Frontend
+# 🌱 LifeLevelUp Frontend
 
-LiveLevelUp es una web app gamificada que representa a una persona y al planeta según sus hábitos saludables. El enfoque es tipo juego estilo "Los Sims", pero usando solo SVGs personalizados, animaciones CSS y emojis unicode. La estética es limpia, atractiva y moderna, con colores pastel y estilo cartoon minimalista.
+LifeLevelUp es una web app gamificada que representa a una persona y al planeta según sus hábitos saludables. El enfoque es tipo juego estilo "Los Sims", pero usando solo SVGs personalizados, animaciones CSS y emojis unicode. La estética es limpia, atractiva y moderna, con colores pastel y estilo cartoon minimalista.
 
 ## 🚀 Características principales
 - **Avatar SVG modular:** Personaje editable, compuesto por partes SVG (cabeza, ojos, boca, cabello, torso, brazos, piernas, expresiones, etc.)

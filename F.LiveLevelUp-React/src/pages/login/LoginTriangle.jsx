@@ -74,7 +74,7 @@ export default function LoginTriangle() {
       <FondoEspacioLogin />
       {/* Centro: bloque vertical con título, planeta y subtítulo */}
       <div style={{flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh'}}>
-        <h1 className="triangle-title" style={{fontFamily: 'Montserrat, Segoe UI, Arial, sans-serif', fontWeight: 900, fontSize: '3.2rem', letterSpacing: '0.06em', color: '#b6eaff', textShadow: '0 4px 32px #1976d2cc, 0 0px 8px #64b5f6cc, 0 1px 0 #fff', marginBottom: '2.2rem'}}>LiveLevelUp</h1>
+        <h1 className="triangle-title" style={{fontFamily: 'Montserrat, Segoe UI, Arial, sans-serif', fontWeight: 900, fontSize: '3.2rem', letterSpacing: '0.06em', color: '#b6eaff', textShadow: '0 4px 32px #1976d2cc, 0 0px 8px #64b5f6cc, 0 1px 0 #fff', marginBottom: '2.2rem'}}>LifeLevelUp</h1>
         <PlanetAnimated className="planet-svg-triangle" />
         <h2 className="triangle-subtitle" style={{fontFamily: 'Montserrat, Segoe UI, Arial, sans-serif', fontWeight: 500, fontSize: '1.3rem', color: '#e3f2fd', textShadow: '0 2px 12px #1976d2aa, 0 1px 0 #fff', marginTop: '2.2rem', marginBottom: '1.5rem'}}>Tu vida tiene más impacto del que imaginas...</h2>
       </div>

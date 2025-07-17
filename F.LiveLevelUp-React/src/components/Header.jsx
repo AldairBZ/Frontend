@@ -3,7 +3,7 @@ import React from 'react';
 export default function Header() {
   return (
     <header className="header">
-      <h1 className="titulo">🌱 LiveLevelUp</h1>
+      <h1 className="titulo">🌱 LifeLevelUp</h1>
       <nav className="nav">
         <a href="/inicio">Inicio</a>
         <a href="/habitos">Hábitos</a>
