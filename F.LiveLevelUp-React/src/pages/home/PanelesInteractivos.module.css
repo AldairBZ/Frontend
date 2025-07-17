@@ -174,5 +174,7 @@ h2 {
   background-position: left center !important;
 }
 .panelSection.panelPlaneta:before {
-  background-position: left center !important;
+  background-position: 35% center !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
 } 

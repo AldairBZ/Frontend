@@ -63,7 +63,7 @@ export default function Home() {
         <nav className={styles.nav}>
           <div className={styles.logo}>
             <img src={logoLiveUp} alt="Logo LiveLevelUp" style={{height: 56, width: 56, objectFit: 'contain', background: 'none', marginRight: 10}} />
-            <span>LiveLevelUp</span>
+            <span>LifeLevelUp</span>
           </div>
           <ul className={styles.menu}>
             <li>
