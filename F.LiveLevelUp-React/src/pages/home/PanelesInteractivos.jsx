@@ -25,7 +25,7 @@ const paneles = [
   },
   {
     imagen: logoLiveUp, // Cambia por tu imagen real 4
-    ruta: '/ruta4',
+    ruta: '/home/salud-planeta',
     titulo: 'Salud del planeta'
   },
   {
