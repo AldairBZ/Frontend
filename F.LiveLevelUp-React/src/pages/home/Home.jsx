@@ -5,6 +5,7 @@ import PanelesInteractivos from './PanelesInteractivos';
 import QuienesSomos from './footer/equipo/QuienesSomos.jsx';
 import Privacidad from './footer/privacidad/Terminos.jsx';
 import Referentes from './footer/referentes/Referentes.jsx';
+import perfilImg from '../../assets/imagenes-home/perfil/perfil.png';
 // Importación condicional del CSS de modo oscuro
 
 export default function Home() {
@@ -83,22 +84,20 @@ export default function Home() {
           <div className={styles.actions}>
             <button
               ref={profileBtnRef}
-              style={{background: 'transparent', border: 'none', padding: 0, cursor: 'pointer', marginLeft: '-12px'}}
+              style={{background: 'transparent', border: 'none', padding: 0, cursor: 'pointer', marginLeft: '-12px', borderRadius: '12px', boxShadow: showProfileMenu ? '0 0 0 2px #81ca57' : '0 2px 8px #0002', transition: 'box-shadow 0.2s'}}
               title="Usuario"
               onClick={() => setShowProfileMenu((v) => !v)}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" viewBox="0 0 24 24" width="40" height="40">
-                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-                <g id="SVGRepo_iconCarrier">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"></path>
-                </g>
-              </svg>
+              <img
+                src={perfilImg}
+                alt="Perfil"
+                style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover', border: darkMode ? '2px solid #81ca57' : '2px solid #5b9cc8', background: darkMode ? '#232e43' : '#fff', transition: 'border 0.2s, background 0.2s' }}
+              />
             </button>
             {showProfileMenu && (
-              <div ref={menuRef} className={styles.profileMenu}>
+              <div ref={menuRef} className={styles.profileMenu + ' ' + (darkMode ? styles.profileMenuDark : '')}>
                 <button className={styles.profileMenuItem}>Editar perfil</button>
-                <button className={styles.profileMenuItem}>Cerrar sesión</button>
+                <button className={styles.profileMenuItem + ' ' + styles.logoutBtn}>Cerrar sesión</button>
               </div>
             )}
             </div>
