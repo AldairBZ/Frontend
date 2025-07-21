@@ -1,39 +1,19 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import styles from './SaludBienestar.module.css';
 import perfilImg from '../../../assets/imagenes-home/perfil/perfil.png';
 import QuienesSomos from '../footer/equipo/QuienesSomos.jsx';
 import Privacidad from '../footer/privacidad/Terminos.jsx';
 import Referentes from '../footer/referentes/Referentes.jsx';
+import { useTheme } from '../../../contexts/ThemeContext';
 
 export default function SaludBienestar() {
-  const [showProfileMenu, setShowProfileMenu] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
-  const [modalAbierto, setModalAbierto] = useState(null); // 'equipo', 'privacidad', 'referentes', 'historia'
-  const profileBtnRef = useRef(null);
-  const menuRef = useRef(null);
+  const [showProfileMenu, setShowProfileMenu] = React.useState(false);
+  const [modalAbierto, setModalAbierto] = React.useState(null);
+  const { darkMode, toggleTheme } = useTheme();
+  const profileBtnRef = React.useRef(null);
+  const menuRef = React.useRef(null);
 
-  useEffect(() => {
-    let darkThemeLink = document.getElementById('dark-theme-css');
-    if (darkMode) {
-      if (!darkThemeLink) {
-        darkThemeLink = document.createElement('link');
-        darkThemeLink.rel = 'stylesheet';
-        darkThemeLink.id = 'dark-theme-css';
-        darkThemeLink.href = '/src/pages/home/dark-theme.css';
-        document.head.appendChild(darkThemeLink);
-      }
-    } else {
-      if (darkThemeLink) {
-        darkThemeLink.parentNode.removeChild(darkThemeLink);
-      }
-    }
-    return () => {
-      const link = document.getElementById('dark-theme-css');
-      if (link) link.parentNode.removeChild(link);
-    };
-  }, [darkMode]);
-
-  useEffect(() => {
+  React.useEffect(() => {
     function handleClickOutside(event) {
       if (
         menuRef.current &&
@@ -55,7 +35,7 @@ export default function SaludBienestar() {
   }, [showProfileMenu]);
 
   return (
-    <div className={darkMode ? styles.homeWrapper + ' dark-mode' : styles.homeWrapper}>
+    <div className={styles.homeWrapper}>
       <header className={styles.header}>
         <nav className={styles.nav}>
           <div className={styles.logo}>
@@ -63,7 +43,7 @@ export default function SaludBienestar() {
           </div>
           <ul className={styles.menu}>
             <li>
-              <a href="/home" className={styles.active}>Home</a>
+              <a href="/home">Home</a>
             </li>
             <li>
               <a href="#">Salud</a>
@@ -75,7 +55,7 @@ export default function SaludBienestar() {
           <div style={{display:'flex',alignItems:'center',gap:'18px'}}>
             <div className={styles.options}>
               <label className={styles.switchLabel}>
-                <input type="checkbox" checked={darkMode} onChange={e => setDarkMode(e.target.checked)} className={styles.switchInput} />
+                <input type="checkbox" checked={darkMode} onChange={toggleTheme} className={styles.switchInput} />
                 <span className={styles.switchSlider}></span>
                 <span className={styles.switchText}>{darkMode ? '🌙' : '☀️'}</span>
               </label>

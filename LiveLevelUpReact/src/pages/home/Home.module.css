@@ -563,3 +563,90 @@ header, header *, .footer, .footer * {
   color: #fff;
   text-shadow: 0 2px 8px #232e43cc;
 } 
+
+/* Estilos para el modo oscuro */
+:global(body.dark-mode) .homeWrapper, 
+:global(body.dark-mode) main {
+  background: #181f2a !important;
+  color: #f5f9fb !important;
+}
+
+:global(body.dark-mode) .header {
+  background: #232e43 !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+
+:global(body.dark-mode) .logo span:last-child {
+  color: #fff !important;
+  text-shadow: 0 4px 32px #1976d2cc, 0 0px 8px #64b5f6cc, 0 1px 0 #232e43;
+}
+
+:global(body.dark-mode) .menu li a {
+  color: #e3f0fa !important;
+  background: rgba(30,40,60,0.18) !important;
+  border: 1.5px solid rgba(255,255,255,0.08) !important;
+  box-shadow: 0 2px 16px 0 rgba(30,40,60,0.18), 0 0px 8px #232e43, 0 1px 0 #232e43 !important;
+}
+
+:global(body.dark-mode) .menu li a:hover {
+  color: #81ca57 !important;
+  background: rgba(255,255,255,0.10) !important;
+  border: 2.5px solid #81ca57 !important;
+  box-shadow: 0 8px 32px 0 #81ca57, 0 0px 12px #232e43 !important;
+}
+
+:global(body.dark-mode) .card {
+  background: #232e43cc !important;
+  color: #f5f9fb !important;
+  box-shadow: 0 4px 24px 0 rgba(129,202,87,0.10), 0 1.5px 0 #81ca57;
+}
+
+:global(body.dark-mode) .card *, 
+:global(body.dark-mode) .card-content, 
+:global(body.dark-mode) .card-image {
+  background: transparent !important;
+  color: #f5f9fb !important;
+}
+
+
+:global(body.dark-mode) .card::after {
+  border: 2px solid rgba(129,202,87,0.10) !important;
+  box-shadow: 0 0 0 1.5px rgba(129,202,87,0.10) inset !important;
+}
+
+:global(body.dark-mode) .card-content h2 {
+  color: #f5f9fb !important;
+}
+
+:global(body.dark-mode) .category {
+  color: #81ca57 !important;
+  opacity: 0.85 !important;
+}
+
+:global(body.dark-mode) .footer {
+  background: #232e43 !important;
+  color: #e3f0fa !important;
+  border-top: 1px solid rgba(129,202,87,0.18) !important;
+  border-image: linear-gradient(90deg, #81ca57 0%, #232e43 50%, #81ca57 100%) 1 !important;
+  box-shadow: 0 -2px 16px 0 rgba(129,202,87,0.10) !important;
+}
+
+:global(body.dark-mode) .footer-col h2, 
+:global(body.dark-mode) .footer-col h3 {
+  color: #e3f0fa !important;
+}
+
+:global(body.dark-mode) .footer-col p, 
+:global(body.dark-mode) .footer-col ul li, 
+:global(body.dark-mode) .footer-col ul li a {
+  color: #b2d8f7 !important;
+}
+
+:global(body.dark-mode) .footer-col ul li a:hover {
+  color: #81ca57 !important;
+}
+
+:global(body.dark-mode) .footer-bottom {
+  color: #b2d8f7 !important;
+  background: transparent !important;
+} 

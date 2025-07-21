@@ -1,43 +1,20 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import styles from './Home.module.css';
-import logoLiveUp from '../../assets/imagenes-home/logoLiveUp.png';
 import PanelesInteractivos from './PanelesInteractivos';
 import QuienesSomos from './footer/equipo/QuienesSomos.jsx';
 import Privacidad from './footer/privacidad/Terminos.jsx';
 import Referentes from './footer/referentes/Referentes.jsx';
 import perfilImg from '../../assets/imagenes-home/perfil/perfil.png';
-// Importación condicional del CSS de modo oscuro
+import { useTheme } from '../../contexts/ThemeContext';
 
 export default function Home() {
-  const [showProfileMenu, setShowProfileMenu] = useState(false);
-  const [darkMode, setDarkMode] = useState(false); // Por defecto, modo claro
-  const profileBtnRef = useRef(null);
-  const menuRef = useRef(null);
-  // Estado para controlar el modal del footer
-  const [modalAbierto, setModalAbierto] = useState(null); // 'equipo', 'privacidad', 'referentes' o null
+  const [showProfileMenu, setShowProfileMenu] = React.useState(false);
+  const profileBtnRef = React.useRef(null);
+  const menuRef = React.useRef(null);
+  const [modalAbierto, setModalAbierto] = React.useState(null);
+  const { darkMode, toggleTheme } = useTheme();
 
-  useEffect(() => {
-    let darkThemeLink = document.getElementById('dark-theme-css');
-    if (darkMode) {
-      if (!darkThemeLink) {
-        darkThemeLink = document.createElement('link');
-        darkThemeLink.rel = 'stylesheet';
-        darkThemeLink.id = 'dark-theme-css';
-        darkThemeLink.href = '/src/pages/home/dark-theme.css';
-        document.head.appendChild(darkThemeLink);
-      }
-    } else {
-      if (darkThemeLink) {
-        darkThemeLink.parentNode.removeChild(darkThemeLink);
-      }
-    }
-    return () => {
-      const link = document.getElementById('dark-theme-css');
-      if (link) link.parentNode.removeChild(link);
-    };
-  }, [darkMode]);
-
-  useEffect(() => {
+  React.useEffect(() => {
     function handleClickOutside(event) {
       if (
         menuRef.current &&
@@ -76,30 +53,30 @@ export default function Home() {
           <div style={{display:'flex',alignItems:'center',gap:'18px'}}>
             <div className={styles.options}>
               <label className={styles.switchLabel}>
-                <input type="checkbox" checked={darkMode} onChange={e => setDarkMode(e.target.checked)} className={styles.switchInput} />
+                <input type="checkbox" checked={darkMode} onChange={toggleTheme} className={styles.switchInput} />
                 <span className={styles.switchSlider}></span>
                 <span className={styles.switchText}>{darkMode ? '🌙' : '☀️'}</span>
               </label>
             </div>
-          <div className={styles.actions}>
-            <button
-              ref={profileBtnRef}
-              style={{background: 'transparent', border: 'none', padding: 0, cursor: 'pointer', marginLeft: '-12px', borderRadius: '12px', boxShadow: showProfileMenu ? '0 0 0 2px #81ca57' : '0 2px 8px #0002', transition: 'box-shadow 0.2s'}}
-              title="Usuario"
-              onClick={() => setShowProfileMenu((v) => !v)}
-            >
-              <img
-                src={perfilImg}
-                alt="Perfil"
-                style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover', border: darkMode ? '2px solid #81ca57' : '2px solid #5b9cc8', background: darkMode ? '#232e43' : '#fff', transition: 'border 0.2s, background 0.2s' }}
-              />
-            </button>
-            {showProfileMenu && (
-              <div ref={menuRef} className={styles.profileMenu + ' ' + (darkMode ? styles.profileMenuDark : '')}>
-                <button className={styles.profileMenuItem}>Editar perfil</button>
-                <button className={styles.profileMenuItem + ' ' + styles.logoutBtn}>Cerrar sesión</button>
-              </div>
-            )}
+            <div className={styles.actions}>
+              <button
+                ref={profileBtnRef}
+                style={{background: 'transparent', border: 'none', padding: 0, cursor: 'pointer', marginLeft: '-12px', borderRadius: '12px', boxShadow: showProfileMenu ? '0 0 0 2px #81ca57' : '0 2px 8px #0002', transition: 'box-shadow 0.2s'}}
+                title="Usuario"
+                onClick={() => setShowProfileMenu((v) => !v)}
+              >
+                <img
+                  src={perfilImg}
+                  alt="Perfil"
+                  style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover', border: darkMode ? '2px solid #81ca57' : '2px solid #5b9cc8', background: darkMode ? '#232e43' : '#fff', transition: 'border 0.2s, background 0.2s' }}
+                />
+              </button>
+              {showProfileMenu && (
+                <div ref={menuRef} className={styles.profileMenu + ' ' + (darkMode ? styles.profileMenuDark : '')}>
+                  <button className={styles.profileMenuItem}>Editar perfil</button>
+                  <button className={styles.profileMenuItem + ' ' + styles.logoutBtn}>Cerrar sesión</button>
+                </div>
+              )}
             </div>
           </div>
         </nav>
