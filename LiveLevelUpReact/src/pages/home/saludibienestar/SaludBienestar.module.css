@@ -234,53 +234,56 @@
 .options {
   display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  margin-right: 8px;
 }
 .switchLabel {
   display: flex;
   align-items: center;
   cursor: pointer;
-  position: relative;
+  gap: 8px;
+  user-select: none;
 }
 .switchInput {
-  opacity: 0;
-  width: 0;
-  height: 0;
-  position: absolute;
+  display: none;
 }
 .switchSlider {
-  position: relative;
-  width: 40px;
+  width: 38px;
   height: 22px;
-  background: #91c1e0;
-  border-radius: 22px;
-  box-shadow: 0 2px 8px #0002;
-  transition: background 0.2s;
-  margin-right: 8px;
+  background: rgba(255,255,255,0.18);
+  border-radius: 12px;
+  position: relative;
+  transition: background 0.3s;
+  box-shadow: 0 2px 8px 0 rgba(91,156,200,0.10);
+  border: 1.5px solid rgba(91,156,200,0.18);
+  display: inline-block;
+}
+.switchInput:checked + .switchSlider {
+  background: rgba(30,40,60,0.28);
+  border: 1.5px solid #81ca57;
 }
 .switchSlider::before {
   content: '';
   position: absolute;
-  left: 2px;
-  top: 2px;
-  width: 18px;
-  height: 18px;
+  left: 3px;
+  top: 3px;
+  width: 16px;
+  height: 16px;
   background: #fff;
   border-radius: 50%;
-  transition: transform 0.2s, background 0.2s;
-}
-.switchInput:checked + .switchSlider {
-  background: #232e43;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+  transition: transform 0.3s, background 0.3s;
 }
 .switchInput:checked + .switchSlider::before {
-  transform: translateX(18px);
-  background: #fff;
+  transform: translateX(16px);
+  background: #81ca57;
 }
 .switchText {
-  font-size: 1.2rem;
-  margin-left: 4px;
-  transition: color 0.2s;
+  font-size: 1.18rem;
+  margin-left: 6px;
+  transition: color 0.3s;
   color: #fff;
+  text-shadow: 0 2px 8px #232e43cc;
 }
 
 /* Espacio para personalizaciones futuras de SaludBienestar */ 
@@ -342,4 +345,187 @@
 :global(body.dark-mode) .footer-bottom {
   color: #b2d8f7 !important;
   background: transparent !important;
+} 
+
+/* Estilos para el Contenido Principal de Salud y Bienestar */
+.mainContent {
+  display: flex;
+  flex: 1;
+  padding: 2rem;
+  gap: 2rem;
+  margin-bottom: 80px; /* Espacio para el footer fijo */
+}
+
+.leftPanel, .rightPanel {
+  flex: 0 0 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.rightPanel {
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.centerPanel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.interactionButton {
+  background-color: #a7c7e7; /* Azul pastel */
+  color: #333;
+  border: none;
+  border-radius: 12px;
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  margin-bottom: 1rem;
+}
+
+.interactionButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dropdown {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+  background-color: #f0f8ff;
+  border-radius: 8px;
+  padding: 0 0.5rem;
+}
+
+.dropdown.show {
+  max-height: 500px; /* Altura suficiente para el contenido */
+  padding: 0.5rem;
+}
+
+.draggableItem {
+  background-color: #fff;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  border: 2px dashed #a7c7e7;
+  cursor: grab;
+  text-align: center;
+}
+
+.avatarPanel {
+  background-color: #e0f0ff;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 6rem;
+  border: 4px dashed #a7c7e7;
+  transition: all 0.3s ease;
+}
+
+.avatarPanel.drag-over {
+  transform: scale(1.1);
+  border-color: #77aaff;
+}
+
+.statusBox {
+  background-color: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #333;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.iconButton {
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.iconButton:hover {
+  transform: scale(1.2);
+}
+
+.achievementsPanel {
+  position: fixed;
+  top: 80px;
+  right: 0;
+  width: 250px;
+  height: calc(100% - 160px);
+  background-color: #f0f8ff;
+  border-left: 2px solid #a7c7e7;
+  border-radius: 12px 0 0 12px;
+  box-shadow: -4px 0 15px rgba(0,0,0,0.1);
+  transform: translateX(100%);
+  transition: transform 0.5s ease-in-out;
+  padding: 1rem;
+  z-index: 100;
+}
+
+.achievementsPanel.show {
+  transform: translateX(0);
+}
+
+.petTip {
+  position: relative;
+  background-color: #f0f8ff;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-top: 1rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  color: #333;
+}
+.petTip::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  right: 20px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: #f0f8ff transparent transparent transparent;
+}
+
+.marquee {
+  position: fixed;
+  bottom: 60px; /* Justo encima del footer */
+  width: 100%;
+  background-color: #a7c7e7;
+  color: #333;
+  padding: 0.5rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marqueeContent {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 20s linear infinite;
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+@media (max-width: 768px) {
+  .mainContent {
+    flex-direction: column;
+  }
+  .leftPanel, .rightPanel {
+    flex-direction: row;
+    justify-content: space-around;
+    flex: 1;
+  }
 } 
