@@ -74,17 +74,108 @@
 }
 .footer {
   background: #5b9cc8;
-  color: #fff;
-  text-align: center;
-  padding: 18px;
+  color: #fff !important;
+  font-size: 0.92rem;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  border-image: linear-gradient(90deg, #b2d8f7 0%, #5b9cc8 50%, #b2d8f7 100%) 1;
+  flex-shrink: 0;
+  box-shadow: 0 -2px 16px 0 rgba(91,156,200,0.10);
+  padding: 0;
+  margin: 0;
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 40;
+  z-index: 50;
+}
+.footer-container, .footer-col, .footer-col h2, .footer-col h3, .footer-col ul li, .footer-col ul li a {
+  color: #fff !important;
+}
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+  flex-wrap: wrap;
+  gap: 48px;
+}
+.footer-col {
+  flex: 1 1 120px;
+  min-width: 120px;
+  margin-bottom: 6px;
+}
+.footer-col h2, .footer-col h3 {
+  font-size: 1.05rem;
+  margin-bottom: 4px;
   font-weight: 500;
-  font-size: 18px;
-  box-shadow: 0 -2px 12px rgba(0,0,0,0.10);
+  color: #fff;
+  letter-spacing: 0.08em;
+}
+.footer-col p, .footer-col ul li, .footer-col ul li a {
+  font-weight: 300;
+  color: #e3f0fa;
+  font-size: 0.93rem;
+  letter-spacing: 0.01em;
+}
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer-col ul li {
+  margin-bottom: 3px;
+  color: #e3f0fa;
+  font-size: 0.93rem;
+}
+.footer-col ul li a {
+  color: #e3f0fa;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-col ul li a:hover {
+  color: #fff;
+}
+.footer-bottom {
+  border-top: none;
+  margin-top: 0;
+  padding: 0 16px 8px 16px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 0.85rem;
+  background: transparent;
+  color: #e3f0fa;
+  min-height: 0;
+  box-shadow: none;
+}
+@media (max-width: 900px) {
+  .footer-container {
+    flex-direction: column;
+    gap: 24px;
+    padding: 0 8px;
+  }
+  .footer-col {
+    margin-bottom: 12px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 4px;
+    padding: 4px 4px;
+  }
+}
+@media (max-width: 800px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 0 2px;
+  }
+  .footer-col {
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 2px;
+  }
 }
 
 /* Dark mode para nav */
