@@ -15,7 +15,7 @@ const paneles = [
   },
   {
     imagen: logoLiveUp, // Cambia por tu imagen real 2
-    ruta: '/ruta2',
+    ruta: '/home/salud-bienestar',
     titulo: 'Salud y bienestar'
   },
   {

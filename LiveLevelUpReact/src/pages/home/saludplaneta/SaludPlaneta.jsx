@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import styles from './Home.module.css';
-import planetaImg from '../../assets/imagenes-home/planeta.jpg';
+import styles from '../Home.module.css';
+import planetaImg from '../../../assets/imagenes-home/planeta.jpg';
 
 export default function SaludPlaneta() {
   const [showLogros, setShowLogros] = useState(false);

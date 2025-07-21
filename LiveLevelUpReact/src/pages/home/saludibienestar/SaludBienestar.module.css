@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&family=Urbanist:wght@400;600;700&display=swap');
+
+.nav {
+  background: #5b9cc8;
+  border-bottom: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 20;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+  padding: 0;
+  margin: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fff;
+  margin-left: 10px;
+}
+.logo span:last-child {
+  color: #fff;
+  text-shadow: 0 4px 32px #1976d2cc, 0 0px 8px #64b5f6cc, 0 1px 0 #fff;
+}
+.menu {
+  display: flex;
+  gap: 48px;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: static;
+}
+.menu li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.menu li a {
+  text-decoration: none;
+  color: #f5f9fb;
+  font-weight: 500;
+  font-size: 1.08rem;
+  transition: color 0.2s, background 0.2s, box-shadow 0.2s, border 0.2s;
+  background: rgba(255,255,255,0.10);
+  border: 1.5px solid rgba(255,255,255,0.10);
+  border-radius: 16px;
+  padding: 10px 36px;
+  margin: 0 2px;
+  box-shadow: 0 2px 16px 0 rgba(91,156,200,0.18), 0 0px 8px #fff2, 0 1px 0 #fff2;
+  cursor: pointer;
+  display: inline-block;
+  backdrop-filter: blur(6px);
+  /* Glassmorphism */
+}
+.menu li a:hover {
+  color: #1976d2;
+  background: rgba(255,255,255,0.15);
+  border: 2.5px solid #fff;
+  box-shadow: 0 8px 32px 0 #91c1e0, 0 0px 12px #fff4;
+  border-radius: 10px;
+}
+.menu li a.active {
+  /* No efecto especial, igual que los demás */
+}
+.footer {
+  background: #5b9cc8;
+  color: #fff;
+  text-align: center;
+  padding: 18px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  font-weight: 500;
+  font-size: 18px;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.10);
+}
+
+/* Dark mode para nav */
+.dark-mode .header, .dark-mode .nav {
+  background: #232e43 !important;
+}
+.dark-mode .menu li a,
+.dark-mode .logo span:last-child {
+  color: #fff !important;
+}
+.dark-mode .menu li a.active {
+  background: #232e43;
+  border: 2.5px solid #81ca57;
+  color: #81ca57;
+}
+
+/* Switch igual que la segunda imagen */
+.options {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.switchLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+.switchInput {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+.switchSlider {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  background: #91c1e0;
+  border-radius: 22px;
+  box-shadow: 0 2px 8px #0002;
+  transition: background 0.2s;
+  margin-right: 8px;
+}
+.switchSlider::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.2s, background 0.2s;
+}
+.switchInput:checked + .switchSlider {
+  background: #232e43;
+}
+.switchInput:checked + .switchSlider::before {
+  transform: translateX(18px);
+  background: #fff;
+}
+.switchText {
+  font-size: 1.2rem;
+  margin-left: 4px;
+  transition: color 0.2s;
+  color: #fff;
+}
+
+/* Espacio para personalizaciones futuras de SaludBienestar */ 
