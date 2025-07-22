@@ -91,30 +91,21 @@ export default function SaludPlaneta() {
         </div>
       </div>
       {/* Pie de página */}
-      <footer className="footer-blanco" style={{background: '#5b9cc8', display: 'flex', justifyContent: 'space-around', padding: 32, fontSize: 18, fontWeight: 500, position: 'fixed', left: 0, right: 0, bottom: 0, zIndex: 40}}>
-        <div>
-          <div style={{fontSize: 18}}>Uso de datos y privacidad</div>
-          <div style={{fontSize: 14, fontWeight: 400}}>
-            <a href="#" onClick={e => {e.preventDefault(); setModalAbierto('privacidad');}} style={{textDecoration: 'none'}}>Política de privacidad</a>
-          </div>
+      <footer className="footer-blanco" style={{background: '#5b9cc8', display: 'flex', justifyContent: 'flex-start', gap: 60, padding: '10px 20px 6px 20px', fontSize: 16, fontWeight: 400, position: 'fixed', left: 0, right: 0, bottom: 0, zIndex: 40}}>
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', minWidth: 160}}>
+          <div style={{fontSize: 16, fontWeight: 500, marginBottom: 10}}>Uso de datos y privacidad</div>
+          <a href="#" onClick={e => {e.preventDefault(); setModalAbierto('privacidad');}} style={{textDecoration: 'none', fontSize: 13, marginBottom: 7}}>Política de privacidad</a>
         </div>
-        <div>
           <div style={{fontSize: 18}}>Webs de confianza</div>
-          <div style={{fontSize: 14, fontWeight: 400}}>
-            <a href="#" onClick={e => {e.preventDefault(); setModalAbierto('referentes');}} style={{textDecoration: 'none'}}>Referentes</a>
-          </div>
-          <div style={{fontSize: 14, fontWeight: 400}}>
-            <a href="#" style={{textDecoration: 'none'}}>Partners</a>
-          </div>
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', minWidth: 160}}>
+          <div style={{fontSize: 16, fontWeight: 500, marginBottom: 10}}>Webs de confianza</div>
+          <a href="#" onClick={e => {e.preventDefault(); setModalAbierto('referentes');}} style={{textDecoration: 'none', fontSize: 13, marginBottom: 7}}>Referentes</a>
+          <a href="#" style={{textDecoration: 'none', fontSize: 13, marginBottom: 7}}>Partners</a>
         </div>
-        <div>
-          <div style={{fontSize: 18}}>Quiénes somos</div>
-          <div style={{fontSize: 14, fontWeight: 400}}>
-            <a href="#" onClick={e => {e.preventDefault(); setModalAbierto('equipo');}} style={{textDecoration: 'none'}}>Equipo</a>
-          </div>
-          <div style={{fontSize: 14, fontWeight: 400}}>
-            <a href="#" onClick={e => {e.preventDefault(); setModalAbierto('historia');}} style={{textDecoration: 'none'}}>Historia</a>
-          </div>
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', minWidth: 160}}>
+          <div style={{fontSize: 16, fontWeight: 500, marginBottom: 10}}>Quiénes somos</div>
+          <a href="#" onClick={e => {e.preventDefault(); setModalAbierto('equipo');}} style={{textDecoration: 'none', fontSize: 13, marginBottom: 7}}>Equipo</a>
+          <a href="#" onClick={e => {e.preventDefault(); setModalAbierto('historia');}} style={{textDecoration: 'none', fontSize: 13, marginBottom: 7}}>Historia</a>
         </div>
       </footer>
       {/* Modal para mostrar los componentes */}
