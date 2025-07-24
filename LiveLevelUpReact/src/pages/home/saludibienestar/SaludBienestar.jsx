@@ -94,9 +94,11 @@ export default function SaludBienestar() {
         </header>
         <div style={{height: 60}} />
         <main className={styles.mainContent}>
+          <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',gap:'18px'}}>
           <LeftPanel />
           <CenterPanel status={status} setStatus={setStatus} />
           <RightPanel />
+          </div>
         </main>
         <Marquee />
         <footer className={styles.footer}>
