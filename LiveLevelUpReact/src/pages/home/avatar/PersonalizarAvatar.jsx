@@ -23,8 +23,14 @@ export default function PersonalizarAvatar() {
         </nav>
       </header>
       {/* Main vacío para personalización */}
-      <main className={styles.main} style={{minHeight: 'calc(100vh - 60px - 48px)', marginTop: 60}}>
-        {/* Aquí irá el contenido de personalización de avatar */}
+      <main className={styles.main} style={{minHeight: 'calc(100vh - 60px - 48px)', marginTop: 10, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', position: 'relative'}}>
+        <div style={{position: 'relative', width: '40vw', minWidth: 300, maxWidth: 600, height: '60vh', minHeight: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff', borderRadius: 24, boxShadow: '0 4px 32px #0002', margin: '-40px auto 0 auto'}}>
+          {/* Panel vacío para personalización */}
+          {/* Opciones (engranaje) */}
+          <div style={{position: 'absolute', top: -22, right: -22, background: '#fff', borderRadius: 12, boxShadow: '0 2px 8px #0002', width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2}}>
+            <span style={{fontSize: 26, color: '#5b9cc8', cursor: 'pointer'}}>⚙️</span>
+          </div>
+        </div>
       </main>
       {/* Footer igual que en Home */}
       <footer className={styles.footer}>
