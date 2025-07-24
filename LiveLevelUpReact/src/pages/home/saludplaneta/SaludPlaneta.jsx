@@ -27,7 +27,8 @@ export default function SaludPlaneta() {
       </header>
       <main className={styles.main} style={{display: 'flex', flex: 1, minHeight: 'calc(100vh - 60px - 48px)', marginTop: 60}}>
         {/* Foro/Chat (izquierda) */}
-        <section style={{flex: '0 0 320px', background: '#183c2a', borderRadius: 18, margin: '18px 18px 18px 0', display: 'flex', flexDirection: 'column', boxShadow: '0 2px 16px #0002'}}>
+        <div style={{display: 'flex', flexDirection: 'row', gap: 18}}>
+        <section style={{flex: '0 0 220px', background: '#183c2a', borderRadius: 18, margin: '18px 18px 18px 0', display: 'flex', flexDirection: 'column', boxShadow: '0 2px 16px #0002'}}>
           <h3 style={{color: '#fff', padding: '18px 0 0 18px'}}>Foro / Chat</h3>
           <div style={{flex: 1, padding: 18, overflowY: 'auto', color: '#fff'}}>Mensajes de ejemplo...</div>
           <form style={{display: 'flex', borderTop: '1px solid #2e5d4a', padding: 12}}>
@@ -83,6 +84,7 @@ export default function SaludPlaneta() {
             )}
           </div>
         </section>
+        </div>
       </main>
       {/* Cinta de noticias animada */}
       <div style={{position: 'fixed', left: 0, right: 0, bottom: 48, height: 38, background: '#183c2a', color: '#fff', display: 'flex', alignItems: 'center', overflow: 'hidden', zIndex: 30}}>
@@ -96,7 +98,6 @@ export default function SaludPlaneta() {
           <div style={{fontSize: 16, fontWeight: 500, marginBottom: 10}}>Uso de datos y privacidad</div>
           <a href="#" onClick={e => {e.preventDefault(); setModalAbierto('privacidad');}} style={{textDecoration: 'none', fontSize: 13, marginBottom: 7}}>Política de privacidad</a>
         </div>
-          <div style={{fontSize: 18}}>Webs de confianza</div>
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', minWidth: 160}}>
           <div style={{fontSize: 16, fontWeight: 500, marginBottom: 10}}>Webs de confianza</div>
           <a href="#" onClick={e => {e.preventDefault(); setModalAbierto('referentes');}} style={{textDecoration: 'none', fontSize: 13, marginBottom: 7}}>Referentes</a>
