@@ -26,6 +26,14 @@ export default function PersonalizarAvatar() {
       {/* Main vacío para personalización */}
       <main className={styles.main} style={{minHeight: 'calc(100vh - 60px - 48px)', marginTop: 10, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', position: 'relative', overflow: 'visible'}}>
         <div style={{position: 'relative', width: '40vw', minWidth: 300, maxWidth: 600, height: '60vh', minHeight: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff', borderRadius: 24, boxShadow: '0 4px 32px #0002', margin: '-40px auto 0 auto', transition: 'transform 0.4s cubic-bezier(.4,1.6,.6,1)', transform: showOptions ? 'translateX(-340px)' : 'translateX(0)'}}>
+          {/* Panel de información encima del panel principal */}
+          <div style={{position: 'absolute', top: 36, left: '70%', transform: 'translateX(-50%)', background: '#5b9cc8', color: '#fff', borderRadius: 14, boxShadow: '0 2px 8px #0002', width: 240, height: 220, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 500, fontSize: 18, zIndex: 3}}>
+            Información
+          </div>
+          {/* Panel azul pequeño de encuesta */}
+          <div style={{position: 'absolute', top: 268, left: '70%', transform: 'translateX(-50%)', background: '#5b9cc8', color: '#fff', borderRadius: 12, boxShadow: '0 2px 8px #0002', width: 140, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 600, fontSize: 17, zIndex: 3, letterSpacing: 1}}>
+            ENCUESTA
+          </div>
           {/* Panel vacío para personalización */}
           {/* Opciones (engranaje) */}
           <div style={{position: 'absolute', top: -22, right: -22, background: '#fff', borderRadius: 12, boxShadow: '0 2px 8px #0002', width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2, cursor: 'pointer'}} onClick={() => setShowOptions(v => !v)}>
