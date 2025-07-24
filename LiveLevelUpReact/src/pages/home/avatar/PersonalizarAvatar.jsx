@@ -6,6 +6,7 @@ import Referentes from '../footer/referentes/Referentes.jsx';
 
 export default function PersonalizarAvatar() {
   const [modalAbierto, setModalAbierto] = useState(null);
+  const [showOptions, setShowOptions] = useState(false);
 
   return (
     <div className={styles.homeWrapper}>
@@ -23,13 +24,17 @@ export default function PersonalizarAvatar() {
         </nav>
       </header>
       {/* Main vacío para personalización */}
-      <main className={styles.main} style={{minHeight: 'calc(100vh - 60px - 48px)', marginTop: 10, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', position: 'relative'}}>
-        <div style={{position: 'relative', width: '40vw', minWidth: 300, maxWidth: 600, height: '60vh', minHeight: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff', borderRadius: 24, boxShadow: '0 4px 32px #0002', margin: '-40px auto 0 auto'}}>
+      <main className={styles.main} style={{minHeight: 'calc(100vh - 60px - 48px)', marginTop: 10, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', position: 'relative', overflow: 'visible'}}>
+        <div style={{position: 'relative', width: '40vw', minWidth: 300, maxWidth: 600, height: '60vh', minHeight: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff', borderRadius: 24, boxShadow: '0 4px 32px #0002', margin: '-40px auto 0 auto', transition: 'transform 0.4s cubic-bezier(.4,1.6,.6,1)', transform: showOptions ? 'translateX(-340px)' : 'translateX(0)'}}>
           {/* Panel vacío para personalización */}
           {/* Opciones (engranaje) */}
-          <div style={{position: 'absolute', top: -22, right: -22, background: '#fff', borderRadius: 12, boxShadow: '0 2px 8px #0002', width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2}}>
-            <span style={{fontSize: 26, color: '#5b9cc8', cursor: 'pointer'}}>⚙️</span>
+          <div style={{position: 'absolute', top: -22, right: -22, background: '#fff', borderRadius: 12, boxShadow: '0 2px 8px #0002', width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2, cursor: 'pointer'}} onClick={() => setShowOptions(v => !v)}>
+            <span style={{fontSize: 26, color: '#5b9cc8'}}>⚙️</span>
           </div>
+        </div>
+        {/* Panel de opciones grande a la derecha */}
+        <div style={{position: 'absolute', top: '60px', left: 'calc(50% - 10px)', height: '70vh', minHeight: 340, width: showOptions ?  '48vw' : 0, maxWidth: 800, background: '#fff', borderRadius: 24, boxShadow: '0 4px 32px #0002', overflow: 'hidden', transition: 'width 0.4s cubic-bezier(.4,1.6,.6,1)', display: showOptions ? 'flex' : 'none', alignItems: 'center', justifyContent: 'center', zIndex: 3}}>
+          {/* Aquí irán las opciones avanzadas */}
         </div>
       </main>
       {/* Footer igual que en Home */}
