@@ -73,7 +73,7 @@ export default function Home() {
               </button>
               {showProfileMenu && (
                 <div ref={menuRef} className={styles.profileMenu + ' ' + (darkMode ? styles.profileMenuDark : '')}>
-                  <button className={styles.profileMenuItem}>Editar perfil</button>
+                  <button className={styles.profileMenuItem} onClick={() => window.location.href = '/home/avatar/personalizar'}>Editar perfil</button>
                   <button className={styles.profileMenuItem + ' ' + styles.logoutBtn}>Cerrar sesión</button>
                 </div>
               )}

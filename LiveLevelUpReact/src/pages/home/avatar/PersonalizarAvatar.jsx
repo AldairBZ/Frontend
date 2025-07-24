@@ -1,0 +1,132 @@
+import React, { useState } from 'react';
+import styles from '../Home.module.css';
+import QuienesSomos from '../footer/equipo/QuienesSomos.jsx';
+import Privacidad from '../footer/privacidad/Terminos.jsx';
+import Referentes from '../footer/referentes/Referentes.jsx';
+
+export default function PersonalizarAvatar() {
+  const [modalAbierto, setModalAbierto] = useState(null);
+
+  return (
+    <div className={styles.homeWrapper}>
+      {/* Header igual que en Home */}
+      <header className={styles.header}>
+        <nav className={styles.nav}>
+          <div className={styles.logo}>
+            <span>LifeLevelUp</span>
+          </div>
+          <ul className={styles.menu}>
+            <li><a href="/home">Inicio</a></li>
+            <li><a href="#">Salud</a></li>
+            <li><a href="#">Planeta</a></li>
+          </ul>
+        </nav>
+      </header>
+      {/* Main vacío para personalización */}
+      <main className={styles.main} style={{minHeight: 'calc(100vh - 60px - 48px)', marginTop: 60}}>
+        {/* Aquí irá el contenido de personalización de avatar */}
+      </main>
+      {/* Footer igual que en Home */}
+      <footer className={styles.footer}>
+        <div className={styles['footer-container']}>
+          <div className={styles['footer-col']}>
+            <h3>Uso de datos y privacidad</h3>
+            <ul>
+              <li><a href="#" onClick={e => {e.preventDefault(); setModalAbierto('privacidad');}}>Política de privacidad</a></li>
+            </ul>
+          </div>
+          <div className={styles['footer-col']}>
+            <h3>Webs de confianza</h3>
+            <ul>
+              <li><a href="#" onClick={e => {e.preventDefault(); setModalAbierto('referentes');}}>Referentes</a></li>
+              <li><a href="#">Partners</a></li>
+            </ul>
+          </div>
+          <div className={styles['footer-col']}>
+            <h3>Quiénes somos</h3>
+            <ul>
+              <li><a href="#" onClick={e => {e.preventDefault(); setModalAbierto('equipo');}}>Equipo</a></li>
+              <li><a href="#" onClick={e => {e.preventDefault(); setModalAbierto('historia');}}>Historia</a></li>
+            </ul>
+          </div>
+        </div>
+        <div className={styles['footer-bottom']}>
+        </div>
+      </footer>
+      {/* Modal para mostrar los componentes */}
+      {modalAbierto && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          background: 'rgba(0,0,0,0.45)',
+          zIndex: 9999,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+          onClick={() => setModalAbierto(null)}
+        >
+          <div style={{
+            background: '#fff',
+            borderRadius: 16,
+            boxShadow: '0 4px 32px #0003',
+            padding: 0,
+            maxWidth: 900,
+            width: '95vw',
+            maxHeight: '90vh',
+            overflowY: 'auto',
+            position: 'relative',
+          }}
+            onClick={e => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setModalAbierto(null)}
+              style={{
+                position: 'absolute',
+                top: 12,
+                right: 16,
+                background: '#5b9cc8',
+                color: '#fff',
+                border: 'none',
+                borderRadius: 8,
+                padding: '6px 16px',
+                fontWeight: 600,
+                fontSize: 18,
+                cursor: 'pointer',
+                zIndex: 2
+              }}
+            >Cerrar ✕</button>
+            {modalAbierto === 'equipo' && <QuienesSomos />}
+            {modalAbierto === 'privacidad' && <Privacidad onClose={() => setModalAbierto(null)} />}
+            {modalAbierto === 'referentes' && <Referentes />}
+            {modalAbierto === 'historia' && (
+              <div style={{padding: 48, minHeight: 120, minWidth: 320}}>
+                <h1 style={{fontSize: 28, marginBottom: 24, color: '#232e43'}}>
+                  Historia
+                </h1>
+                <div style={{fontSize: 18, color: '#232e43', lineHeight: 1.6}}>
+                  <p>🧬 <b>Nuestra Historia</b></p>
+                  <p>Todo empezó con una simple pregunta:<br/>
+                  ¿Y si nuestras decisiones diarias pudieran salvarnos… y salvar al planeta?</p>
+                  <p>LifeLevelUp nació como un proyecto que une tecnología, salud y conciencia colectiva. Queríamos algo más que una app informativa: queríamos una experiencia que te hiciera ver, sentir y actuar.</p>
+                  <p>Nos dimos cuenta de que muchas plataformas hablan de bienestar o sostenibilidad… pero pocas conectan ambas cosas de forma visual, educativa y accesible para todos.</p>
+                  <p>Así nació LifeLevelUp.<br/>
+                  Un espacio donde tu avatar evoluciona contigo, donde tus decisiones tienen consecuencias, y donde cada cambio cuenta —no solo para ti, sino para todos.</p>
+                  <p>Porque creemos que el cambio empieza en lo pequeño. En lo personal. En lo cotidiano.<br/>
+                  Y si muchas personas lo hacen a la vez... el mundo también mejora.</p>
+                  <p style={{marginTop: 32}}>
+                  Somos un equipo de jóvenes diseñadores, desarrolladores y soñadores comprometidos con el futuro.<br/>
+                  Y sí, también usamos LifeLevelUp cada día.<br/>
+                  — El equipo de LifeLevelUp</p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+} 
