@@ -6,6 +6,7 @@ import Referentes from '../footer/referentes/Referentes.jsx';
 import MonigoteBase from './MonigoteBase.jsx';
 
 export default function PersonalizarAvatar() {
+  // Estados temporales (formulario)
   const [modalAbierto, setModalAbierto] = useState(null);
   const [showOptions, setShowOptions] = useState(false);
   const [altura, setAltura] = useState(1.70);
@@ -20,6 +21,21 @@ export default function PersonalizarAvatar() {
   const [peso, setPeso] = useState(70);
   const [nombre, setNombre] = useState('');
   const [popup, setPopup] = useState('');
+
+  // Estados guardados (panel de información)
+  const [savedData, setSavedData] = useState({
+    nombre: '',
+    edad: 18,
+    peso: 70,
+    altura: 1.70,
+    genero: '',
+    actividad: '',
+    dieta: '',
+    horasSueno: 8,
+    estres: '',
+    consumo: '',
+    animo: '',
+  });
 
   return (
     <div className={styles.homeWrapper}>
@@ -43,17 +59,17 @@ export default function PersonalizarAvatar() {
           <div style={{position: 'absolute', top: 20, left: '70%', transform: 'translateX(-50%)', background: '#8fc4ea', color: '#fff', borderRadius: 14, boxShadow: '0 2px 8px #0002', width: 240, height: 280, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', fontWeight: 500, fontSize: 15, zIndex: 3, padding: '22px 18px 18px 18px', gap: 6}}>
             <div style={{fontSize: 18, fontWeight: 700, marginBottom: 10}}>Información</div>
             <div style={{lineHeight: 1.5}}>
-              <div><b>Nombre:</b> {nombre || <span style={{opacity: 0.6}}>—</span>}</div>
-              <div><b>Edad:</b> {edad ? edad + ' años' : <span style={{opacity: 0.6}}>—</span>}</div>
-              <div><b>Peso:</b> {peso ? peso + ' kg' : <span style={{opacity: 0.6}}>—</span>}</div>
-              <div><b>Altura:</b> {altura ? altura.toFixed(2) + ' m' : <span style={{opacity: 0.6}}>—</span>}</div>
-              <div><b>Género:</b> {genero ? (genero === 'masculino' ? 'Masculino ♂️' : 'Femenino ♀️') : <span style={{opacity: 0.6}}>—</span>}</div>
-              <div><b>Actividad física:</b> {actividad ? (actividad.charAt(0).toUpperCase() + actividad.slice(1)) : <span style={{opacity: 0.6}}>—</span>}</div>
-              <div><b>Dieta:</b> {dieta ? (dieta.charAt(0).toUpperCase() + dieta.slice(1)) : <span style={{opacity: 0.6}}>—</span>}</div>
-              <div><b>Horas de sueño:</b> {horasSueno ? horasSueno + ' h' : <span style={{opacity: 0.6}}>—</span>}</div>
-              <div><b>Estrés:</b> {estres ? (estres.charAt(0).toUpperCase() + estres.slice(1)) : <span style={{opacity: 0.6}}>—</span>}</div>
-              <div><b>Consumo:</b> {consumo ? (consumo.charAt(0).toUpperCase() + consumo.slice(1)) : <span style={{opacity: 0.6}}>—</span>}</div>
-              <div><b>Ánimo:</b> {animo ? (animo.charAt(0).toUpperCase() + animo.slice(1)) : <span style={{opacity: 0.6}}>—</span>}</div>
+              <div><b>Nombre:</b> {savedData.nombre || <span style={{opacity: 0.6}}>—</span>}</div>
+              <div><b>Edad:</b> {savedData.edad ? savedData.edad + ' años' : <span style={{opacity: 0.6}}>—</span>}</div>
+              <div><b>Peso:</b> {savedData.peso ? savedData.peso + ' kg' : <span style={{opacity: 0.6}}>—</span>}</div>
+              <div><b>Altura:</b> {savedData.altura ? savedData.altura.toFixed(2) + ' m' : <span style={{opacity: 0.6}}>—</span>}</div>
+              <div><b>Género:</b> {savedData.genero ? (savedData.genero === 'masculino' ? 'Masculino ♂️' : 'Femenino ♀️') : <span style={{opacity: 0.6}}>—</span>}</div>
+              <div><b>Actividad física:</b> {savedData.actividad ? (savedData.actividad.charAt(0).toUpperCase() + savedData.actividad.slice(1)) : <span style={{opacity: 0.6}}>—</span>}</div>
+              <div><b>Dieta:</b> {savedData.dieta ? (savedData.dieta.charAt(0).toUpperCase() + savedData.dieta.slice(1)) : <span style={{opacity: 0.6}}>—</span>}</div>
+              <div><b>Horas de sueño:</b> {savedData.horasSueno ? savedData.horasSueno + ' h' : <span style={{opacity: 0.6}}>—</span>}</div>
+              <div><b>Estrés:</b> {savedData.estres ? (savedData.estres.charAt(0).toUpperCase() + savedData.estres.slice(1)) : <span style={{opacity: 0.6}}>—</span>}</div>
+              <div><b>Consumo:</b> {savedData.consumo ? (savedData.consumo.charAt(0).toUpperCase() + savedData.consumo.slice(1)) : <span style={{opacity: 0.6}}>—</span>}</div>
+              <div><b>Ánimo:</b> {savedData.animo ? (savedData.animo.charAt(0).toUpperCase() + savedData.animo.slice(1)) : <span style={{opacity: 0.6}}>—</span>}</div>
             </div>
           </div>
           {/* Monigote base pegado a la derecha */}
@@ -204,8 +220,32 @@ export default function PersonalizarAvatar() {
                   setPopup('El peso no puede ser menor de 10 kg.');
                   return;
                 }
+                // Validación de campos obligatorios tipo botón
+                const camposFaltantes = [];
+                if (!genero) camposFaltantes.push('género');
+                if (!actividad) camposFaltantes.push('actividad física');
+                if (!dieta) camposFaltantes.push('dieta');
+                if (!estres) camposFaltantes.push('estrés');
+                if (!consumo) camposFaltantes.push('consumo');
+                if (!animo) camposFaltantes.push('ánimo');
+                if (camposFaltantes.length > 0) {
+                  setPopup('Falta seleccionar: ' + camposFaltantes.join(', '));
+                  return;
+                }
                 setPopup('');
-                // Aquí iría la lógica de guardado real
+                setSavedData({
+                  nombre,
+                  edad,
+                  peso,
+                  altura,
+                  genero,
+                  actividad,
+                  dieta,
+                  horasSueno,
+                  estres,
+                  consumo,
+                  animo,
+                });
               }}
             >
               <span role="img" aria-label="imprimir" style={{fontSize: 18}}>🖨️</span>
