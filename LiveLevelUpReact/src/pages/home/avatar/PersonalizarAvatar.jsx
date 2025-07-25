@@ -55,6 +55,38 @@ export default function PersonalizarAvatar() {
       {/* Main vacío para personalización */}
       <main className={styles.main} style={{minHeight: 'calc(100vh - 60px - 48px)', marginTop: 10, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', position: 'relative', overflow: 'visible'}}>
         <div style={{position: 'relative', width: '40vw', minWidth: 300, maxWidth: 600, height: '60vh', minHeight: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff', borderRadius: 24, boxShadow: '0 4px 32px #0002', margin: '-40px auto 0 auto', transition: 'transform 0.4s cubic-bezier(.4,1.6,.6,1)', transform: showOptions ? 'translateX(-340px)' : 'translateX(0)'}}>
+          {/* Botón de armario dentro del panel blanco, arriba a la izquierda */}
+          <div style={{
+            position: 'absolute',
+            top: 14,
+            left: 14,
+            zIndex: 10,
+          }}>
+            <button
+              type="button"
+              style={{
+                background: '#5b9cc8',
+                border: 'none',
+                borderRadius: '50%',
+                width: 52,
+                height: 52,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 2px 8px #0002',
+                cursor: 'pointer',
+                transition: 'box-shadow 0.2s',
+                fontSize: 24,
+                padding: 0,
+              }}
+              aria-label="Abrir armario"
+            >
+              {/* Icono de armario SVG proporcionado */}
+              <svg fill="#000" viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 10.551v-.678A4.005 4.005 0 0 0 16 6c0-2.206-1.794-4-4-4S8 3.794 8 6h2c0-1.103.897-2 2-2s2 .897 2 2-.897 2-2 2a1 1 0 0 0-1 1v1.551l-8.665 7.702A1.001 1.001 0 0 0 3 20h18a1.001 1.001 0 0 0 .664-1.748L13 10.551zM5.63 18 12 12.338 18.37 18H5.63z"></path>
+              </svg>
+            </button>
+          </div>
           {/* Panel de información encima del panel principal */}
           <div style={{position: 'absolute', top: 20, left: '70%', transform: 'translateX(-50%)', background: '#8fc4ea', color: '#fff', borderRadius: 14, boxShadow: '0 2px 8px #0002', width: 240, height: 280, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', fontWeight: 500, fontSize: 15, zIndex: 3, padding: '22px 18px 18px 18px', gap: 6}}>
             <div style={{fontSize: 18, fontWeight: 700, marginBottom: 10}}>Información</div>
