@@ -28,15 +28,11 @@ export default function PersonalizarAvatar() {
       <main className={styles.main} style={{minHeight: 'calc(100vh - 60px - 48px)', marginTop: 10, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', position: 'relative', overflow: 'visible'}}>
         <div style={{position: 'relative', width: '40vw', minWidth: 300, maxWidth: 600, height: '60vh', minHeight: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff', borderRadius: 24, boxShadow: '0 4px 32px #0002', margin: '-40px auto 0 auto', transition: 'transform 0.4s cubic-bezier(.4,1.6,.6,1)', transform: showOptions ? 'translateX(-340px)' : 'translateX(0)'}}>
           {/* Panel de información encima del panel principal */}
-          <div style={{position: 'absolute', top: 20, left: '70%', transform: 'translateX(-50%)', background: '#5b9cc8', color: '#fff', borderRadius: 14, boxShadow: '0 2px 8px #0002', width: 240, height: 220, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 500, fontSize: 18, zIndex: 3}}>
+          <div style={{position: 'absolute', top: 20, left: '70%', transform: 'translateX(-50%)', background: '#8fc4ea', color: '#fff', borderRadius: 14, boxShadow: '0 2px 8px #0002', width: 240, height: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 500, fontSize: 18, zIndex: 3}}>
             Información
           </div>
-          {/* Panel azul pequeño de encuesta */}
-          <div style={{position: 'absolute', top: 252, left: '70%', transform: 'translateX(-50%)', background: '#5b9cc8', color: '#fff', borderRadius: 12, boxShadow: '0 2px 8px #0002', width: 140, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 600, fontSize: 17, zIndex: 3, letterSpacing: 1}}>
-            ENCUESTA
-          </div>
           {/* Monigote base pegado a la derecha */}
-          <div style={{position: 'absolute', right: 270, bottom: 0, top: 0, display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', zIndex: 2, pointerEvents: 'none'}}>
+          <div style={{position: 'absolute', right: 300, bottom: 0, top: 0, display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', zIndex: 2, pointerEvents: 'none'}}>
             <MonigoteBase style={{height: '95%', maxHeight: 300, width: 'auto', marginRight: 8, marginBottom: 8}} />
           </div>
           {/* Panel vacío para personalización */}
