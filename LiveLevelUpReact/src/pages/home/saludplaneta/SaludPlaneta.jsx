@@ -39,8 +39,8 @@ export default function SaludPlaneta() {
         {/* Panel de progreso (centro) */}
         <section style={{flex: 1.2, display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 420}}>
           <div style={{display: 'flex', alignItems: 'center', background: '#fff', borderRadius: 24, boxShadow: '0 4px 32px #0002', padding: 36, minWidth: 420, minHeight: 320}}>
-            <div className="planet-orbit" style={{position: 'relative', width: 200, height: 200, marginRight: 32}}>
-              <img src={planetaImg} alt="Planeta" style={{width: 200, height: 200, borderRadius: '50%', objectFit: 'cover', boxShadow: '0 2px 16px #5b9cc8', position: 'relative', zIndex: 2}} />
+            <div className="planet-orbit" style={{position: 'relative', width: 270, height: 270, marginRight: 32}}>
+              <img src={planetaImg} alt="Planeta" style={{width: 270, height: 270, borderRadius: '50%', objectFit: 'cover', boxShadow: '0 2px 16px #5b9cc8', position: 'relative', zIndex: 2}} />
             </div>
             <div>
               <h2 style={{fontSize: '2.2rem', fontWeight: 700, color: '#183c2a'}}>Progreso ambiental</h2>
@@ -201,10 +201,10 @@ export default function SaludPlaneta() {
         .planet-orbit::before {
           content: '';
           position: absolute;
-          top: -18px;
-          left: -18px;
-          width: 236px;
-          height: 236px;
+          top: -24px;
+          left: -24px;
+          width: 318px;
+          height: 318px;
           border-radius: 50%;
           background: conic-gradient(rgba(91,156,200,0.18) 0deg, rgba(91,156,200,0.32) 90deg, rgba(91,156,200,0.18) 180deg, rgba(91,156,200,0.32) 270deg, rgba(91,156,200,0.18) 360deg);
           z-index: 1;
