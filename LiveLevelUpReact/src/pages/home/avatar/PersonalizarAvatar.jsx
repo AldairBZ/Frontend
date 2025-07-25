@@ -10,6 +10,16 @@ export default function PersonalizarAvatar() {
   const [showOptions, setShowOptions] = useState(false);
   const [altura, setAltura] = useState(1.70);
   const [horasSueno, setHorasSueno] = useState(8);
+  const [genero, setGenero] = useState('');
+  const [actividad, setActividad] = useState('');
+  const [dieta, setDieta] = useState('');
+  const [estres, setEstres] = useState('');
+  const [consumo, setConsumo] = useState('');
+  const [animo, setAnimo] = useState('');
+  const [edad, setEdad] = useState(18);
+  const [peso, setPeso] = useState(70);
+  const [nombre, setNombre] = useState('');
+  const [popup, setPopup] = useState('');
 
   return (
     <div className={styles.homeWrapper}>
@@ -68,17 +78,17 @@ export default function PersonalizarAvatar() {
             {/* Nombre */}
             <label style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
               Nombre:
-              <input type="text" style={{maxWidth: 120, width: '100%', padding: 5, borderRadius: 6, border: '1px solid #bcd', fontSize: 13}} />
+              <input type="text" maxLength={20} value={nombre} onChange={e => setNombre(e.target.value)} style={{maxWidth: 120, width: '100%', padding: 5, borderRadius: 6, border: '1px solid #bcd', fontSize: 13}} />
             </label>
             {/* Edad */}
             <label style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
               Edad:
-              <input type="number" min={0} max={120} style={{width: 55, padding: 5, borderRadius: 6, border: '1px solid #bcd', fontSize: 13}} />
+              <input type="number" min={5} max={100} value={edad} onChange={e => setEdad(Number(e.target.value))} style={{width: 55, padding: 5, borderRadius: 6, border: '1px solid #bcd', fontSize: 13}} />
             </label>
             {/* Peso */}
             <label style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
               Peso:
-              <input type="number" min={0} max={300} style={{width: 55, padding: 5, borderRadius: 6, border: '1px solid #bcd', fontSize: 13}} />
+              <input type="number" min={10} max={400} value={peso} onChange={e => setPeso(Number(e.target.value))} style={{width: 55, padding: 5, borderRadius: 6, border: '1px solid #bcd', fontSize: 13}} />
             </label>
             {/* Altura */}
             <label style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
@@ -89,26 +99,26 @@ export default function PersonalizarAvatar() {
             {/* Género */}
             <div style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
               Género:
-              <button type="button" style={{background: '#8fc4ea', color: '#fff', border: 'none', borderRadius: 6, padding: '5px 9px', fontSize: 13, display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer'}}>
+              <button type="button" onClick={() => setGenero('masculino')} style={{background: '#8fc4ea', color: '#fff', border: genero === 'masculino' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 9px', fontSize: 13, display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer', boxShadow: genero === 'masculino' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>
                 <span role="img" aria-label="masculino">♂️</span>
               </button>
-              <button type="button" style={{background: '#f7a3c7', color: '#fff', border: 'none', borderRadius: 6, padding: '5px 9px', fontSize: 13, display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer'}}>
+              <button type="button" onClick={() => setGenero('femenino')} style={{background: '#f7a3c7', color: '#fff', border: genero === 'femenino' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 9px', fontSize: 13, display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer', boxShadow: genero === 'femenino' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>
                 <span role="img" aria-label="femenino">♀️</span>
               </button>
             </div>
             {/* Nivel de actividad física */}
             <div style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
               Nivel de actividad física:
-              <button type="button" style={{background: '#e0e0e0', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Malo</button>
-              <button type="button" style={{background: '#ffe680', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Neutral</button>
-              <button type="button" style={{background: '#b6e6a0', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Bueno</button>
+              <button type="button" onClick={() => setActividad('malo')} style={{background: '#e0e0e0', border: actividad === 'malo' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: actividad === 'malo' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Malo</button>
+              <button type="button" onClick={() => setActividad('neutral')} style={{background: '#ffe680', border: actividad === 'neutral' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: actividad === 'neutral' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Neutral</button>
+              <button type="button" onClick={() => setActividad('bueno')} style={{background: '#b6e6a0', border: actividad === 'bueno' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: actividad === 'bueno' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Bueno</button>
             </div>
             {/* Tipo de dieta */}
             <div style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
               Tipo de dieta:
-              <button type="button" style={{background: '#e0e0e0', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Omnívora</button>
-              <button type="button" style={{background: '#b6e6a0', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Vegetariana</button>
-              <button type="button" style={{background: '#a0e6d6', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Vegana</button>
+              <button type="button" onClick={() => setDieta('omnivora')} style={{background: '#e0e0e0', border: dieta === 'omnivora' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: dieta === 'omnivora' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Omnívora</button>
+              <button type="button" onClick={() => setDieta('vegetariana')} style={{background: '#b6e6a0', border: dieta === 'vegetariana' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: dieta === 'vegetariana' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Vegetariana</button>
+              <button type="button" onClick={() => setDieta('vegana')} style={{background: '#a0e6d6', border: dieta === 'vegana' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: dieta === 'vegana' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Vegana</button>
             </div>
             {/* Horas de sueño */}
             <label style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
@@ -119,33 +129,67 @@ export default function PersonalizarAvatar() {
             {/* Nivel de estrés */}
             <div style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
               Nivel de estrés:
-              <button type="button" style={{background: '#b6e6a0', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Bajo</button>
-              <button type="button" style={{background: '#ffe680', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Medio</button>
-              <button type="button" style={{background: '#f7a3c7', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Alto</button>
+              <button type="button" onClick={() => setEstres('bajo')} style={{background: '#b6e6a0', border: estres === 'bajo' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: estres === 'bajo' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Bajo</button>
+              <button type="button" onClick={() => setEstres('medio')} style={{background: '#ffe680', border: estres === 'medio' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: estres === 'medio' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Medio</button>
+              <button type="button" onClick={() => setEstres('alto')} style={{background: '#f7a3c7', border: estres === 'alto' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: estres === 'alto' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Alto</button>
             </div>
             {/* Consumo de sustancias */}
             <div style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
               Consumo de sustancias:
-              <button type="button" style={{background: '#b6e6a0', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Ninguno</button>
-              <button type="button" style={{background: '#e0e0e0', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Poco</button>
-              <button type="button" style={{background: '#ffe680', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Habitual</button>
-              <button type="button" style={{background: '#f7a3c7', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Mucho</button>
+              <button type="button" onClick={() => setConsumo('ninguno')} style={{background: '#b6e6a0', border: consumo === 'ninguno' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: consumo === 'ninguno' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Ninguno</button>
+              <button type="button" onClick={() => setConsumo('poco')} style={{background: '#e0e0e0', border: consumo === 'poco' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: consumo === 'poco' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Poco</button>
+              <button type="button" onClick={() => setConsumo('habitual')} style={{background: '#ffe680', border: consumo === 'habitual' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: consumo === 'habitual' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Habitual</button>
+              <button type="button" onClick={() => setConsumo('mucho')} style={{background: '#f7a3c7', border: consumo === 'mucho' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: consumo === 'mucho' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Mucho</button>
             </div>
             {/* Estado de ánimo general */}
             <div style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
               Estado de ánimo general:
-              <button type="button" style={{background: '#b6e6a0', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Bajo</button>
-              <button type="button" style={{background: '#ffe680', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Neutro</button>
-              <button type="button" style={{background: '#8fc4ea', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Alto</button>
+              <button type="button" onClick={() => setAnimo('bajo')} style={{background: '#b6e6a0', border: animo === 'bajo' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: animo === 'bajo' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Bajo</button>
+              <button type="button" onClick={() => setAnimo('neutro')} style={{background: '#ffe680', border: animo === 'neutro' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: animo === 'neutro' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Neutro</button>
+              <button type="button" onClick={() => setAnimo('alto')} style={{background: '#8fc4ea', border: animo === 'alto' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: animo === 'alto' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Alto</button>
             </div>
           </form>
           {/* Botón Guardar abajo a la derecha */}
           <div style={{position: 'absolute', bottom: 12, right: 32, zIndex: 4}}>
-            <button type="button" style={{background: '#3498db', color: '#fff', border: 'none', borderRadius: 8, padding: '10px 22px', fontWeight: 600, fontSize: 15, display: 'flex', alignItems: 'center', gap: 8, boxShadow: '0 2px 8px #0001', cursor: 'pointer'}}>
+            <button
+              type="button"
+              style={{background: '#3498db', color: '#fff', border: 'none', borderRadius: 8, padding: '10px 22px', fontWeight: 600, fontSize: 15, display: 'flex', alignItems: 'center', gap: 8, boxShadow: '0 2px 8px #0001', cursor: 'pointer'}}
+              onClick={() => {
+                if (nombre.length > 20) {
+                  setPopup('El nombre no puede tener más de 20 caracteres.');
+                  return;
+                }
+                if (edad > 100) {
+                  setPopup('La edad no puede ser mayor de 100 años.');
+                  return;
+                }
+                if (edad < 5) {
+                  setPopup('La edad no puede ser menor de 5 años.');
+                  return;
+                }
+                if (peso > 400) {
+                  setPopup('El peso no puede ser mayor de 400 kg.');
+                  return;
+                }
+                if (peso < 10) {
+                  setPopup('El peso no puede ser menor de 10 kg.');
+                  return;
+                }
+                setPopup('');
+                // Aquí iría la lógica de guardado real
+              }}
+            >
               <span role="img" aria-label="imprimir" style={{fontSize: 18}}>🖨️</span>
               Guardar
             </button>
           </div>
+          {/* Pop-up de error */}
+          {popup && (
+            <div style={{position: 'absolute', bottom: 70, right: 32, background: '#fff', color: '#232e43', border: '1.5px solid #3498db', borderRadius: 8, padding: '10px 18px', fontWeight: 600, fontSize: 14, boxShadow: '0 2px 12px #0002', zIndex: 10}}>
+              {popup}
+              <button onClick={() => setPopup('')} style={{marginLeft: 16, background: 'none', border: 'none', color: '#3498db', fontWeight: 700, fontSize: 16, cursor: 'pointer'}}>✕</button>
+            </div>
+          )}
         </div>
       </main>
       {/* Footer igual que en Home */}
