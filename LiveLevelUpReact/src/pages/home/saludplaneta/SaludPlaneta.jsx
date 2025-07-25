@@ -4,6 +4,7 @@ import planetaImg from '../../../assets/svg/planet.png';
 import QuienesSomos from '../footer/equipo/QuienesSomos.jsx';
 import Privacidad from '../footer/privacidad/Terminos.jsx';
 import Referentes from '../footer/referentes/Referentes.jsx';
+import gatoMedicoImg from '../../../assets/gato-medico.png';
 
 export default function SaludPlaneta() {
   const [showLogros, setShowLogros] = useState(false);
@@ -49,7 +50,11 @@ export default function SaludPlaneta() {
           </div>
         </section>
         {/* Columna derecha: logros, consejos, acciones */}
-        <section style={{flex: '0 0 260px', display: 'flex', flexDirection: 'column', gap: 18, margin: '18px 0 18px 18px'}}>
+        <section style={{flex: '0 0 260px', display: 'flex', flexDirection: 'column', gap: 18, margin: '18px 0 18px 18px', alignItems: 'center'}}>
+          {/* Gato médico en vez de huellitas */}
+          <div style={{marginBottom: 8, marginTop: 2}}>
+            <img src={gatoMedicoImg} alt="Gato médico" style={{width: 54, height: 54, borderRadius: '50%', objectFit: 'cover', boxShadow: '0 2px 8px #0002', background: '#fff'}} />
+          </div>
           {/* Icono logros */}
           <div style={{alignSelf: 'flex-end'}}>
             <button onClick={() => setShowLogros(v => !v)} style={{background: '#5b9cc8', border: 'none', borderRadius: '50%', width: 48, height: 48, color: '#fff', fontSize: 28, boxShadow: '0 2px 8px #0002', cursor: 'pointer'}}>🏆</button>
@@ -66,7 +71,9 @@ export default function SaludPlaneta() {
           </div>
           {/* Icono consejos */}
           <div style={{alignSelf: 'flex-end', position: 'relative'}}>
-            <button style={{background: '#ffd600', border: 'none', borderRadius: '50%', width: 48, height: 48, color: '#183c2a', fontSize: 28, boxShadow: '0 2px 8px #0002', cursor: 'pointer'}}>😊</button>
+            <button style={{background: '#ffd600', border: 'none', borderRadius: '50%', width: 48, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px #0002', cursor: 'pointer', padding: 0}}>
+              <img src={gatoMedicoImg} alt="Consejo" style={{width: 36, height: 36, borderRadius: '50%', objectFit: 'cover'}} />
+            </button>
             <div style={{position: 'absolute', left: 60, top: 0, background: '#fff', borderRadius: 16, boxShadow: '0 4px 32px #0003', padding: 18, minWidth: 180, minHeight: 120, maxWidth: 220, zIndex: 10, display: 'flex', alignItems: 'center'}}>
               <span style={{fontWeight: 500, color: '#183c2a'}}>Consejo: Apaga las luces que no uses para ahorrar energía.</span>
             </div>
@@ -201,12 +208,12 @@ export default function SaludPlaneta() {
         .planet-orbit::before {
           content: '';
           position: absolute;
-          top: -24px;
-          left: -24px;
-          width: 318px;
-          height: 318px;
+          top: -12px;
+          left: -12px;
+          width: 294px;
+          height: 294px;
           border-radius: 50%;
-          background: conic-gradient(rgba(91,156,200,0.18) 0deg, rgba(91,156,200,0.32) 90deg, rgba(91,156,200,0.18) 180deg, rgba(91,156,200,0.32) 270deg, rgba(91,156,200,0.18) 360deg);
+          background: conic-gradient(rgba(91,156,200,0.10) 0deg, rgba(91,156,200,0.18) 90deg, rgba(91,156,200,0.10) 180deg, rgba(91,156,200,0.18) 270deg, rgba(91,156,200,0.10) 360deg);
           z-index: 1;
           animation: orbit-spin 3.5s linear infinite;
         }
