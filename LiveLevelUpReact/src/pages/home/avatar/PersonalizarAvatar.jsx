@@ -40,8 +40,21 @@ export default function PersonalizarAvatar() {
       <main className={styles.main} style={{minHeight: 'calc(100vh - 60px - 48px)', marginTop: 10, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', position: 'relative', overflow: 'visible'}}>
         <div style={{position: 'relative', width: '40vw', minWidth: 300, maxWidth: 600, height: '60vh', minHeight: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff', borderRadius: 24, boxShadow: '0 4px 32px #0002', margin: '-40px auto 0 auto', transition: 'transform 0.4s cubic-bezier(.4,1.6,.6,1)', transform: showOptions ? 'translateX(-340px)' : 'translateX(0)'}}>
           {/* Panel de información encima del panel principal */}
-          <div style={{position: 'absolute', top: 20, left: '70%', transform: 'translateX(-50%)', background: '#8fc4ea', color: '#fff', borderRadius: 14, boxShadow: '0 2px 8px #0002', width: 240, height: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 500, fontSize: 18, zIndex: 3}}>
-            Información
+          <div style={{position: 'absolute', top: 20, left: '70%', transform: 'translateX(-50%)', background: '#8fc4ea', color: '#fff', borderRadius: 14, boxShadow: '0 2px 8px #0002', width: 240, height: 280, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', fontWeight: 500, fontSize: 15, zIndex: 3, padding: '22px 18px 18px 18px', gap: 6}}>
+            <div style={{fontSize: 18, fontWeight: 700, marginBottom: 10}}>Información</div>
+            <div style={{lineHeight: 1.5}}>
+              <div><b>Nombre:</b> {nombre || <span style={{opacity: 0.6}}>—</span>}</div>
+              <div><b>Edad:</b> {edad ? edad + ' años' : <span style={{opacity: 0.6}}>—</span>}</div>
+              <div><b>Peso:</b> {peso ? peso + ' kg' : <span style={{opacity: 0.6}}>—</span>}</div>
+              <div><b>Altura:</b> {altura ? altura.toFixed(2) + ' m' : <span style={{opacity: 0.6}}>—</span>}</div>
+              <div><b>Género:</b> {genero ? (genero === 'masculino' ? 'Masculino ♂️' : 'Femenino ♀️') : <span style={{opacity: 0.6}}>—</span>}</div>
+              <div><b>Actividad física:</b> {actividad ? (actividad.charAt(0).toUpperCase() + actividad.slice(1)) : <span style={{opacity: 0.6}}>—</span>}</div>
+              <div><b>Dieta:</b> {dieta ? (dieta.charAt(0).toUpperCase() + dieta.slice(1)) : <span style={{opacity: 0.6}}>—</span>}</div>
+              <div><b>Horas de sueño:</b> {horasSueno ? horasSueno + ' h' : <span style={{opacity: 0.6}}>—</span>}</div>
+              <div><b>Estrés:</b> {estres ? (estres.charAt(0).toUpperCase() + estres.slice(1)) : <span style={{opacity: 0.6}}>—</span>}</div>
+              <div><b>Consumo:</b> {consumo ? (consumo.charAt(0).toUpperCase() + consumo.slice(1)) : <span style={{opacity: 0.6}}>—</span>}</div>
+              <div><b>Ánimo:</b> {animo ? (animo.charAt(0).toUpperCase() + animo.slice(1)) : <span style={{opacity: 0.6}}>—</span>}</div>
+            </div>
           </div>
           {/* Monigote base pegado a la derecha */}
           <div style={{position: 'absolute', right: 300, bottom: 0, top: 0, display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', zIndex: 2, pointerEvents: 'none'}}>
@@ -83,12 +96,20 @@ export default function PersonalizarAvatar() {
             {/* Edad */}
             <label style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
               Edad:
-              <input type="number" min={5} max={100} value={edad} onChange={e => setEdad(Number(e.target.value))} style={{width: 55, padding: 5, borderRadius: 6, border: '1px solid #bcd', fontSize: 13}} />
+              <input type="number" min={5} max={100} value={edad === '' ? '' : edad} onChange={e => {
+                const val = e.target.value;
+                if (val === '') setEdad('');
+                else setEdad(Number(val));
+              }} style={{width: 55, padding: 5, borderRadius: 6, border: '1px solid #bcd', fontSize: 13}} />
             </label>
             {/* Peso */}
             <label style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
               Peso:
-              <input type="number" min={10} max={400} value={peso} onChange={e => setPeso(Number(e.target.value))} style={{width: 55, padding: 5, borderRadius: 6, border: '1px solid #bcd', fontSize: 13}} />
+              <input type="number" min={10} max={400} value={peso === '' ? '' : peso} onChange={e => {
+                const val = e.target.value;
+                if (val === '') setPeso('');
+                else setPeso(Number(val));
+              }} style={{width: 55, padding: 5, borderRadius: 6, border: '1px solid #bcd', fontSize: 13}} />
             </label>
             {/* Altura */}
             <label style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
@@ -159,12 +180,20 @@ export default function PersonalizarAvatar() {
                   setPopup('El nombre no puede tener más de 20 caracteres.');
                   return;
                 }
+                if (edad === '' || isNaN(edad)) {
+                  setPopup('La edad no puede estar vacía.');
+                  return;
+                }
                 if (edad > 100) {
                   setPopup('La edad no puede ser mayor de 100 años.');
                   return;
                 }
                 if (edad < 5) {
                   setPopup('La edad no puede ser menor de 5 años.');
+                  return;
+                }
+                if (peso === '' || isNaN(peso)) {
+                  setPopup('El peso no puede estar vacío.');
                   return;
                 }
                 if (peso > 400) {
