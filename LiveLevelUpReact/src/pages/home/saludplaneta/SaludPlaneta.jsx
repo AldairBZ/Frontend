@@ -28,7 +28,7 @@ export default function SaludPlaneta() {
       <main className={styles.main} style={{display: 'flex', flex: 1, minHeight: 'calc(100vh - 60px - 48px)', marginTop: 60}}>
         {/* Foro/Chat (izquierda) */}
         <div style={{display: 'flex', flexDirection: 'row', gap: 18}}>
-        <section style={{flex: '0 0 220px', background: '#183c2a', borderRadius: 18, margin: '18px 18px 18px 0', display: 'flex', flexDirection: 'column', boxShadow: '0 2px 16px #0002'}}>
+        <section style={{flex: '0 0 220px', background: '#81ca57', borderRadius: 18, margin: '18px 18px 18px 0', display: 'flex', flexDirection: 'column', boxShadow: '0 2px 16px #0002'}}>
           <h3 style={{color: '#fff', padding: '18px 0 0 18px'}}>Foro / Chat</h3>
           <div style={{flex: 1, padding: 18, overflowY: 'auto', color: '#fff'}}>Mensajes de ejemplo...</div>
           <form style={{display: 'flex', borderTop: '1px solid #2e5d4a', padding: 12}}>
