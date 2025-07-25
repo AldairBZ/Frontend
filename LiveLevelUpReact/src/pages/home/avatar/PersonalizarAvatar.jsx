@@ -64,74 +64,88 @@ export default function PersonalizarAvatar() {
           zIndex: 3,
           transform: showOptions ? 'translateX(0)' : 'translateX(100%)',
         }}>
-          <form style={{width: '90%', maxWidth: 500, display: 'flex', flexDirection: 'column', gap: 22, margin: '0 auto'}}>
+          <form style={{width: '90%', maxWidth: 500, display: 'flex', flexDirection: 'column', gap: 8, margin: '0 auto'}}>
             {/* Nombre */}
-            <label style={{display: 'flex', alignItems: 'center', gap: 12, fontWeight: 500}}>
+            <label style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
               Nombre:
-              <input type="text" style={{flex: 1, padding: 8, borderRadius: 8, border: '1px solid #bcd', fontSize: 16}} />
+              <input type="text" style={{maxWidth: 120, width: '100%', padding: 5, borderRadius: 6, border: '1px solid #bcd', fontSize: 13}} />
             </label>
             {/* Edad */}
-            <label style={{display: 'flex', alignItems: 'center', gap: 12, fontWeight: 500}}>
+            <label style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
               Edad:
-              <input type="number" min={0} max={120} style={{width: 80, padding: 8, borderRadius: 8, border: '1px solid #bcd', fontSize: 16}} />
+              <input type="number" min={0} max={120} style={{width: 55, padding: 5, borderRadius: 6, border: '1px solid #bcd', fontSize: 13}} />
             </label>
             {/* Peso */}
-            <label style={{display: 'flex', alignItems: 'center', gap: 12, fontWeight: 500}}>
+            <label style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
               Peso:
-              <input type="number" min={0} max={300} style={{width: 80, padding: 8, borderRadius: 8, border: '1px solid #bcd', fontSize: 16}} />
+              <input type="number" min={0} max={300} style={{width: 55, padding: 5, borderRadius: 6, border: '1px solid #bcd', fontSize: 13}} />
             </label>
             {/* Altura */}
-            <label style={{display: 'flex', alignItems: 'center', gap: 12, fontWeight: 500}}>
+            <label style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
               Altura:
               <input type="range" min={1} max={2.15} step={0.01} value={altura} onChange={e => setAltura(Number(e.target.value))} style={{flex: 1}} />
-              <span style={{width: 48, textAlign: 'right'}}>{altura.toFixed(2)}m</span>
+              <span style={{width: 30, textAlign: 'right', fontSize: 12}}>{altura.toFixed(2)}m</span>
             </label>
             {/* Género */}
-            <div style={{display: 'flex', alignItems: 'center', gap: 12, fontWeight: 500}}>
+            <div style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
               Género:
-              <button type="button" style={{background: '#8fc4ea', color: '#fff', border: 'none', borderRadius: 8, padding: '8px 18px', fontSize: 18, display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer'}}>
+              <button type="button" style={{background: '#8fc4ea', color: '#fff', border: 'none', borderRadius: 6, padding: '5px 9px', fontSize: 13, display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer'}}>
                 <span role="img" aria-label="masculino">♂️</span>
               </button>
-              <button type="button" style={{background: '#f7a3c7', color: '#fff', border: 'none', borderRadius: 8, padding: '8px 18px', fontSize: 18, display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer'}}>
+              <button type="button" style={{background: '#f7a3c7', color: '#fff', border: 'none', borderRadius: 6, padding: '5px 9px', fontSize: 13, display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer'}}>
                 <span role="img" aria-label="femenino">♀️</span>
               </button>
             </div>
             {/* Nivel de actividad física */}
-            <div style={{display: 'flex', alignItems: 'center', gap: 12, fontWeight: 500}}>
+            <div style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
               Nivel de actividad física:
-              <button type="button" style={{background: '#e0e0e0', border: 'none', borderRadius: 8, padding: '8px 14px', fontWeight: 600, cursor: 'pointer'}}>Malo</button>
-              <button type="button" style={{background: '#ffe680', border: 'none', borderRadius: 8, padding: '8px 14px', fontWeight: 600, cursor: 'pointer'}}>Neutral</button>
-              <button type="button" style={{background: '#b6e6a0', border: 'none', borderRadius: 8, padding: '8px 14px', fontWeight: 600, cursor: 'pointer'}}>Bueno</button>
+              <button type="button" style={{background: '#e0e0e0', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Malo</button>
+              <button type="button" style={{background: '#ffe680', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Neutral</button>
+              <button type="button" style={{background: '#b6e6a0', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Bueno</button>
             </div>
             {/* Tipo de dieta */}
-            <div style={{display: 'flex', alignItems: 'center', gap: 12, fontWeight: 500}}>
+            <div style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
               Tipo de dieta:
-              <button type="button" style={{background: '#e0e0e0', border: 'none', borderRadius: 8, padding: '8px 14px', fontWeight: 600, cursor: 'pointer'}}>Omnívora</button>
-              <button type="button" style={{background: '#b6e6a0', border: 'none', borderRadius: 8, padding: '8px 14px', fontWeight: 600, cursor: 'pointer'}}>Vegetariana</button>
-              <button type="button" style={{background: '#a0e6d6', border: 'none', borderRadius: 8, padding: '8px 14px', fontWeight: 600, cursor: 'pointer'}}>Vegana</button>
+              <button type="button" style={{background: '#e0e0e0', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Omnívora</button>
+              <button type="button" style={{background: '#b6e6a0', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Vegetariana</button>
+              <button type="button" style={{background: '#a0e6d6', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Vegana</button>
             </div>
             {/* Horas de sueño */}
-            <label style={{display: 'flex', alignItems: 'center', gap: 12, fontWeight: 500}}>
+            <label style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
               Horas de sueño:
               <input type="range" min={1} max={14} step={1} value={horasSueno} onChange={e => setHorasSueno(Number(e.target.value))} style={{flex: 1}} />
-              <span style={{width: 48, textAlign: 'right'}}>{horasSueno}h</span>
+              <span style={{width: 30, textAlign: 'right', fontSize: 12}}>{horasSueno}h</span>
             </label>
             {/* Nivel de estrés */}
-            <div style={{display: 'flex', alignItems: 'center', gap: 12, fontWeight: 500}}>
+            <div style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
               Nivel de estrés:
-              <button type="button" style={{background: '#b6e6a0', border: 'none', borderRadius: 8, padding: '8px 14px', fontWeight: 600, cursor: 'pointer'}}>Bajo</button>
-              <button type="button" style={{background: '#ffe680', border: 'none', borderRadius: 8, padding: '8px 14px', fontWeight: 600, cursor: 'pointer'}}>Medio</button>
-              <button type="button" style={{background: '#f7a3c7', border: 'none', borderRadius: 8, padding: '8px 14px', fontWeight: 600, cursor: 'pointer'}}>Alto</button>
+              <button type="button" style={{background: '#b6e6a0', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Bajo</button>
+              <button type="button" style={{background: '#ffe680', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Medio</button>
+              <button type="button" style={{background: '#f7a3c7', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Alto</button>
             </div>
             {/* Consumo de sustancias */}
-            <div style={{display: 'flex', alignItems: 'center', gap: 12, fontWeight: 500}}>
+            <div style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
               Consumo de sustancias:
-              <button type="button" style={{background: '#b6e6a0', border: 'none', borderRadius: 8, padding: '8px 14px', fontWeight: 600, cursor: 'pointer'}}>Ninguno</button>
-              <button type="button" style={{background: '#e0e0e0', border: 'none', borderRadius: 8, padding: '8px 14px', fontWeight: 600, cursor: 'pointer'}}>Poco</button>
-              <button type="button" style={{background: '#ffe680', border: 'none', borderRadius: 8, padding: '8px 14px', fontWeight: 600, cursor: 'pointer'}}>Habitual</button>
-              <button type="button" style={{background: '#f7a3c7', border: 'none', borderRadius: 8, padding: '8px 14px', fontWeight: 600, cursor: 'pointer'}}>Mucho</button>
+              <button type="button" style={{background: '#b6e6a0', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Ninguno</button>
+              <button type="button" style={{background: '#e0e0e0', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Poco</button>
+              <button type="button" style={{background: '#ffe680', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Habitual</button>
+              <button type="button" style={{background: '#f7a3c7', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Mucho</button>
+            </div>
+            {/* Estado de ánimo general */}
+            <div style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
+              Estado de ánimo general:
+              <button type="button" style={{background: '#b6e6a0', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Bajo</button>
+              <button type="button" style={{background: '#ffe680', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Neutro</button>
+              <button type="button" style={{background: '#8fc4ea', border: 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer'}}>Alto</button>
             </div>
           </form>
+          {/* Botón Guardar abajo a la derecha */}
+          <div style={{position: 'absolute', bottom: 12, right: 32, zIndex: 4}}>
+            <button type="button" style={{background: '#3498db', color: '#fff', border: 'none', borderRadius: 8, padding: '10px 22px', fontWeight: 600, fontSize: 15, display: 'flex', alignItems: 'center', gap: 8, boxShadow: '0 2px 8px #0001', cursor: 'pointer'}}>
+              <span role="img" aria-label="imprimir" style={{fontSize: 18}}>🖨️</span>
+              Guardar
+            </button>
+          </div>
         </div>
       </main>
       {/* Footer igual que en Home */}
