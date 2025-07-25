@@ -21,6 +21,7 @@ export default function PersonalizarAvatar() {
   const [peso, setPeso] = useState(70);
   const [nombre, setNombre] = useState('');
   const [popup, setPopup] = useState('');
+  const [armarioAbierto, setArmarioAbierto] = useState(false);
 
   // Estados guardados (panel de información)
   const [savedData, setSavedData] = useState({
@@ -36,6 +37,9 @@ export default function PersonalizarAvatar() {
     consumo: '',
     animo: '',
   });
+
+  // Estilos para transición del armario
+  const armarioWidth = 240;
 
   return (
     <div className={styles.homeWrapper}>
@@ -80,6 +84,7 @@ export default function PersonalizarAvatar() {
                 padding: 0,
               }}
               aria-label="Abrir armario"
+              onClick={() => setArmarioAbierto(true)}
             >
               {/* Icono de armario SVG proporcionado */}
               <svg fill="#000" viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
@@ -293,6 +298,126 @@ export default function PersonalizarAvatar() {
           )}
         </div>
       </main>
+      {/* Panel de armario lateral */}
+      {armarioAbierto && (
+        <>
+          {/* Fondo semitransparente tipo modal */}
+          <div
+            onClick={() => setArmarioAbierto(false)}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              background: 'rgba(0,0,0,0.18)',
+              zIndex: 1999,
+              transition: 'background 0.3s',
+            }}
+          />
+          {/* Panel armario con transición */}
+          <div
+            style={{
+              position: 'fixed',
+              top: '8vh',
+              left: 0,
+              width: armarioWidth,
+              height: '84vh',
+              background: 'linear-gradient(120deg, #deb887 80%, #a0522d 100%)',
+              boxShadow: '4px 0 24px #0004',
+              zIndex: 2000,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              borderRadius: '0 18px 18px 0',
+              transition: 'transform 0.4s cubic-bezier(.4,1.6,.6,1)',
+              transform: armarioAbierto ? 'translateX(0)' : `translateX(-${armarioWidth}px)`,
+              overflow: 'hidden',
+            }}
+          >
+            {/* Cabecera del armario */}
+            <div style={{
+              width: '100%',
+              padding: '18px 18px 8px 18px',
+              background: 'rgba(160,82,45,0.12)',
+              borderBottom: '2px solid #a0522d',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 110,
+            }}>
+              <span style={{fontWeight: 700, fontSize: 18, color: '#7b3f00', letterSpacing: 1}}>Armario</span>
+              <button
+                onClick={() => setArmarioAbierto(false)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: '#7b3f00',
+                  fontWeight: 700,
+                  fontSize: 22,
+                  cursor: 'pointer',
+                  lineHeight: 1,
+                }}
+                aria-label="Cerrar armario"
+              >✕</button>
+            </div>
+            {/* Botones de categorías de ropa arriba */}
+            <div style={{
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              padding: '12px 12px 0 12px',
+              gap: 8,
+            }}>
+              {['Cabeza', 'Torso', 'Piernas'].map((cat, idx) => (
+                <button
+                  key={cat}
+                  style={{
+                    background: 'rgba(255,255,255,0.85)',
+                    border: '1.5px solid #bfa16b',
+                    borderRadius: 7,
+                    padding: '5px 10px',
+                    fontWeight: 600,
+                    fontSize: 13,
+                    color: '#7b3f00',
+                    boxShadow: '0 1px 4px #0001',
+                    cursor: 'pointer',
+                    transition: 'background 0.2s, border 0.2s',
+                    ...(cat === 'Piernas' ? { marginRight: 18 } : {}),
+                  }}
+                >{cat}</button>
+              ))}
+            </div>
+            {/* Botón de zapatos abajo del todo */}
+            <div style={{
+              width: '100%',
+              position: 'absolute',
+              bottom: 18,
+              left: 0,
+              display: 'flex',
+              justifyContent: 'center',
+              pointerEvents: 'none',
+            }}>
+              <button
+                style={{
+                  background: 'rgba(255,255,255,0.85)',
+                  border: '1.5px solid #bfa16b',
+                  borderRadius: 7,
+                  padding: '5px 18px',
+                  fontWeight: 600,
+                  fontSize: 13,
+                  color: '#7b3f00',
+                  boxShadow: '0 1px 4px #0001',
+                  cursor: 'pointer',
+                  transition: 'background 0.2s, border 0.2s',
+                  pointerEvents: 'auto',
+                }}
+              >Zapatos</button>
+            </div>
+          </div>
+        </>
+      )}
       {/* Footer igual que en Home */}
       <footer className={styles.footer}>
         <div className={styles['footer-container']}>
