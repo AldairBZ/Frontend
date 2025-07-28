@@ -60,10 +60,6 @@ export default function SaludPlaneta() {
         </section>
         {/* Columna derecha: logros, consejos, acciones */}
         <section style={{flex: '0 0 260px', display: 'flex', flexDirection: 'column', gap: 18, margin: '18px 0 18px 18px', alignItems: 'center'}}>
-          {/* Gato médico en vez de huellitas */}
-          <div style={{marginBottom: 8, marginTop: 2}}>
-            <img src={gatoMedicoImg} alt="Gato médico" style={{width: 54, height: 54, borderRadius: '50%', objectFit: 'cover', boxShadow: '0 2px 8px #0002', background: '#fff'}} />
-          </div>
           {/* Icono logros */}
           <div style={{alignSelf: 'flex-end'}}>
             <button onClick={() => setShowLogros(v => !v)} style={{background: '#5b9cc8', border: 'none', borderRadius: '50%', width: 48, height: 48, color: '#fff', fontSize: 28, boxShadow: '0 2px 8px #0002', cursor: 'pointer'}}>🏆</button>
@@ -91,7 +87,8 @@ export default function SaludPlaneta() {
           <div style={{alignSelf: 'flex-end', marginTop: 'auto'}}>
             <button onClick={() => setShowAcciones(v => !v)} style={{background: '#81ca57', border: 'none', borderRadius: 12, color: '#fff', fontWeight: 700, fontSize: 18, padding: '12px 32px', boxShadow: '0 2px 8px #0002', cursor: 'pointer'}}>Acciones</button>
             {showAcciones && (
-              <div style={{position: 'absolute', right: 0, bottom: 60, background: '#fff', borderRadius: 16, boxShadow: '0 4px 32px #0003', padding: 24, minWidth: 220, zIndex: 10}}>
+              <div style={{position: 'absolute', right: 0, bottom: 120, background: '#fff', borderRadius: 16, boxShadow: '0 4px 32px #0003', padding: 24, minWidth: 220, zIndex: 10}}>
+                <button onClick={() => setShowAcciones(false)} style={{position: 'absolute', top: 8, right: 12, background: '#ff5252', color: '#fff', border: 'none', borderRadius: 8, padding: '2px 10px', fontWeight: 700, fontSize: 18, cursor: 'pointer', zIndex: 2}}>✕</button>
                 <h4 style={{margin: 0, marginBottom: 12}}>Acciones ecológicas</h4>
                 <div style={{display: 'flex', flexDirection: 'column', gap: 12}}>
                   <button style={{background: '#e3f2fd', border: 'none', borderRadius: 8, padding: 12, fontWeight: 600, color: '#183c2a', cursor: 'pointer'}}>Reciclar hoy</button>
