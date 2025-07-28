@@ -26,6 +26,19 @@ const LeftPanel = () => {
   const [habitosOpen, setHabitosOpen] = React.useState(false);
   const [accionesOpen, setAccionesOpen] = React.useState(false);
   
+  const handleHabitosClick = () => {
+    setHabitosOpen((open) => {
+      if (!open) setAccionesOpen(false);
+      return !open;
+    });
+  };
+  const handleAccionesClick = () => {
+    setAccionesOpen((open) => {
+      if (!open) setHabitosOpen(false);
+      return !open;
+    });
+  };
+
   const habitos = [
     { id: 'h1', text: 'Comer fruta 🍎' },
     { id: 'h2', text: 'Dormir bien 😴' },
@@ -38,11 +51,11 @@ const LeftPanel = () => {
 
   return (
     <aside className={styles.leftPanel}>
-      <button onClick={() => setHabitosOpen(!habitosOpen)} className={styles.interactionButton}>Hábitos ▼</button>
+      <button onClick={handleHabitosClick} className={styles.interactionButton}>Hábitos ▼</button>
       <div className={`${styles.dropdown} ${habitosOpen ? styles.show : ''}`}>
         {habitos.map(h => <DraggableItem key={h.id} item={h} />)}
       </div>
-      <button onClick={() => setAccionesOpen(!accionesOpen)} className={styles.interactionButton}>Acciones ▼</button>
+      <button onClick={handleAccionesClick} className={styles.interactionButton}>Acciones ▼</button>
       <div className={`${styles.dropdown} ${accionesOpen ? styles.show : ''}`}>
         {acciones.map(a => <DraggableItem key={a.id} item={a} />)}
       </div>

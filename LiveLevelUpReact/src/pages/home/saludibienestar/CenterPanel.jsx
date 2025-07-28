@@ -12,7 +12,13 @@ const CenterPanel = ({ status, setStatus }) => {
   }));
   
   const handleDrop = (item) => {
-    if (item.text.includes('fruta') || item.text.includes('dormir') || item.text.includes('ejercicio')) {
+    // console.log('Texto arrastrado:', item.text);
+    if (
+      item.text.includes('fruta') ||
+      item.text.includes('Dormir bien') ||
+      item.text.includes('dormir bien') ||
+      item.text.includes('ejercicio')
+    ) {
       setStatus(`¡Genial! Has hecho algo bueno: ${item.text} ✅`);
     } else {
       setStatus(`¡Ojo! Esto no es bueno: ${item.text} ❌`);
