@@ -6,7 +6,7 @@ export default function Avatar() {
   const [estadoFisico] = useState('');
 
   return (
-    <div className="p-6">
+    <div className="p-6" style={{ minHeight: '420px', paddingBottom: '48px' }}>
       <h2 className="text-2xl mb-4">Tu Avatar Vital</h2>
       <img src={avatarImg} alt="Avatar" className="mx-auto mb-4" />
       <p><strong>Esperanza de vida:</strong> {esperanzaVida} años</p>
