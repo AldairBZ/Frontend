@@ -45,24 +45,14 @@ export default function SaludPlaneta() {
             </div>
             <div>
               <h2 style={{fontSize: '2.2rem', fontWeight: 700, color: '#183c2a'}}>Progreso ambiental</h2>
-              <div style={{fontSize: '0.98rem', color: '#4a5a5a', marginBottom: 8, marginTop: 2, maxWidth: 340, lineHeight: 1.4}}>
-                Mejora tu vida y cuida el planeta, un hábito a la vez.<br/>
-                Life Level Up es una plataforma donde transformas tus rutinas en logros, llevas un seguimiento de tu salud física y mental, y adoptas hábitos sostenibles para vivir mejor.<br/>
-                ¡Sube de nivel en tu bienestar personal y en tu impacto positivo en el mundo!
-              </div>
               <h1 style={{ fontSize: '2.2rem', fontWeight: 700, color: '#fff', margin: 0, marginBottom: 24 }}>
                 Tu vida tiene más impacto del que imaginas...
               </h1>
-              <p style={{fontSize: '1.1rem', color: '#183c2a'}}>Aquí verás tu impacto positivo en el planeta y consejos para mejorar.</p>
             </div>
           </div>
         </section>
         {/* Columna derecha: logros, consejos, acciones */}
         <section style={{flex: '0 0 260px', display: 'flex', flexDirection: 'column', gap: 18, margin: '18px 0 18px 18px', alignItems: 'center'}}>
-          {/* Gato médico en vez de huellitas */}
-          <div style={{marginBottom: 8, marginTop: 2}}>
-            <img src={gatoMedicoImg} alt="Gato médico" style={{width: 54, height: 54, borderRadius: '50%', objectFit: 'cover', boxShadow: '0 2px 8px #0002', background: '#fff'}} />
-          </div>
           {/* Icono logros */}
           <div style={{alignSelf: 'flex-end'}}>
             <button onClick={() => setShowLogros(v => !v)} style={{background: '#5b9cc8', border: 'none', borderRadius: '50%', width: 48, height: 48, color: '#fff', fontSize: 28, boxShadow: '0 2px 8px #0002', cursor: 'pointer'}}>🏆</button>
