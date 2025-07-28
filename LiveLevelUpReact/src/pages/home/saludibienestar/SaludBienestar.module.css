@@ -498,14 +498,15 @@
 }
 
 .marquee {
-  position: fixed;
-  bottom: 60px; /* Justo encima del footer */
+  position: sticky;
+  top: 0px;
   width: 100%;
-  background-color: #a7c7e7;
-  color: #333;
+  background-color: #111;
+  color: #fff;
   padding: 0.5rem 0;
   overflow: hidden;
   white-space: nowrap;
+  z-index: 100;
 }
 
 .marqueeContent {
