@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './LoginTriangle.css';
 import planetaGif from '../../assets/svg/planet.png';
 import FondoEspacioLogin from './FondoEspacioLogin';
+import Terminos from '../home/footer/privacidad/Terminos';
 
 function PlanetAnimated({ className = '', style = {} }) {
   return (
@@ -69,6 +70,7 @@ function LoginForm() {
 }
 
 export default function LoginTriangle() {
+  const [showTerms, setShowTerms] = useState(false);
   return (
     <div className="triangle-bg" style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0}}>
       <FondoEspacioLogin />
@@ -77,10 +79,20 @@ export default function LoginTriangle() {
         <h1 className="triangle-title" style={{fontFamily: 'Montserrat, Segoe UI, Arial, sans-serif', fontWeight: 900, fontSize: '3.2rem', letterSpacing: '0.06em', color: '#b6eaff', textShadow: '0 4px 32px #1976d2cc, 0 0px 8px #64b5f6cc, 0 1px 0 #fff', marginBottom: '2.2rem'}}>LifeLevelUp</h1>
         <PlanetAnimated className="planet-svg-triangle" />
         <h2 className="triangle-subtitle" style={{fontFamily: 'Montserrat, Segoe UI, Arial, sans-serif', fontWeight: 500, fontSize: '0.92rem', lineHeight: 1.35, color: '#e3f2fd', textShadow: '0 2px 12px #1976d2aa, 0 1px 0 #fff', marginTop: '0.5rem', marginBottom: '0.5rem', paddingLeft: '1.5rem', textAlign: 'left'}}>
-          Mejora tu vida y cuida el planeta, un hábito a la vez.<br/>
-          Life Level Up es una plataforma donde transformas tus rutinas en logros, llevas un seguimiento de tu salud física y mental, y adoptas hábitos sostenibles para vivir mejor.<br/>
-          ¡Sube de nivel en tu bienestar personal y en tu impacto positivo en el mundo!
+          Tu vida tiene más impacto de lo que imaginas...
         </h2>
+        <div className="triangle-links-login" style={{marginTop: '1.2rem', display: 'flex', gap: '2.5rem', justifyContent: 'center'}}>
+          <a href="#" onClick={e => {e.preventDefault(); setShowTerms(true);}}>términos y condiciones</a>
+          <a href="/home">Visitar página</a>
+        </div>
+        {showTerms && (
+          <div style={{position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: '#000a', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <div style={{background: '#fff', borderRadius: 16, boxShadow: '0 8px 32px #0006', maxWidth: 900, width: '90vw', maxHeight: '90vh', overflowY: 'auto', padding: 32, position: 'relative'}}>
+              <button onClick={() => setShowTerms(false)} style={{position: 'absolute', top: 16, right: 16, background: 'none', border: 'none', fontSize: 28, color: '#1976d2', cursor: 'pointer'}}>×</button>
+              <Terminos onClose={() => setShowTerms(false)} />
+            </div>
+          </div>
+        )}
       </div>
       {/* Panel de login a la derecha */}
       <div style={{flex: '0 0 420px', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh'}}>

@@ -483,3 +483,11 @@ body {
 .triangle-form-content {
   z-index: 2100 !important;
 } 
+
+.triangle-links-login a {
+  color: #fff !important;
+  font-size: 0.95rem;
+  text-decoration: underline;
+  opacity: 1;
+  font-weight: 600;
+} 
