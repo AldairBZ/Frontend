@@ -81,8 +81,18 @@ export default function Home() {
           </div>
         </nav>
       </header>
-      <main className={styles.main}>
+      <main className={styles.main} style={{overflowY: 'auto', minHeight: 'calc(100vh - 60px - 48px)'}}>
         <PanelesInteractivos />
+        <section style={{maxWidth: 900, margin: '40px auto 40px auto', background: 'rgba(245,249,251,0.92)', borderRadius: 24, boxShadow: '0 4px 24px #b4f8c844', padding: '36px 32px', textAlign: 'left'}}>
+          <h1 style={{fontSize: '2.2rem', fontWeight: 800, color: '#5b9cc8', marginBottom: 18, letterSpacing: '0.01em'}}>¿Por qué LifeLevelUp?</h1>
+          <p style={{fontSize: '1.18rem', color: '#232e43', marginBottom: 18, lineHeight: 1.6}}>
+            LifeLevelUp es una experiencia interactiva que convierte tus hábitos diarios en una aventura visual. Imagina que tú y el planeta son parte de un juego tipo Los Sims, pero en versión minimalista, con avatares SVG personalizables y animaciones suaves.
+          </p>
+          <h2 style={{fontSize: '1.35rem', fontWeight: 700, color: '#81ca57', marginBottom: 10, marginTop: 18}}>🌍 El planeta también importa</h2>
+          <p style={{fontSize: '1.08rem', color: '#232e43', marginBottom: 0, lineHeight: 1.6}}>
+            Cada acción positiva también afecta al planeta virtual, que refleja el impacto colectivo de tus decisiones. Por ejemplo, elegir caminar en lugar de usar coche mejora la salud ambiental del mundo que estás ayudando a construir.
+          </p>
+        </section>
       </main>
       <footer className={styles.footer}>
         <div className={styles['footer-container']}>
