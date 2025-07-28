@@ -156,48 +156,59 @@ export default function SaludPlaneta() {
         </div>
       </main>
 
-      {/* ===== FOOTER (Como el del Home) ===== */}
+      {/* ===== FOOTER COMPLETO ===== */}
       <footer className={styles.footer}>
         <div className={styles.footerContainer}>
+          <div className={styles.footerBrand}>
+            <h2>LifeLevelUp</h2>
+            <p>Concienciación ambiental y bienestar personal. Transformando hábitos en impacto positivo.</p>
+            <div className={styles.footerEmojis}>
+              <span>🌱</span>
+              <span>🌍</span>
+              <span>💚</span>
+            </div>
+          </div>
+          
           <div className={styles.footerCol}>
-            <h3>Uso de datos y privacidad</h3>
+            <h3>Enlaces rápidos</h3>
             <ul>
-              <li>
-                <a href="#" onClick={e => {e.preventDefault(); setModalAbierto('privacidad');}}>
-                  Política de privacidad
-                </a>
-              </li>
+              <li><a href="/home">Inicio</a></li>
+              <li><a href="#">Salud y Bienestar</a></li>
+              <li><a href="#">Salud del Planeta</a></li>
+              <li><a href="#">Personalizar Avatar</a></li>
+              <li><a href="#">Recursos</a></li>
             </ul>
           </div>
+          
           <div className={styles.footerCol}>
-            <h3>Webs de confianza</h3>
+            <h3>Sobre nosotros</h3>
             <ul>
-              <li>
-                <a href="#" onClick={e => {e.preventDefault(); setModalAbierto('referentes');}}>
-                  Referentes
-                </a>
-              </li>
-              <li><a href="#">Partners</a></li>
+              <li><a href="#" onClick={e => {e.preventDefault(); setModalAbierto('referentes');}}>Referentes científicos</a></li>
+              <li><a href="#" onClick={e => {e.preventDefault(); setModalAbierto('privacidad');}}>Política de privacidad</a></li>
+              <li><a href="#">Guía de hábitos</a></li>
+              <li><a href="#">Contacto</a></li>
             </ul>
           </div>
-          <div className={styles.footerCol}>
-            <h3>Quiénes somos</h3>
-            <ul>
-              <li>
-                <a href="#" onClick={e => {e.preventDefault(); setModalAbierto('equipo');}}>
-                  Equipo
-                </a>
-              </li>
-              <li>
-                <a href="#" onClick={e => {e.preventDefault(); setModalAbierto('historia');}}>
-                  Historia
-                </a>
-              </li>
-            </ul>
+          
+          <div className={styles.footerContact}>
+            <h3>Contacto</h3>
+            <a href="mailto:hola@lifelevelup.com" className={styles.contactItem}>
+              <span className={styles.contactIcon}>📧</span>
+              hola@lifelevelup.com
+            </a>
+            <a href="tel:+346667526382" className={styles.contactItem}>
+              <span className={styles.contactIcon}>🌱</span>
+              +34 666 PLANETA
+            </a>
+            <a href="#" className={styles.contactItem}>
+              <span className={styles.contactIcon}>🌍</span>
+              España, Europa
+            </a>
           </div>
         </div>
+        
         <div className={styles.footerBottom}>
-          <p>&copy; 2024 LifeLevelUp. Todos los derechos reservados.</p>
+          <p>&copy; 2025 LifeLevelUp. Todos los derechos reservados.</p>
         </div>
       </footer>
 
