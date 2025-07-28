@@ -95,16 +95,91 @@ export default function Home() {
           </div>
         </nav>
       </header>
+<<<<<<< Updated upstream
       <main ref={mainRef} className={styles.main} style={{overflowY: 'auto', minHeight: '100vh', paddingTop: 0}}>
         <PanelesInteractivos />
         <section style={{maxWidth: 900, margin: '0 auto 40px auto', padding: '0 32px', textAlign: 'left'}}>
           <h1 style={{fontSize: '2.2rem', fontWeight: 800, color: '#5b9cc8', marginBottom: 18, letterSpacing: '0.01em'}}>¿Por qué LifeLevelUp?</h1>
           <p style={{fontSize: '1.18rem', color: '#232e43', marginBottom: 18, lineHeight: 1.6}}>
+=======
+      <main className={styles.main}>
+        <PanelesInteractivos />
+        <section style={{
+          maxWidth: 900, 
+          margin: '40px auto 80px auto', 
+          padding: '0 32px', 
+          textAlign: 'left'
+        }}>
+          <h1 style={{
+            fontSize: '2.2rem', 
+            fontWeight: 800, 
+            color: '#5b9cc8', 
+            marginBottom: 24, 
+            letterSpacing: '0.01em',
+            textShadow: '0 2px 8px rgba(91,156,200,0.3)'
+          }}>¿Por qué LifeLevelUp?</h1>
+          <p style={{
+            fontSize: '1.18rem', 
+            color: '#f5f9fb', 
+            marginBottom: 32, 
+            lineHeight: 1.7,
+            textShadow: '0 1px 4px rgba(0,0,0,0.3)'
+          }}>
+>>>>>>> Stashed changes
             LifeLevelUp es una experiencia interactiva que convierte tus hábitos diarios en una aventura visual. Imagina que tú y el planeta son parte de un juego tipo Los Sims, pero en versión minimalista, con avatares SVG personalizables y animaciones suaves.
           </p>
-          <h2 style={{fontSize: '1.35rem', fontWeight: 700, color: '#81ca57', marginBottom: 10, marginTop: 18}}>🌍 El planeta también importa</h2>
-          <p style={{fontSize: '1.08rem', color: '#232e43', marginBottom: 0, lineHeight: 1.6}}>
+          <h2 style={{
+            fontSize: '1.35rem', 
+            fontWeight: 700, 
+            color: '#81ca57', 
+            marginBottom: 16, 
+            marginTop: 32,
+            textShadow: '0 2px 8px rgba(129,202,87,0.3)'
+          }}>🌍 El planeta también importa</h2>
+          <p style={{
+            fontSize: '1.08rem', 
+            color: '#e3f0fa', 
+            marginBottom: 0, 
+            lineHeight: 1.7,
+            textShadow: '0 1px 4px rgba(0,0,0,0.3)'
+          }}>
             Cada acción positiva también afecta al planeta virtual, que refleja el impacto colectivo de tus decisiones. Por ejemplo, elegir caminar en lugar de usar coche mejora la salud ambiental del mundo que estás ayudando a construir.
+          </p>
+          
+          <h2 style={{
+            fontSize: '1.35rem', 
+            fontWeight: 700, 
+            color: '#81ca57', 
+            marginBottom: 16, 
+            marginTop: 40,
+            textShadow: '0 2px 8px rgba(129,202,87,0.3)'
+          }}>🎮 Una experiencia única</h2>
+          <p style={{
+            fontSize: '1.08rem', 
+            color: '#e3f0fa', 
+            marginBottom: 0, 
+            lineHeight: 1.7,
+            textShadow: '0 1px 4px rgba(0,0,0,0.3)'
+          }}>
+            Nuestra plataforma combina gamificación, educación ambiental y bienestar personal en una sola experiencia. Cada decisión que tomas se refleja en tu avatar y en el estado del planeta virtual, creando una conexión visual entre tus acciones y sus consecuencias.
+          </p>
+          
+          <h2 style={{
+            fontSize: '1.35rem', 
+            fontWeight: 700, 
+            color: '#81ca57', 
+            marginBottom: 16, 
+            marginTop: 40,
+            textShadow: '0 2px 8px rgba(129,202,87,0.3)'
+          }}>🌟 Comienza tu viaje</h2>
+          <p style={{
+            fontSize: '1.08rem', 
+            color: '#e3f0fa', 
+            marginBottom: 60, 
+            lineHeight: 1.7,
+            textShadow: '0 1px 4px rgba(0,0,0,0.3)'
+          }}>
+            Únete a nuestra comunidad y descubre cómo pequeños cambios en tu rutina diaria pueden tener un impacto significativo en tu bienestar y en el planeta. ¡Tu avatar te está esperando!
           </p>
         </section>
       </main>

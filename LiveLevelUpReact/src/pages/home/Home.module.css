@@ -17,9 +17,14 @@ html, body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+<<<<<<< Updated upstream
   background: #fff;
   overflow-x: hidden;
   height: auto;
+=======
+  background: #16281d;
+  overflow-y: auto; /* Asegurar que el scroll funcione */
+>>>>>>> Stashed changes
 }
 
 body {
@@ -147,6 +152,7 @@ main {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+<<<<<<< Updated upstream
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -157,6 +163,15 @@ main {
   position: relative;
   min-height: 100vh;
   height: auto;
+=======
+  flex: 1 0 auto;
+  min-height: calc(100vh - 60px); /* Solo 60px header */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Cambiado de stretch a flex-start */
+  background: transparent;
+  overflow-y: auto; /* Asegurar que el scroll funcione */
+>>>>>>> Stashed changes
 }
 .articles {
   display: flex;
@@ -260,8 +275,13 @@ main {
 .footer {
   background: #5b9cc8;
   color: #fff;
+<<<<<<< Updated upstream
   padding: 0;
   margin: 0;
+=======
+  padding: 24px 0 16px 0;
+  margin: 0; /* Quito el margin negativo */
+>>>>>>> Stashed changes
   font-size: 0.92rem;
   border-top: 1px solid rgba(255,255,255,0.2);
   border-image: linear-gradient(90deg, #b2d8f7 0%, #5b9cc8 50%, #b2d8f7 100%) 1;
@@ -657,6 +677,7 @@ header, header *, .footer, .footer * {
 :global(body.dark-mode) .footer-bottom {
   color: #b2d8f7 !important;
   background: transparent !important;
+<<<<<<< Updated upstream
 } 
 
 .main, .main * {
@@ -696,4 +717,22 @@ header, header *, .footer, .footer * {
 
 .homeWrapper, .main {
   overflow-x: hidden !important;
+=======
+}
+
+/* Estilos para el contenido en modo oscuro */
+:global(body.dark-mode) main section h1 {
+  color: #81ca57 !important;
+  text-shadow: 0 2px 8px rgba(129,202,87,0.4) !important;
+}
+
+:global(body.dark-mode) main section h2 {
+  color: #5b9cc8 !important;
+  text-shadow: 0 2px 8px rgba(91,156,200,0.4) !important;
+}
+
+:global(body.dark-mode) main section p {
+  color: #e3f0fa !important;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5) !important;
+>>>>>>> Stashed changes
 } 
