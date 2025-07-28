@@ -15,7 +15,7 @@ html, body, #root {
   margin: 0 !important;
   padding: 0 !important;
   border: none !important;
-  background: #101c3a !important;
+  background: #fff !important;
   box-sizing: border-box !important;
-  overflow: hidden !important;
+  overflow: auto !important;
 }

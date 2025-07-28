@@ -15,7 +15,6 @@ export default function Home() {
   const { darkMode, toggleTheme } = useTheme();
   const mainRef = React.useRef(null);
   const [showScrollLight, setShowScrollLight] = React.useState(true);
-  const [showFooter, setShowFooter] = React.useState(false);
   const [scrollProgress, setScrollProgress] = React.useState(0);
   const [showScrollToTop, setShowScrollToTop] = React.useState(false);
   const [activeSection, setActiveSection] = React.useState('home');
@@ -51,12 +50,8 @@ export default function Home() {
       const scrollHeight = main.scrollHeight;
       
       // Calcular progreso del scroll (0 a 1)
-      const progress = scrollTop / (scrollHeight - clientHeight);
-      setScrollProgress(Math.min(progress, 1));
-      
-      // Mostrar footer cuando el usuario está al 80% del contenido
-      const shouldShowFooter = progress > 0.8;
-      setShowFooter(shouldShowFooter);
+      const progress = scrollHeight > clientHeight ? scrollTop / (scrollHeight - clientHeight) : 0;
+      setScrollProgress(Math.min(Math.max(progress, 0), 1));
       
       // Mostrar botón de volver arriba cuando el usuario ha hecho scroll
       setShowScrollToTop(progress > 0.3);
@@ -102,7 +97,7 @@ export default function Home() {
   };
 
   return (
-    <div className={styles.homeWrapper}>
+    <div className={styles.homeWrapper} style={{height: '100vh', display: 'flex', flexDirection: 'column'}}>
       <header className={styles.header}>
         <nav className={styles.nav}>
           <div className={styles.logo}>
@@ -212,7 +207,7 @@ export default function Home() {
           color: '#fff',
           textShadow: '0 1px 2px rgba(0,0,0,0.3)'
         }}>
-          {Math.round(scrollProgress * 100)}%
+          {isNaN(scrollProgress * 100) ? '0%' : Math.round(scrollProgress * 100) + '%'}
         </span>
       </div>
             
@@ -251,10 +246,11 @@ export default function Home() {
         className={styles.main} 
         style={{
           overflowY: 'auto', 
-          minHeight: '100vh', 
+          flex: 1,
           paddingTop: 0,
-          paddingBottom: showFooter ? '120px' : '20px', // Espacio para el footer
-          transition: 'padding-bottom 0.6s cubic-bezier(0.4, 0, 0.2, 1)'
+          background: '#fff',
+          color: '#333',
+          height: '100%'
         }}
       >
         <PanelesInteractivos />
@@ -277,10 +273,9 @@ export default function Home() {
           }}>¿Por qué LifeLevelUp?</h1>
           <p style={{
             fontSize: '1.18rem', 
-            color: '#f5f9fb', 
+            color: '#333', 
             marginBottom: 32, 
-            lineHeight: 1.7,
-            textShadow: '0 1px 4px rgba(0,0,0,0.3)'
+            lineHeight: 1.7
           }}>
             LifeLevelUp es una experiencia interactiva que convierte tus hábitos diarios en una aventura visual. Imagina que tú y el planeta son parte de un juego tipo Los Sims, pero en versión minimalista, con avatares SVG personalizables y animaciones suaves.
           </p>
@@ -338,6 +333,462 @@ export default function Home() {
             Únete a nuestra comunidad y descubre cómo pequeños cambios en tu rutina diaria pueden tener un impacto significativo en tu bienestar y en el planeta. ¡Tu avatar te está esperando!
           </p>
         </section>
+
+        {/* Sección de Estadísticas Impactantes */}
+        <section style={{
+          maxWidth: 900, 
+          margin: '60px auto 80px auto', 
+          padding: '0 32px', 
+          textAlign: 'center'
+        }}>
+          <h2 style={{
+            fontSize: '1.8rem', 
+            fontWeight: 700, 
+            color: '#81ca57', 
+            marginBottom: 40, 
+            textShadow: '0 2px 8px rgba(129,202,87,0.3)'
+          }}>📊 El impacto de nuestros hábitos diarios</h2>
+          
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            gap: '32px',
+            marginTop: '40px'
+          }}>
+            <div style={{
+              background: '#f8f9fa',
+              borderRadius: '16px',
+              padding: '24px',
+              border: '1px solid rgba(129,202,87,0.2)',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.1)'
+            }}>
+              <div style={{fontSize: '3rem', marginBottom: '16px'}}>🌱</div>
+              <h3 style={{color: '#81ca57', fontSize: '1.3rem', marginBottom: '12px'}}>Reducción de CO₂</h3>
+              <p style={{color: '#333', fontSize: '1.1rem'}}>
+                Caminar 30 min diarios en lugar de usar coche reduce <strong>2.5 kg</strong> de CO₂ por semana
+              </p>
+            </div>
+            
+            <div style={{
+              background: '#f8f9fa',
+              borderRadius: '16px',
+              padding: '24px',
+              border: '1px solid rgba(91,156,200,0.2)',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.1)'
+            }}>
+              <div style={{fontSize: '3rem', marginBottom: '16px'}}>💧</div>
+              <h3 style={{color: '#5b9cc8', fontSize: '1.3rem', marginBottom: '12px'}}>Ahorro de Agua</h3>
+              <p style={{color: '#333', fontSize: '1.1rem'}}>
+                Duchas de 5 min en lugar de 15 min ahorran <strong>150 litros</strong> de agua por día
+              </p>
+            </div>
+            
+            <div style={{
+              background: '#f8f9fa',
+              borderRadius: '16px',
+              padding: '24px',
+              border: '1px solid rgba(129,202,87,0.2)',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.1)'
+            }}>
+              <div style={{fontSize: '3rem', marginBottom: '16px'}}>⚡</div>
+              <h3 style={{color: '#81ca57', fontSize: '1.3rem', marginBottom: '12px'}}>Energía Limpia</h3>
+              <p style={{color: '#333', fontSize: '1.1rem'}}>
+                Usar transporte público reduce <strong>75%</strong> las emisiones por viaje
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Sección de Consejos Prácticos */}
+        <section style={{
+          maxWidth: 900, 
+          margin: '60px auto 80px auto', 
+          padding: '0 32px', 
+          textAlign: 'left'
+        }}>
+          <h2 style={{
+            fontSize: '1.8rem', 
+            fontWeight: 700, 
+            color: '#5b9cc8', 
+            marginBottom: 32, 
+            textShadow: '0 2px 8px rgba(91,156,200,0.3)'
+          }}>💡 Consejos para empezar hoy mismo</h2>
+          
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '24px',
+            marginTop: '32px'
+          }}>
+            <div style={{
+              background: '#f8f9fa',
+              borderRadius: '12px',
+              padding: '20px',
+              border: '1px solid rgba(91,156,200,0.15)',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+            }}>
+              <h3 style={{color: '#5b9cc8', fontSize: '1.2rem', marginBottom: '12px'}}>🌅 Mañana sostenible</h3>
+              <ul style={{color: '#333', fontSize: '1rem', lineHeight: '1.6'}}>
+                <li>• Desayuna alimentos locales y de temporada</li>
+                <li>• Usa una taza reutilizable para el café</li>
+                <li>• Camina o usa bici para distancias cortas</li>
+              </ul>
+            </div>
+            
+            <div style={{
+              background: '#f8f9fa',
+              borderRadius: '12px',
+              padding: '20px',
+              border: '1px solid rgba(129,202,87,0.15)',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+            }}>
+              <h3 style={{color: '#81ca57', fontSize: '1.2rem', marginBottom: '12px'}}>🌞 Durante el día</h3>
+              <ul style={{color: '#333', fontSize: '1rem', lineHeight: '1.6'}}>
+                <li>• Lleva tu propia botella de agua</li>
+                <li>• Come más vegetales y menos carne</li>
+                <li>• Apaga luces y dispositivos innecesarios</li>
+              </ul>
+            </div>
+            
+            <div style={{
+              background: '#f8f9fa',
+              borderRadius: '12px',
+              padding: '20px',
+              border: '1px solid rgba(91,156,200,0.15)',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+            }}>
+              <h3 style={{color: '#5b9cc8', fontSize: '1.2rem', marginBottom: '12px'}}>🌙 Noche consciente</h3>
+              <ul style={{color: '#333', fontSize: '1rem', lineHeight: '1.6'}}>
+                <li>• Dúchate en menos de 5 minutos</li>
+                <li>• Recicla y separa residuos correctamente</li>
+                <li>• Reflexiona sobre tu impacto diario</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Sección de Comunidad */}
+        <section style={{
+          maxWidth: 900, 
+          margin: '60px auto 80px auto', 
+          padding: '0 32px', 
+          textAlign: 'center'
+        }}>
+          <h2 style={{
+            fontSize: '1.8rem', 
+            fontWeight: 700, 
+            color: '#81ca57', 
+            marginBottom: 24, 
+            textShadow: '0 2px 8px rgba(129,202,87,0.3)'
+          }}>🤝 Únete a nuestra comunidad</h2>
+          
+          <p style={{
+            fontSize: '1.1rem', 
+            color: '#333', 
+            marginBottom: 40, 
+            lineHeight: '1.7'
+          }}>
+            Más de <strong>10,000 personas</strong> ya están transformando sus hábitos y creando un impacto positivo. 
+            Cada pequeño cambio cuenta cuando lo hacemos juntos.
+          </p>
+          
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '24px',
+            flexWrap: 'wrap'
+          }}>
+            <button style={{
+              background: 'linear-gradient(135deg, #81ca57 0%, #5b9cc8 100%)',
+              color: '#fff',
+              border: 'none',
+              padding: '12px 24px',
+              borderRadius: '8px',
+              fontSize: '1rem',
+              fontWeight: '600',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              boxShadow: '0 4px 16px rgba(129,202,87,0.3)'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.transform = 'translateY(-2px)';
+              e.target.style.boxShadow = '0 6px 20px rgba(129,202,87,0.4)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = 'translateY(0)';
+              e.target.style.boxShadow = '0 4px 16px rgba(129,202,87,0.3)';
+            }}
+            >
+              🌱 Crear mi cuenta
+            </button>
+            
+            <button style={{
+              background: 'transparent',
+              color: '#81ca57',
+              border: '2px solid #81ca57',
+              padding: '12px 24px',
+              borderRadius: '8px',
+              fontSize: '1rem',
+              fontWeight: '600',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = '#81ca57';
+              e.target.style.color = '#fff';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = 'transparent';
+              e.target.style.color = '#81ca57';
+            }}
+            >
+              📚 Ver más recursos
+            </button>
+          </div>
+        </section>
+
+        {/* Sección Newsletter */}
+        <section style={{
+          maxWidth: 900, 
+          margin: '60px auto 80px auto', 
+          padding: '0 32px', 
+          textAlign: 'center'
+        }}>
+          <div style={{
+            background: '#f8f9fa',
+            borderRadius: '22px',
+            boxShadow: '0 8px 40px rgba(129,202,87,0.15)',
+            padding: '2.5rem 3.5rem 2rem 3.5rem',
+            maxWidth: '900px',
+            margin: '0 auto',
+            border: '1px solid rgba(129,202,87,0.2)'
+          }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '1rem',
+              marginBottom: '1.2rem'
+            }}>
+              <span style={{
+                fontSize: '3.2rem',
+                display: 'inline-block',
+                animation: 'floatCarta 3.5s ease-in-out infinite alternate'
+              }}>🌱</span>
+            </div>
+            
+            <h2 style={{
+              color: '#81ca57',
+              fontSize: '1.5rem',
+              marginBottom: '0.7rem',
+              fontWeight: '700'
+            }}>¡Suscríbete y recibe consejos sostenibles en tu bandeja!</h2>
+            
+            <p style={{
+              color: '#333',
+              marginBottom: '1.2rem',
+              fontSize: '1.08rem',
+              lineHeight: '1.6'
+            }}>
+              Sé el primero en enterarte de nuevos hábitos, consejos ambientales y descuentos. 
+              Te prometemos solo correos con impacto positivo para ti y el planeta.
+            </p>
+            
+            <form style={{
+              display: 'flex',
+              gap: '0.7rem',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexWrap: 'wrap'
+            }}>
+              <input 
+                type="email" 
+                placeholder="tucorreo@lifelevelup.com" 
+                required 
+                style={{
+                  padding: '0.9rem 1.1rem',
+                  borderRadius: '10px',
+                  border: '1.5px solid #81ca57',
+                  background: '#fff',
+                  color: '#333',
+                  fontSize: '1.08rem',
+                  minWidth: '280px',
+                  outline: 'none'
+                }}
+              />
+              <button 
+                type="submit" 
+                style={{
+                  background: 'linear-gradient(90deg, #81ca57 0%, #5b9cc8 100%)',
+                  color: '#fff',
+                  fontWeight: '700',
+                  border: 'none',
+                  padding: '0.9rem 1.3rem',
+                  borderRadius: '10px',
+                  fontSize: '1.08rem',
+                  boxShadow: '0 2px 8px 0 rgba(129,202,87,0.3)',
+                  transition: 'all 0.2s',
+                  cursor: 'pointer'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = 'translateY(-2px)';
+                  e.target.style.boxShadow = '0 4px 16px 0 rgba(129,202,87,0.4)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = 'translateY(0)';
+                  e.target.style.boxShadow = '0 2px 8px 0 rgba(129,202,87,0.3)';
+                }}
+              >
+                🌱 Suscribirme
+              </button>
+            </form>
+            
+            <p style={{
+              color: '#81ca57',
+              fontSize: '0.98rem',
+              marginTop: '1.1rem',
+              opacity: '0.9'
+            }}>
+              * No spam, solo consejos sostenibles de calidad. Puedes darte de baja cuando quieras.
+            </p>
+          </div>
+        </section>
+        
+        {/* Espacio adicional para asegurar que el footer sea visible */}
+        <section style={{
+          padding: '60px 20px',
+          textAlign: 'center',
+          background: '#f8f9fa',
+          marginTop: '40px'
+        }}>
+          <div style={{
+            maxWidth: '800px',
+            margin: '0 auto'
+          }}>
+            <h3 style={{
+              color: '#5b9cc8',
+              fontSize: '1.3rem',
+              marginBottom: '1rem',
+              fontWeight: '600'
+            }}>
+              🌍 Únete a la revolución sostenible
+            </h3>
+            <p style={{
+              color: '#666',
+              fontSize: '1rem',
+              lineHeight: '1.6',
+              marginBottom: '2rem'
+            }}>
+              Cada pequeño hábito cuenta. Juntos podemos crear un futuro más verde y saludable para todos.
+            </p>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '2rem',
+              flexWrap: 'wrap'
+            }}>
+              <div style={{
+                background: '#fff',
+                padding: '1.5rem',
+                borderRadius: '12px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                minWidth: '200px'
+              }}>
+                <div style={{fontSize: '2rem', marginBottom: '0.5rem'}}>🌱</div>
+                <h4 style={{color: '#81ca57', marginBottom: '0.5rem'}}>Hábitos Verdes</h4>
+                <p style={{color: '#666', fontSize: '0.9rem'}}>Pequeños cambios, gran impacto</p>
+              </div>
+              <div style={{
+                background: '#fff',
+                padding: '1.5rem',
+                borderRadius: '12px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                minWidth: '200px'
+              }}>
+                <div style={{fontSize: '2rem', marginBottom: '0.5rem'}}>💚</div>
+                <h4 style={{color: '#81ca57', marginBottom: '0.5rem'}}>Bienestar Total</h4>
+                <p style={{color: '#666', fontSize: '0.9rem'}}>Salud para ti y el planeta</p>
+              </div>
+              <div style={{
+                background: '#fff',
+                padding: '1.5rem',
+                borderRadius: '12px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                minWidth: '200px'
+              }}>
+                <div style={{fontSize: '2rem', marginBottom: '0.5rem'}}>🌍</div>
+                <h4 style={{color: '#81ca57', marginBottom: '0.5rem'}}>Impacto Global</h4>
+                <p style={{color: '#666', fontSize: '0.9rem'}}>Cambios que transforman el mundo</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Footer pegado al bloque anterior */}
+        <footer 
+          className={styles.footer} 
+          style={{
+            width: '100%',
+            background: '#5b9cc8',
+            marginTop: '0',
+            padding: '20px 0 15px 0'
+          }}
+        >
+          <div className={styles['footer-container']}>
+            <div className={styles['footer-col']}>
+              <h3 style={{fontSize: '1.1rem', marginBottom: '0.8rem'}}>LifeLevelUp</h3>
+              <p style={{color: '#e3f0fa', fontSize: '0.85rem', lineHeight: '1.4', marginBottom: '0.8rem'}}>
+                Concienciación ambiental y bienestar personal. Transformando hábitos en impacto positivo.
+              </p>
+              <div className={styles['footer-social']}>
+                <a href="#" className={styles['footer-social-link']} style={{color: '#fff', fontSize: '1.2rem', marginRight: '0.8rem', transition: 'color 0.3s'}}>🌱</a>
+                <a href="#" className={styles['footer-social-link']} style={{color: '#fff', fontSize: '1.2rem', marginRight: '0.8rem', transition: 'color 0.3s'}}>🌍</a>
+                <a href="#" className={styles['footer-social-link']} style={{color: '#fff', fontSize: '1.2rem', marginRight: '0.8rem', transition: 'color 0.3s'}}>💚</a>
+              </div>
+            </div>
+
+            <div className={styles['footer-col']}>
+              <h4 style={{fontSize: '1rem', marginBottom: '0.6rem'}}>Enlaces rápidos</h4>
+              <ul>
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#salud">Salud y Bienestar</a></li>
+                <li><a href="#planeta">Salud del Planeta</a></li>
+                <li><a href="#avatar">Personalizar Avatar</a></li>
+              </ul>
+            </div>
+
+            <div className={styles['footer-col']}>
+              <h4 style={{fontSize: '1rem', marginBottom: '0.6rem'}}>Recursos</h4>
+              <ul>
+                <li><a href="#" onClick={e => {e.preventDefault(); setModalAbierto('equipo');}}>Sobre nosotros</a></li>
+                <li><a href="#" onClick={e => {e.preventDefault(); setModalAbierto('referentes');}}>Referentes científicos</a></li>
+                <li><a href="#" onClick={e => {e.preventDefault(); setModalAbierto('privacidad');}}>Política de privacidad</a></li>
+                <li><a href="#">Guía de hábitos</a></li>
+              </ul>
+            </div>
+
+            <div className={styles['footer-col']}>
+              <h4 style={{fontSize: '1rem', marginBottom: '0.6rem'}}>Contacto</h4>
+              <div className={styles['footer-contact']}>
+                <p style={{color: '#e3f0fa', fontSize: '0.8rem', marginBottom: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                  <span>📧</span> hola@lifelevelup.com
+                </p>
+                <p style={{color: '#e3f0fa', fontSize: '0.8rem', marginBottom: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                  <span>🌱</span> +34 666 PLANETA
+                </p>
+                <p style={{color: '#e3f0fa', fontSize: '0.8rem', marginBottom: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                  <span>🌍</span> España, Europa
+                </p>
+              </div>  
+            </div>
+          </div>
+
+          <div className={styles['footer-bottom']}>
+            <p style={{color: '#e3f0fa', fontSize: '0.75rem', textAlign: 'center', margin: '0'}}>
+              &copy; 2025 LifeLevelUp. Todos los derechos reservados.
+            </p>
+          </div>
+        </footer>
       </main>
       {showScrollLight && (
         <div 
@@ -365,10 +816,10 @@ export default function Home() {
       {showScrollToTop && (
         <button
           onClick={() => mainRef.current?.scrollTo({ top: 0, behavior: 'smooth' })}
-          style={{
-            position: 'fixed',
-            bottom: showFooter ? '140px' : '20px',
-            right: '20px',
+                      style={{
+              position: 'fixed',
+              bottom: '20px',
+              right: '20px',
             width: '50px',
             height: '50px',
             borderRadius: '50%',
@@ -400,49 +851,7 @@ export default function Home() {
         </button>
       )}
       
-      {/* Footer con animación de aparición */}
-      <footer 
-        className={styles.footer} 
-        style={{
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          zIndex: 10,
-          width: '100%',
-          transform: showFooter ? 'translateY(0)' : 'translateY(100%)',
-          opacity: showFooter ? 1 : 0,
-          transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
-          boxShadow: showFooter ? '0 -4px 20px rgba(0,0,0,0.15)' : 'none',
-          backdropFilter: showFooter ? 'blur(10px)' : 'none',
-          background: showFooter ? 'rgba(91, 156, 200, 0.95)' : 'rgba(91, 156, 200, 1)'
-        }}
-      >
-        <div className={styles['footer-container']}>
-          <div className={styles['footer-col']}>
-            <h3>Uso de datos y privacidad</h3>
-            <ul>
-              <li><a href="#" onClick={e => {e.preventDefault(); setModalAbierto('privacidad');}}>Política de privacidad</a></li>
-            </ul>
-          </div>
-          <div className={styles['footer-col']}>
-            <h3>Webs de confianza</h3>
-            <ul>
-              <li><a href="#" onClick={e => {e.preventDefault(); setModalAbierto('referentes');}}>Referentes</a></li>
-              <li><a href="#">Partners</a></li>
-            </ul>
-          </div>
-          <div className={styles['footer-col']}>
-            <h3>Quiénes somos</h3>
-            <ul>
-              <li><a href="#" onClick={e => {e.preventDefault(); setModalAbierto('equipo');}}>Equipo</a></li>
-              <li><a href="#" onClick={e => {e.preventDefault(); setModalAbierto('historia');}}>Historia</a></li>
-            </ul>
-          </div>
-        </div>
-        <div className={styles['footer-bottom']}>
-        </div>
-      </footer>
+
       {/* Modal para mostrar los componentes */}
       {modalAbierto && (
         <div style={{
@@ -519,6 +928,7 @@ export default function Home() {
           </div>
         </div>
       )}
+      
     </div>
   );
 } 

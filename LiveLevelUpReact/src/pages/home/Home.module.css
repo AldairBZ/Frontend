@@ -17,8 +17,8 @@ html, body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #16281d;
-  overflow-y: auto; /* Asegurar que el scroll funcione */
+  background: #fff;
+  overflow: hidden; /* Evitar doble scroll */
 }
 
 body {
@@ -249,13 +249,12 @@ main {
 .footer {
   background: #5b9cc8;
   color: #fff;
-  padding: 24px 0 16px 0;
-  margin: 0; /* Quito el margin negativo */
-  font-size: 0.92rem;
-  border-top: 1px solid rgba(255,255,255,0.2);
-  border-image: linear-gradient(90deg, #b2d8f7 0%, #5b9cc8 50%, #b2d8f7 100%) 1;
+  padding: 15px 0 10px 0;
+  margin: 0;
+  font-size: 0.85rem;
+  border-top: 1px solid rgba(255,255,255,0.15);
   flex-shrink: 0;
-  box-shadow: 0 -2px 16px 0 rgba(91,156,200,0.10);
+  box-shadow: 0 -1px 8px 0 rgba(91,156,200,0.08);
   position: static !important;
   z-index: 1 !important;
 }
@@ -266,7 +265,7 @@ main {
   margin: 0 auto;
   padding: 0 16px;
   flex-wrap: wrap;
-  gap: 48px;
+  gap: 32px;
 }
 .footer-col {
   flex: 1 1 120px;
@@ -274,16 +273,16 @@ main {
   margin-bottom: 6px;
 }
 .footer-col h2, .footer-col h3 {
-  font-size: 1.05rem;
-  margin-bottom: 4px;
+  font-size: 0.95rem;
+  margin-bottom: 3px;
   font-weight: 500;
   color: #fff;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
 }
 .footer-col p, .footer-col ul li, .footer-col ul li a {
   font-weight: 300;
   color: #e3f0fa;
-  font-size: 0.93rem;
+  font-size: 0.8rem;
   letter-spacing: 0.01em;
 }
 .footer-col ul {
@@ -307,11 +306,11 @@ main {
 .footer-bottom {
   border-top: none;
   margin-top: 0;
-  padding: 0 16px 8px 16px;
+  padding: 0 16px 5px 16px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   background: transparent;
   color: #e3f0fa;
   min-height: 0;
@@ -700,6 +699,11 @@ header, header *, .footer, .footer * {
     opacity: 1;
     transform: translateX(-50%) scale(1);
   }
+}
+
+@keyframes floatCarta {
+  0% { transform: translateY(0) scale(1) rotate(-8deg); }
+  100% { transform: translateY(-18px) scale(1.08) rotate(8deg); }
 }
 .main {
   scrollbar-width: thin;
