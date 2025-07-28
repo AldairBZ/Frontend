@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './SaludBienestar.module.css';
+import gatoMedicoImg from '../../../assets/gato-medico.png';
 
 const consejos = [
   "Recuerda beber 2 litros de agua al día.",
@@ -23,9 +24,11 @@ const RightPanel = () => {
         <div>
           <button onClick={() => setAchievementsOpen(true)} className={styles.iconButton}>🏆</button>
         </div>
-        <div>
-          <button onClick={handlePetClick} className={styles.iconButton}>🐾</button>
+        <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 12}}>
           {petTip && <div className={styles.petTip}>{petTip}</div>}
+          <button onClick={handlePetClick} className={styles.iconButton} style={{background: 'none', border: 'none', boxShadow: 'none', padding: 0, marginBottom: 0, cursor: 'pointer'}}>
+            <img src={gatoMedicoImg} alt="Gato médico" style={{width: 48, height: 48, borderRadius: '50%', objectFit: 'cover', background: '#fff', boxShadow: '0 2px 8px #0002'}} />
+          </button>
         </div>
       </aside>
       <div className={`${styles.achievementsPanel} ${achievementsOpen ? styles.show : ''}`}>
