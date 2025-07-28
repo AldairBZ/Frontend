@@ -90,10 +90,13 @@ export default function SaludPlaneta() {
               <div style={{position: 'absolute', right: 0, bottom: 120, background: '#fff', borderRadius: 16, boxShadow: '0 4px 32px #0003', padding: 24, minWidth: 220, zIndex: 10}}>
                 <button onClick={() => setShowAcciones(false)} style={{position: 'absolute', top: 8, right: 12, background: '#ff5252', color: '#fff', border: 'none', borderRadius: 8, padding: '2px 10px', fontWeight: 700, fontSize: 18, cursor: 'pointer', zIndex: 2}}>✕</button>
                 <h4 style={{margin: 0, marginBottom: 12}}>Acciones ecológicas</h4>
-                <div style={{display: 'flex', flexDirection: 'column', gap: 12}}>
-                  <button style={{background: '#e3f2fd', border: 'none', borderRadius: 8, padding: 12, fontWeight: 600, color: '#183c2a', cursor: 'pointer'}}>Reciclar hoy</button>
-                  <button style={{background: '#e3f2fd', border: 'none', borderRadius: 8, padding: 12, fontWeight: 600, color: '#183c2a', cursor: 'pointer'}}>Apagar luces</button>
-                  <button style={{background: '#e3f2fd', border: 'none', borderRadius: 8, padding: 12, fontWeight: 600, color: '#183c2a', cursor: 'pointer'}}>Usar transporte público</button>
+                <div style={{display: 'flex', flexDirection: 'column', gap: 10}}>
+                  <button style={{background: '#e3f2fd', border: 'none', borderRadius: 7, padding: '7px 10px', fontWeight: 600, color: '#183c2a', cursor: 'pointer', fontSize: '0.98rem', boxShadow: '0 1px 4px #81ca5744', transition: 'background 0.2s'}}>Reciclar</button>
+                  <button style={{background: '#e3f2fd', border: 'none', borderRadius: 7, padding: '7px 10px', fontWeight: 600, color: '#183c2a', cursor: 'pointer', fontSize: '0.98rem', boxShadow: '0 1px 4px #81ca5744', transition: 'background 0.2s'}}>Reducir el consumo energético</button>
+                  <button style={{background: '#e3f2fd', border: 'none', borderRadius: 7, padding: '7px 10px', fontWeight: 600, color: '#183c2a', cursor: 'pointer', fontSize: '0.98rem', boxShadow: '0 1px 4px #81ca5744', transition: 'background 0.2s'}}>Fomentar la conservación de la biodiversidad</button>
+                  <button style={{background: '#ffe0e0', border: 'none', borderRadius: 7, padding: '7px 10px', fontWeight: 600, color: '#b71c1c', cursor: 'pointer', fontSize: '0.98rem', boxShadow: '0 1px 4px #ff525244', transition: 'background 0.2s'}}>Contaminar</button>
+                  <button style={{background: '#ffe0e0', border: 'none', borderRadius: 7, padding: '7px 10px', fontWeight: 600, color: '#b71c1c', cursor: 'pointer', fontSize: '0.98rem', boxShadow: '0 1px 4px #ff525244', transition: 'background 0.2s'}}>Consumir muchas materias primas</button>
+                  <button style={{background: '#ffe0e0', border: 'none', borderRadius: 7, padding: '7px 10px', fontWeight: 600, color: '#b71c1c', cursor: 'pointer', fontSize: '0.98rem', boxShadow: '0 1px 4px #ff525244', transition: 'background 0.2s'}}>Realizar caza furtiva</button>
                 </div>
               </div>
             )}
