@@ -10,6 +10,8 @@ export default function SaludPlaneta() {
   const [showLogros, setShowLogros] = useState(false);
   const [showAcciones, setShowAcciones] = useState(false);
   const [modalAbierto, setModalAbierto] = useState(null);
+  const [chatMessages, setChatMessages] = useState([]);
+  const [chatInput, setChatInput] = useState("");
 
   return (
     <div className={styles.homeWrapper}>
@@ -30,10 +32,20 @@ export default function SaludPlaneta() {
         {/* Foro/Chat (izquierda) */}
         <div style={{display: 'flex', flexDirection: 'row', gap: 18}}>
         <section style={{flex: '0 0 220px', background: '#81ca57', borderRadius: 18, margin: '18px 18px 18px 0', display: 'flex', flexDirection: 'column', boxShadow: '0 2px 16px #0002'}}>
-          <h3 style={{color: '#fff', padding: '18px 0 0 18px'}}>Foro / Chat</h3>
-          <div style={{flex: 1, padding: 18, overflowY: 'auto', color: '#fff'}}>Mensajes de ejemplo...</div>
-          <form style={{display: 'flex', borderTop: '1px solid #2e5d4a', padding: 12}}>
-            <input type="text" placeholder="Escribe un mensaje..." style={{flex: 1, borderRadius: 8, border: 'none', padding: 8}} />
+          <h3 style={{color: '#fff', padding: '2px 0 0 18px', fontSize: '1.5rem', fontWeight: 800}}>Chat</h3>
+          <div style={{flex: 1, padding: 18, overflowY: 'auto', color: '#fff', display: 'flex', flexDirection: 'column', gap: 8}}>
+            {chatMessages.map((msg, idx) => (
+              <div key={idx} style={{background: '#fff8', color: '#232e43', borderRadius: 8, padding: '6px 10px', alignSelf: 'flex-start', maxWidth: '90%', fontSize: '0.98rem', fontWeight: 500}}>{msg}</div>
+            ))}
+          </div>
+          <form style={{display: 'flex', borderTop: '1px solid #2e5d4a', padding: 12}} onSubmit={e => {
+            e.preventDefault();
+            if (chatInput.trim() !== "") {
+              setChatMessages(msgs => [...msgs, chatInput]);
+              setChatInput("");
+            }
+          }}>
+            <input type="text" placeholder="Escribe un mensaje..." value={chatInput} onChange={e => setChatInput(e.target.value)} style={{flex: 1, borderRadius: 8, border: 'none', padding: 8}} />
             <button type="submit" style={{marginLeft: 8, background: '#5b9cc8', color: '#fff', border: 'none', borderRadius: 8, padding: '8px 18px', fontWeight: 600}}>Enviar</button>
           </form>
         </section>
