@@ -96,6 +96,7 @@ export default function Home() {
         </nav>
       </header>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       <main ref={mainRef} className={styles.main} style={{overflowY: 'auto', minHeight: '100vh', paddingTop: 0}}>
         <PanelesInteractivos />
         <section style={{maxWidth: 900, margin: '0 auto 40px auto', padding: '0 32px', textAlign: 'left'}}>
@@ -104,6 +105,10 @@ export default function Home() {
 =======
       <main className={styles.main}>
         <PanelesInteractivos />
+=======
+      <main className={styles.main}>
+        <PanelesInteractivos />
+>>>>>>> Stashed changes
         <section style={{
           maxWidth: 900, 
           margin: '40px auto 80px auto', 
@@ -125,6 +130,9 @@ export default function Home() {
             lineHeight: 1.7,
             textShadow: '0 1px 4px rgba(0,0,0,0.3)'
           }}>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
             LifeLevelUp es una experiencia interactiva que convierte tus hábitos diarios en una aventura visual. Imagina que tú y el planeta son parte de un juego tipo Los Sims, pero en versión minimalista, con avatares SVG personalizables y animaciones suaves.
           </p>

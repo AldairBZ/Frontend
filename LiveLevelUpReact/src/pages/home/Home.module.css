@@ -24,6 +24,9 @@ html, body {
 =======
   background: #16281d;
   overflow-y: auto; /* Asegurar que el scroll funcione */
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 }
 
@@ -153,6 +156,7 @@ main {
   padding: 0;
   box-sizing: border-box;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -163,6 +167,15 @@ main {
   position: relative;
   min-height: 100vh;
   height: auto;
+=======
+  flex: 1 0 auto;
+  min-height: calc(100vh - 60px); /* Solo 60px header */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Cambiado de stretch a flex-start */
+  background: transparent;
+  overflow-y: auto; /* Asegurar que el scroll funcione */
+>>>>>>> Stashed changes
 =======
   flex: 1 0 auto;
   min-height: calc(100vh - 60px); /* Solo 60px header */
@@ -276,8 +289,13 @@ main {
   background: #5b9cc8;
   color: #fff;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   padding: 0;
   margin: 0;
+=======
+  padding: 24px 0 16px 0;
+  margin: 0; /* Quito el margin negativo */
+>>>>>>> Stashed changes
 =======
   padding: 24px 0 16px 0;
   margin: 0; /* Quito el margin negativo */
@@ -678,6 +696,7 @@ header, header *, .footer, .footer * {
   color: #b2d8f7 !important;
   background: transparent !important;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 } 
 
 .main, .main * {
@@ -718,6 +737,8 @@ header, header *, .footer, .footer * {
 .homeWrapper, .main {
   overflow-x: hidden !important;
 =======
+=======
+>>>>>>> Stashed changes
 }
 
 /* Estilos para el contenido en modo oscuro */
@@ -734,5 +755,8 @@ header, header *, .footer, .footer * {
 :global(body.dark-mode) main section p {
   color: #e3f0fa !important;
   text-shadow: 0 1px 4px rgba(0,0,0,0.5) !important;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 } 
