@@ -1,0 +1,242 @@
+/* Footer Component Styles */
+.footer {
+  background: #5b9cc8;
+  color: #fff;
+  padding: clamp(15px, 3vw, 20px) 0 clamp(10px, 2vw, 15px) 0;
+  margin: 0;
+  font-size: clamp(0.8rem, 2vw, 0.85rem);
+  border-top: 1px solid rgba(255,255,255,0.15);
+  flex-shrink: 0;
+  box-shadow: 0 -1px 8px 0 rgba(91,156,200,0.08);
+  position: static !important;
+  z-index: 1 !important;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(10px, 3vw, 16px);
+  flex-wrap: wrap;
+  gap: clamp(20px, 4vw, 32px);
+}
+
+.footer-col {
+  flex: 1 1 clamp(200px, 25vw, 250px);
+  min-width: 200px;
+  margin-bottom: 6px;
+}
+
+.footer-col h2, .footer-col h3 {
+  font-size: clamp(0.9rem, 2.5vw, 0.95rem);
+  margin-bottom: 3px;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+.footer-col p, .footer-col ul li, .footer-col ul li a {
+  font-weight: 300;
+  color: #e3f0fa;
+  font-size: clamp(0.75rem, 2vw, 0.8rem);
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 3px;
+  color: #e3f0fa;
+  font-size: clamp(0.75rem, 2vw, 0.8rem);
+}
+
+.footer-col ul li a {
+  color: #e3f0fa;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+  color: #fff;
+  transform: translateX(3px);
+}
+
+.footer-social {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.footer-social-link {
+  color: #fff;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.footer-social-link:hover {
+  transform: scale(1.2);
+  color: #81ca57;
+}
+
+.footer-contact p {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+  color: #e3f0fa;
+  font-size: clamp(0.75rem, 2vw, 0.8rem);
+}
+
+.footer-bottom {
+  border-top: none;
+  margin-top: 0;
+  padding: 0 clamp(10px, 3vw, 16px) 5px clamp(10px, 3vw, 16px);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: clamp(0.7rem, 1.8vw, 0.75rem);
+  background: transparent;
+  color: #e3f0fa;
+  min-height: 0;
+  box-shadow: none;
+}
+
+.footer-bottom p {
+  margin: 0;
+  text-align: center;
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.45);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.3);
+  padding: 0;
+  max-width: 900px;
+  width: 95vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: #5b9cc8;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 16px;
+  fontWeight: 600;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+  background: #4a8bb8;
+  transform: scale(1.05);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 10px;
+  }
+  
+  .footer-col {
+    margin-bottom: 15px;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px 10px;
+  }
+  
+  .modal-content {
+    width: 98vw;
+    max-height: 95vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-container {
+    gap: 15px;
+    padding: 0 5px;
+  }
+  
+  .footer-col {
+    margin-bottom: 10px;
+  }
+  
+  .footer-social {
+    gap: 6px;
+  }
+  
+  .footer-social-link {
+    font-size: 1rem;
+  }
+}
+
+/* Dark mode support */
+.dark-mode .footer {
+  background: #1a2332;
+}
+
+.dark-mode .footer-col h2, 
+.dark-mode .footer-col h3 {
+  color: #fff;
+}
+
+.dark-mode .footer-col p, 
+.dark-mode .footer-col ul li, 
+.dark-mode .footer-col ul li a {
+  color: #b6eaff;
+}
+
+.dark-mode .footer-col ul li a:hover {
+  color: #fff;
+}
+
+.dark-mode .footer-bottom {
+  color: #b6eaff;
+}
+
+.dark-mode .modal-content {
+  background: #232e43;
+  color: #e3f0fa;
+}
+
+.dark-mode .modal-close {
+  background: #81ca57;
+  color: #232e43;
+}
+
+.dark-mode .modal-close:hover {
+  background: #6bb847;
+} 
