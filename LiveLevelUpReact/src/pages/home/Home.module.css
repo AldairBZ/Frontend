@@ -17,17 +17,8 @@ html, body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-<<<<<<< Updated upstream
-  background: #fff;
-  overflow-x: hidden;
-  height: auto;
-=======
   background: #16281d;
   overflow-y: auto; /* Asegurar que el scroll funcione */
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 }
 
 body {
@@ -155,36 +146,6 @@ main {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-  background: transparent;
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-  position: relative;
-  min-height: 100vh;
-  height: auto;
-=======
-  flex: 1 0 auto;
-  min-height: calc(100vh - 60px); /* Solo 60px header */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* Cambiado de stretch a flex-start */
-  background: transparent;
-  overflow-y: auto; /* Asegurar que el scroll funcione */
->>>>>>> Stashed changes
-=======
-  flex: 1 0 auto;
-  min-height: calc(100vh - 60px); /* Solo 60px header */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* Cambiado de stretch a flex-start */
-  background: transparent;
-  overflow-y: auto; /* Asegurar que el scroll funcione */
->>>>>>> Stashed changes
 }
 .articles {
   display: flex;
@@ -288,18 +249,8 @@ main {
 .footer {
   background: #5b9cc8;
   color: #fff;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  padding: 0;
-  margin: 0;
-=======
   padding: 24px 0 16px 0;
   margin: 0; /* Quito el margin negativo */
->>>>>>> Stashed changes
-=======
-  padding: 24px 0 16px 0;
-  margin: 0; /* Quito el margin negativo */
->>>>>>> Stashed changes
   font-size: 0.92rem;
   border-top: 1px solid rgba(255,255,255,0.2);
   border-image: linear-gradient(90deg, #b2d8f7 0%, #5b9cc8 50%, #b2d8f7 100%) 1;
@@ -695,9 +646,7 @@ header, header *, .footer, .footer * {
 :global(body.dark-mode) .footer-bottom {
   color: #b2d8f7 !important;
   background: transparent !important;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-} 
+}
 
 .main, .main * {
   color: #232e43;
@@ -726,19 +675,60 @@ header, header *, .footer, .footer * {
   animation: scrollLightPulse 1.2s infinite alternate;
 }
 @keyframes scrollLightPulse {
-  0% { opacity: 0.7; box-shadow: 0 0 12px 2px #b6eaff88; }
-  100% { opacity: 1; box-shadow: 0 0 22px 8px #81ca5788; }
+  0% { 
+    opacity: 0.7; 
+    box-shadow: 0 0 12px 2px #b6eaff88;
+    transform: translateX(-50%) scale(1);
+  }
+  100% { 
+    opacity: 1; 
+    box-shadow: 0 0 22px 8px #81ca5788;
+    transform: translateX(-50%) scale(1.1);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(-50%) scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
 }
 .main {
   scrollbar-width: thin;
   scrollbar-color: #b6eaff #ffffff00;
+  scroll-behavior: smooth;
+}
+
+/* Estilos para el scrollbar personalizado */
+.main::-webkit-scrollbar {
+  width: 8px;
+}
+
+.main::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.main::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #81ca57 0%, #5b9cc8 100%);
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.main::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #5b9cc8 0%, #81ca57 100%);
 } 
 
 .homeWrapper, .main {
   overflow-x: hidden !important;
-=======
-=======
->>>>>>> Stashed changes
 }
 
 /* Estilos para el contenido en modo oscuro */
@@ -755,8 +745,4 @@ header, header *, .footer, .footer * {
 :global(body.dark-mode) main section p {
   color: #e3f0fa !important;
   text-shadow: 0 1px 4px rgba(0,0,0,0.5) !important;
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 } 

@@ -52,11 +52,17 @@ export default function PanelesInteractivos({ panelesCustom }) {
               </article>
             </div>
           ) : (
-            <Link to={panel.ruta} key={i} className={
-              styles.panelSection + (i === 3 ? ' ' + styles.panelPlaneta : '') + (i === 1 ? ' ' + styles.panelBienestar : '')
-            } style={{
-              '--panel-img': (i === 0 || i === panelesToShow.length - 1) ? `url(${fondopanel})` : (i === 1 ? `url(${bienestar})` : (i === 3 ? `url(${planeta})` : 'none'))
-            }}>
+            <Link 
+              to={panel.ruta} 
+              key={i} 
+              id={i === 1 ? 'salud' : i === 3 ? 'planeta' : `panel-${i}`}
+              className={
+                styles.panelSection + (i === 3 ? ' ' + styles.panelPlaneta : '') + (i === 1 ? ' ' + styles.panelBienestar : '')
+              } 
+              style={{
+                '--panel-img': (i === 0 || i === panelesToShow.length - 1) ? `url(${fondopanel})` : (i === 1 ? `url(${bienestar})` : (i === 3 ? `url(${planeta})` : 'none'))
+              }}
+            >
               <article className={styles.panelArticle}>
                 <h2>{panel.titulo}</h2>
                 {panel.titulo === 'Salud y bienestar' && (

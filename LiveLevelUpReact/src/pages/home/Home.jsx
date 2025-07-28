@@ -15,6 +15,10 @@ export default function Home() {
   const { darkMode, toggleTheme } = useTheme();
   const mainRef = React.useRef(null);
   const [showScrollLight, setShowScrollLight] = React.useState(true);
+  const [showFooter, setShowFooter] = React.useState(false);
+  const [scrollProgress, setScrollProgress] = React.useState(0);
+  const [showScrollToTop, setShowScrollToTop] = React.useState(false);
+  const [activeSection, setActiveSection] = React.useState('home');
 
   React.useEffect(() => {
     function handleClickOutside(event) {
@@ -40,14 +44,62 @@ export default function Home() {
   React.useEffect(() => {
     const main = mainRef.current;
     if (!main) return;
+    
     function onScroll() {
-      const atBottom = main.scrollTop + main.clientHeight >= main.scrollHeight - 2;
+      const scrollTop = main.scrollTop;
+      const clientHeight = main.clientHeight;
+      const scrollHeight = main.scrollHeight;
+      
+      // Calcular progreso del scroll (0 a 1)
+      const progress = scrollTop / (scrollHeight - clientHeight);
+      setScrollProgress(Math.min(progress, 1));
+      
+      // Mostrar footer cuando el usuario está al 80% del contenido
+      const shouldShowFooter = progress > 0.8;
+      setShowFooter(shouldShowFooter);
+      
+      // Mostrar botón de volver arriba cuando el usuario ha hecho scroll
+      setShowScrollToTop(progress > 0.3);
+      
+      // Detectar sección activa
+      const sections = ['home', 'por-que-lifelevelup'];
+      const headerHeight = 60;
+      let currentSection = 'home';
+      
+      sections.forEach(sectionId => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const elementTop = element.offsetTop - headerHeight;
+          const elementBottom = elementTop + element.offsetHeight;
+          if (scrollTop >= elementTop && scrollTop < elementBottom) {
+            currentSection = sectionId;
+          }
+        }
+      });
+      setActiveSection(currentSection);
+      
+      // Ocultar scroll light cuando está cerca del final
+      const atBottom = scrollTop + clientHeight >= scrollHeight - 50;
       setShowScrollLight(!atBottom);
     }
+    
     main.addEventListener('scroll', onScroll);
-    onScroll();
+    onScroll(); // Ejecutar una vez para establecer el estado inicial
     return () => main.removeEventListener('scroll', onScroll);
   }, []);
+
+  // Función para hacer scroll suave a una sección
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element && mainRef.current) {
+      const headerHeight = 60; // Altura del header fijo
+      const elementPosition = element.offsetTop - headerHeight;
+      mainRef.current.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <div className={styles.homeWrapper}>
@@ -55,16 +107,115 @@ export default function Home() {
         <nav className={styles.nav}>
           <div className={styles.logo}>
             <span>LifeLevelUp</span>
+            {/* Indicador de sección activa */}
+            {activeSection !== 'home' && (
+              <div style={{
+                position: 'absolute',
+                top: '100%',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: '4px',
+                height: '4px',
+                borderRadius: '50%',
+                background: '#81ca57',
+                boxShadow: '0 0 8px #81ca57',
+                animation: 'pulse 2s infinite'
+              }} />
+            )}
           </div>
           <ul className={styles.menu}>
             <li>
-              <a href="#">Salud</a>
+              <a 
+                href="#salud" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection('salud');
+                }}
+                style={{
+                  background: activeSection === 'salud' ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.10)',
+                  border: activeSection === 'salud' ? '2.5px solid #fff' : '1.5px solid rgba(255,255,255,0.10)',
+                  boxShadow: activeSection === 'salud' ? '0 8px 32px 0 #91c1e0, 0 0px 12px #fff4' : '0 2px 16px 0 rgba(91,156,200,0.18), 0 0px 8px #fff2, 0 1px 0 #fff2'
+                }}
+              >
+                Salud
+              </a>
             </li>
             <li>
-              <a href="#">Planeta</a>
+              <a 
+                href="#planeta" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection('planeta');
+                }}
+                style={{
+                  background: activeSection === 'planeta' ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.10)',
+                  border: activeSection === 'planeta' ? '2.5px solid #fff' : '1.5px solid rgba(255,255,255,0.10)',
+                  boxShadow: activeSection === 'planeta' ? '0 8px 32px 0 #91c1e0, 0 0px 12px #fff4' : '0 2px 16px 0 rgba(91,156,200,0.18), 0 0px 8px #fff2, 0 1px 0 #fff2'
+                }}
+              >
+                Planeta
+              </a>
             </li>
           </ul>
           <div style={{display:'flex',alignItems:'center',gap:'18px'}}>
+                  {/* Indicador de progreso de scroll */}
+      <div style={{
+        position: 'relative',
+        width: 32,
+        height: 32,
+        borderRadius: '50%',
+        background: 'rgba(255,255,255,0.1)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: '12px',
+        fontWeight: 'bold',
+        color: '#fff',
+        backdropFilter: 'blur(4px)',
+        border: '1px solid rgba(255,255,255,0.2)',
+        transition: 'all 0.3s ease'
+      }}
+      onMouseEnter={(e) => {
+        e.target.style.transform = 'scale(1.1)';
+        e.target.style.background = 'rgba(255,255,255,0.2)';
+      }}
+      onMouseLeave={(e) => {
+        e.target.style.transform = 'scale(1)';
+        e.target.style.background = 'rgba(255,255,255,0.1)';
+      }}
+      >
+        <svg width="32" height="32" viewBox="0 0 32 32" style={{transform: 'rotate(-90deg)'}}>
+          <circle
+            cx="16"
+            cy="16"
+            r="14"
+            stroke="rgba(255,255,255,0.3)"
+            strokeWidth="2"
+            fill="none"
+          />
+          <circle
+            cx="16"
+            cy="16"
+            r="14"
+            stroke="#81ca57"
+            strokeWidth="2"
+            fill="none"
+            strokeDasharray={`${2 * Math.PI * 14}`}
+            strokeDashoffset={`${2 * Math.PI * 14 * (1 - scrollProgress)}`}
+            style={{transition: 'stroke-dashoffset 0.3s ease'}}
+          />
+        </svg>
+        <span style={{
+          position: 'absolute',
+          fontSize: '10px',
+          fontWeight: 'bold',
+          color: '#fff',
+          textShadow: '0 1px 2px rgba(0,0,0,0.3)'
+        }}>
+          {Math.round(scrollProgress * 100)}%
+        </span>
+      </div>
+            
             <div className={styles.options}>
               <label className={styles.switchLabel}>
                 <input type="checkbox" checked={darkMode} onChange={toggleTheme} className={styles.switchInput} />
@@ -95,26 +246,27 @@ export default function Home() {
           </div>
         </nav>
       </header>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      <main ref={mainRef} className={styles.main} style={{overflowY: 'auto', minHeight: '100vh', paddingTop: 0}}>
+      <main 
+        ref={mainRef} 
+        className={styles.main} 
+        style={{
+          overflowY: 'auto', 
+          minHeight: '100vh', 
+          paddingTop: 0,
+          paddingBottom: showFooter ? '120px' : '20px', // Espacio para el footer
+          transition: 'padding-bottom 0.6s cubic-bezier(0.4, 0, 0.2, 1)'
+        }}
+      >
         <PanelesInteractivos />
-        <section style={{maxWidth: 900, margin: '0 auto 40px auto', padding: '0 32px', textAlign: 'left'}}>
-          <h1 style={{fontSize: '2.2rem', fontWeight: 800, color: '#5b9cc8', marginBottom: 18, letterSpacing: '0.01em'}}>¿Por qué LifeLevelUp?</h1>
-          <p style={{fontSize: '1.18rem', color: '#232e43', marginBottom: 18, lineHeight: 1.6}}>
-=======
-      <main className={styles.main}>
-        <PanelesInteractivos />
-=======
-      <main className={styles.main}>
-        <PanelesInteractivos />
->>>>>>> Stashed changes
-        <section style={{
-          maxWidth: 900, 
-          margin: '40px auto 80px auto', 
-          padding: '0 32px', 
-          textAlign: 'left'
-        }}>
+        <section 
+          id="por-que-lifelevelup"
+          style={{
+            maxWidth: 900, 
+            margin: '40px auto 80px auto', 
+            padding: '0 32px', 
+            textAlign: 'left'
+          }}
+        >
           <h1 style={{
             fontSize: '2.2rem', 
             fontWeight: 800, 
@@ -130,10 +282,6 @@ export default function Home() {
             lineHeight: 1.7,
             textShadow: '0 1px 4px rgba(0,0,0,0.3)'
           }}>
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
             LifeLevelUp es una experiencia interactiva que convierte tus hábitos diarios en una aventura visual. Imagina que tú y el planeta son parte de un juego tipo Los Sims, pero en versión minimalista, con avatares SVG personalizables y animaciones suaves.
           </p>
           <h2 style={{
@@ -191,8 +339,85 @@ export default function Home() {
           </p>
         </section>
       </main>
-      {showScrollLight && <div className="scroll-light" />}
-      <footer className={styles.footer} style={{position: 'static'}}>
+      {showScrollLight && (
+        <div 
+          className="scroll-light" 
+          style={{
+            position: 'fixed',
+            left: '50%',
+            bottom: '18px',
+            transform: 'translateX(-50%)',
+            width: '38px',
+            height: '10px',
+            borderRadius: '8px',
+            background: 'radial-gradient(circle, #b6eaff 60%, #81ca57 100%, transparent 100%)',
+            boxShadow: '0 0 18px 6px #b6eaff88',
+            opacity: 0.85,
+            pointerEvents: 'none',
+            zIndex: 100,
+            transition: 'opacity 0.3s',
+            animation: 'scrollLightPulse 1.2s infinite alternate'
+          }}
+        />
+      )}
+      
+      {/* Botón de volver arriba */}
+      {showScrollToTop && (
+        <button
+          onClick={() => mainRef.current?.scrollTo({ top: 0, behavior: 'smooth' })}
+          style={{
+            position: 'fixed',
+            bottom: showFooter ? '140px' : '20px',
+            right: '20px',
+            width: '50px',
+            height: '50px',
+            borderRadius: '50%',
+            background: 'linear-gradient(135deg, #81ca57 0%, #5b9cc8 100%)',
+            border: 'none',
+            color: '#fff',
+            fontSize: '20px',
+            cursor: 'pointer',
+            boxShadow: '0 4px 16px rgba(129, 202, 87, 0.3)',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            zIndex: 100,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transform: 'scale(1)',
+            opacity: 1
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.transform = 'scale(1.1)';
+            e.target.style.boxShadow = '0 6px 20px rgba(129, 202, 87, 0.4)';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.transform = 'scale(1)';
+            e.target.style.boxShadow = '0 4px 16px rgba(129, 202, 87, 0.3)';
+          }}
+          title="Volver arriba"
+        >
+          ↑
+        </button>
+      )}
+      
+      {/* Footer con animación de aparición */}
+      <footer 
+        className={styles.footer} 
+        style={{
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 10,
+          width: '100%',
+          transform: showFooter ? 'translateY(0)' : 'translateY(100%)',
+          opacity: showFooter ? 1 : 0,
+          transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+          boxShadow: showFooter ? '0 -4px 20px rgba(0,0,0,0.15)' : 'none',
+          backdropFilter: showFooter ? 'blur(10px)' : 'none',
+          background: showFooter ? 'rgba(91, 156, 200, 0.95)' : 'rgba(91, 156, 200, 1)'
+        }}
+      >
         <div className={styles['footer-container']}>
           <div className={styles['footer-col']}>
             <h3>Uso de datos y privacidad</h3>
