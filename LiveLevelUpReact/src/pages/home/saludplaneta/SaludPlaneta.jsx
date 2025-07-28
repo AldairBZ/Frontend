@@ -45,14 +45,25 @@ export default function SaludPlaneta() {
             </div>
             <div>
               <h2 style={{fontSize: '2.2rem', fontWeight: 700, color: '#183c2a'}}>Progreso ambiental</h2>
-              <h1 style={{ fontSize: '2.2rem', fontWeight: 700, color: '#fff', margin: 0, marginBottom: 24 }}>
-                Tu vida tiene más impacto del que imaginas...
-              </h1>
+              {/* Barra de salud */}
+              <p style={{fontSize: '1.1rem', color: '#183c2a'}}>Aquí verás tu impacto positivo en el planeta y consejos para mejorar.</p>
+
+              <div style={{marginTop: 18, marginBottom: 8, width: 240}}>
+                <div style={{fontSize: '0.95rem', color: '#183c2a', marginBottom: 4, fontWeight: 500}}>Salud</div>
+                <div style={{background: '#e0e0e0', borderRadius: 12, height: 18, width: '100%', boxShadow: '0 1px 4px #0001', position: 'relative'}}>
+                  <div style={{width: '45%', height: '100%', background: 'linear-gradient(90deg, #ff5252 0%, #ffd600 100%)', borderRadius: 12, transition: 'width 0.4s'}}></div>
+                  <span style={{position: 'absolute', right: 12, top: 0, height: '100%', display: 'flex', alignItems: 'center', fontWeight: 600, color: '#232e43', fontSize: '0.98rem'}}>45/100</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
         {/* Columna derecha: logros, consejos, acciones */}
         <section style={{flex: '0 0 260px', display: 'flex', flexDirection: 'column', gap: 18, margin: '18px 0 18px 18px', alignItems: 'center'}}>
+          {/* Gato médico en vez de huellitas */}
+          <div style={{marginBottom: 8, marginTop: 2}}>
+            <img src={gatoMedicoImg} alt="Gato médico" style={{width: 54, height: 54, borderRadius: '50%', objectFit: 'cover', boxShadow: '0 2px 8px #0002', background: '#fff'}} />
+          </div>
           {/* Icono logros */}
           <div style={{alignSelf: 'flex-end'}}>
             <button onClick={() => setShowLogros(v => !v)} style={{background: '#5b9cc8', border: 'none', borderRadius: '50%', width: 48, height: 48, color: '#fff', fontSize: 28, boxShadow: '0 2px 8px #0002', cursor: 'pointer'}}>🏆</button>
