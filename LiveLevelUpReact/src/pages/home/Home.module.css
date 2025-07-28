@@ -7,17 +7,19 @@ html, body, body * {
 html, body {
   width: 100%;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   overflow-y: auto;
   color: #141414 !important;
-  background: #16281d;
+  background: #fff;
 }
 
 .homeWrapper {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #16281d;
+  background: #fff;
+  overflow-x: hidden;
+  height: auto;
 }
 
 body {
@@ -140,17 +142,21 @@ nav {
 }
 
 main {
+  flex: 1 0 auto;
   width: 100%;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  flex: 1 0 auto;
-  min-height: calc(100vh - 60px - 48px); /* 60px header, 48px footer */
-  height: calc(100vh - 60px - 48px);
   display: flex;
   flex-direction: column;
-  justify-content: stretch;
+  justify-content: flex-start;
+  align-items: stretch;
   background: transparent;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  position: relative;
+  min-height: 100vh;
+  height: auto;
 }
 .articles {
   display: flex;
@@ -255,12 +261,14 @@ main {
   background: #5b9cc8;
   color: #fff;
   padding: 0;
-  margin: -100px 0 0 0; /* Subo el footer 100px hacia arriba */
+  margin: 0;
   font-size: 0.92rem;
   border-top: 1px solid rgba(255,255,255,0.2);
   border-image: linear-gradient(90deg, #b2d8f7 0%, #5b9cc8 50%, #b2d8f7 100%) 1;
   flex-shrink: 0;
   box-shadow: 0 -2px 16px 0 rgba(91,156,200,0.10);
+  position: static !important;
+  z-index: 1 !important;
 }
 .footer-container {
   display: flex;
@@ -649,4 +657,43 @@ header, header *, .footer, .footer * {
 :global(body.dark-mode) .footer-bottom {
   color: #b2d8f7 !important;
   background: transparent !important;
+} 
+
+.main, .main * {
+  color: #232e43;
+}
+
+/* Scrollbar: solo una luz pequeña, centrada abajo */
+.main::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+.scroll-light {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  width: 38px;
+  height: 10px;
+  border-radius: 8px;
+  background: radial-gradient(circle, #b6eaff 60%, #81ca57 100%, transparent 100%);
+  box-shadow: 0 0 18px 6px #b6eaff88;
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 100;
+  transition: opacity 0.3s;
+  animation: scrollLightPulse 1.2s infinite alternate;
+}
+@keyframes scrollLightPulse {
+  0% { opacity: 0.7; box-shadow: 0 0 12px 2px #b6eaff88; }
+  100% { opacity: 1; box-shadow: 0 0 22px 8px #81ca5788; }
+}
+.main {
+  scrollbar-width: thin;
+  scrollbar-color: #b6eaff #ffffff00;
+} 
+
+.homeWrapper, .main {
+  overflow-x: hidden !important;
 } 

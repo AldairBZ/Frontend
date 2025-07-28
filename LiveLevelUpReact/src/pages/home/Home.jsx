@@ -13,6 +13,8 @@ export default function Home() {
   const menuRef = React.useRef(null);
   const [modalAbierto, setModalAbierto] = React.useState(null);
   const { darkMode, toggleTheme } = useTheme();
+  const mainRef = React.useRef(null);
+  const [showScrollLight, setShowScrollLight] = React.useState(true);
 
   React.useEffect(() => {
     function handleClickOutside(event) {
@@ -34,6 +36,18 @@ export default function Home() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [showProfileMenu]);
+
+  React.useEffect(() => {
+    const main = mainRef.current;
+    if (!main) return;
+    function onScroll() {
+      const atBottom = main.scrollTop + main.clientHeight >= main.scrollHeight - 2;
+      setShowScrollLight(!atBottom);
+    }
+    main.addEventListener('scroll', onScroll);
+    onScroll();
+    return () => main.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
     <div className={styles.homeWrapper}>
@@ -81,9 +95,9 @@ export default function Home() {
           </div>
         </nav>
       </header>
-      <main className={styles.main} style={{overflowY: 'auto', minHeight: 'calc(100vh - 60px - 48px)'}}>
+      <main ref={mainRef} className={styles.main} style={{overflowY: 'auto', minHeight: '100vh', paddingTop: 0}}>
         <PanelesInteractivos />
-        <section style={{maxWidth: 900, margin: '40px auto 40px auto', background: 'rgba(245,249,251,0.92)', borderRadius: 24, boxShadow: '0 4px 24px #b4f8c844', padding: '36px 32px', textAlign: 'left'}}>
+        <section style={{maxWidth: 900, margin: '0 auto 40px auto', padding: '0 32px', textAlign: 'left'}}>
           <h1 style={{fontSize: '2.2rem', fontWeight: 800, color: '#5b9cc8', marginBottom: 18, letterSpacing: '0.01em'}}>¿Por qué LifeLevelUp?</h1>
           <p style={{fontSize: '1.18rem', color: '#232e43', marginBottom: 18, lineHeight: 1.6}}>
             LifeLevelUp es una experiencia interactiva que convierte tus hábitos diarios en una aventura visual. Imagina que tú y el planeta son parte de un juego tipo Los Sims, pero en versión minimalista, con avatares SVG personalizables y animaciones suaves.
@@ -94,7 +108,8 @@ export default function Home() {
           </p>
         </section>
       </main>
-      <footer className={styles.footer}>
+      {showScrollLight && <div className="scroll-light" />}
+      <footer className={styles.footer} style={{position: 'static'}}>
         <div className={styles['footer-container']}>
           <div className={styles['footer-col']}>
             <h3>Uso de datos y privacidad</h3>
