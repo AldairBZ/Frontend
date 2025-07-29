@@ -137,8 +137,8 @@
 /* Contenedor principal con estructura cuadriculada */
 .panelsContainer {
   display: grid;
-  grid-template-columns: 350px 1fr 350px;
-  gap: 50px;
+  grid-template-columns: minmax(280px, 1fr) minmax(400px, 2fr) minmax(250px, 1fr);
+  gap: 30px;
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
@@ -158,6 +158,7 @@
   transition: all 0.3s ease;
   overflow: hidden;
   height: 500px;
+  min-width: 0; /* Permite que el panel se encoja */
 }
 
 .chatPanel:hover {
@@ -247,9 +248,10 @@
 /* ===== SECCIÓN 2: PANEL CENTRAL DE PROGRESO ===== */
 .progressPanel {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: 40px;
+  padding: 0;
+  min-width: 0; /* Permite que el panel se encoja */
 }
 
 .progressCard {
@@ -258,14 +260,15 @@
   background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
   border-radius: 32px;
   box-shadow: 0 16px 48px rgba(91,156,200,0.15);
-  padding: 60px;
+  padding: 40px;
   width: 100%;
   max-width: 700px;
   min-height: 500px;
   border: 2px solid rgba(91,156,200,0.1);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
-  gap: 60px;
+  gap: 40px;
+  margin-top: 0;
 }
 
 .progressCard:hover {
@@ -275,8 +278,8 @@
 
 .planetContainer {
   position: relative;
-  width: 320px;
-  height: 320px;
+  width: 280px;
+  height: 280px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -284,8 +287,8 @@
 }
 
 .planetImage {
-  width: 320px;
-  height: 320px;
+  width: 280px;
+  height: 280px;
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 12px 40px rgba(91,156,200,0.3);
@@ -298,8 +301,8 @@
   position: absolute;
   top: -20px;
   left: -20px;
-  width: 360px;
-  height: 360px;
+  width: 320px;
+  height: 320px;
   border-radius: 50%;
   background: conic-gradient(
     rgba(91,156,200,0.1) 0deg, 
@@ -323,10 +326,11 @@
   flex-direction: column;
   justify-content: center;
   gap: 30px;
+  min-width: 0; /* Permite que el contenido se encoja */
 }
 
 .progressTitle {
-  font-size: 2.8rem;
+  font-size: 2.4rem;
   font-weight: 700;
   color: #183c2a;
   margin: 0;
@@ -335,7 +339,7 @@
 }
 
 .progressDescription {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #183c2a;
   margin: 0;
   line-height: 1.6;
@@ -393,10 +397,11 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
-  align-items: center;
+  align-items: flex-end;
   justify-content: flex-start;
-  padding: 40px 0;
+  padding: 40px 20px 40px 0;
   height: 500px;
+  min-width: 0; /* Permite que el panel se encoja */
 }
 
 .actionButton {
@@ -414,6 +419,7 @@
   align-items: center;
   justify-content: center;
   align-self: flex-end;
+  margin-right: 20px;
 }
 
 .actionButton:hover {
@@ -424,6 +430,7 @@
 .tipsButton {
   background: linear-gradient(135deg, #ffd600 0%, #ffb300 100%);
   box-shadow: 0 8px 24px rgba(255,214,0,0.3);
+  margin-right: 20px;
 }
 
 .tipsButton:hover {
@@ -451,6 +458,7 @@
   margin-top: auto;
   align-self: flex-end;
   white-space: nowrap;
+  margin-right: 20px;
 }
 
 .actionsMainButton:hover {
@@ -470,6 +478,7 @@
   border: 2px solid rgba(91,156,200,0.1);
   backdrop-filter: blur(10px);
   animation: popupFadeIn 0.3s ease;
+  right: 20px;
 }
 
 @keyframes popupFadeIn {
@@ -510,7 +519,7 @@
 
 .tipsPopup {
   position: absolute;
-  left: 100px;
+  right: 120px;
   top: 0;
   background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
   border-radius: 24px;
@@ -535,13 +544,14 @@
 
 .actionsPopup {
   position: absolute;
-  right: 0;
-  bottom: 160px;
+  right: 20px;
+  bottom: 80px;
   background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
   border-radius: 24px;
   box-shadow: 0 16px 48px rgba(0,0,0,0.15);
   padding: 32px;
   min-width: 300px;
+  max-width: 350px;
   z-index: 10;
   border: 2px solid rgba(129,202,87,0.2);
   backdrop-filter: blur(10px);
@@ -796,31 +806,49 @@
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 1400px) {
   .panelsContainer {
-    grid-template-columns: 320px 1fr 320px;
-    gap: 40px;
+    grid-template-columns: minmax(250px, 1fr) minmax(350px, 2fr) minmax(200px, 1fr);
+    gap: 25px;
     max-width: 1200px;
   }
   
   .progressCard {
-    padding: 50px;
-    gap: 50px;
+    padding: 35px;
+    gap: 35px;
   }
   
   .planetContainer {
-    width: 280px;
-    height: 280px;
+    width: 240px;
+    height: 240px;
   }
   
   .planetImage {
-    width: 280px;
-    height: 280px;
+    width: 240px;
+    height: 240px;
   }
   
   .planetOrbit {
-    width: 320px;
-    height: 320px;
+    width: 280px;
+    height: 280px;
     top: -20px;
     left: -20px;
+  }
+  
+  .progressTitle {
+    font-size: 2.2rem;
+  }
+  
+  .progressDescription {
+    font-size: 1.1rem;
+  }
+  
+  .tipsPopup {
+    right: 100px;
+    max-width: 280px;
+  }
+  
+  .actionsPopup {
+    max-width: 320px;
+    bottom: 70px;
   }
   
   .footerContainer {
@@ -831,37 +859,49 @@
 
 @media (max-width: 1200px) {
   .panelsContainer {
-    grid-template-columns: 280px 1fr 280px;
-    gap: 30px;
+    grid-template-columns: minmax(220px, 1fr) minmax(300px, 2fr) minmax(180px, 1fr);
+    gap: 20px;
     max-width: 1000px;
   }
   
   .progressCard {
-    padding: 40px;
-    gap: 40px;
+    padding: 30px;
+    gap: 30px;
   }
   
   .planetContainer {
-    width: 240px;
-    height: 240px;
+    width: 200px;
+    height: 200px;
   }
   
   .planetImage {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .planetOrbit {
     width: 240px;
     height: 240px;
   }
   
-  .planetOrbit {
-    width: 280px;
-    height: 280px;
-  }
-  
   .progressTitle {
-    font-size: 2.4rem;
+    font-size: 2rem;
   }
   
   .progressDescription {
-    font-size: 1.1rem;
+    font-size: 1rem;
+  }
+  
+  .tipsPopup {
+    right: 90px;
+    max-width: 260px;
+    min-width: 250px;
+  }
+  
+  .actionsPopup {
+    max-width: 300px;
+    min-width: 280px;
+    bottom: 60px;
   }
 }
 
@@ -890,6 +930,26 @@
   
   .healthBar {
     max-width: 400px;
+  }
+  
+  .actionsPanel {
+    align-items: center;
+    padding: 40px 0;
+  }
+  
+  .actionButton, .tipsButton, .actionsMainButton {
+    margin-right: 0;
+  }
+  
+  .tipsPopup {
+    right: 80px;
+    max-width: 280px;
+  }
+  
+  .actionsPopup {
+    right: 0;
+    bottom: 100px;
+    max-width: 320px;
   }
   
   .footerContainer {
@@ -925,26 +985,38 @@
   }
   
   .planetContainer {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
   }
   
   .planetImage {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
   }
   
   .planetOrbit {
-    width: 240px;
-    height: 240px;
+    width: 220px;
+    height: 220px;
   }
   
   .progressTitle {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
   
   .progressDescription {
-    font-size: 1rem;
+    font-size: 0.95rem;
+  }
+  
+  .tipsPopup {
+    right: 70px;
+    max-width: 250px;
+    min-width: 220px;
+  }
+  
+  .actionsPopup {
+    max-width: 280px;
+    min-width: 250px;
+    bottom: 80px;
   }
   
   .footer {
@@ -996,26 +1068,38 @@
   }
   
   .planetContainer {
-    width: 180px;
-    height: 180px;
+    width: 160px;
+    height: 160px;
   }
   
   .planetImage {
-    width: 180px;
-    height: 180px;
+    width: 160px;
+    height: 160px;
   }
   
   .planetOrbit {
-    width: 220px;
-    height: 220px;
+    width: 200px;
+    height: 200px;
   }
   
   .progressTitle {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
   
   .progressDescription {
     font-size: 0.9rem;
+  }
+  
+  .tipsPopup {
+    right: 60px;
+    max-width: 220px;
+    min-width: 200px;
+  }
+  
+  .actionsPopup {
+    max-width: 250px;
+    min-width: 220px;
+    bottom: 70px;
   }
   
   .footer {
