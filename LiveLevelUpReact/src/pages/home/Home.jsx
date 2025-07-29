@@ -2,11 +2,13 @@ import React from 'react';
 import styles from './Home.module.css';
 import PanelesInteractivos from './PanelesInteractivos';
 import Layout from '../../components/Layout.jsx';
+import HeroSection from './HeroSection';
 
 export default function Home() {
 
     return (
     <Layout>
+      <HeroSection />
       <div className={styles.homeContent}>
         <PanelesInteractivos />
         <section 

@@ -1,0 +1,108 @@
+.heroSection {
+  width: 100%;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(120deg, #e0f7fa 0%, #b2f7ef 100%);
+  padding: 3rem 0 2rem 0;
+  box-sizing: border-box;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 3rem;
+  align-items: center;
+  max-width: 1100px;
+  width: 100%;
+  background: rgba(255,255,255,0.55);
+  border-radius: 2rem;
+  box-shadow: 0 8px 32px 0 rgba(91,156,200,0.10), 0 2px 8px #b2d8f733;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 2.5rem 3rem;
+}
+
+.heroAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: floatAvatar 2.8s ease-in-out infinite alternate;
+}
+@keyframes floatAvatar {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-18px); }
+}
+
+.heroTextBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.2rem;
+}
+.heroTitle {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-size: 2.7rem;
+  font-weight: 800;
+  color: #1976d2;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.1;
+}
+.heroSubtitle {
+  font-size: 1.25rem;
+  color: #232e43;
+  margin-bottom: 1.2rem;
+  font-family: 'Inter', 'Poppins', sans-serif;
+}
+.heroCtas {
+  display: flex;
+  gap: 1.2rem;
+}
+.ctaPrimary {
+  background: linear-gradient(90deg, #39e09b 0%, #1976d2 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 1.5rem;
+  padding: 0.9rem 2.2rem;
+  box-shadow: 0 2px 8px #39e09b33;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.ctaPrimary:hover {
+  background: linear-gradient(90deg, #1976d2 0%, #39e09b 100%);
+  box-shadow: 0 4px 16px #1976d244;
+  transform: translateY(-2px) scale(1.04);
+}
+.ctaSecondary {
+  background: #fff;
+  color: #1976d2;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border: 2px solid #1976d2;
+  border-radius: 1.5rem;
+  padding: 0.9rem 2.2rem;
+  box-shadow: 0 2px 8px #1976d222;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.ctaSecondary:hover {
+  background: #1976d2;
+  color: #fff;
+  box-shadow: 0 4px 16px #1976d244;
+  transform: translateY(-2px) scale(1.04);
+}
+
+@media (max-width: 900px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    padding: 1.5rem 1rem;
+    gap: 2rem;
+  }
+  .heroTitle {
+    font-size: 2rem;
+  }
+} 
