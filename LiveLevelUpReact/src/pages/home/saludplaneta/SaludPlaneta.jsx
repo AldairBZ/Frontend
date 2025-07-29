@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './SaludPlaneta.module.css';
 import planetaImg from '../../../assets/svg/planet.png';
@@ -11,13 +11,74 @@ export default function SaludPlaneta() {
   const [showLogros, setShowLogros] = useState(false);
   const [showAcciones, setShowAcciones] = useState(false);
   const [modalAbierto, setModalAbierto] = useState(null);
-  const [chatMessages, setChatMessages] = useState([]);
+  const [chatMessages, setChatMessages] = useState([
+    { id: 1, user: "María", message: "¡Acabo de completar el reto de reciclaje! 🌱", time: "2 min" },
+    { id: 2, user: "Carlos", message: "Hoy caminé 10km en lugar de usar el coche 🚶‍♂️", time: "5 min" },
+    { id: 3, user: "Ana", message: "Conseguí reducir mi consumo de agua en un 30% 💧", time: "8 min" },
+    { id: 4, user: "Luis", message: "Planteé 3 árboles en mi jardín 🌳", time: "12 min" }
+  ]);
   const [chatInput, setChatInput] = useState("");
+  const [planetaHealth, setPlanetaHealth] = useState(45);
+  const [currentTip, setCurrentTip] = useState("Apaga las luces que no uses para ahorrar energía.");
   const navigate = useNavigate();
+
+  // Consejos rotativos del gato bot
+  const consejos = [
+    "Apaga las luces que no uses para ahorrar energía.",
+    "Usa transporte público o bicicleta para trayectos cortos.",
+    "Recicla papel, plástico y vidrio correctamente.",
+    "Dúchate en menos de 5 minutos para ahorrar agua.",
+    "Compra productos locales para reducir la huella de carbono.",
+    "Usa bolsas reutilizables en lugar de plástico.",
+    "Desconecta dispositivos cuando no los uses.",
+    "Come más vegetales y menos carne."
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTip(consejos[Math.floor(Math.random() * consejos.length)]);
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleChatSubmit = (e) => {
+    e.preventDefault();
+    if (chatInput.trim() !== "") {
+      const newMessage = {
+        id: Date.now(),
+        user: "Tú",
+        message: chatInput,
+        time: "Ahora"
+      };
+      setChatMessages(prev => [newMessage, ...prev]);
+      setChatInput("");
+      
+      setTimeout(() => {
+        const systemMessage = {
+          id: Date.now() + 1,
+          user: "Sistema",
+          message: "¡Gracias por compartir tu acción ecológica! +5 puntos 🌟",
+          time: "Ahora"
+        };
+        setChatMessages(prev => [systemMessage, ...prev]);
+        setPlanetaHealth(prev => Math.min(100, prev + 1));
+      }, 1000);
+    }
+  };
+
+  const accionesEcológicas = [
+    { id: 1, text: "Reciclar", positive: true },
+    { id: 2, text: "Reducir el consumo energético", positive: true },
+    { id: 3, text: "Fomentar la conservación de la biodiversidad", positive: true },
+    { id: 4, text: "Contaminar", positive: false },
+    { id: 5, text: "Consumir muchas materias primas", positive: false },
+    { id: 6, text: "Realizar caza furtiva", positive: false }
+  ];
 
   return (
     <div className={styles.saludPlanetaWrapper}>
-      {/* ===== HEADER ===== */}
+      {/* ===== HEADER MODERNO ===== */}
       <header className={styles.header}>
         <nav className={styles.nav}>
           <div className={styles.logo} onClick={() => navigate('/home')} style={{cursor: 'pointer'}}>
@@ -25,204 +86,244 @@ export default function SaludPlaneta() {
           </div>
           <ul className={styles.menu}>
             <li><a href="/home">Inicio</a></li>
-            <li><a href="/home/salud-bienestar">Salud</a></li>
-            <li><a href="/home/salud-planeta" style={{background: 'rgba(255,255,255,0.2)', border: '2px solid #fff'}}>Planeta</a></li>
+            <li><a href="/home/saludibienestar">Salud</a></li>
+            <li><a href="/home/saludplaneta" className={styles.activeLink}>Planeta</a></li>
           </ul>
         </nav>
       </header>
 
-      {/* ===== HERO MODERNO ===== */}
+      {/* ===== HERO SECTION MODERNO ===== */}
       <section className={styles.heroSection}>
         <div className={styles.heroBackground}>
           <div className={styles.heroParticles}></div>
           <div className={styles.heroGradient}></div>
         </div>
+        
         <div className={styles.heroContainer}>
-          <div className={styles.heroGrid}>
-            {/* Columna izquierda: Avatar planeta */}
-            <div className={styles.heroAvatar}>
-              <div className={styles.avatarContainer}>
-                <img src={planetaImg} alt="Planeta" style={{width: 180, height: 180}} />
-                <div className={styles.avatarGlow}></div>
+          <div className={styles.heroContent}>
+            <div className={styles.heroBadge}>
+              <span className={styles.badgeIcon}>🌍</span>
+              <span className={styles.badgeText}>Salud del Planeta</span>
+            </div>
+            
+            <h1 className={styles.heroTitle}>
+              Tu impacto positivo
+              <span className={styles.heroTitleHighlight}> transforma el mundo.</span>
+            </h1>
+            
+            <p className={styles.heroSubtitle}>
+              Únete a nuestra comunidad ecológica y descubre cómo cada pequeña acción 
+              contribuye a un planeta más saludable y sostenible.
+            </p>
+            
+            <div className={styles.heroStats}>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>1,247</span>
+                <span className={styles.statLabel}>Usuarios activos</span>
               </div>
-              <div className={styles.heroStats}>
-                <div className={styles.statItem}>
-                  <span className={styles.statNumber}>+8K</span>
-                  <span className={styles.statLabel}>Acciones ecológicas</span>
-                </div>
-                <div className={styles.statItem}>
-                  <span className={styles.statNumber}>+120K</span>
-                  <span className={styles.statLabel}>Kg CO₂ ahorrados</span>
-                </div>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>45,892</span>
+                <span className={styles.statLabel}>Acciones completadas</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>{planetaHealth}/100</span>
+                <span className={styles.statLabel}>Salud del planeta</span>
               </div>
             </div>
-            {/* Columna derecha: Texto y CTAs */}
-            <div className={styles.heroTextBlock}>
-              <div className={styles.heroBadge}>
-                <span className={styles.badgeIcon}>🌍</span>
-                <span className={styles.badgeText}>Planeta saludable, futuro brillante</span>
-              </div>
-              <h1 className={styles.heroTitle}>
-                Cuida el planeta.<span className={styles.heroTitleHighlight}> Cambia tu entorno.</span>
-              </h1>
-              <p className={styles.heroSubtitle}>
-                Descubre cómo tus hábitos diarios pueden transformar el mundo. Participa en retos ecológicos, mide tu impacto y evoluciona junto a la comunidad.
-              </p>
-              <div className={styles.heroFeatures}>
-                <div className={styles.featureItem}>
-                  <span className={styles.featureIcon}>♻️</span>
-                  <span className={styles.featureText}>Retos ecológicos</span>
-                </div>
-                <div className={styles.featureItem}>
-                  <span className={styles.featureIcon}>🌱</span>
-                  <span className={styles.featureText}>Impacto real</span>
-                </div>
-                <div className={styles.featureItem}>
-                  <span className={styles.featureIcon}>📊</span>
-                  <span className={styles.featureText}>Métricas ambientales</span>
-                </div>
-              </div>
-              <div className={styles.heroCtas}>
-                <button className={styles.ctaPrimary} onClick={() => navigate('/home/salud-bienestar')}>
-                  <span className={styles.ctaIcon}>🌱</span>
-                  <span className={styles.ctaText}>Ver salud y bienestar</span>
-                  <span className={styles.ctaArrow}>→</span>
-                </button>
-                <button className={styles.ctaSecondary} onClick={() => navigate('/home/avatar/personalizar')}>
-                  <span className={styles.ctaIcon}>🧑‍🚀</span>
-                  <span className={styles.ctaText}>Personalizar avatar</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className={styles.heroScroll}>
-          <div className={styles.scrollIndicator}>
-            <span className={styles.scrollText}>Descubre más</span>
-            <div className={styles.scrollArrow}></div>
           </div>
         </div>
       </section>
 
-      {/* ===== BARRA DE NOTICIAS ===== */}
+      {/* ===== CINTA DE NOTICIAS MODERNA ===== */}
       <div className={styles.newsTicker}>
         <div className={styles.tickerContent}>
-          🌍 ¡Recuerda separar los residuos! &nbsp;&nbsp;&nbsp;♻️ Participa en el reto ecológico semanal. &nbsp;&nbsp;&nbsp;💧 Ahorra agua todos los días. &nbsp;&nbsp;&nbsp;🚲 Usa la bici para trayectos cortos.
+          🌍 ¡Recuerda separar los residuos! &nbsp;&nbsp;&nbsp;♻️ Participa en el reto ecológico semanal. &nbsp;&nbsp;&nbsp;💧 Ahorra agua todos los días. &nbsp;&nbsp;&nbsp;🚲 Usa la bici para trayectos cortos. &nbsp;&nbsp;&nbsp;🌱 Planta un árbol hoy mismo. &nbsp;&nbsp;&nbsp;⚡ Desconecta dispositivos innecesarios.
         </div>
       </div>
-      
-      {/* ===== MAIN CONTENT ===== */}
+
+      {/* ===== MAIN CONTENT MODERNO ===== */}
       <main className={styles.main}>
-        {/* Contenedor principal con estructura cuadriculada */}
         <div className={styles.panelsContainer}>
-          {/* ===== SECCIÓN 1: PANEL DE CHAT ===== */}
+          {/* ===== PANEL DE CHAT MODERNO ===== */}
           <section className={styles.chatPanel}>
-            <h3 className={styles.chatHeader}>Chat</h3>
+            <div className={styles.chatHeader}>
+              <div className={styles.chatTitle}>
+                <span className={styles.chatIcon}>💬</span>
+                <h3>Chat Ecológico</h3>
+              </div>
+              <div className={styles.onlineUsers}>
+                <span className={styles.usersIcon}>👥</span>
+                <span>1,247 usuarios online</span>
+              </div>
+            </div>
+            
             <div className={styles.chatMessages}>
-              {chatMessages.map((msg, idx) => (
-                <div key={idx} className={styles.chatMessage}>{msg}</div>
+              {chatMessages.map((msg) => (
+                <div key={msg.id} className={`${styles.chatMessage} ${msg.user === "Tú" ? styles.ownMessage : msg.user === "Sistema" ? styles.systemMessage : styles.otherMessage}`}>
+                  <div className={styles.messageHeader}>
+                    <span className={styles.messageUser}>{msg.user}</span>
+                    <span className={styles.messageTime}>{msg.time}</span>
+                  </div>
+                  <div className={styles.messageText}>{msg.message}</div>
+                </div>
               ))}
             </div>
-            <form className={styles.chatForm} onSubmit={e => {
-              e.preventDefault();
-              if (chatInput.trim() !== "") {
-                setChatMessages(msgs => [...msgs, chatInput]);
-                setChatInput("");
-              }
-            }}>
+            
+            <form className={styles.chatForm} onSubmit={handleChatSubmit}>
               <input 
                 type="text" 
-                placeholder="Escribe un mensaje..." 
+                placeholder="Comparte tu acción ecológica..." 
                 value={chatInput} 
                 onChange={e => setChatInput(e.target.value)} 
                 className={styles.chatInput}
               />
-              <button type="submit" className={styles.chatButton}>Enviar</button>
+              <button type="submit" className={styles.chatButton}>
+                <span>Enviar</span>
+                <span className={styles.sendIcon}>🚀</span>
+              </button>
             </form>
           </section>
 
-          {/* ===== SECCIÓN 2: PANEL CENTRAL DE PROGRESO ===== */}
+          {/* ===== PANEL CENTRAL MODERNO ===== */}
           <section className={styles.progressPanel}>
             <div className={styles.progressCard}>
               <div className={styles.planetContainer}>
                 <div className={styles.planetOrbit}></div>
                 <img src={planetaImg} alt="Planeta" className={styles.planetImage} />
+                <div className={styles.planetGlow}></div>
               </div>
+              
               <div className={styles.progressContent}>
-                <h2 className={styles.progressTitle}>Progreso ambiental</h2>
+                <h2 className={styles.progressTitle}>🌍 Salud del Planeta</h2>
                 <p className={styles.progressDescription}>
-                  Aquí verás tu impacto positivo en el planeta y consejos para mejorar.
+                  Tu impacto positivo está transformando el mundo. Cada acción cuenta.
                 </p>
 
                 <div className={styles.healthBar}>
-                  <div className={styles.healthLabel}>Salud</div>
+                  <div className={styles.healthLabel}>
+                    <span>Estado Actual</span>
+                    <span className={styles.healthValue}>{planetaHealth}/100</span>
+                  </div>
                   <div className={styles.healthBarContainer}>
-                    <div className={styles.healthBarFill}></div>
-                    <span className={styles.healthBarValue}>45/100</span>
+                    <div 
+                      className={styles.healthBarFill} 
+                      style={{width: `${planetaHealth}%`}}
+                    ></div>
+                    <div className={styles.healthBarGlow}></div>
+                  </div>
+                  <div className={styles.healthStatus}>
+                    {planetaHealth < 30 ? "🌡️ Crítico" : 
+                     planetaHealth < 60 ? "⚠️ Mejorando" : 
+                     planetaHealth < 80 ? "🌱 Saludable" : "🌟 Excelente"}
+                  </div>
+                </div>
+
+                <div className={styles.statsGrid}>
+                  <div className={styles.statItem}>
+                    <span className={styles.statNumber}>1,247</span>
+                    <span className={styles.statLabel}>Usuarios activos</span>
+                  </div>
+                  <div className={styles.statItem}>
+                    <span className={styles.statNumber}>45,892</span>
+                    <span className={styles.statLabel}>Acciones completadas</span>
                   </div>
                 </div>
               </div>
             </div>
           </section>
 
-          {/* ===== SECCIÓN 3: PANEL DE ACCIONES ===== */}
+          {/* ===== PANEL DE ACCIONES MODERNO ===== */}
           <section className={styles.actionsPanel}>
-            <div style={{display: 'flex', flexDirection: 'row', gap: 24, alignItems: 'flex-end', width: '100%', justifyContent: 'flex-end'}}>
-              {/* Icono logros */}
-              <div style={{position: 'relative'}}>
-                <button 
-                  onClick={() => setShowLogros(v => !v)} 
-                  className={styles.actionButton}
-                >
-                  🏆
-                </button>
-                {showLogros && (
-                  <div className={styles.popup} style={{top: 80, right: 40}}>
-                    <h4 className={styles.popupTitle}>Logros</h4>
-                    <ul className={styles.popupList}>
-                      <li>🌱 Primer paso ecológico</li>
-                      <li>🌍 Amigo del planeta</li>
-                      <li>♻️ Reciclador experto</li>
-                    </ul>
+            {/* Icono de logros */}
+            <div className={styles.actionItem}>
+              <button 
+                onClick={() => setShowLogros(v => !v)} 
+                className={styles.actionButton}
+                title="Ver logros"
+              >
+                🏆
+              </button>
+              {showLogros && (
+                <div className={styles.popup}>
+                  <div className={styles.popupHeader}>
+                    <h4>🏆 Logros Desbloqueados</h4>
+                    <button 
+                      onClick={() => setShowLogros(false)} 
+                      className={styles.closeButton}
+                    >
+                      ✕
+                    </button>
                   </div>
-                )}
-              </div>
-              {/* Icono consejos + popup alineados */}
-              <div style={{position: 'relative'}}>
-                <button className={`${styles.actionButton} ${styles.tipsButton}`} style={{marginBottom: 0}}>
-                  <img src={gatoMedicoImg} alt="Consejo" className={styles.tipsImage} />
-                </button>
-                <div className={styles.tipsPopup} style={{position: 'absolute', right: -40, top: 88, marginTop: 0, marginBottom: 0, alignSelf: 'unset'}}>
-                  <span className={styles.tipsText}>
-                    Consejo: Apaga las luces que no uses para ahorrar energía.
-                  </span>
+                  <ul className={styles.popupList}>
+                    <li className={styles.achievementItem}>
+                      <span className={styles.achievementIcon}>🌱</span>
+                      <div className={styles.achievementInfo}>
+                        <span className={styles.achievementTitle}>Primer paso ecológico</span>
+                        <span className={styles.achievementDesc}>Completaste tu primera acción verde</span>
+                      </div>
+                    </li>
+                    <li className={styles.achievementItem}>
+                      <span className={styles.achievementIcon}>🌍</span>
+                      <div className={styles.achievementInfo}>
+                        <span className={styles.achievementTitle}>Amigo del planeta</span>
+                        <span className={styles.achievementDesc}>10 acciones consecutivas</span>
+                      </div>
+                    </li>
+                    <li className={styles.achievementItem}>
+                      <span className={styles.achievementIcon}>♻️</span>
+                      <div className={styles.achievementInfo}>
+                        <span className={styles.achievementTitle}>Reciclador experto</span>
+                        <span className={styles.achievementDesc}>Reciclaste 50 elementos</span>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
+              )}
+            </div>
+
+            {/* Gato bot con consejos */}
+            <div className={styles.actionItem}>
+              <button className={`${styles.actionButton} ${styles.tipsButton}`}>
+                <img src={gatoMedicoImg} alt="Gato consejero" className={styles.tipsImage} />
+              </button>
+              <div className={styles.tipsPopup}>
+                <div className={styles.tipsHeader}>
+                  <span className={styles.tipsIcon}>🐱</span>
+                  <span className={styles.tipsTitle}>Consejo del día</span>
+                </div>
+                <span className={styles.tipsText}>{currentTip}</span>
               </div>
             </div>
-            {/* Botón acciones */}
-            <div style={{alignSelf: 'flex-end', marginTop: '32px', position: 'relative'}}>
+
+            {/* Botón de acciones */}
+            <div className={styles.actionItem}>
               <button 
                 onClick={() => setShowAcciones(v => !v)} 
                 className={styles.actionsMainButton}
               >
-                Acciones
+                <span>⚡</span>
+                <span>Acciones</span>
               </button>
               {showAcciones && (
                 <div className={styles.actionsPopup}>
-                  <button 
-                    onClick={() => setShowAcciones(false)} 
-                    className={styles.closeButton}
-                  >
-                    ✕
-                  </button>
-                  <h4 className={styles.popupTitle}>Acciones ecológicas</h4>
+                  <div className={styles.popupHeader}>
+                    <h4>🎯 Acciones Ecológicas</h4>
+                    <button 
+                      onClick={() => setShowAcciones(false)} 
+                      className={styles.closeButton}
+                    >
+                      ✕
+                    </button>
+                  </div>
                   <div className={styles.actionsGrid}>
-                    <button className={styles.actionItem}>Reciclar</button>
-                    <button className={styles.actionItem}>Reducir el consumo energético</button>
-                    <button className={styles.actionItem}>Fomentar la conservación de la biodiversidad</button>
-                    <button className={styles.actionItemNegative}>Contaminar</button>
-                    <button className={styles.actionItemNegative}>Consumir muchas materias primas</button>
-                    <button className={styles.actionItemNegative}>Realizar caza furtiva</button>
+                    {accionesEcológicas.map(accion => (
+                      <button 
+                        key={accion.id} 
+                        className={`${styles.actionItem} ${accion.positive ? styles.positiveAction : styles.negativeAction}`}
+                      >
+                        {accion.text}
+                      </button>
+                    ))}
                   </div>
                 </div>
               )}
@@ -231,7 +332,7 @@ export default function SaludPlaneta() {
         </div>
       </main>
 
-      {/* ===== FOOTER COMPLETO ===== */}
+      {/* ===== FOOTER MODERNO ===== */}
       <footer className={styles.footer}>
         <div className={styles.footerContainer}>
           <div className={styles.footerBrand}>
