@@ -1,3 +1,255 @@
+/* HERO MODERNO - Inspirado en Home y HeroSection */
+.heroSection {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+.heroBackground {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 1;
+}
+.heroParticles {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+  animation: particleFloat 20s ease-in-out infinite;
+}
+.heroGradient {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 50%, rgba(16, 185, 129, 0.6) 100%);
+}
+@keyframes particleFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-20px) rotate(120deg); }
+  66% { transform: translateY(10px) rotate(240deg); }
+}
+.heroContainer {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 24px;
+  margin: 0 auto;
+}
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  align-items: center;
+  min-height: 60vh;
+}
+.heroAvatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+.avatarContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.avatarGlow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 220px; height: 220px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: avatarGlow 3s ease-in-out infinite alternate;
+  z-index: -1;
+}
+@keyframes avatarGlow {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+  100% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
+}
+.heroStats {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.statItem:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.15);
+}
+.statNumber {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+}
+.statLabel {
+  font-size: 1rem;
+  color: #e0e7ef;
+  font-weight: 500;
+}
+.heroTextBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.heroBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,255,255,0.15);
+  border-radius: 16px;
+  padding: 0.5rem 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  font-size: 1.1rem;
+  width: fit-content;
+}
+.badgeIcon {
+  font-size: 1.3rem;
+}
+.badgeText {
+  font-size: 1.1rem;
+}
+.heroTitle {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+  line-height: 1.1;
+}
+.heroTitleHighlight {
+  color: #10b981;
+}
+.heroSubtitle {
+  font-size: 1.2rem;
+  color: #e0e7ef;
+  margin: 0;
+  line-height: 1.5;
+}
+.heroFeatures {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,255,255,0.12);
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1rem;
+}
+.featureIcon {
+  font-size: 1.2rem;
+}
+.featureText {
+  font-size: 1rem;
+}
+.heroCtas {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 1.2rem;
+}
+.ctaPrimary {
+  background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 1rem 2.2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(16,185,129,0.18);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.ctaPrimary:hover {
+  background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+  transform: translateY(-2px) scale(1.04);
+}
+.ctaSecondary {
+  background: rgba(255,255,255,0.18);
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 16px;
+  padding: 1rem 2.2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(59,130,246,0.10);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.ctaSecondary:hover {
+  background: rgba(255,255,255,0.28);
+  color: #10b981;
+  border-color: #10b981;
+  transform: translateY(-2px) scale(1.04);
+}
+.ctaIcon {
+  font-size: 1.3rem;
+}
+.ctaText {
+  font-size: 1.1rem;
+}
+.ctaArrow {
+  font-size: 1.2rem;
+}
+.heroScroll {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+.scrollIndicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  color: #fff;
+  opacity: 0.7;
+  animation: scrollBounce 2s infinite;
+}
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+.scrollText {
+  font-size: 1rem;
+}
+.scrollArrow {
+  width: 24px;
+  height: 24px;
+  border-left: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  transform: rotate(-45deg);
+  margin-top: 4px;
+}
+
 /* Estilos modernos para Salud Planeta - Estructura Cuadriculada */
 .saludPlanetaWrapper {
   min-height: 100vh;

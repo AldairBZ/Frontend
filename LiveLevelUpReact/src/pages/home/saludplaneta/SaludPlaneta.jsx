@@ -25,11 +25,84 @@ export default function SaludPlaneta() {
           </div>
           <ul className={styles.menu}>
             <li><a href="/home">Inicio</a></li>
-            <li><a href="/home/saludibienestar">Salud</a></li>
-            <li><a href="/home/saludplaneta" style={{background: 'rgba(255,255,255,0.2)', border: '2px solid #fff'}}>Planeta</a></li>
+            <li><a href="/home/salud-bienestar">Salud</a></li>
+            <li><a href="/home/salud-planeta" style={{background: 'rgba(255,255,255,0.2)', border: '2px solid #fff'}}>Planeta</a></li>
           </ul>
         </nav>
       </header>
+
+      {/* ===== HERO MODERNO ===== */}
+      <section className={styles.heroSection}>
+        <div className={styles.heroBackground}>
+          <div className={styles.heroParticles}></div>
+          <div className={styles.heroGradient}></div>
+        </div>
+        <div className={styles.heroContainer}>
+          <div className={styles.heroGrid}>
+            {/* Columna izquierda: Avatar planeta */}
+            <div className={styles.heroAvatar}>
+              <div className={styles.avatarContainer}>
+                <img src={planetaImg} alt="Planeta" style={{width: 180, height: 180}} />
+                <div className={styles.avatarGlow}></div>
+              </div>
+              <div className={styles.heroStats}>
+                <div className={styles.statItem}>
+                  <span className={styles.statNumber}>+8K</span>
+                  <span className={styles.statLabel}>Acciones ecológicas</span>
+                </div>
+                <div className={styles.statItem}>
+                  <span className={styles.statNumber}>+120K</span>
+                  <span className={styles.statLabel}>Kg CO₂ ahorrados</span>
+                </div>
+              </div>
+            </div>
+            {/* Columna derecha: Texto y CTAs */}
+            <div className={styles.heroTextBlock}>
+              <div className={styles.heroBadge}>
+                <span className={styles.badgeIcon}>🌍</span>
+                <span className={styles.badgeText}>Planeta saludable, futuro brillante</span>
+              </div>
+              <h1 className={styles.heroTitle}>
+                Cuida el planeta.<span className={styles.heroTitleHighlight}> Cambia tu entorno.</span>
+              </h1>
+              <p className={styles.heroSubtitle}>
+                Descubre cómo tus hábitos diarios pueden transformar el mundo. Participa en retos ecológicos, mide tu impacto y evoluciona junto a la comunidad.
+              </p>
+              <div className={styles.heroFeatures}>
+                <div className={styles.featureItem}>
+                  <span className={styles.featureIcon}>♻️</span>
+                  <span className={styles.featureText}>Retos ecológicos</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.featureIcon}>🌱</span>
+                  <span className={styles.featureText}>Impacto real</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.featureIcon}>📊</span>
+                  <span className={styles.featureText}>Métricas ambientales</span>
+                </div>
+              </div>
+              <div className={styles.heroCtas}>
+                <button className={styles.ctaPrimary} onClick={() => navigate('/home/salud-bienestar')}>
+                  <span className={styles.ctaIcon}>🌱</span>
+                  <span className={styles.ctaText}>Ver salud y bienestar</span>
+                  <span className={styles.ctaArrow}>→</span>
+                </button>
+                <button className={styles.ctaSecondary} onClick={() => navigate('/home/avatar/personalizar')}>
+                  <span className={styles.ctaIcon}>🧑‍🚀</span>
+                  <span className={styles.ctaText}>Personalizar avatar</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={styles.heroScroll}>
+          <div className={styles.scrollIndicator}>
+            <span className={styles.scrollText}>Descubre más</span>
+            <div className={styles.scrollArrow}></div>
+          </div>
+        </div>
+      </section>
 
       {/* ===== BARRA DE NOTICIAS ===== */}
       <div className={styles.newsTicker}>
