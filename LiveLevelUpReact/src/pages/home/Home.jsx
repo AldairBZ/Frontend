@@ -62,7 +62,7 @@ export default function Home() {
       avatar: "👩‍🦰",
       before: "Sedentaria, 0 ejercicio",
       after: "10.000 pasos diarios",
-      story: "En 3 meses perdí 8kg y me siento más energética que nunca. ¡Gracias LiveLevelUp!",
+              story: "En 3 meses perdí 8kg y me siento más energética que nunca. ¡Gracias LifeLevelUp!",
       impact: "+2 años de vida"
     },
     {

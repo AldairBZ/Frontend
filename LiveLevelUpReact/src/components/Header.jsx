@@ -74,7 +74,7 @@ export default function Header({ darkMode, toggleTheme }) {
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <nav className="nav">
         <div className="logo">
-          <span>LiveLevelUp</span>
+                                <span>LifeLevelUp</span>
           {activeSection !== 'home' && (
             <div className="active-indicator" />
           )}

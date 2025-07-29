@@ -21,7 +21,7 @@ export default function Footer() {
         <div className="footer-container">
           {/* Columna principal */}
           <div className="footer-col">
-            <h3>LiveLevelUp</h3>
+                                    <h3>LifeLevelUp</h3>
             <p>
               Transformamos hábitos diarios en impacto positivo para ti y el planeta. 
               Únete a nuestra comunidad de más de 10,000 personas que ya están creando 
@@ -90,7 +90,7 @@ export default function Footer() {
             <div className="footer-contact">
               <p>
                 <span>📧</span>
-                hola@livelevelup.com
+                hola@lifelevelup.com
               </p>
               <p>
                 <span>🌱</span>
@@ -150,7 +150,7 @@ export default function Footer() {
         {/* Sección inferior */}
         <div className="footer-bottom">
           <p>
-            &copy; 2025 LiveLevelUp. Todos los derechos reservados. 
+            &copy; 2025 LifeLevelUp. Todos los derechos reservados. 
             <span style={{ marginLeft: '1rem', opacity: 0.7 }}>
               🌍 Juntos creamos un futuro más verde y saludable.
             </span>
