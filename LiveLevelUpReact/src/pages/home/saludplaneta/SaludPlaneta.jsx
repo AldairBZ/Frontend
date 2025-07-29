@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './SaludPlaneta.module.css';
 import planetaImg from '../../../assets/svg/planet.png';
 import QuienesSomos from '../footer/equipo/QuienesSomos.jsx';
@@ -12,13 +13,14 @@ export default function SaludPlaneta() {
   const [modalAbierto, setModalAbierto] = useState(null);
   const [chatMessages, setChatMessages] = useState([]);
   const [chatInput, setChatInput] = useState("");
+  const navigate = useNavigate();
 
   return (
     <div className={styles.saludPlanetaWrapper}>
       {/* ===== HEADER ===== */}
       <header className={styles.header}>
         <nav className={styles.nav}>
-          <div className={styles.logo}>
+          <div className={styles.logo} onClick={() => navigate('/home')} style={{cursor: 'pointer'}}>
             <span>LifeLevelUp</span>
           </div>
           <ul className={styles.menu}>

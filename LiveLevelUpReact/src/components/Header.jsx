@@ -66,15 +66,21 @@ export default function Header({ darkMode, toggleTheme }) {
   };
 
   const handleNavClick = (sectionId) => {
-    scrollToSection(sectionId);
+    if (sectionId === 'salud') {
+      navigate('/home/salud-bienestar');
+    } else if (sectionId === 'planeta') {
+      navigate('/home/salud-planeta');
+    } else {
+      scrollToSection(sectionId);
+    }
     setShowMobileMenu(false);
   };
 
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <nav className="nav">
-        <div className="logo">
-                                <span>LifeLevelUp</span>
+        <div className="logo" onClick={() => navigate('/home')} style={{cursor: 'pointer'}}>
+          <span>LifeLevelUp</span>
           {activeSection !== 'home' && (
             <div className="active-indicator" />
           )}

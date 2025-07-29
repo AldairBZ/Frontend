@@ -45,6 +45,11 @@
   color: #fff;
   margin-left: 10px;
   flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: translateY(-1px);
 }
 
 .logo span {
