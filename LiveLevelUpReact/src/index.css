@@ -19,3 +19,47 @@ html, body, #root {
   box-sizing: border-box !important;
   overflow: auto !important;
 }
+
+/* Scrollbar global: solo un destello animado tipo ranura de luz */
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  width: 4px;
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: linear-gradient(120deg, transparent 10%, #6ec6ff 30%, #fff 50%, #6ec6ff 70%, transparent 90%);
+  background-size: 200% 200%;
+  animation: scroll-comet 1.2s linear infinite;
+  min-height: 40px;
+  box-shadow: 0 0 16px 6px #fff8, 0 0 32px 12px #6ec6ff44;
+  border: none;
+}
+
+@keyframes scroll-comet {
+  0% {
+    background-position: 120% 0;
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.85;
+  }
+  100% {
+    background-position: 0 100%;
+    opacity: 1;
+  }
+}
+
+html::-webkit-scrollbar-thumb:window-inactive, body::-webkit-scrollbar-thumb:window-inactive {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-track, body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Firefox */
+html, body {
+  scrollbar-width: thin;
+  scrollbar-color: #fff #fff0;
+}

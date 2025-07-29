@@ -354,6 +354,43 @@
   padding: 2rem;
   gap: 2rem;
   margin-bottom: 80px; /* Espacio para el footer fijo */
+  scrollbar-width: initial;
+  scrollbar-color: initial;
+}
+
+/* Scrollbar para Webkit (Chrome, Edge, Safari) */
+.mainContent::-webkit-scrollbar {
+  width: 10px;
+  background: #e0f0ff;
+  border-radius: 8px;
+}
+
+.mainContent::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: linear-gradient(120deg, #b2d8f7 40%, #fff 50%, #b2d8f7 60%);
+  background-size: 200% 200%;
+  animation: scroll-glow 1.5s linear infinite;
+  box-shadow: 0 0 8px 2px #b2d8f788;
+}
+
+@keyframes scroll-glow {
+  0% {
+    background-position: 100% 0;
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.7;
+  }
+  100% {
+    background-position: 0 100%;
+    opacity: 1;
+  }
+}
+
+/* Scrollbar para Firefox */
+.mainContent {
+  scrollbar-width: thin;
+  scrollbar-color: #b2d8f7 #e0f0ff;
 }
 
 .leftPanel, .rightPanel {
@@ -529,4 +566,307 @@
     justify-content: space-around;
     flex: 1;
   }
+} 
+
+/* Modern main content layout */
+.mainContentModern {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3rem;
+  padding: 2.5rem 2rem 1rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 60vh;
+  background: rgba(255,255,255,0.95);
+  border-radius: 32px;
+  box-shadow: 0 8px 32px 0 rgba(91,156,200,0.10), 0 2px 8px #b2d8f733;
+  position: relative;
+  z-index: 2;
+}
+
+.marqueeContainer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 64px;
+  z-index: 200;
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .mainContentModern {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+    border-radius: 18px;
+  }
+  .marqueeContainer {
+    bottom: 80px;
+  }
+}
+
+/* Ajustes para los paneles laterales y central */
+.leftPanel {
+  min-width: 180px;
+  max-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1.5rem;
+}
+
+.rightPanel {
+  min-width: 180px;
+  max-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.5rem;
+}
+
+.centerPanel {
+  flex: 1 1 320px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  min-width: 260px;
+  max-width: 480px;
+}
+
+.avatarPanel {
+  background: linear-gradient(135deg, #e0f0ff 60%, #b2d8f7 100%);
+  border-radius: 50%;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  border: 4px solid #b2d8f7;
+  box-shadow: 0 2px 16px #b2d8f733;
+  transition: box-shadow 0.3s, border 0.3s;
+}
+.avatarPanel.drag-over {
+  box-shadow: 0 0 32px #6ec6ff99;
+  border-color: #6ec6ff;
+}
+
+.statusBox {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px #b2d8f733;
+  padding: 1.2rem 2rem;
+  font-size: 1.15rem;
+  color: #232e43;
+  margin-left: 1.5rem;
+  min-width: 180px;
+  max-width: 260px;
+  text-align: left;
+}
+
+/* Modern buttons */
+.interactionButton {
+  background: linear-gradient(90deg, #b2d8f7 0%, #5b9cc8 100%);
+  color: #232e43;
+  border: none;
+  border-radius: 12px;
+  padding: 0.9rem 2.2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px #b2d8f733;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+}
+.interactionButton:hover {
+  background: linear-gradient(90deg, #5b9cc8 0%, #b2d8f7 100%);
+  color: #1976d2;
+  box-shadow: 0 4px 16px #b2d8f744;
+}
+
+.dropdown {
+  width: 100%;
+  background: #f0f8ff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px #b2d8f733;
+  margin-top: 0.5rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.dropdown.show {
+  max-height: 400px;
+  padding: 0.5rem 0;
+  overflow: visible;
+}
+.draggableItem {
+  background: #fff;
+  border-radius: 8px;
+  border: 2px dashed #b2d8f7;
+  padding: 0.7rem 1.2rem;
+  margin: 0.3rem 0.7rem;
+  font-size: 1rem;
+  color: #232e43;
+  cursor: grab;
+  box-shadow: 0 1px 4px #b2d8f722;
+  transition: box-shadow 0.2s, border 0.2s;
+}
+.draggableItem:active {
+  box-shadow: 0 2px 8px #6ec6ff44;
+  border-color: #6ec6ff;
+}
+
+/* Right panel: logros y consejos */
+.iconButton {
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 2.2rem;
+  width: 54px;
+  height: 54px;
+  box-shadow: 0 2px 8px #b2d8f733;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+.iconButton:hover {
+  background: #e0f0ff;
+  box-shadow: 0 4px 16px #6ec6ff44;
+}
+
+.achievementsPanel {
+  position: fixed;
+  top: 90px;
+  right: 0;
+  width: 270px;
+  height: calc(100% - 160px);
+  background: #f0f8ff;
+  border-left: 2px solid #b2d8f7;
+  border-radius: 16px 0 0 16px;
+  box-shadow: -4px 0 24px #b2d8f733;
+  transform: translateX(110%);
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  padding: 1.2rem 1.5rem;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.achievementsPanel.show {
+  transform: translateX(0);
+}
+.achievementsPanel h3 {
+  margin: 0 0 0.7rem 0;
+  font-size: 1.2rem;
+  color: #1976d2;
+}
+.achievementsPanel ul {
+  padding-left: 1.2rem;
+  margin: 0 0 1rem 0;
+  color: #232e43;
+  font-size: 1rem;
+}
+.achievementsPanel button {
+  align-self: flex-end;
+  background: #b2d8f7;
+  color: #232e43;
+  border: none;
+  border-radius: 8px;
+  padding: 0.4rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 1px 4px #b2d8f722;
+  transition: background 0.2s;
+}
+.achievementsPanel button:hover {
+  background: #5b9cc8;
+  color: #fff;
+}
+
+.petTip {
+  position: relative;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px #b2d8f733;
+  color: #232e43;
+  padding: 1.1rem 1.5rem;
+  font-size: 1.05rem;
+  margin-top: 1.2rem;
+  margin-bottom: 0.5rem;
+  min-width: 160px;
+  max-width: 220px;
+  text-align: left;
+}
+.petTip::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  right: 20px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+}
+
+@media (max-width: 900px) {
+  .leftPanel, .rightPanel {
+    min-width: 120px;
+    max-width: 100vw;
+    align-items: center;
+  }
+  .centerPanel {
+    flex-direction: column;
+    gap: 1.2rem;
+    min-width: 180px;
+    max-width: 100vw;
+  }
+  .statusBox {
+    margin-left: 0;
+    margin-top: 1.2rem;
+    min-width: 120px;
+    max-width: 100vw;
+    text-align: center;
+  }
+} 
+
+/* Scrollbar global: cometa pequeño y brillante */
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  width: 4px;
+  background: transparent;
+}
+html::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: linear-gradient(120deg, transparent 10%, #6ec6ff 30%, #fff 60%, #6ec6ff 80%, transparent 100%);
+  background-size: 200% 200%;
+  animation: scroll-comet 1.1s linear infinite;
+  min-height: 40px;
+  box-shadow: 0 0 18px 8px #fff8, 0 0 32px 12px #6ec6ff44;
+  border: none;
+}
+@keyframes scroll-comet {
+  0% {
+    background-position: 120% 0;
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.85;
+  }
+  100% {
+    background-position: 0 100%;
+    opacity: 1;
+  }
+}
+html::-webkit-scrollbar-thumb:window-inactive, body::-webkit-scrollbar-thumb:window-inactive {
+  background: transparent;
+}
+html::-webkit-scrollbar-track, body::-webkit-scrollbar-track {
+  background: transparent;
+}
+html, body {
+  scrollbar-width: thin;
+  scrollbar-color: #fff #fff0;
 } 
