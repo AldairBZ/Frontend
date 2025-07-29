@@ -576,29 +576,17 @@
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  background: #fff;
+  background: url('../../assets/imagenes-home/fondopanel.jpg') center center / cover fixed no-repeat;
 }
 
-/* Sección de información: más compacta y elegante */
-.infoSection {
-  max-width: 650px;
-  margin: 1.5rem auto 1rem auto;
+.mainContentModern, .infoSection, .tipsSection {
+  background: rgba(255,255,255,0.7);
+  box-shadow: 0 2px 12px #0002;
+  border: none;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  margin: 1.2rem 0; /* solo margen vertical, no horizontal */
   padding: 1.1rem 1.2rem;
-  background: #f0f8ff;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px #b2d8f722;
-  text-align: center;
-}
-.infoSection h2 {
-  margin-bottom: 0.7rem;
-  color: #1976d2;
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-.infoSection p {
-  color: #232e43;
-  font-size: 1.05rem;
-  margin: 0;
 }
 
 /* Panel principal: compacto y alineado */
