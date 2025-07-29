@@ -102,12 +102,18 @@
   white-space: nowrap;
 }
 
-.menu li a:hover,
-.menu li a.active {
+.menu li a:hover {
   background: rgba(255,255,255,0.2);
   border: 2px solid #fff;
   box-shadow: 0 8px 32px 0 #91c1e0, 0 0px 12px #fff4;
   transform: translateY(-2px);
+}
+
+.menu li a.active {
+  border: 1.5px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.1);
+  box-shadow: 0 2px 16px 0 rgba(91,156,200,0.18), 0 0px 8px #fff2, 0 1px 0 #fff2;
+  transform: none;
 }
 
 .actions {

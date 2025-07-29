@@ -17,6 +17,8 @@
   background: #fff;
   color: #333;
   position: relative;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
 }
 
 /* Scrollbar personalizado */

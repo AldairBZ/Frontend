@@ -10,11 +10,13 @@ import CenterPanel from './CenterPanel';
 import RightPanel from './RightPanel';
 import Marquee from './Marquee';
 import Layout from '../../../components/Layout.jsx';
+import ModernAvatar from './ModernAvatar';
+import { useEffect } from 'react';
 
 export default function SaludBienestar() {
   const [showProfileMenu, setShowProfileMenu] = React.useState(false);
   const [modalAbierto, setModalAbierto] = React.useState(null);
-  const [status, setStatus] = React.useState('Estado de salud: Neutro 🙂');
+  const [status] = React.useState('Estado de salud: Neutro 🙂');
   
   const profileBtnRef = React.useRef(null);
   const menuRef = React.useRef(null);
@@ -40,6 +42,33 @@ export default function SaludBienestar() {
     };
   }, [showProfileMenu]);
 
+  // Mueve la luz según el scroll global
+  useEffect(() => {
+    const indicator = document.getElementById('scrollLightIndicator');
+    if (!indicator) return;
+    let hideTimeout;
+    function updateScrollLight() {
+      const scrollY = window.scrollY;
+      const winH = window.innerHeight;
+      const docH = document.body.scrollHeight;
+      const percent = docH > winH ? scrollY / (docH - winH) : 0;
+      const top = percent * (winH - 48);
+      indicator.style.top = `${top}px`;
+      indicator.style.opacity = '0.95';
+      indicator.style.transition = 'top 0.2s cubic-bezier(0.4,0,0.2,1), opacity 0.2s';
+      clearTimeout(hideTimeout);
+      hideTimeout = setTimeout(() => {
+        indicator.style.opacity = '0';
+      }, 500);
+    }
+    window.addEventListener('scroll', updateScrollLight);
+    updateScrollLight();
+    return () => {
+      window.removeEventListener('scroll', updateScrollLight);
+      clearTimeout(hideTimeout);
+    };
+  }, []);
+
   return (
     <DndProvider backend={HTML5Backend}>
       <Layout>
@@ -48,14 +77,50 @@ export default function SaludBienestar() {
         <div className={styles.homeWrapper}>
           {/* Espaciador para header fijo */}
           <div style={{ height: 60 }} />
+
+          {/* Sección de información */}
+          <section className={styles.infoSection}>
+            <h2>¿Por qué es importante la salud y el bienestar?</h2>
+            <p>
+              La salud y el bienestar son la base para una vida plena. Adoptar hábitos saludables y tomar buenas decisiones diarias impacta directamente en tu energía, ánimo y calidad de vida. ¡Empieza hoy a mejorar tu salud y verás cómo todo cambia a tu alrededor!
+            </p>
+          </section>
+
+          {/* Panel principal: avatar, hábitos, logros */}
           <main className={styles.mainContentModern}>
-            {/* Panel izquierdo: botones y paneles de hábitos/acciones */}
             <LeftPanel />
-            {/* Panel central: avatar y estado de salud */}
-            <CenterPanel status={status} setStatus={setStatus} />
-            {/* Panel derecho: logros y consejos */}
+            <section className={styles.centerPanel}>
+              {/* Avatar moderno (SVG realista próximamente) */}
+              <div className={styles.avatarPanel}>
+                <ModernAvatar size={160} />
+              </div>
+              <div className={styles.statusBox}>{status}</div>
+            </section>
             <RightPanel />
           </main>
+
+          {/* Sección de tips destacados */}
+          <section className={styles.tipsSection}>
+            <h2>Tips destacados para tu bienestar</h2>
+            <div className={styles.tipsGrid}>
+              <div className={styles.tipCard}>
+                <h3>💧 Hidratación</h3>
+                <p>Bebe al menos 2 litros de agua al día.</p>
+              </div>
+              <div className={styles.tipCard}>
+                <h3>🍎 Alimentación</h3>
+                <p>Incluye frutas y verduras en cada comida.</p>
+              </div>
+              <div className={styles.tipCard}>
+                <h3>😴 Descanso</h3>
+                <p>Duerme entre 7 y 8 horas cada noche.</p>
+              </div>
+              <div className={styles.tipCard}>
+                <h3>🏃‍♂️ Ejercicio</h3>
+                <p>Realiza actividad física al menos 30 minutos al día.</p>
+              </div>
+            </div>
+          </section>
           {/* Modal para mostrar los componentes (footer, equipo, etc) */}
           {modalAbierto && (
             <div style={{
@@ -133,6 +198,8 @@ export default function SaludBienestar() {
             </div>
           )}
         </div>
+        {/* Indicador de luz de scroll global */}
+        <div className="scroll-light-indicator" id="scrollLightIndicator" />
       </Layout>
     </DndProvider>
   );
