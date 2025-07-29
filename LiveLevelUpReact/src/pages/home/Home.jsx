@@ -1,486 +1,403 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Home.module.css';
 import PanelesInteractivos from './PanelesInteractivos';
 import Layout from '../../components/Layout.jsx';
 import HeroSection from './HeroSection';
 
 export default function Home() {
+  const [userCount, setUserCount] = useState(1247);
+  const [co2Saved, setCo2Saved] = useState(128304);
+  const [waterSaved, setWaterSaved] = useState(1032000);
+  const [kmWalked, setKmWalked] = useState(82000);
+  const [isVisible, setIsVisible] = useState(false);
 
-    return (
+  useEffect(() => {
+    setIsVisible(true);
+    // Simular contador de usuarios en tiempo real
+    const interval = setInterval(() => {
+      setUserCount(prev => prev + Math.floor(Math.random() * 3) + 1);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const weeklyChallenges = [
+    {
+      id: 1,
+      emoji: "🥦",
+      title: "5 días sin carne",
+      description: "Reduce tu huella de carbono y mejora tu salud",
+      reward: "50 puntos + Insignia Verde",
+      participants: 342
+    },
+    {
+      id: 2,
+      emoji: "🚶‍♀️",
+      title: "7.000 pasos diarios",
+      description: "Mantén tu cuerpo activo y reduce emisiones",
+      reward: "75 puntos + Insignia Activa",
+      participants: 567
+    },
+    {
+      id: 3,
+      emoji: "🚯",
+      title: "Semana sin plástico",
+      description: "Elimina el plástico de un solo uso",
+      reward: "100 puntos + Insignia Eco",
+      participants: 234
+    },
+    {
+      id: 4,
+      emoji: "💧",
+      title: "Duchas de 5 minutos",
+      description: "Ahorra agua y energía en tu rutina",
+      reward: "60 puntos + Insignia Ahorro",
+      participants: 456
+    }
+  ];
+
+  const successStories = [
+    {
+      id: 1,
+      name: "María G.",
+      avatar: "👩‍🦰",
+      before: "Sedentaria, 0 ejercicio",
+      after: "10.000 pasos diarios",
+      story: "En 3 meses perdí 8kg y me siento más energética que nunca. ¡Gracias LiveLevelUp!",
+      impact: "+2 años de vida"
+    },
+    {
+      id: 2,
+      name: "Carlos M.",
+      avatar: "👨‍🦱",
+      before: "Coche todos los días",
+      after: "Bicicleta + transporte público",
+      story: "Ahorro 200€ al mes y he reducido mi huella de carbono en un 60%",
+      impact: "-1.2 ton CO₂/año"
+    },
+    {
+      id: 3,
+      name: "Ana L.",
+      avatar: "👩‍🦳",
+      before: "Dieta alta en carne",
+      after: "Vegetariana 4 días/semana",
+      story: "Mejoré mi digestión y descubrí sabores increíbles. El planeta también lo agradece.",
+      impact: "-0.8 ton CO₂/año"
+    }
+  ];
+
+  const educationalCards = [
+    {
+      id: 1,
+      icon: "♻️",
+      title: "El reciclaje explicado en 60 segundos",
+      content: "Reciclar una botella de plástico ahorra la energía necesaria para mantener una bombilla encendida durante 6 horas. ¿Sabías que el 91% del plástico no se recicla?",
+      category: "reciclaje"
+    },
+    {
+      id: 2,
+      icon: "🌱",
+      title: "Por qué comer local es mejor",
+      content: "Los alimentos locales viajan menos de 100km vs 2.500km de media. Esto significa 17 veces menos emisiones de CO₂ y productos más frescos.",
+      category: "alimentacion"
+    },
+    {
+      id: 3,
+      icon: "💡",
+      title: "El impacto de apagar las luces",
+      content: "Apagar las luces cuando no las necesitas puede ahorrar hasta 15% en tu factura eléctrica. Multiplicado por millones de hogares, el impacto es enorme.",
+      category: "energia"
+    },
+    {
+      id: 4,
+      icon: "🚰",
+      title: "La crisis del agua dulce",
+      content: "Solo el 2.5% del agua del planeta es dulce, y el 70% está congelada. Cada gota cuenta: una ducha de 5 min vs 15 min ahorra 150 litros.",
+      category: "agua"
+    }
+  ];
+
+  return (
     <Layout>
       <HeroSection />
+      
+      {/* Contador de usuarios en tiempo real */}
+      <div className={styles.liveCounter}>
+        <div className={styles.counterContent}>
+          <span className={styles.counterIcon}>👥</span>
+          <span className={styles.counterText}>
+            <strong>{userCount.toLocaleString()}</strong> personas transformando sus hábitos ahora mismo
+          </span>
+          <div className={styles.counterPulse}></div>
+        </div>
+      </div>
+
       <div className={styles.homeContent}>
         <PanelesInteractivos />
-        <section 
-          id="por-que-lifelevelup"
-          style={{
-            maxWidth: 900, 
-            margin: '40px auto 80px auto', 
-            padding: '0 32px', 
-            textAlign: 'left'
-          }}
-        >
-          <h1 style={{
-            fontSize: '2.2rem', 
-            fontWeight: 800, 
-            color: '#5b9cc8', 
-            marginBottom: 24, 
-            letterSpacing: '0.01em',
-            textShadow: '0 2px 8px rgba(91,156,200,0.3)'
-          }}>¿Por qué LifeLevelUp?</h1>
-          <p style={{
-            fontSize: '1.18rem', 
-            color: '#333', 
-            marginBottom: 32, 
-            lineHeight: 1.7
-          }}>
-            LifeLevelUp es una experiencia interactiva que convierte tus hábitos diarios en una aventura visual. Imagina que tú y el planeta son parte de un juego tipo Los Sims, pero en versión minimalista, con avatares SVG personalizables y animaciones suaves.
-          </p>
-          <h2 style={{
-            fontSize: '1.35rem', 
-            fontWeight: 700, 
-            color: '#81ca57', 
-            marginBottom: 16, 
-            marginTop: 32,
-            textShadow: '0 2px 8px rgba(129,202,87,0.3)'
-          }}>🌍 El planeta también importa</h2>
-          <p style={{
-            fontSize: '1.08rem', 
-            color: '#e3f0fa', 
-            marginBottom: 0, 
-            lineHeight: 1.7,
-            textShadow: '0 1px 4px rgba(0,0,0,0.3)'
-          }}>
-            Cada acción positiva también afecta al planeta virtual, que refleja el impacto colectivo de tus decisiones. Por ejemplo, elegir caminar en lugar de usar coche mejora la salud ambiental del mundo que estás ayudando a construir.
-          </p>
-          
-          <h2 style={{
-            fontSize: '1.35rem', 
-            fontWeight: 700, 
-            color: '#81ca57', 
-            marginBottom: 16, 
-            marginTop: 40,
-            textShadow: '0 2px 8px rgba(129,202,87,0.3)'
-          }}>🎮 Una experiencia única</h2>
-          <p style={{
-            fontSize: '1.08rem', 
-            color: '#e3f0fa', 
-            marginBottom: 0, 
-            lineHeight: 1.7,
-            textShadow: '0 1px 4px rgba(0,0,0,0.3)'
-          }}>
-            Nuestra plataforma combina gamificación, educación ambiental y bienestar personal en una sola experiencia. Cada decisión que tomas se refleja en tu avatar y en el estado del planeta virtual, creando una conexión visual entre tus acciones y sus consecuencias.
-          </p>
-          
-          <h2 style={{
-            fontSize: '1.35rem', 
-            fontWeight: 700, 
-            color: '#81ca57', 
-            marginBottom: 16, 
-            marginTop: 40,
-            textShadow: '0 2px 8px rgba(129,202,87,0.3)'
-          }}>🌟 Comienza tu viaje</h2>
-          <p style={{
-            fontSize: '1.08rem', 
-            color: '#e3f0fa', 
-            marginBottom: 60, 
-            lineHeight: 1.7,
-            textShadow: '0 1px 4px rgba(0,0,0,0.3)'
-          }}>
-            Únete a nuestra comunidad y descubre cómo pequeños cambios en tu rutina diaria pueden tener un impacto significativo en tu bienestar y en el planeta. ¡Tu avatar te está esperando!
-          </p>
-        </section>
 
-        {/* Sección de Estadísticas Impactantes */}
-        <section style={{
-          maxWidth: 900, 
-          margin: '60px auto 80px auto', 
-          padding: '0 32px', 
-          textAlign: 'center'
-        }}>
-          <h2 style={{
-            fontSize: '1.8rem', 
-            fontWeight: 700, 
-            color: '#81ca57', 
-            marginBottom: 40, 
-            textShadow: '0 2px 8px rgba(129,202,87,0.3)'
-          }}>📊 El impacto de nuestros hábitos diarios</h2>
-          
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '32px',
-            marginTop: '40px'
-          }}>
-            <div style={{
-              background: '#f8f9fa',
-              borderRadius: '16px',
-              padding: '24px',
-              border: '1px solid rgba(129,202,87,0.2)',
-              boxShadow: '0 4px 16px rgba(0,0,0,0.1)'
-            }}>
-              <div style={{fontSize: '3rem', marginBottom: '16px'}}>🌱</div>
-              <h3 style={{color: '#81ca57', fontSize: '1.3rem', marginBottom: '12px'}}>Reducción de CO₂</h3>
-              <p style={{color: '#333', fontSize: '1.1rem'}}>
-                Caminar 30 min diarios en lugar de usar coche reduce <strong>2.5 kg</strong> de CO₂ por semana
-              </p>
-            </div>
-            
-            <div style={{
-              background: '#f8f9fa',
-              borderRadius: '16px',
-              padding: '24px',
-              border: '1px solid rgba(91,156,200,0.2)',
-              boxShadow: '0 4px 16px rgba(0,0,0,0.1)'
-            }}>
-              <div style={{fontSize: '3rem', marginBottom: '16px'}}>💧</div>
-              <h3 style={{color: '#5b9cc8', fontSize: '1.3rem', marginBottom: '12px'}}>Ahorro de Agua</h3>
-              <p style={{color: '#333', fontSize: '1.1rem'}}>
-                Duchas de 5 min en lugar de 15 min ahorran <strong>150 litros</strong> de agua por día
-              </p>
-            </div>
-            
-            <div style={{
-              background: '#f8f9fa',
-              borderRadius: '16px',
-              padding: '24px',
-              border: '1px solid rgba(129,202,87,0.2)',
-              boxShadow: '0 4px 16px rgba(0,0,0,0.1)'
-            }}>
-              <div style={{fontSize: '3rem', marginBottom: '16px'}}>⚡</div>
-              <h3 style={{color: '#81ca57', fontSize: '1.3rem', marginBottom: '12px'}}>Energía Limpia</h3>
-              <p style={{color: '#333', fontSize: '1.1rem'}}>
-                Usar transporte público reduce <strong>75%</strong> las emisiones por viaje
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Sección de Consejos Prácticos */}
-        <section style={{
-          maxWidth: 900, 
-          margin: '60px auto 80px auto', 
-          padding: '0 32px', 
-          textAlign: 'left'
-        }}>
-          <h2 style={{
-            fontSize: '1.8rem', 
-            fontWeight: 700, 
-            color: '#5b9cc8', 
-            marginBottom: 32, 
-            textShadow: '0 2px 8px rgba(91,156,200,0.3)'
-          }}>💡 Consejos para empezar hoy mismo</h2>
-          
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '24px',
-            marginTop: '32px'
-          }}>
-            <div style={{
-              background: '#f8f9fa',
-              borderRadius: '12px',
-              padding: '20px',
-              border: '1px solid rgba(91,156,200,0.15)',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-            }}>
-              <h3 style={{color: '#5b9cc8', fontSize: '1.2rem', marginBottom: '12px'}}>🌅 Mañana sostenible</h3>
-              <ul style={{color: '#333', fontSize: '1rem', lineHeight: '1.6'}}>
-                <li>• Desayuna alimentos locales y de temporada</li>
-                <li>• Usa una taza reutilizable para el café</li>
-                <li>• Camina o usa bici para distancias cortas</li>
-              </ul>
-            </div>
-            
-            <div style={{
-              background: '#f8f9fa',
-              borderRadius: '12px',
-              padding: '20px',
-              border: '1px solid rgba(129,202,87,0.15)',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-            }}>
-              <h3 style={{color: '#81ca57', fontSize: '1.2rem', marginBottom: '12px'}}>🌞 Durante el día</h3>
-              <ul style={{color: '#333', fontSize: '1rem', lineHeight: '1.6'}}>
-                <li>• Lleva tu propia botella de agua</li>
-                <li>• Come más vegetales y menos carne</li>
-                <li>• Apaga luces y dispositivos innecesarios</li>
-              </ul>
-            </div>
-            
-            <div style={{
-              background: '#f8f9fa',
-              borderRadius: '12px',
-              padding: '20px',
-              border: '1px solid rgba(91,156,200,0.15)',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-            }}>
-              <h3 style={{color: '#5b9cc8', fontSize: '1.2rem', marginBottom: '12px'}}>🌙 Noche consciente</h3>
-              <ul style={{color: '#333', fontSize: '1rem', lineHeight: '1.6'}}>
-                <li>• Dúchate en menos de 5 minutos</li>
-                <li>• Recicla y separa residuos correctamente</li>
-                <li>• Reflexiona sobre tu impacto diario</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* Sección de Comunidad */}
-        <section style={{
-          maxWidth: 900, 
-          margin: '60px auto 80px auto', 
-          padding: '0 32px', 
-          textAlign: 'center'
-        }}>
-          <h2 style={{
-            fontSize: '1.8rem', 
-            fontWeight: 700, 
-            color: '#81ca57', 
-            marginBottom: 24, 
-            textShadow: '0 2px 8px rgba(129,202,87,0.3)'
-          }}>🤝 Únete a nuestra comunidad</h2>
-          
-          <p style={{
-            fontSize: '1.1rem', 
-            color: '#333', 
-            marginBottom: 40, 
-            lineHeight: '1.7'
-          }}>
-            Más de <strong>10,000 personas</strong> ya están transformando sus hábitos y creando un impacto positivo. 
-            Cada pequeño cambio cuenta cuando lo hacemos juntos.
-          </p>
-          
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '24px',
-            flexWrap: 'wrap'
-          }}>
-            <button style={{
-              background: 'linear-gradient(135deg, #81ca57 0%, #5b9cc8 100%)',
-              color: '#fff',
-              border: 'none',
-              padding: '12px 24px',
-              borderRadius: '8px',
-              fontSize: '1rem',
-              fontWeight: '600',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              boxShadow: '0 4px 16px rgba(129,202,87,0.3)'
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.transform = 'translateY(-2px)';
-              e.target.style.boxShadow = '0 6px 20px rgba(129,202,87,0.4)';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.transform = 'translateY(0)';
-              e.target.style.boxShadow = '0 4px 16px rgba(129,202,87,0.3)';
-            }}
-            >
-              🌱 Crear mi cuenta
-            </button>
-            
-            <button style={{
-              background: 'transparent',
-              color: '#81ca57',
-              border: '2px solid #81ca57',
-              padding: '12px 24px',
-              borderRadius: '8px',
-              fontSize: '1rem',
-              fontWeight: '600',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease'
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.background = '#81ca57';
-              e.target.style.color = '#fff';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.background = 'transparent';
-              e.target.style.color = '#81ca57';
-            }}
-            >
-              📚 Ver más recursos
-            </button>
-          </div>
-        </section>
-
-        {/* Sección Newsletter */}
-        <section style={{
-          maxWidth: 900, 
-          margin: '60px auto 80px auto', 
-          padding: '0 32px', 
-          textAlign: 'center'
-        }}>
-          <div style={{
-            background: '#f8f9fa',
-            borderRadius: '22px',
-            boxShadow: '0 8px 40px rgba(129,202,87,0.15)',
-            padding: '2.5rem 3.5rem 2rem 3.5rem',
-            maxWidth: '900px',
-            margin: '0 auto',
-            border: '1px solid rgba(129,202,87,0.2)'
-          }}>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '1rem',
-              marginBottom: '1.2rem'
-            }}>
-              <span style={{
-                fontSize: '3.2rem',
-                display: 'inline-block',
-                animation: 'floatCarta 3.5s ease-in-out infinite alternate'
-              }}>🌱</span>
-            </div>
-            
-            <h2 style={{
-              color: '#81ca57',
-              fontSize: '1.5rem',
-              marginBottom: '0.7rem',
-              fontWeight: '700'
-            }}>¡Suscríbete y recibe consejos sostenibles en tu bandeja!</h2>
-            
-            <p style={{
-              color: '#333',
-              marginBottom: '1.2rem',
-              fontSize: '1.08rem',
-              lineHeight: '1.6'
-            }}>
-              Sé el primero en enterarte de nuevos hábitos, consejos ambientales y descuentos. 
-              Te prometemos solo correos con impacto positivo para ti y el planeta.
+        {/* Sección de Desafíos Semanales */}
+        <section className={styles.challengesSection}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>🏆 Desafíos Semanales</h2>
+            <p className={styles.sectionSubtitle}>
+              Únete a retos divertidos y gana recompensas mientras transformas tus hábitos
             </p>
+          </div>
+          
+          <div className={styles.challengesGrid}>
+            {weeklyChallenges.map(challenge => (
+              <div key={challenge.id} className={styles.challengeCard}>
+                <div className={styles.challengeHeader}>
+                  <span className={styles.challengeEmoji}>{challenge.emoji}</span>
+                  <div className={styles.challengeInfo}>
+                    <h3 className={styles.challengeTitle}>{challenge.title}</h3>
+                    <p className={styles.challengeDescription}>{challenge.description}</p>
+                  </div>
+                </div>
+                <div className={styles.challengeFooter}>
+                  <div className={styles.challengeReward}>
+                    <span className={styles.rewardText}>{challenge.reward}</span>
+                    <span className={styles.participants}>{challenge.participants} participantes</span>
+                  </div>
+                  <button className={styles.joinButton}>Unirme</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Sección de Impacto Colectivo */}
+        <section className={styles.impactSection}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>🌍 Impacto Colectivo</h2>
+            <p className={styles.sectionSubtitle}>
+              Juntos estamos creando un cambio real. Estos son nuestros números en tiempo real:
+            </p>
+          </div>
+          
+          <div className={styles.impactGrid}>
+            <div className={styles.impactCard}>
+              <div className={styles.impactIcon}>🌱</div>
+              <div className={styles.impactNumber}>
+                {isVisible ? co2Saved.toLocaleString() : '0'}
+              </div>
+              <div className={styles.impactLabel}>kg de CO₂ evitados</div>
+              <div className={styles.impactDescription}>
+                Equivale a plantar {Math.floor(co2Saved / 22)} árboles
+              </div>
+            </div>
             
-            <form style={{
-              display: 'flex',
-              gap: '0.7rem',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexWrap: 'wrap'
-            }}>
+            <div className={styles.impactCard}>
+              <div className={styles.impactIcon}>💧</div>
+              <div className={styles.impactNumber}>
+                {isVisible ? (waterSaved / 1000).toLocaleString() : '0'}
+              </div>
+              <div className={styles.impactLabel}>litros de agua ahorrados</div>
+              <div className={styles.impactDescription}>
+                Equivale a {Math.floor(waterSaved / 150)} duchas de 5 minutos
+              </div>
+            </div>
+            
+            <div className={styles.impactCard}>
+              <div className={styles.impactIcon}>🚶‍♂️</div>
+              <div className={styles.impactNumber}>
+                {isVisible ? kmWalked.toLocaleString() : '0'}
+              </div>
+              <div className={styles.impactLabel}>km caminados</div>
+              <div className={styles.impactDescription}>
+                Equivale a dar la vuelta al mundo {Math.floor(kmWalked / 40075)} veces
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Sección de Historias de Éxito */}
+        <section className={styles.storiesSection}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>🌟 Historias de Éxito</h2>
+            <p className={styles.sectionSubtitle}>
+              Descubre cómo otros usuarios están transformando sus vidas y el planeta
+            </p>
+          </div>
+          
+          <div className={styles.storiesGrid}>
+            {successStories.map(story => (
+              <div key={story.id} className={styles.storyCard}>
+                <div className={styles.storyHeader}>
+                  <div className={styles.storyAvatar}>{story.avatar}</div>
+                  <div className={styles.storyInfo}>
+                    <h3 className={styles.storyName}>{story.name}</h3>
+                    <div className={styles.storyImpact}>{story.impact}</div>
+                  </div>
+                </div>
+                <div className={styles.storyContent}>
+                  <div className={styles.storyComparison}>
+                    <div className={styles.beforeAfter}>
+                      <span className={styles.beforeLabel}>Antes:</span>
+                      <span className={styles.beforeText}>{story.before}</span>
+                    </div>
+                    <div className={styles.arrow}>→</div>
+                    <div className={styles.beforeAfter}>
+                      <span className={styles.afterLabel}>Ahora:</span>
+                      <span className={styles.afterText}>{story.after}</span>
+                    </div>
+                  </div>
+                  <p className={styles.storyText}>{story.story}</p>
+                </div>
+                <button className={styles.readMoreButton}>Leer más</button>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Sección de Educación Ambiental */}
+        <section className={styles.educationSection}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>📚 Educación Ambiental</h2>
+            <p className={styles.sectionSubtitle}>
+              Aprende sobre el impacto de tus acciones en menos de 60 segundos
+            </p>
+          </div>
+          
+          <div className={styles.educationGrid}>
+            {educationalCards.map(card => (
+              <div key={card.id} className={styles.educationCard}>
+                <div className={styles.educationHeader}>
+                  <span className={styles.educationIcon}>{card.icon}</span>
+                  <h3 className={styles.educationTitle}>{card.title}</h3>
+                </div>
+                <div className={styles.educationContent}>
+                  <p className={styles.educationText}>{card.content}</p>
+                </div>
+                <div className={styles.educationFooter}>
+                  <span className={styles.educationCategory}>{card.category}</span>
+                  <button className={styles.learnMoreButton}>Aprender más</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Sección de Progreso y Logros */}
+        <section className={styles.progressSection}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>🎮 Tu Progreso</h2>
+            <p className={styles.sectionSubtitle}>
+              Desbloquea logros y sube de nivel mientras mejoras tus hábitos
+            </p>
+          </div>
+          
+          <div className={styles.progressGrid}>
+            <div className={styles.progressCard}>
+              <div className={styles.progressIcon}>🏆</div>
+              <h3 className={styles.progressTitle}>Nivel Actual</h3>
+              <div className={styles.progressLevel}>Nivel 7 - Eco Guerrero</div>
+              <div className={styles.progressBar}>
+                <div className={styles.progressFill} style={{width: '75%'}}></div>
+              </div>
+              <div className={styles.progressText}>75% completado</div>
+            </div>
+            
+            <div className={styles.progressCard}>
+              <div className={styles.progressIcon}>⭐</div>
+              <h3 className={styles.progressTitle}>Puntos Totales</h3>
+              <div className={styles.progressPoints}>2,847 puntos</div>
+              <div className={styles.progressRank}>Top 15% de usuarios</div>
+            </div>
+            
+            <div className={styles.progressCard}>
+              <div className={styles.progressIcon}>🏅</div>
+              <h3 className={styles.progressTitle}>Insignias Desbloqueadas</h3>
+              <div className={styles.badgesGrid}>
+                <span className={styles.badge}>🌱</span>
+                <span className={styles.badge}>💧</span>
+                <span className={styles.badge}>♻️</span>
+                <span className={styles.badge}>🚶‍♀️</span>
+                <span className={styles.badge}>🥦</span>
+                <span className={styles.badge}>⚡</span>
+              </div>
+              <div className={styles.progressText}>6 de 12 insignias</div>
+            </div>
+          </div>
+        </section>
+
+        {/* Sección de Hábitos Diarios (mejorada) */}
+        <section className={styles.habitsSection}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>💡 Hábitos Diarios Sostenibles</h2>
+            <p className={styles.sectionSubtitle}>
+              Pequeños cambios que generan un gran impacto en tu vida y el planeta
+            </p>
+          </div>
+          
+          <div className={styles.habitsGrid}>
+            <div className={styles.habitCard}>
+              <div className={styles.habitHeader}>
+                <span className={styles.habitEmoji}>🌅</span>
+                <h3 className={styles.habitTitle}>Mañana Sostenible</h3>
+              </div>
+              <ul className={styles.habitList}>
+                <li>Desayuna alimentos locales y de temporada</li>
+                <li>Usa una taza reutilizable para el café</li>
+                <li>Camina o usa bici para distancias cortas</li>
+                <li>Dúchate en menos de 5 minutos</li>
+              </ul>
+            </div>
+            
+            <div className={styles.habitCard}>
+              <div className={styles.habitHeader}>
+                <span className={styles.habitEmoji}>🌞</span>
+                <h3 className={styles.habitTitle}>Durante el Día</h3>
+              </div>
+              <ul className={styles.habitList}>
+                <li>Lleva tu propia botella de agua</li>
+                <li>Come más vegetales y menos carne</li>
+                <li>Apaga luces y dispositivos innecesarios</li>
+                <li>Usa escaleras en lugar de ascensor</li>
+              </ul>
+            </div>
+            
+            <div className={styles.habitCard}>
+              <div className={styles.habitHeader}>
+                <span className={styles.habitEmoji}>🌙</span>
+                <h3 className={styles.habitTitle}>Noche Consciente</h3>
+              </div>
+              <ul className={styles.habitList}>
+                <li>Recicla y separa residuos correctamente</li>
+                <li>Reflexiona sobre tu impacto diario</li>
+                <li>Desconecta dispositivos antes de dormir</li>
+                <li>Planifica el día siguiente de forma sostenible</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Sección Newsletter (mejorada) */}
+        <section className={styles.newsletterSection}>
+          <div className={styles.newsletterCard}>
+            <div className={styles.newsletterHeader}>
+              <span className={styles.newsletterEmoji}>🌱</span>
+              <h2 className={styles.newsletterTitle}>¡Únete a la revolución sostenible!</h2>
+            </div>
+            <p className={styles.newsletterText}>
+              Recibe consejos personalizados, nuevos desafíos y actualizaciones exclusivas. 
+              Sé parte del cambio que el planeta necesita.
+            </p>
+            <form className={styles.newsletterForm}>
               <input 
                 type="email" 
-                placeholder="tucorreo@lifelevelup.com" 
+                placeholder="tu@email.com" 
+                className={styles.newsletterInput}
                 required 
-                style={{
-                  padding: '0.9rem 1.1rem',
-                  borderRadius: '10px',
-                  border: '1.5px solid #81ca57',
-                  background: '#fff',
-                  color: '#333',
-                  fontSize: '1.08rem',
-                  minWidth: '280px',
-                  outline: 'none'
-                }}
               />
-              <button 
-                type="submit" 
-                style={{
-                  background: 'linear-gradient(90deg, #81ca57 0%, #5b9cc8 100%)',
-                  color: '#fff',
-                  fontWeight: '700',
-                  border: 'none',
-                  padding: '0.9rem 1.3rem',
-                  borderRadius: '10px',
-                  fontSize: '1.08rem',
-                  boxShadow: '0 2px 8px 0 rgba(129,202,87,0.3)',
-                  transition: 'all 0.2s',
-                  cursor: 'pointer'
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.transform = 'translateY(-2px)';
-                  e.target.style.boxShadow = '0 4px 16px 0 rgba(129,202,87,0.4)';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.transform = 'translateY(0)';
-                  e.target.style.boxShadow = '0 2px 8px 0 rgba(129,202,87,0.3)';
-                }}
-              >
+              <button type="submit" className={styles.newsletterButton}>
                 🌱 Suscribirme
               </button>
             </form>
-            
-            <p style={{
-              color: '#81ca57',
-              fontSize: '0.98rem',
-              marginTop: '1.1rem',
-              opacity: '0.9'
-            }}>
-              * No spam, solo consejos sostenibles de calidad. Puedes darte de baja cuando quieras.
+            <p className={styles.newsletterDisclaimer}>
+              * Solo contenido de valor. Sin spam, puedes darte de baja cuando quieras.
             </p>
           </div>
         </section>
-        
-        {/* Espacio adicional para asegurar que el footer sea visible */}
-        <section style={{
-          padding: '60px 20px',
-          textAlign: 'center',
-          background: '#f8f9fa',
-          marginTop: '40px'
-        }}>
-          <div style={{
-            maxWidth: '800px',
-            margin: '0 auto'
-          }}>
-            <h3 style={{
-              color: '#5b9cc8',
-              fontSize: '1.3rem',
-              marginBottom: '1rem',
-              fontWeight: '600'
-            }}>
-              🌍 Únete a la revolución sostenible
-            </h3>
-            <p style={{
-              color: '#666',
-              fontSize: '1rem',
-              lineHeight: '1.6',
-              marginBottom: '2rem'
-            }}>
-              Cada pequeño hábito cuenta. Juntos podemos crear un futuro más verde y saludable para todos.
-            </p>
-            <div style={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: '2rem',
-              flexWrap: 'wrap'
-            }}>
-              <div style={{
-                background: '#fff',
-                padding: '1.5rem',
-                borderRadius: '12px',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                minWidth: '200px'
-              }}>
-                <div style={{fontSize: '2rem', marginBottom: '0.5rem'}}>🌱</div>
-                <h4 style={{color: '#81ca57', marginBottom: '0.5rem'}}>Hábitos Verdes</h4>
-                <p style={{color: '#666', fontSize: '0.9rem'}}>Pequeños cambios, gran impacto</p>
-              </div>
-              <div style={{
-                background: '#fff',
-                padding: '1.5rem',
-                borderRadius: '12px',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                minWidth: '200px'
-              }}>
-                <div style={{fontSize: '2rem', marginBottom: '0.5rem'}}>💚</div>
-                <h4 style={{color: '#81ca57', marginBottom: '0.5rem'}}>Bienestar Total</h4>
-                <p style={{color: '#666', fontSize: '0.9rem'}}>Salud para ti y el planeta</p>
-              </div>
-              <div style={{
-                background: '#fff',
-                padding: '1.5rem',
-                borderRadius: '12px',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                minWidth: '200px'
-              }}>
-                <div style={{fontSize: '2rem', marginBottom: '0.5rem'}}>🌍</div>
-                <h4 style={{color: '#81ca57', marginBottom: '0.5rem'}}>Impacto Global</h4>
-                <p style={{color: '#666', fontSize: '0.9rem'}}>Cambios que transforman el mundo</p>
-              </div>
-            </div>
-          </div>
-        </section>
-        
       </div>
     </Layout>
   );
