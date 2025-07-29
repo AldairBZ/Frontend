@@ -131,274 +131,273 @@ export default function Home() {
         </div>
       </div>
 
-      <div className={styles.homeContent}>
-        <PanelesInteractivos />
+      {/* Paneles interactivos (ahora vacíos) */}
+      <PanelesInteractivos />
 
-        {/* Sección de Desafíos Semanales */}
-        <section className={styles.challengesSection}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>🏆 Desafíos Semanales</h2>
-            <p className={styles.sectionSubtitle}>
-              Únete a retos divertidos y gana recompensas mientras transformas tus hábitos
-            </p>
+      {/* Sección de Desafíos Semanales */}
+      <section className={styles.challengesSection}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>🏆 Desafíos Semanales</h2>
+          <p className={styles.sectionSubtitle}>
+            Únete a retos divertidos y gana recompensas mientras transformas tus hábitos
+          </p>
+        </div>
+        
+        <div className={styles.challengesGrid}>
+          {weeklyChallenges.map(challenge => (
+            <div key={challenge.id} className={styles.challengeCard}>
+              <div className={styles.challengeHeader}>
+                <span className={styles.challengeEmoji}>{challenge.emoji}</span>
+                <div className={styles.challengeInfo}>
+                  <h3 className={styles.challengeTitle}>{challenge.title}</h3>
+                  <p className={styles.challengeDescription}>{challenge.description}</p>
+                </div>
+              </div>
+              <div className={styles.challengeFooter}>
+                <div className={styles.challengeReward}>
+                  <span className={styles.rewardText}>{challenge.reward}</span>
+                  <span className={styles.participants}>{challenge.participants} participantes</span>
+                </div>
+                <button className={styles.joinButton}>Unirme</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Sección de Impacto Colectivo */}
+      <section className={styles.impactSection}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>🌍 Impacto Colectivo</h2>
+          <p className={styles.sectionSubtitle}>
+            Juntos estamos creando un cambio real. Estos son nuestros números en tiempo real:
+          </p>
+        </div>
+        
+        <div className={styles.impactGrid}>
+          <div className={styles.impactCard}>
+            <div className={styles.impactIcon}>🌱</div>
+            <div className={styles.impactNumber}>
+              {isVisible ? co2Saved.toLocaleString() : '0'}
+            </div>
+            <div className={styles.impactLabel}>kg de CO₂ evitados</div>
+            <div className={styles.impactDescription}>
+              Equivale a plantar {Math.floor(co2Saved / 22)} árboles
+            </div>
           </div>
           
-          <div className={styles.challengesGrid}>
-            {weeklyChallenges.map(challenge => (
-              <div key={challenge.id} className={styles.challengeCard}>
-                <div className={styles.challengeHeader}>
-                  <span className={styles.challengeEmoji}>{challenge.emoji}</span>
-                  <div className={styles.challengeInfo}>
-                    <h3 className={styles.challengeTitle}>{challenge.title}</h3>
-                    <p className={styles.challengeDescription}>{challenge.description}</p>
+          <div className={styles.impactCard}>
+            <div className={styles.impactIcon}>💧</div>
+            <div className={styles.impactNumber}>
+              {isVisible ? (waterSaved / 1000).toLocaleString() : '0'}
+            </div>
+            <div className={styles.impactLabel}>litros de agua ahorrados</div>
+            <div className={styles.impactDescription}>
+              Equivale a {Math.floor(waterSaved / 150)} duchas de 5 minutos
+            </div>
+          </div>
+          
+          <div className={styles.impactCard}>
+            <div className={styles.impactIcon}>🚶‍♂️</div>
+            <div className={styles.impactNumber}>
+              {isVisible ? kmWalked.toLocaleString() : '0'}
+            </div>
+            <div className={styles.impactLabel}>km caminados</div>
+            <div className={styles.impactDescription}>
+              Equivale a dar la vuelta al mundo {Math.floor(kmWalked / 40075)} veces
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Sección de Historias de Éxito */}
+      <section className={styles.storiesSection}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>🌟 Historias de Éxito</h2>
+          <p className={styles.sectionSubtitle}>
+            Descubre cómo otros usuarios están transformando sus vidas y el planeta
+          </p>
+        </div>
+        
+        <div className={styles.storiesGrid}>
+          {successStories.map(story => (
+            <div key={story.id} className={styles.storyCard}>
+              <div className={styles.storyHeader}>
+                <div className={styles.storyAvatar}>{story.avatar}</div>
+                <div className={styles.storyInfo}>
+                  <h3 className={styles.storyName}>{story.name}</h3>
+                  <div className={styles.storyImpact}>{story.impact}</div>
+                </div>
+              </div>
+              <div className={styles.storyContent}>
+                <div className={styles.storyComparison}>
+                  <div className={styles.beforeAfter}>
+                    <span className={styles.beforeLabel}>Antes:</span>
+                    <span className={styles.beforeText}>{story.before}</span>
+                  </div>
+                  <div className={styles.arrow}>→</div>
+                  <div className={styles.beforeAfter}>
+                    <span className={styles.afterLabel}>Ahora:</span>
+                    <span className={styles.afterText}>{story.after}</span>
                   </div>
                 </div>
-                <div className={styles.challengeFooter}>
-                  <div className={styles.challengeReward}>
-                    <span className={styles.rewardText}>{challenge.reward}</span>
-                    <span className={styles.participants}>{challenge.participants} participantes</span>
-                  </div>
-                  <button className={styles.joinButton}>Unirme</button>
-                </div>
+                <p className={styles.storyText}>{story.story}</p>
               </div>
-            ))}
-          </div>
-        </section>
+              <button className={styles.readMoreButton}>Leer más</button>
+            </div>
+          ))}
+        </div>
+      </section>
 
-        {/* Sección de Impacto Colectivo */}
-        <section className={styles.impactSection}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>🌍 Impacto Colectivo</h2>
-            <p className={styles.sectionSubtitle}>
-              Juntos estamos creando un cambio real. Estos son nuestros números en tiempo real:
-            </p>
+      {/* Sección de Educación Ambiental */}
+      <section className={styles.educationSection}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>📚 Educación Ambiental</h2>
+          <p className={styles.sectionSubtitle}>
+            Aprende sobre el impacto de tus acciones en menos de 60 segundos
+          </p>
+        </div>
+        
+        <div className={styles.educationGrid}>
+          {educationalCards.map(card => (
+            <div key={card.id} className={styles.educationCard}>
+              <div className={styles.educationHeader}>
+                <span className={styles.educationIcon}>{card.icon}</span>
+                <h3 className={styles.educationTitle}>{card.title}</h3>
+              </div>
+              <div className={styles.educationContent}>
+                <p className={styles.educationText}>{card.content}</p>
+              </div>
+              <div className={styles.educationFooter}>
+                <span className={styles.educationCategory}>{card.category}</span>
+                <button className={styles.learnMoreButton}>Aprender más</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Sección de Progreso y Logros */}
+      <section className={styles.progressSection}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>🎮 Tu Progreso</h2>
+          <p className={styles.sectionSubtitle}>
+            Desbloquea logros y sube de nivel mientras mejoras tus hábitos
+          </p>
+        </div>
+        
+        <div className={styles.progressGrid}>
+          <div className={styles.progressCard}>
+            <div className={styles.progressIcon}>🏆</div>
+            <h3 className={styles.progressTitle}>Nivel Actual</h3>
+            <div className={styles.progressLevel}>Nivel 7 - Eco Guerrero</div>
+            <div className={styles.progressBar}>
+              <div className={styles.progressFill} style={{width: '75%'}}></div>
+            </div>
+            <div className={styles.progressText}>75% completado</div>
           </div>
           
-          <div className={styles.impactGrid}>
-            <div className={styles.impactCard}>
-              <div className={styles.impactIcon}>🌱</div>
-              <div className={styles.impactNumber}>
-                {isVisible ? co2Saved.toLocaleString() : '0'}
-              </div>
-              <div className={styles.impactLabel}>kg de CO₂ evitados</div>
-              <div className={styles.impactDescription}>
-                Equivale a plantar {Math.floor(co2Saved / 22)} árboles
-              </div>
-            </div>
-            
-            <div className={styles.impactCard}>
-              <div className={styles.impactIcon}>💧</div>
-              <div className={styles.impactNumber}>
-                {isVisible ? (waterSaved / 1000).toLocaleString() : '0'}
-              </div>
-              <div className={styles.impactLabel}>litros de agua ahorrados</div>
-              <div className={styles.impactDescription}>
-                Equivale a {Math.floor(waterSaved / 150)} duchas de 5 minutos
-              </div>
-            </div>
-            
-            <div className={styles.impactCard}>
-              <div className={styles.impactIcon}>🚶‍♂️</div>
-              <div className={styles.impactNumber}>
-                {isVisible ? kmWalked.toLocaleString() : '0'}
-              </div>
-              <div className={styles.impactLabel}>km caminados</div>
-              <div className={styles.impactDescription}>
-                Equivale a dar la vuelta al mundo {Math.floor(kmWalked / 40075)} veces
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Sección de Historias de Éxito */}
-        <section className={styles.storiesSection}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>🌟 Historias de Éxito</h2>
-            <p className={styles.sectionSubtitle}>
-              Descubre cómo otros usuarios están transformando sus vidas y el planeta
-            </p>
+          <div className={styles.progressCard}>
+            <div className={styles.progressIcon}>⭐</div>
+            <h3 className={styles.progressTitle}>Puntos Totales</h3>
+            <div className={styles.progressPoints}>2,847 puntos</div>
+            <div className={styles.progressRank}>Top 15% de usuarios</div>
           </div>
           
-          <div className={styles.storiesGrid}>
-            {successStories.map(story => (
-              <div key={story.id} className={styles.storyCard}>
-                <div className={styles.storyHeader}>
-                  <div className={styles.storyAvatar}>{story.avatar}</div>
-                  <div className={styles.storyInfo}>
-                    <h3 className={styles.storyName}>{story.name}</h3>
-                    <div className={styles.storyImpact}>{story.impact}</div>
-                  </div>
-                </div>
-                <div className={styles.storyContent}>
-                  <div className={styles.storyComparison}>
-                    <div className={styles.beforeAfter}>
-                      <span className={styles.beforeLabel}>Antes:</span>
-                      <span className={styles.beforeText}>{story.before}</span>
-                    </div>
-                    <div className={styles.arrow}>→</div>
-                    <div className={styles.beforeAfter}>
-                      <span className={styles.afterLabel}>Ahora:</span>
-                      <span className={styles.afterText}>{story.after}</span>
-                    </div>
-                  </div>
-                  <p className={styles.storyText}>{story.story}</p>
-                </div>
-                <button className={styles.readMoreButton}>Leer más</button>
-              </div>
-            ))}
+          <div className={styles.progressCard}>
+            <div className={styles.progressIcon}>🏅</div>
+            <h3 className={styles.progressTitle}>Insignias Desbloqueadas</h3>
+            <div className={styles.badgesGrid}>
+              <span className={styles.badge}>🌱</span>
+              <span className={styles.badge}>💧</span>
+              <span className={styles.badge}>♻️</span>
+              <span className={styles.badge}>🚶‍♀️</span>
+              <span className={styles.badge}>🥦</span>
+              <span className={styles.badge}>⚡</span>
+            </div>
+            <div className={styles.progressText}>6 de 12 insignias</div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Sección de Educación Ambiental */}
-        <section className={styles.educationSection}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>📚 Educación Ambiental</h2>
-            <p className={styles.sectionSubtitle}>
-              Aprende sobre el impacto de tus acciones en menos de 60 segundos
-            </p>
+      {/* Sección de Hábitos Diarios (mejorada) */}
+      <section className={styles.habitsSection}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>💡 Hábitos Diarios Sostenibles</h2>
+          <p className={styles.sectionSubtitle}>
+            Pequeños cambios que generan un gran impacto en tu vida y el planeta
+          </p>
+        </div>
+        
+        <div className={styles.habitsGrid}>
+          <div className={styles.habitCard}>
+            <div className={styles.habitHeader}>
+              <span className={styles.habitEmoji}>🌅</span>
+              <h3 className={styles.habitTitle}>Mañana Sostenible</h3>
+            </div>
+            <ul className={styles.habitList}>
+              <li>Desayuna alimentos locales y de temporada</li>
+              <li>Usa una taza reutilizable para el café</li>
+              <li>Camina o usa bici para distancias cortas</li>
+              <li>Dúchate en menos de 5 minutos</li>
+            </ul>
           </div>
           
-          <div className={styles.educationGrid}>
-            {educationalCards.map(card => (
-              <div key={card.id} className={styles.educationCard}>
-                <div className={styles.educationHeader}>
-                  <span className={styles.educationIcon}>{card.icon}</span>
-                  <h3 className={styles.educationTitle}>{card.title}</h3>
-                </div>
-                <div className={styles.educationContent}>
-                  <p className={styles.educationText}>{card.content}</p>
-                </div>
-                <div className={styles.educationFooter}>
-                  <span className={styles.educationCategory}>{card.category}</span>
-                  <button className={styles.learnMoreButton}>Aprender más</button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Sección de Progreso y Logros */}
-        <section className={styles.progressSection}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>🎮 Tu Progreso</h2>
-            <p className={styles.sectionSubtitle}>
-              Desbloquea logros y sube de nivel mientras mejoras tus hábitos
-            </p>
+          <div className={styles.habitCard}>
+            <div className={styles.habitHeader}>
+              <span className={styles.habitEmoji}>🌞</span>
+              <h3 className={styles.habitTitle}>Durante el Día</h3>
+            </div>
+            <ul className={styles.habitList}>
+              <li>Lleva tu propia botella de agua</li>
+              <li>Come más vegetales y menos carne</li>
+              <li>Apaga luces y dispositivos innecesarios</li>
+              <li>Usa escaleras en lugar de ascensor</li>
+            </ul>
           </div>
           
-          <div className={styles.progressGrid}>
-            <div className={styles.progressCard}>
-              <div className={styles.progressIcon}>🏆</div>
-              <h3 className={styles.progressTitle}>Nivel Actual</h3>
-              <div className={styles.progressLevel}>Nivel 7 - Eco Guerrero</div>
-              <div className={styles.progressBar}>
-                <div className={styles.progressFill} style={{width: '75%'}}></div>
-              </div>
-              <div className={styles.progressText}>75% completado</div>
+          <div className={styles.habitCard}>
+            <div className={styles.habitHeader}>
+              <span className={styles.habitEmoji}>🌙</span>
+              <h3 className={styles.habitTitle}>Noche Consciente</h3>
             </div>
-            
-            <div className={styles.progressCard}>
-              <div className={styles.progressIcon}>⭐</div>
-              <h3 className={styles.progressTitle}>Puntos Totales</h3>
-              <div className={styles.progressPoints}>2,847 puntos</div>
-              <div className={styles.progressRank}>Top 15% de usuarios</div>
-            </div>
-            
-            <div className={styles.progressCard}>
-              <div className={styles.progressIcon}>🏅</div>
-              <h3 className={styles.progressTitle}>Insignias Desbloqueadas</h3>
-              <div className={styles.badgesGrid}>
-                <span className={styles.badge}>🌱</span>
-                <span className={styles.badge}>💧</span>
-                <span className={styles.badge}>♻️</span>
-                <span className={styles.badge}>🚶‍♀️</span>
-                <span className={styles.badge}>🥦</span>
-                <span className={styles.badge}>⚡</span>
-              </div>
-              <div className={styles.progressText}>6 de 12 insignias</div>
-            </div>
+            <ul className={styles.habitList}>
+              <li>Recicla y separa residuos correctamente</li>
+              <li>Reflexiona sobre tu impacto diario</li>
+              <li>Desconecta dispositivos antes de dormir</li>
+              <li>Planifica el día siguiente de forma sostenible</li>
+            </ul>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Sección de Hábitos Diarios (mejorada) */}
-        <section className={styles.habitsSection}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>💡 Hábitos Diarios Sostenibles</h2>
-            <p className={styles.sectionSubtitle}>
-              Pequeños cambios que generan un gran impacto en tu vida y el planeta
-            </p>
+      {/* Sección Newsletter (mejorada) */}
+      <section className={styles.newsletterSection}>
+        <div className={styles.newsletterCard}>
+          <div className={styles.newsletterHeader}>
+            <span className={styles.newsletterEmoji}>🌱</span>
+            <h2 className={styles.newsletterTitle}>¡Únete a la revolución sostenible!</h2>
           </div>
-          
-          <div className={styles.habitsGrid}>
-            <div className={styles.habitCard}>
-              <div className={styles.habitHeader}>
-                <span className={styles.habitEmoji}>🌅</span>
-                <h3 className={styles.habitTitle}>Mañana Sostenible</h3>
-              </div>
-              <ul className={styles.habitList}>
-                <li>Desayuna alimentos locales y de temporada</li>
-                <li>Usa una taza reutilizable para el café</li>
-                <li>Camina o usa bici para distancias cortas</li>
-                <li>Dúchate en menos de 5 minutos</li>
-              </ul>
-            </div>
-            
-            <div className={styles.habitCard}>
-              <div className={styles.habitHeader}>
-                <span className={styles.habitEmoji}>🌞</span>
-                <h3 className={styles.habitTitle}>Durante el Día</h3>
-              </div>
-              <ul className={styles.habitList}>
-                <li>Lleva tu propia botella de agua</li>
-                <li>Come más vegetales y menos carne</li>
-                <li>Apaga luces y dispositivos innecesarios</li>
-                <li>Usa escaleras en lugar de ascensor</li>
-              </ul>
-            </div>
-            
-            <div className={styles.habitCard}>
-              <div className={styles.habitHeader}>
-                <span className={styles.habitEmoji}>🌙</span>
-                <h3 className={styles.habitTitle}>Noche Consciente</h3>
-              </div>
-              <ul className={styles.habitList}>
-                <li>Recicla y separa residuos correctamente</li>
-                <li>Reflexiona sobre tu impacto diario</li>
-                <li>Desconecta dispositivos antes de dormir</li>
-                <li>Planifica el día siguiente de forma sostenible</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* Sección Newsletter (mejorada) */}
-        <section className={styles.newsletterSection}>
-          <div className={styles.newsletterCard}>
-            <div className={styles.newsletterHeader}>
-              <span className={styles.newsletterEmoji}>🌱</span>
-              <h2 className={styles.newsletterTitle}>¡Únete a la revolución sostenible!</h2>
-            </div>
-            <p className={styles.newsletterText}>
-              Recibe consejos personalizados, nuevos desafíos y actualizaciones exclusivas. 
-              Sé parte del cambio que el planeta necesita.
-            </p>
-            <form className={styles.newsletterForm}>
-              <input 
-                type="email" 
-                placeholder="tu@email.com" 
-                className={styles.newsletterInput}
-                required 
-              />
-              <button type="submit" className={styles.newsletterButton}>
-                🌱 Suscribirme
-              </button>
-            </form>
-            <p className={styles.newsletterDisclaimer}>
-              * Solo contenido de valor. Sin spam, puedes darte de baja cuando quieras.
-            </p>
-          </div>
-        </section>
-      </div>
+          <p className={styles.newsletterText}>
+            Recibe consejos personalizados, nuevos desafíos y actualizaciones exclusivas. 
+            Sé parte del cambio que el planeta necesita.
+          </p>
+          <form className={styles.newsletterForm}>
+            <input 
+              type="email" 
+              placeholder="tu@email.com" 
+              className={styles.newsletterInput}
+              required 
+            />
+            <button type="submit" className={styles.newsletterButton}>
+              🌱 Suscribirme
+            </button>
+          </form>
+          <p className={styles.newsletterDisclaimer}>
+            * Solo contenido de valor. Sin spam, puedes darte de baja cuando quieras.
+          </p>
+        </div>
+      </section>
     </Layout>
   );
 } 

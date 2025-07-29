@@ -51,6 +51,9 @@
   font-size: 1.1rem;
   position: relative;
   z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
 .counterIcon {
@@ -104,18 +107,54 @@
 
 .sectionSubtitle {
   font-family: 'Inter', sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: var(--text-light);
   line-height: 1.6;
-  font-weight: 400;
 }
 
-/* Sección de Desafíos Semanales */
+/* Secciones principales con padding */
+.challengesSection,
+.impactSection,
+.storiesSection,
+.educationSection,
+.progressSection,
+.habitsSection,
+.newsletterSection {
+  padding: 80px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Fondos alternados para las secciones */
 .challengesSection {
-  padding: 80px 0;
   background: var(--bg-light);
 }
 
+.impactSection {
+  background: linear-gradient(135deg, #f0f9ff 0%, #ecfdf5 100%);
+}
+
+.storiesSection {
+  background: var(--bg-white);
+}
+
+.educationSection {
+  background: var(--bg-light);
+}
+
+.progressSection {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+}
+
+.habitsSection {
+  background: var(--bg-white);
+}
+
+.newsletterSection {
+  background: linear-gradient(135deg, #dbeafe 0%, #d1fae5 100%);
+}
+
+/* Sección de Desafíos Semanales */
 .challengesGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -227,11 +266,6 @@
 }
 
 /* Sección de Impacto Colectivo */
-.impactSection {
-  padding: 80px 0;
-  background: linear-gradient(135deg, #f0f9ff 0%, #ecfdf5 100%);
-}
-
 .impactGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -308,11 +342,6 @@
 }
 
 /* Sección de Historias de Éxito */
-.storiesSection {
-  padding: 80px 0;
-  background: var(--bg-white);
-}
-
 .storiesGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -439,11 +468,6 @@
 }
 
 /* Sección de Educación Ambiental */
-.educationSection {
-  padding: 80px 0;
-  background: var(--bg-light);
-}
-
 .educationGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -544,11 +568,6 @@
 }
 
 /* Sección de Progreso y Logros */
-.progressSection {
-  padding: 80px 0;
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-}
-
 .progressGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -672,11 +691,6 @@
 }
 
 /* Sección de Hábitos Diarios */
-.habitsSection {
-  padding: 80px 0;
-  background: var(--bg-white);
-}
-
 .habitsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -754,11 +768,6 @@
 }
 
 /* Sección Newsletter */
-.newsletterSection {
-  padding: 80px 0;
-  background: linear-gradient(135deg, #dbeafe 0%, #d1fae5 100%);
-}
-
 .newsletterCard {
   background: var(--bg-white);
   border-radius: var(--border-radius-lg);
