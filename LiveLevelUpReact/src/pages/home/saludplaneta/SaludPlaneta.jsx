@@ -92,40 +92,40 @@ export default function SaludPlaneta() {
 
           {/* ===== SECCIÓN 3: PANEL DE ACCIONES ===== */}
           <section className={styles.actionsPanel}>
-            {/* Icono logros */}
-            <div style={{alignSelf: 'flex-end', position: 'relative'}}>
-              <button 
-                onClick={() => setShowLogros(v => !v)} 
-                className={styles.actionButton}
-              >
-                🏆
-              </button>
-              {showLogros && (
-                <div className={styles.popup} style={{top: 80, right: 40}}>
-                  <h4 className={styles.popupTitle}>Logros</h4>
-                  <ul className={styles.popupList}>
-                    <li>🌱 Primer paso ecológico</li>
-                    <li>🌍 Amigo del planeta</li>
-                    <li>♻️ Reciclador experto</li>
-                  </ul>
+            <div style={{display: 'flex', flexDirection: 'row', gap: 24, alignItems: 'flex-end', width: '100%', justifyContent: 'flex-end'}}>
+              {/* Icono logros */}
+              <div style={{position: 'relative'}}>
+                <button 
+                  onClick={() => setShowLogros(v => !v)} 
+                  className={styles.actionButton}
+                >
+                  🏆
+                </button>
+                {showLogros && (
+                  <div className={styles.popup} style={{top: 80, right: 40}}>
+                    <h4 className={styles.popupTitle}>Logros</h4>
+                    <ul className={styles.popupList}>
+                      <li>🌱 Primer paso ecológico</li>
+                      <li>🌍 Amigo del planeta</li>
+                      <li>♻️ Reciclador experto</li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+              {/* Icono consejos + popup alineados */}
+              <div style={{position: 'relative'}}>
+                <button className={`${styles.actionButton} ${styles.tipsButton}`} style={{marginBottom: 0}}>
+                  <img src={gatoMedicoImg} alt="Consejo" className={styles.tipsImage} />
+                </button>
+                <div className={styles.tipsPopup} style={{position: 'absolute', right: -40, top: 88, marginTop: 0, marginBottom: 0, alignSelf: 'unset'}}>
+                  <span className={styles.tipsText}>
+                    Consejo: Apaga las luces que no uses para ahorrar energía.
+                  </span>
                 </div>
-              )}
-            </div>
-
-            {/* Icono consejos */}
-            <div style={{alignSelf: 'flex-end', position: 'relative'}}>
-              <button className={`${styles.actionButton} ${styles.tipsButton}`}>
-                <img src={gatoMedicoImg} alt="Consejo" className={styles.tipsImage} />
-              </button>
-              <div className={styles.tipsPopup}>
-                <span className={styles.tipsText}>
-                  Consejo: Apaga las luces que no uses para ahorrar energía.
-                </span>
               </div>
             </div>
-
             {/* Botón acciones */}
-            <div style={{alignSelf: 'flex-end', marginTop: 'auto', position: 'relative'}}>
+            <div style={{alignSelf: 'flex-end', marginTop: '32px', position: 'relative'}}>
               <button 
                 onClick={() => setShowAcciones(v => !v)} 
                 className={styles.actionsMainButton}

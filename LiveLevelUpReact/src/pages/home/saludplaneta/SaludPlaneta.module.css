@@ -332,18 +332,20 @@
 .progressTitle {
   font-size: 2.4rem;
   font-weight: 700;
-  color: #183c2a;
+  color: #000 !important;
   margin: 0;
-  text-shadow: 0 2px 8px rgba(24,60,42,0.1);
+  text-shadow: none !important;
   line-height: 1.2;
+  opacity: 1 !important;
 }
 
 .progressDescription {
   font-size: 1.2rem;
-  color: #183c2a;
+  color: #000 !important;
   margin: 0;
   line-height: 1.6;
-  opacity: 0.8;
+  opacity: 1 !important;
+  text-shadow: none !important;
 }
 
 .healthBar {
@@ -399,9 +401,9 @@
   gap: 30px;
   align-items: flex-end;
   justify-content: flex-start;
-  padding: 40px 20px 40px 0;
+  padding: 0 20px 40px 0; /* Elimina el padding-top para subir los iconos */
   height: 500px;
-  min-width: 0; /* Permite que el panel se encoja */
+  min-width: 0;
 }
 
 .actionButton {
@@ -455,7 +457,7 @@
   box-shadow: 0 8px 24px rgba(129,202,87,0.3);
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: auto;
+  margin-top: 32px; /* Espacio desde los iconos */
   align-self: flex-end;
   white-space: nowrap;
   margin-right: 20px;
