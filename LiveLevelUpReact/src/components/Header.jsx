@@ -72,6 +72,8 @@ export default function Header({ darkMode, toggleTheme }) {
       navigate('/home/salud-planeta');
     } else if (sectionId === 'desafios') {
       navigate('/home/desafios');
+    } else if (sectionId === 'comunidad') {
+      navigate('/home/comunidad');
     } else {
       scrollToSection(sectionId);
     }

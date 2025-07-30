@@ -21,35 +21,7 @@ export default function Home() {
 
 
 
-  const successStories = [
-    {
-      id: 1,
-      name: "María G.",
-      avatar: "👩‍🦰",
-      before: "Sedentaria, 0 ejercicio",
-      after: "10.000 pasos diarios",
-              story: "En 3 meses perdí 8kg y me siento más energética que nunca. ¡Gracias LifeLevelUp!",
-      impact: "+2 años de vida"
-    },
-    {
-      id: 2,
-      name: "Carlos M.",
-      avatar: "👨‍🦱",
-      before: "Coche todos los días",
-      after: "Bicicleta + transporte público",
-      story: "Ahorro 200€ al mes y he reducido mi huella de carbono en un 60%",
-      impact: "-1.2 ton CO₂/año"
-    },
-    {
-      id: 3,
-      name: "Ana L.",
-      avatar: "👩‍🦳",
-      before: "Dieta alta en carne",
-      after: "Vegetariana 4 días/semana",
-      story: "Mejoré mi digestión y descubrí sabores increíbles. El planeta también lo agradece.",
-      impact: "-0.8 ton CO₂/año"
-    }
-  ];
+
 
   const educationalCards = [
     {
@@ -144,44 +116,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Sección de Historias de Éxito */}
-      <section className={styles.storiesSection}>
-        <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>🌟 Historias de Éxito</h2>
-          <p className={styles.sectionSubtitle}>
-            Descubre cómo otros usuarios están transformando sus vidas y el planeta
-          </p>
-        </div>
-        
-        <div className={styles.storiesGrid}>
-          {successStories.map(story => (
-            <div key={story.id} className={styles.storyCard}>
-              <div className={styles.storyHeader}>
-                <div className={styles.storyAvatar}>{story.avatar}</div>
-                <div className={styles.storyInfo}>
-                  <h3 className={styles.storyName}>{story.name}</h3>
-                  <div className={styles.storyImpact}>{story.impact}</div>
-                </div>
-              </div>
-              <div className={styles.storyContent}>
-                <div className={styles.storyComparison}>
-                  <div className={styles.beforeAfter}>
-                    <span className={styles.beforeLabel}>Antes:</span>
-                    <span className={styles.beforeText}>{story.before}</span>
-                  </div>
-                  <div className={styles.arrow}>→</div>
-                  <div className={styles.beforeAfter}>
-                    <span className={styles.afterLabel}>Ahora:</span>
-                    <span className={styles.afterText}>{story.after}</span>
-                  </div>
-                </div>
-                <p className={styles.storyText}>{story.story}</p>
-              </div>
-              <button className={styles.readMoreButton}>Leer más</button>
-            </div>
-          ))}
-        </div>
-      </section>
+
 
       {/* Sección de Educación Ambiental */}
       <section className={styles.educationSection}>

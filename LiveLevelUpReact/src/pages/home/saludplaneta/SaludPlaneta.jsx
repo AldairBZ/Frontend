@@ -86,8 +86,8 @@ export default function SaludPlaneta() {
           </div>
           <ul className={styles.menu}>
             <li><a href="/home">Inicio</a></li>
-            <li><a href="/home/saludibienestar">Salud</a></li>
-            <li><a href="/home/saludplaneta" className={styles.activeLink}>Planeta</a></li>
+            <li><a href="/home/salud-bienestar">Salud</a></li>
+            <li><a href="/home/salud-planeta" className={styles.activeLink}>Planeta</a></li>
           </ul>
         </nav>
       </header>
@@ -349,8 +349,8 @@ export default function SaludPlaneta() {
             <h3>Enlaces rápidos</h3>
             <ul>
               <li><a href="/home">Inicio</a></li>
-              <li><a href="/home/saludibienestar">Salud y Bienestar</a></li>
-              <li><a href="/home/saludplaneta">Salud del Planeta</a></li>
+              <li><a href="/home/salud-bienestar">Salud y Bienestar</a></li>
+              <li><a href="/home/salud-planeta">Salud del Planeta</a></li>
               <li><a href="/home/avatar">Personalizar Avatar</a></li>
               <li><a href="#">Recursos</a></li>
             </ul>

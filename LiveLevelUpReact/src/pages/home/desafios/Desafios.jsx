@@ -115,8 +115,8 @@ export default function Desafios() {
           </div>
           <ul className={styles.menu}>
             <li><a href="/home">Inicio</a></li>
-            <li><a href="/home/saludibienestar">Salud</a></li>
-            <li><a href="/home/saludplaneta">Planeta</a></li>
+            <li><a href="/home/salud-bienestar">Salud</a></li>
+            <li><a href="/home/salud-planeta">Planeta</a></li>
             <li><a href="/home/desafios" className={styles.activeLink}>Desafíos</a></li>
             <li><a href="/home/comunidad">Comunidad</a></li>
           </ul>
@@ -252,8 +252,8 @@ export default function Desafios() {
             <h3>Enlaces rápidos</h3>
             <ul>
               <li><a href="/home">Inicio</a></li>
-              <li><a href="/home/saludibienestar">Salud y Bienestar</a></li>
-              <li><a href="/home/saludplaneta">Salud del Planeta</a></li>
+              <li><a href="/home/salud-bienestar">Salud y Bienestar</a></li>
+              <li><a href="/home/salud-planeta">Salud del Planeta</a></li>
               <li><a href="/home/desafios">Desafíos</a></li>
               <li><a href="/home/comunidad">Comunidad</a></li>
             </ul>

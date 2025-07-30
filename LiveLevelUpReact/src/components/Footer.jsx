@@ -50,12 +50,12 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Navegación</h4>
             <ul>
-              <li><a href="#home">🏠 Inicio</a></li>
-              <li><a href="#salud">🌱 Salud y Bienestar</a></li>
-              <li><a href="#planeta">🌍 Salud del Planeta</a></li>
-              <li><a href="#desafios">🏆 Desafíos Semanales</a></li>
-              <li><a href="#comunidad">👥 Comunidad</a></li>
-              <li><a href="#avatar">🎨 Personalizar Avatar</a></li>
+              <li><a href="/home">🏠 Inicio</a></li>
+              <li><a href="/home/salud-bienestar">🌱 Salud y Bienestar</a></li>
+              <li><a href="/home/salud-planeta">🌍 Salud del Planeta</a></li>
+              <li><a href="/home/desafios">🏆 Desafíos</a></li>
+              <li><a href="/home/comunidad">👥 Comunidad</a></li>
+              <li><a href="/home/avatar/personalizar">🎨 Personalizar Avatar</a></li>
             </ul>
           </div>
 
