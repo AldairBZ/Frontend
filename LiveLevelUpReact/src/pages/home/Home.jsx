@@ -146,48 +146,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Sección de Progreso y Logros */}
-      <section className={styles.progressSection}>
-        <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>🎮 Tu Progreso</h2>
-          <p className={styles.sectionSubtitle}>
-            Desbloquea logros y sube de nivel mientras mejoras tus hábitos
-          </p>
-        </div>
-        
-        <div className={styles.progressGrid}>
-          <div className={styles.progressCard}>
-            <div className={styles.progressIcon}>🏆</div>
-            <h3 className={styles.progressTitle}>Nivel Actual</h3>
-            <div className={styles.progressLevel}>Nivel 7 - Eco Guerrero</div>
-            <div className={styles.progressBar}>
-              <div className={styles.progressFill} style={{width: '75%'}}></div>
-            </div>
-            <div className={styles.progressText}>75% completado</div>
-          </div>
-          
-          <div className={styles.progressCard}>
-            <div className={styles.progressIcon}>⭐</div>
-            <h3 className={styles.progressTitle}>Puntos Totales</h3>
-            <div className={styles.progressPoints}>2,847 puntos</div>
-            <div className={styles.progressRank}>Top 15% de usuarios</div>
-          </div>
-          
-          <div className={styles.progressCard}>
-            <div className={styles.progressIcon}>🏅</div>
-            <h3 className={styles.progressTitle}>Insignias Desbloqueadas</h3>
-            <div className={styles.badgesGrid}>
-              <span className={styles.badge}>🌱</span>
-              <span className={styles.badge}>💧</span>
-              <span className={styles.badge}>♻️</span>
-              <span className={styles.badge}>🚶‍♀️</span>
-              <span className={styles.badge}>🥦</span>
-              <span className={styles.badge}>⚡</span>
-            </div>
-            <div className={styles.progressText}>6 de 12 insignias</div>
-          </div>
-        </div>
-      </section>
+
 
       {/* Sección de Hábitos Diarios (mejorada) */}
       <section className={styles.habitsSection}>
