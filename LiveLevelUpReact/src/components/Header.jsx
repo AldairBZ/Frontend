@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import perfilImg from '../assets/imagenes-home/perfil/perfil.png';
 import './Header.css';
 
@@ -7,10 +7,31 @@ export default function Header({ darkMode, toggleTheme }) {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection] = useState('salud');
+  const [activeSection, setActiveSection] = useState('home');
   const profileBtnRef = useRef(null);
   const menuRef = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Detectar la página activa basándose en la URL
+  useEffect(() => {
+    const path = location.pathname;
+    if (path === '/home') {
+      setActiveSection('home');
+    } else if (path === '/home/salud-bienestar') {
+      setActiveSection('salud');
+    } else if (path === '/home/salud-planeta') {
+      setActiveSection('planeta');
+    } else if (path === '/home/desafios') {
+      setActiveSection('desafios');
+    } else if (path === '/home/comunidad') {
+      setActiveSection('comunidad');
+    } else if (path === '/home/blogs') {
+      setActiveSection('blogs');
+    } else {
+      setActiveSection('home');
+    }
+  }, [location.pathname]);
 
   // Efecto para detectar scroll
   useEffect(() => {
@@ -66,6 +87,8 @@ export default function Header({ darkMode, toggleTheme }) {
   };
 
   const handleNavClick = (sectionId) => {
+    console.log('handleNavClick llamado con sectionId:', sectionId); // Test log
+    
     if (sectionId === 'salud') {
       navigate('/home/salud-bienestar');
     } else if (sectionId === 'planeta') {
@@ -73,7 +96,10 @@ export default function Header({ darkMode, toggleTheme }) {
     } else if (sectionId === 'desafios') {
       navigate('/home/desafios');
     } else if (sectionId === 'comunidad') {
+      console.log('Navegando a comunidad...'); // Test log
       navigate('/home/comunidad');
+    } else if (sectionId === 'blogs') {
+      navigate('/home/blogs');
     } else {
       scrollToSection(sectionId);
     }
@@ -151,6 +177,19 @@ export default function Header({ darkMode, toggleTheme }) {
             >
               <span>👥</span>
               Comunidad
+            </a>
+          </li>
+          <li>
+            <a 
+              href="#blogs" 
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick('blogs');
+              }}
+              className={activeSection === 'blogs' ? 'active' : ''}
+            >
+              <span>📝</span>
+              Blogs
             </a>
           </li>
         </ul>

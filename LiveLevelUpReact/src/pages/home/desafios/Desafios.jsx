@@ -1,86 +1,97 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '../../../contexts/ThemeContext';
+import Layout from '../../../components/Layout.jsx';
 import styles from './Desafios.module.css';
 
 export default function Desafios() {
   const navigate = useNavigate();
+  const { darkMode } = useTheme();
   const [activeFilter, setActiveFilter] = useState('todos');
 
   const weeklyChallenges = [
     {
       id: 1,
-      emoji: "🥦",
-      title: "5 días sin carne",
-      description: "Reduce tu huella de carbono y mejora tu salud",
-      reward: "50 puntos + Insignia Verde",
-      participants: 342,
-      category: "alimentacion",
-      difficulty: "facil",
-      duration: "5 días"
+      title: "Semana del Reciclaje",
+      description: "Recicla al menos 5 tipos diferentes de materiales durante la semana",
+      difficulty: "Fácil",
+      participants: 1247,
+      progress: 85,
+      category: "reciclaje",
+      icon: "♻️",
+      rewards: ["50 puntos", "Insignia Verde"],
+      deadline: "3 días restantes"
     },
     {
       id: 2,
-      emoji: "🚶‍♀️",
-      title: "7.000 pasos diarios",
-      description: "Mantén tu cuerpo activo y reduce emisiones",
-      reward: "75 puntos + Insignia Activa",
-      participants: 567,
-      category: "movimiento",
-      difficulty: "medio",
-      duration: "7 días"
+      title: "Desafío de Transporte Sostenible",
+      description: "Usa transporte público o bicicleta durante 5 días consecutivos",
+      difficulty: "Medio",
+      participants: 892,
+      progress: 62,
+      category: "transporte",
+      icon: "🚌",
+      rewards: ["100 puntos", "Insignia Azul", "10% descuento en transporte"],
+      deadline: "5 días restantes"
     },
     {
       id: 3,
-      emoji: "🚯",
-      title: "Semana sin plástico",
-      description: "Elimina el plástico de un solo uso",
-      reward: "100 puntos + Insignia Eco",
-      participants: 234,
-      category: "sostenibilidad",
-      difficulty: "dificil",
-      duration: "7 días"
+      title: "Reto de Ahorro Energético",
+      description: "Reduce tu consumo de electricidad en un 20% esta semana",
+      difficulty: "Difícil",
+      participants: 456,
+      progress: 38,
+      category: "energia",
+      icon: "💡",
+      rewards: ["150 puntos", "Insignia Dorada", "Kit de eficiencia energética"],
+      deadline: "7 días restantes"
     },
     {
       id: 4,
-      emoji: "💧",
-      title: "Duchas de 5 minutos",
-      description: "Ahorra agua y energía en tu rutina",
-      reward: "60 puntos + Insignia Ahorro",
-      participants: 456,
-      category: "ahorro",
-      difficulty: "facil",
-      duration: "7 días"
+      title: "Desafío de Alimentación Local",
+      description: "Compra solo productos locales durante 7 días",
+      difficulty: "Medio",
+      participants: 678,
+      progress: 71,
+      category: "alimentacion",
+      icon: "🛒",
+      rewards: ["80 puntos", "Insignia Verde", "Guía de productos locales"],
+      deadline: "4 días restantes"
     },
     {
       id: 5,
-      emoji: "🚲",
-      title: "Transporte sostenible",
-      description: "Usa bici o transporte público toda la semana",
-      reward: "80 puntos + Insignia Transporte",
-      participants: 189,
-      category: "movimiento",
-      difficulty: "medio",
-      duration: "7 días"
+      title: "Reto de Reducción de Plástico",
+      description: "Evita usar plásticos de un solo uso durante 10 días",
+      difficulty: "Difícil",
+      participants: 334,
+      progress: 45,
+      category: "plastico",
+      icon: "🥤",
+      rewards: ["120 puntos", "Insignia Azul", "Kit de productos reutilizables"],
+      deadline: "6 días restantes"
     },
     {
       id: 6,
-      emoji: "🌱",
-      title: "Planta un árbol",
-      description: "Contribuye a la reforestación del planeta",
-      reward: "150 puntos + Insignia Reforestador",
-      participants: 123,
-      category: "sostenibilidad",
-      difficulty: "facil",
-      duration: "1 día"
+      title: "Desafío de Conservación del Agua",
+      description: "Reduce tu consumo de agua en un 25% esta semana",
+      difficulty: "Medio",
+      participants: 567,
+      progress: 58,
+      category: "agua",
+      icon: "💧",
+      rewards: ["90 puntos", "Insignia Verde", "Regulador de agua"],
+      deadline: "2 días restantes"
     }
   ];
 
   const filters = [
-    { id: 'todos', label: 'Todos', icon: '🏆' },
-    { id: 'alimentacion', label: 'Alimentación', icon: '🥗' },
-    { id: 'movimiento', label: 'Movimiento', icon: '🚶‍♀️' },
-    { id: 'sostenibilidad', label: 'Sostenibilidad', icon: '🌍' },
-    { id: 'ahorro', label: 'Ahorro', icon: '💰' }
+    { id: 'todos', name: 'Todos', icon: '🏆' },
+    { id: 'reciclaje', name: 'Reciclaje', icon: '♻️' },
+    { id: 'transporte', name: 'Transporte', icon: '🚌' },
+    { id: 'energia', name: 'Energía', icon: '💡' },
+    { id: 'alimentacion', name: 'Alimentación', icon: '🛒' },
+    { id: 'plastico', name: 'Plástico', icon: '🥤' },
+    { id: 'agua', name: 'Agua', icon: '💧' }
   ];
 
   const filteredChallenges = activeFilter === 'todos' 
@@ -88,82 +99,40 @@ export default function Desafios() {
     : weeklyChallenges.filter(challenge => challenge.category === activeFilter);
 
   const getDifficultyColor = (difficulty) => {
-    switch(difficulty) {
-      case 'facil': return '#10b981';
-      case 'medio': return '#f59e0b';
-      case 'dificil': return '#ef4444';
+    switch (difficulty) {
+      case 'Fácil': return '#10b981';
+      case 'Medio': return '#f59e0b';
+      case 'Difícil': return '#ef4444';
       default: return '#6b7280';
     }
   };
 
-  const getDifficultyLabel = (difficulty) => {
-    switch(difficulty) {
-      case 'facil': return 'Fácil';
-      case 'medio': return 'Medio';
-      case 'dificil': return 'Difícil';
-      default: return 'Desconocido';
-    }
-  };
-
   return (
-    <div className={styles.desafiosWrapper}>
-      {/* ===== HEADER MODERNO ===== */}
-      <header className={styles.header}>
-        <nav className={styles.nav}>
-          <div className={styles.logo} onClick={() => navigate('/home')} style={{cursor: 'pointer'}}>
-            <span>LifeLevelUp</span>
+    <Layout>
+      <div className={styles.desafiosWrapper}>
+        {/* ===== HERO SECTION MODERNO ===== */}
+        <section className={styles.heroSection}>
+          <div className={styles.heroBackground}>
+            <div className={styles.heroParticles}></div>
+            <div className={styles.heroGradient}></div>
           </div>
-          <ul className={styles.menu}>
-            <li><a href="/home">Inicio</a></li>
-            <li><a href="/home/salud-bienestar">Salud</a></li>
-            <li><a href="/home/salud-planeta">Planeta</a></li>
-            <li><a href="/home/desafios" className={styles.activeLink}>Desafíos</a></li>
-            <li><a href="/home/comunidad">Comunidad</a></li>
-          </ul>
-        </nav>
-      </header>
-
-      {/* ===== HERO SECTION MODERNO ===== */}
-      <section className={styles.heroSection}>
-        <div className={styles.heroBackground}>
-          <div className={styles.heroParticles}></div>
-          <div className={styles.heroGradient}></div>
-        </div>
-        
-        <div className={styles.heroContainer}>
-          <div className={styles.heroContent}>
-            <div className={styles.heroBadge}>
-              <span className={styles.badgeIcon}>🏆</span>
-              <span className={styles.badgeText}>Desafíos Semanales</span>
-            </div>
-            
-            <h1 className={styles.heroTitle}>
-              Transforma tus hábitos
-              <span className={styles.heroTitleHighlight}> superando retos.</span>
-            </h1>
-            
-            <p className={styles.heroSubtitle}>
-              Únete a desafíos divertidos y gana recompensas mientras transformas tus hábitos 
-              y contribuyes a un mundo más sostenible.
-            </p>
-            
-            <div className={styles.heroStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>1,247</span>
-                <span className={styles.statLabel}>Usuarios activos</span>
+          <div className={styles.heroContainer}>
+            <div className={styles.heroContent}>
+              <div className={styles.heroBadge}>
+                <span>🏆</span>
+                Semanales
               </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>45,892</span>
-                <span className={styles.statLabel}>Desafíos completados</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>12</span>
-                <span className={styles.statLabel}>Desafíos disponibles</span>
-              </div>
+              <h1 className={styles.heroTitle}>
+                Supera tus
+                <span className={styles.heroTitleHighlight}> límites sostenibles</span>
+              </h1>
+              <p className={styles.heroSubtitle}>
+                Únete a desafíos semanales que transforman pequeños cambios en grandes impactos. 
+                ¡Compite, colabora y celebra el progreso colectivo!
+              </p>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       {/* ===== FILTROS ===== */}
       <section className={styles.filtersSection}>
@@ -180,7 +149,7 @@ export default function Desafios() {
                 onClick={() => setActiveFilter(filter.id)}
               >
                 <span className={styles.filterIcon}>{filter.icon}</span>
-                <span className={styles.filterLabel}>{filter.label}</span>
+                <span className={styles.filterLabel}>{filter.name}</span>
               </button>
             ))}
           </div>
@@ -194,7 +163,7 @@ export default function Desafios() {
             {filteredChallenges.map(challenge => (
               <div key={challenge.id} className={styles.challengeCard}>
                 <div className={styles.challengeHeader}>
-                  <div className={styles.challengeEmoji}>{challenge.emoji}</div>
+                  <div className={styles.challengeEmoji}>{challenge.icon}</div>
                   <div className={styles.challengeInfo}>
                     <h3 className={styles.challengeTitle}>{challenge.title}</h3>
                     <p className={styles.challengeDescription}>{challenge.description}</p>
@@ -209,18 +178,18 @@ export default function Desafios() {
                         style={{backgroundColor: getDifficultyColor(challenge.difficulty)}}
                       ></span>
                       <span className={styles.difficultyText}>
-                        {getDifficultyLabel(challenge.difficulty)}
+                        {challenge.difficulty}
                       </span>
                     </div>
                     <div className={styles.challengeDuration}>
                       <span className={styles.durationIcon}>⏱️</span>
-                      <span>{challenge.duration}</span>
+                      <span>{challenge.deadline}</span>
                     </div>
                   </div>
                   
                   <div className={styles.challengeReward}>
                     <div className={styles.rewardInfo}>
-                      <span className={styles.rewardText}>{challenge.reward}</span>
+                      <span className={styles.rewardText}>{challenge.rewards.join(' + ')}</span>
                       <span className={styles.participants}>{challenge.participants} participantes</span>
                     </div>
                     <button className={styles.joinButton}>
@@ -291,5 +260,6 @@ export default function Desafios() {
         </div>
       </footer>
     </div>
+    </Layout>
   );
 } 

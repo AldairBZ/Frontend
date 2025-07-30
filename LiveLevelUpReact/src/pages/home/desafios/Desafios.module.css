@@ -24,75 +24,12 @@
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ===== CONTENEDOR PRINCIPAL ===== */
+/* Contenedor principal */
 .desafiosWrapper {
   min-height: 100vh;
-  background: var(--bg-light);
+  background: linear-gradient(135deg, #f0fdf4 0%, #eff6ff 50%, #fef3c7 100%);
   position: relative;
   overflow-x: hidden;
-  font-family: 'Inter', sans-serif;
-}
-
-/* ===== HEADER MODERNO ===== */
-.header {
-  background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-blue) 100%);
-  padding: 20px 0;
-  position: relative;
-  z-index: 100;
-  box-shadow: var(--shadow-lg);
-}
-
-.nav {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  color: var(--text-white);
-  font-size: 1.8rem;
-  font-weight: 800;
-  transition: var(--transition);
-  padding: 8px 16px;
-  border-radius: 12px;
-  font-family: 'Poppins', sans-serif;
-}
-
-.logo:hover {
-  background: rgba(255,255,255,0.1);
-  transform: translateY(-2px);
-}
-
-.menu {
-  display: flex;
-  list-style: none;
-  gap: 30px;
-  margin: 0;
-  padding: 0;
-}
-
-.menu li a {
-  color: var(--text-white);
-  text-decoration: none;
-  font-weight: 500;
-  padding: 12px 20px;
-  border-radius: 12px;
-  transition: var(--transition);
-  border: 2px solid transparent;
-  font-family: 'Inter', sans-serif;
-}
-
-.menu li a:hover {
-  background: rgba(255,255,255,0.1);
-  transform: translateY(-2px);
-}
-
-.activeLink {
-  background: rgba(255,255,255,0.2) !important;
-  border: 2px solid var(--text-white) !important;
 }
 
 /* ===== HERO SECTION MODERNO ===== */
@@ -502,107 +439,25 @@
   transform: translateX(4px);
 }
 
-/* ===== FOOTER MODERNO ===== */
-.footer {
-  background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-blue) 100%);
-  color: var(--text-white);
-  padding: 60px 0 30px;
-  margin-top: 80px;
-  position: relative;
-  z-index: 10;
+/* ===== ANIMACIONES ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.footerContainer {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 40px;
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 50px;
-}
-
-.footerBrand h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: var(--accent-green);
-  font-family: 'Poppins', sans-serif;
-}
-
-.footerBrand p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 25px;
-  color: rgba(255,255,255,0.8);
-  font-family: 'Inter', sans-serif;
-}
-
-.footerEmojis {
-  display: flex;
-  gap: 15px;
-  font-size: 1.5rem;
-}
-
-.footerCol h3 {
-  font-size: 1.3rem;
-  margin-bottom: 25px;
-  color: var(--accent-green);
-  font-family: 'Poppins', sans-serif;
-}
-
-.footerCol ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footerCol ul li {
-  margin-bottom: 12px;
-}
-
-.footerCol ul li a {
-  color: rgba(255,255,255,0.8);
-  text-decoration: none;
-  transition: var(--transition);
-  font-family: 'Inter', sans-serif;
-}
-
-.footerCol ul li a:hover {
-  color: var(--accent-green);
-}
-
-.footerContact h3 {
-  font-size: 1.3rem;
-  margin-bottom: 25px;
-  color: var(--accent-green);
-  font-family: 'Poppins', sans-serif;
-}
-
-.contactItem {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: rgba(255,255,255,0.8);
-  text-decoration: none;
-  margin-bottom: 15px;
-  transition: var(--transition);
-  font-family: 'Inter', sans-serif;
-}
-
-.contactItem:hover {
-  color: var(--accent-green);
-}
-
-.contactIcon {
-  font-size: 1.2rem;
-}
-
-.footerBottom {
-  border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 30px;
-  margin-top: 50px;
-  text-align: center;
-  color: rgba(255,255,255,0.6);
-  font-family: 'Inter', sans-serif;
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
@@ -653,8 +508,8 @@
   
   .challengeReward {
     flex-direction: column;
-    gap: 15px;
-    align-items: stretch;
+    gap: 12px;
+    align-items: flex-start;
   }
   
   .joinButton {

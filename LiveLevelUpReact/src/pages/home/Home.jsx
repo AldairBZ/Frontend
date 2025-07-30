@@ -19,41 +19,6 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
-
-
-
-
-  const educationalCards = [
-    {
-      id: 1,
-      icon: "♻️",
-      title: "El reciclaje explicado en 60 segundos",
-      content: "Reciclar una botella de plástico ahorra la energía necesaria para mantener una bombilla encendida durante 6 horas. ¿Sabías que el 91% del plástico no se recicla?",
-      category: "reciclaje"
-    },
-    {
-      id: 2,
-      icon: "🌱",
-      title: "Por qué comer local es mejor",
-      content: "Los alimentos locales viajan menos de 100km vs 2.500km de media. Esto significa 17 veces menos emisiones de CO₂ y productos más frescos.",
-      category: "alimentacion"
-    },
-    {
-      id: 3,
-      icon: "💡",
-      title: "El impacto de apagar las luces",
-      content: "Apagar las luces cuando no las necesitas puede ahorrar hasta 15% en tu factura eléctrica. Multiplicado por millones de hogares, el impacto es enorme.",
-      category: "energia"
-    },
-    {
-      id: 4,
-      icon: "🚰",
-      title: "La crisis del agua dulce",
-      content: "Solo el 2.5% del agua del planeta es dulce, y el 70% está congelada. Cada gota cuenta: una ducha de 5 min vs 15 min ahorra 150 litros.",
-      category: "agua"
-    }
-  ];
-
   return (
     <Layout>
       <HeroSection />
@@ -113,36 +78,6 @@ export default function Home() {
               Equivale a dar la vuelta al mundo {Math.floor(kmWalked / 40075)} veces
             </div>
           </div>
-        </div>
-      </section>
-
-
-
-      {/* Sección de Educación Ambiental */}
-      <section className={styles.educationSection}>
-        <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>📚 Educación Ambiental</h2>
-          <p className={styles.sectionSubtitle}>
-            Aprende sobre el impacto de tus acciones en menos de 60 segundos
-          </p>
-        </div>
-        
-        <div className={styles.educationGrid}>
-          {educationalCards.map(card => (
-            <div key={card.id} className={styles.educationCard}>
-              <div className={styles.educationHeader}>
-                <span className={styles.educationIcon}>{card.icon}</span>
-                <h3 className={styles.educationTitle}>{card.title}</h3>
-              </div>
-              <div className={styles.educationContent}>
-                <p className={styles.educationText}>{card.content}</p>
-              </div>
-              <div className={styles.educationFooter}>
-                <span className={styles.educationCategory}>{card.category}</span>
-                <button className={styles.learnMoreButton}>Aprender más</button>
-              </div>
-            </div>
-          ))}
         </div>
       </section>
 

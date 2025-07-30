@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '../../../contexts/ThemeContext';
+import Layout from '../../../components/Layout.jsx';
 import styles from './SaludBienestar.module.css';
 import gatoMedico from '../../../assets/gato-medico.png';
 
 export default function SaludBienestar() {
   const navigate = useNavigate();
+  const { darkMode } = useTheme();
   const [showHabitsDropdown, setShowHabitsDropdown] = useState(false);
   const [showActionsDropdown, setShowActionsDropdown] = useState(false);
   const [showAchievements, setShowAchievements] = useState(false);
@@ -24,34 +27,29 @@ export default function SaludBienestar() {
   ]);
 
   const habits = [
-    { id: 1, name: 'Fumar', icon: '🚬', impact: -9, category: 'negative' },
-    { id: 2, name: 'Beber alcohol', icon: '🍺', impact: -3, category: 'negative' },
-    { id: 3, name: 'Ejercicio diario', icon: '🏃‍♂️', impact: +5, category: 'positive' },
-    { id: 4, name: 'Meditación', icon: '🧘‍♀️', impact: +2, category: 'positive' },
-    { id: 5, name: 'Dormir 8 horas', icon: '😴', impact: +3, category: 'positive' },
-    { id: 6, name: 'Comer frutas', icon: '🍎', impact: +2, category: 'positive' }
+    { id: 1, name: 'Beber 8 vasos de agua', impact: 15, icon: '💧' },
+    { id: 2, name: 'Comer 5 frutas al día', impact: 20, icon: '🍎' },
+    { id: 3, name: 'Ejercicio 30 min', impact: 25, icon: '🏃‍♂️' },
+    { id: 4, name: 'Dormir 8 horas', impact: 30, icon: '😴' },
+    { id: 5, name: 'Meditar 10 min', impact: 10, icon: '🧘‍♀️' }
   ];
 
   const actions = [
-    { id: 1, name: 'Beber agua', icon: '💧', impact: +1, category: 'positive' },
-    { id: 2, name: 'Caminar 30 min', icon: '🚶‍♀️', impact: +2, category: 'positive' },
-    { id: 3, name: 'Comer verduras', icon: '🥬', impact: +1, category: 'positive' },
-    { id: 4, name: 'Tomar café', icon: '☕', impact: -1, category: 'negative' },
-    { id: 5, name: 'Usar escaleras', icon: '🪜', impact: +1, category: 'positive' },
-    { id: 6, name: 'Respirar profundo', icon: '🫁', impact: +1, category: 'positive' }
+    { id: 1, name: 'Tomar vitaminas', impact: 5, icon: '💊' },
+    { id: 2, name: 'Salir a caminar', impact: 15, icon: '🚶‍♂️' },
+    { id: 3, name: 'Leer un libro', impact: 8, icon: '📚' },
+    { id: 4, name: 'Llamar a un amigo', impact: 12, icon: '📞' }
   ];
 
   const catTips = [
-    "¡Hola! Recuerda beber 2 litros de agua al día 💧",
-    "Un paseo de 30 minutos puede cambiar tu día 🚶‍♀️",
-    "Las frutas son tus mejores amigas 🍎",
-    "Respira profundo y relájate 🫁",
-    "¡El ejercicio es la mejor medicina! 🏃‍♂️",
-    "Duerme bien para despertar mejor 😴"
+    "¡Hola! Recuerda beber agua cada hora 🥤",
+    "Una manzana al día mantiene al doctor lejos 🍎",
+    "El ejercicio libera endorfinas, ¡la hormona de la felicidad! 🏃‍♂️",
+    "Dormir bien es clave para tu salud mental 😴",
+    "La meditación reduce el estrés y mejora la concentración 🧘‍♀️"
   ];
 
   useEffect(() => {
-    // Rotar consejos del gato
     const tipInterval = setInterval(() => {
       const randomTip = catTips[Math.floor(Math.random() * catTips.length)];
       setCurrentTip(randomTip);
@@ -63,7 +61,6 @@ export default function SaludBienestar() {
     if (!userHabits.find(h => h.id === habit.id)) {
       setUserHabits([...userHabits, habit]);
       updateHealthStatus(habit.impact);
-      setShowHabitsDropdown(false);
     }
   };
 
@@ -71,7 +68,6 @@ export default function SaludBienestar() {
     if (!userActions.find(a => a.id === action.id)) {
       setUserActions([...userActions, action]);
       updateHealthStatus(action.impact);
-      setShowActionsDropdown(false);
     }
   };
 
@@ -92,424 +88,370 @@ export default function SaludBienestar() {
   };
 
   const updateHealthStatus = (impact) => {
-    // Simular cálculo de impacto en la salud
     const totalImpact = userHabits.reduce((sum, h) => sum + h.impact, 0) + 
                        userActions.reduce((sum, a) => sum + a.impact, 0) + impact;
     
-    if (totalImpact >= 10) {
+    if (totalImpact >= 80) {
       setHealthStatus('Excelente');
       setHealthEmoji('😄');
       setAvatarMood('excited');
-    } else if (totalImpact >= 5) {
+    } else if (totalImpact >= 60) {
+      setHealthStatus('Muy Bueno');
+      setHealthEmoji('😊');
+      setAvatarMood('happy');
+    } else if (totalImpact >= 40) {
       setHealthStatus('Bueno');
       setHealthEmoji('🙂');
-      setAvatarMood('happy');
-    } else if (totalImpact >= 0) {
-      setHealthStatus('Neutro');
-      setHealthEmoji('😐');
       setAvatarMood('neutral');
-    } else if (totalImpact >= -5) {
+    } else if (totalImpact >= 20) {
       setHealthStatus('Regular');
-      setHealthEmoji('😕');
+      setHealthEmoji('😐');
       setAvatarMood('worried');
     } else {
-      setHealthStatus('Malo');
-      setHealthEmoji('😞');
+      setHealthStatus('Necesita Mejora');
+      setHealthEmoji('😟');
       setAvatarMood('sad');
     }
   };
 
   const getImpactColor = (impact) => {
-    return impact > 0 ? '#10b981' : impact < 0 ? '#ef4444' : '#6b7280';
+    if (impact >= 80) return '#10b981';
+    if (impact >= 60) return '#34d399';
+    if (impact >= 40) return '#fbbf24';
+    if (impact >= 20) return '#f59e0b';
+    return '#ef4444';
   };
 
   return (
-    <div className={styles.saludBienestarWrapper}>
-      {/* ===== HEADER MODERNO ===== */}
-      <header className={styles.header}>
-        <nav className={styles.nav}>
-          <div className={styles.logo} onClick={() => navigate('/home')}>
-            <span>LifeLevelUp</span>
+    <Layout>
+      <div className={styles.saludBienestarWrapper}>
+        {/* ===== HERO SECTION MODERNO ===== */}
+        <section className={styles.heroSection}>
+          <div className={styles.heroBackground}>
+            <div className={styles.heroParticles}></div>
+            <div className={styles.heroGradient}></div>
           </div>
-          <ul className={styles.menu}>
-            <li><a href="/home">Inicio</a></li>
-            <li><a href="/home/salud-bienestar" className={styles.activeLink}>Salud</a></li>
-            <li><a href="/home/salud-planeta">Planeta</a></li>
-            <li><a href="/home/desafios">Desafíos</a></li>
-            <li><a href="/home/comunidad">Comunidad</a></li>
-          </ul>
-        </nav>
-      </header>
-
-      {/* ===== HERO SECTION MODERNO ===== */}
-      <section className={styles.heroSection}>
-        <div className={styles.heroBackground}>
-          <div className={styles.heroParticles}></div>
-          <div className={styles.heroGradient}></div>
-        </div>
-        <div className={styles.heroContainer}>
-          <div className={styles.heroContent}>
-            <div className={styles.heroBadge}>
-              <span>🌱</span>
-              <span>Salud y Bienestar</span>
-            </div>
-            <h1 className={styles.heroTitle}>
-              Interactúa con tu
-              <span className={styles.heroTitleHighlight}> avatar de salud</span>
-            </h1>
-            <p className={styles.heroSubtitle}>
-              Simula hábitos y rutinas para ver cómo impactan en tu bienestar. 
-              ¡Tu avatar reacciona a tus decisiones en tiempo real!
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== SECCIÓN PRINCIPAL INTERACTIVA ===== */}
-      <section className={styles.mainInteractiveSection}>
-        <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>¿Por qué es importante la salud y el bienestar?</h2>
-          <p className={styles.sectionSubtitle}>
-            La salud y el bienestar son la base para una vida plena. Adoptar hábitos saludables y tomar buenas decisiones diarias impacta directamente en tu energía, ánimo y calidad de vida. ¡Empieza hoy a mejorar tu salud y verás cómo todo cambia a tu alrededor!
-          </p>
-        </div>
-
-        <div className={styles.interactiveContainer}>
-          {/* ===== PANEL IZQUIERDO - HÁBITOS Y ACCIONES ===== */}
-          <div className={styles.leftPanel}>
-            {/* Panel de Hábitos */}
-            <div className={styles.habitsPanel}>
-              <button 
-                className={styles.dropdownButton}
-                onClick={() => setShowHabitsDropdown(!showHabitsDropdown)}
-              >
-                Hábitos ▼
-              </button>
-              
-              {showHabitsDropdown && (
-                <div className={styles.dropdownMenu}>
-                  {habits.map(habit => (
-                    <div 
-                      key={habit.id} 
-                      className={styles.dropdownItem}
-                      onClick={() => addHabit(habit)}
-                    >
-                      <span className={styles.itemIcon}>{habit.icon}</span>
-                      <span className={styles.itemName}>{habit.name}</span>
-                      <span 
-                        className={styles.itemImpact}
-                        style={{ color: getImpactColor(habit.impact) }}
-                      >
-                        {habit.impact > 0 ? '+' : ''}{habit.impact} años
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* Hábitos Seleccionados */}
-              <div className={styles.selectedItems}>
-                {userHabits.map(habit => (
-                  <div key={habit.id} className={styles.selectedItem}>
-                    <span className={styles.itemIcon}>{habit.icon}</span>
-                    <span className={styles.itemName}>{habit.name}</span>
-                    <button 
-                      className={styles.removeButton}
-                      onClick={() => removeHabit(habit.id)}
-                    >
-                      ✕
-                    </button>
-                  </div>
-                ))}
+          <div className={styles.heroContainer}>
+            <div className={styles.heroContent}>
+              <div className={styles.heroBadge}>
+                <span>🌱</span>
+                Interactivo
               </div>
-            </div>
-
-            {/* Panel de Acciones */}
-            <div className={styles.actionsPanel}>
-              <button 
-                className={styles.dropdownButton}
-                onClick={() => setShowActionsDropdown(!showActionsDropdown)}
-              >
-                Acciones ▼
-              </button>
-              
-              {showActionsDropdown && (
-                <div className={styles.dropdownMenu}>
-                  {actions.map(action => (
-                    <div 
-                      key={action.id} 
-                      className={styles.dropdownItem}
-                      onClick={() => addAction(action)}
-                    >
-                      <span className={styles.itemIcon}>{action.icon}</span>
-                      <span className={styles.itemName}>{action.name}</span>
-                      <span 
-                        className={styles.itemImpact}
-                        style={{ color: getImpactColor(action.impact) }}
-                      >
-                        {action.impact > 0 ? '+' : ''}{action.impact} años
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* Acciones Seleccionadas */}
-              <div className={styles.selectedItems}>
-                {userActions.map(action => (
-                  <div key={action.id} className={styles.selectedItem}>
-                    <span className={styles.itemIcon}>{action.icon}</span>
-                    <span className={styles.itemName}>{action.name}</span>
-                    <button 
-                      className={styles.removeButton}
-                      onClick={() => removeAction(action.id)}
-                    >
-                      ✕
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* ===== PANEL CENTRAL - AVATAR ===== */}
-          <div className={styles.centerPanel}>
-            <div className={styles.avatarContainer}>
-              <div className={`${styles.avatar} ${styles[avatarMood]}`}>
-                <div className={styles.avatarFace}>
-                  <div className={styles.avatarEyes}>
-                    <div className={styles.eye}></div>
-                    <div className={styles.eye}></div>
-                  </div>
-                  <div className={styles.avatarMouth}></div>
-                </div>
-                <div className={styles.avatarBody}>
-                  <div className={styles.avatarShirt}></div>
-                </div>
-              </div>
-            </div>
-            
-            <div className={styles.healthStatus}>
-              <h3>Estado de salud: {healthStatus}</h3>
-              <span className={styles.healthEmoji}>{healthEmoji}</span>
-            </div>
-
-            {/* Simulador de Impacto */}
-            <div className={styles.impactSimulator}>
-              <h4>Impacto en tu vida:</h4>
-              <div className={styles.impactBar}>
-                <div 
-                  className={styles.impactFill}
-                  style={{ 
-                    width: `${Math.max(0, Math.min(100, 50 + (userHabits.reduce((sum, h) => sum + h.impact, 0) + userActions.reduce((sum, a) => sum + a.impact, 0)) * 5))}%`,
-                    backgroundColor: getImpactColor(userHabits.reduce((sum, h) => sum + h.impact, 0) + userActions.reduce((sum, a) => sum + a.impact, 0))
-                  }}
-                ></div>
-              </div>
-              <p className={styles.impactText}>
-                {userHabits.reduce((sum, h) => sum + h.impact, 0) + userActions.reduce((sum, a) => sum + a.impact, 0)} años de impacto
+              <h1 className={styles.heroTitle}>
+                Interactúa con tu
+                <span className={styles.heroTitleHighlight}> avatar de salud</span>
+              </h1>
+              <p className={styles.heroSubtitle}>
+                Simula hábitos y rutinas para ver cómo impactan en tu bienestar. 
+                ¡Tu avatar reacciona a tus decisiones en tiempo real!
               </p>
             </div>
           </div>
+        </section>
 
-          {/* ===== PANEL DERECHO - BOT Y LOGROS ===== */}
-          <div className={styles.rightPanel}>
-            {/* Bot de Gato */}
-            <div className={styles.catBot}>
-              <div className={styles.catAvatar} onClick={() => setShowCatTip(!showCatTip)}>
-                <img 
-                  src={gatoMedico} 
-                  alt="Gato Doctor" 
-                  className={styles.catImage}
-                />
-              </div>
-              
-              {showCatTip && (
-                <div className={styles.catTip}>
-                  <p>{currentTip}</p>
-                  <button 
-                    className={styles.closeTipButton}
-                    onClick={() => setShowCatTip(false)}
-                  >
-                    ✕
-                  </button>
-                </div>
-              )}
-            </div>
+        {/* ===== SECCIÓN PRINCIPAL INTERACTIVA ===== */}
+        <section className={styles.mainInteractiveSection}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>¿Por qué es importante la salud y el bienestar?</h2>
+            <p className={styles.sectionSubtitle}>
+              La salud y el bienestar son la base para una vida plena. Adoptar hábitos saludables y tomar buenas decisiones diarias impacta directamente en tu energía, ánimo y calidad de vida. ¡Empieza hoy a mejorar tu salud y verás cómo todo cambia a tu alrededor!
+            </p>
+          </div>
 
-            {/* Recordatorio de Agua */}
-            <div className={styles.waterReminder}>
-              <span className={styles.waterIcon}>💧</span>
-              <p>Recuerda beber 2 litros de agua al día.</p>
-            </div>
-
-            {/* Panel de Logros */}
-            <div className={styles.achievementsPanel}>
-              <div className={styles.achievementsHeader}>
-                <span className={styles.trophyIcon}>🏆</span>
-                <h3>Logros</h3>
-              </div>
-              
-              <div className={styles.achievementsList}>
-                {achievements.map(achievement => (
-                  <div 
-                    key={achievement.id} 
-                    className={`${styles.achievement} ${achievement.unlocked ? styles.unlocked : styles.locked}`}
-                  >
-                    <span className={styles.achievementIcon}>{achievement.icon}</span>
-                    <span className={styles.achievementName}>{achievement.name}</span>
-                    {achievement.unlocked && <span className={styles.unlockBadge}>✓</span>}
+          <div className={styles.interactiveContainer}>
+            {/* ===== PANEL IZQUIERDO - HÁBITOS Y ACCIONES ===== */}
+            <div className={styles.leftPanel}>
+              {/* Panel de Hábitos */}
+              <div className={styles.habitsPanel}>
+                <button 
+                  className={styles.dropdownButton}
+                  onClick={() => setShowHabitsDropdown(!showHabitsDropdown)}
+                >
+                  Hábitos ▼
+                </button>
+                
+                {showHabitsDropdown && (
+                  <div className={styles.dropdownMenu}>
+                    {habits.map(habit => (
+                      <div 
+                        key={habit.id} 
+                        className={styles.dropdownItem}
+                        onClick={() => addHabit(habit)}
+                      >
+                        <span className={styles.itemIcon}>{habit.icon}</span>
+                        <span className={styles.itemName}>{habit.name}</span>
+                        <span 
+                          className={styles.itemImpact}
+                          style={{ color: getImpactColor(habit.impact) }}
+                        >
+                          {habit.impact} años
+                        </span>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                )}
+
+                {/* Hábitos Seleccionados */}
+                <div className={styles.selectedItems}>
+                  {userHabits.map(habit => (
+                    <div key={habit.id} className={styles.selectedItem}>
+                      <span className={styles.itemIcon}>{habit.icon}</span>
+                      <span className={styles.itemName}>{habit.name}</span>
+                      <button 
+                        className={styles.removeButton}
+                        onClick={() => removeHabit(habit.id)}
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Panel de Acciones */}
+              <div className={styles.actionsPanel}>
+                <button 
+                  className={styles.dropdownButton}
+                  onClick={() => setShowActionsDropdown(!showActionsDropdown)}
+                >
+                  Acciones ▼
+                </button>
+                
+                {showActionsDropdown && (
+                  <div className={styles.dropdownMenu}>
+                    {actions.map(action => (
+                      <div 
+                        key={action.id} 
+                        className={styles.dropdownItem}
+                        onClick={() => addAction(action)}
+                      >
+                        <span className={styles.itemIcon}>{action.icon}</span>
+                        <span className={styles.itemName}>{action.name}</span>
+                        <span 
+                          className={styles.itemImpact}
+                          style={{ color: getImpactColor(action.impact) }}
+                        >
+                          {action.impact} años
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Acciones Seleccionadas */}
+                <div className={styles.selectedItems}>
+                  {userActions.map(action => (
+                    <div key={action.id} className={styles.selectedItem}>
+                      <span className={styles.itemIcon}>{action.icon}</span>
+                      <span className={styles.itemName}>{action.name}</span>
+                      <button 
+                        className={styles.removeButton}
+                        onClick={() => removeAction(action.id)}
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* ===== PANEL CENTRAL - AVATAR ===== */}
+            <div className={styles.centerPanel}>
+              <div className={styles.avatarContainer}>
+                <div className={`${styles.avatar} ${styles[avatarMood]}`}>
+                  <div className={styles.avatarFace}>
+                    <div className={styles.avatarEyes}>
+                      <div className={styles.eye}></div>
+                      <div className={styles.eye}></div>
+                    </div>
+                    <div className={styles.avatarMouth}></div>
+                  </div>
+                  <div className={styles.avatarBody}>
+                    <div className={styles.avatarShirt}></div>
+                  </div>
+                </div>
               </div>
               
-              <button 
-                className={styles.closeAchievementsButton}
-                onClick={() => setShowAchievements(false)}
-              >
-                Cerrar
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+              <div className={styles.healthStatus}>
+                <h3>Estado de salud: {healthStatus}</h3>
+                <span className={styles.healthEmoji}>{healthEmoji}</span>
+              </div>
 
-      {/* ===== SECCIÓN DE PROGRESO (MOVIDA DESDE HOME) ===== */}
-      <section className={styles.progressSection}>
-        <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>🎮 Tu Progreso</h2>
-          <p className={styles.sectionSubtitle}>
-            Desbloquea logros y sube de nivel mientras mejoras tus hábitos
-          </p>
-        </div>
-        
-        <div className={styles.progressGrid}>
-          <div className={styles.progressCard}>
-            <div className={styles.progressIcon}>🏆</div>
-            <h3 className={styles.progressTitle}>Nivel Actual</h3>
-            <div className={styles.progressLevel}>Nivel 7 - Eco Guerrero</div>
-            <div className={styles.progressBar}>
-              <div className={styles.progressFill} style={{width: '75%'}}></div>
+              {/* Simulador de Impacto */}
+              <div className={styles.impactSimulator}>
+                <h4>Impacto en tu vida:</h4>
+                <div className={styles.impactBar}>
+                  <div 
+                    className={styles.impactFill}
+                    style={{ 
+                      width: `${Math.max(0, Math.min(100, 50 + (userHabits.reduce((sum, h) => sum + h.impact, 0) + userActions.reduce((sum, a) => sum + a.impact, 0)) * 5))}%`,
+                      backgroundColor: getImpactColor(userHabits.reduce((sum, h) => sum + h.impact, 0) + userActions.reduce((sum, a) => sum + a.impact, 0))
+                    }}
+                  ></div>
+                </div>
+                <p className={styles.impactText}>
+                  {userHabits.reduce((sum, h) => sum + h.impact, 0) + userActions.reduce((sum, a) => sum + a.impact, 0)} años de impacto
+                </p>
+              </div>
             </div>
-            <div className={styles.progressText}>75% completado</div>
-          </div>
-          
-          <div className={styles.progressCard}>
-            <div className={styles.progressIcon}>⭐</div>
-            <h3 className={styles.progressTitle}>Puntos Totales</h3>
-            <div className={styles.progressPoints}>2,847 puntos</div>
-            <div className={styles.progressRank}>Top 15% de usuarios</div>
-          </div>
-          
-          <div className={styles.progressCard}>
-            <div className={styles.progressIcon}>🏅</div>
-            <h3 className={styles.progressTitle}>Insignias Desbloqueadas</h3>
-            <div className={styles.badgesGrid}>
-              <span className={styles.badge}>🌱</span>
-              <span className={styles.badge}>💧</span>
-              <span className={styles.badge}>♻️</span>
-              <span className={styles.badge}>🚶‍♀️</span>
-              <span className={styles.badge}>🥦</span>
-              <span className={styles.badge}>⚡</span>
-            </div>
-            <div className={styles.progressText}>6 de 12 insignias</div>
-          </div>
-        </div>
-      </section>
 
-      {/* ===== SECCIÓN DE HÁBITOS DIARIOS SOSTENIBLES (MOVIDA DESDE HOME) ===== */}
-      <section className={styles.habitsSection}>
-        <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>💡 Hábitos Diarios Sostenibles</h2>
-          <p className={styles.sectionSubtitle}>
-            Pequeños cambios que generan un gran impacto en tu vida y el planeta
-          </p>
-        </div>
-        
-        <div className={styles.habitsGrid}>
-          <div className={styles.habitCard}>
-            <div className={styles.habitHeader}>
-              <span className={styles.habitEmoji}>🌅</span>
-              <h3 className={styles.habitTitle}>Mañana Sostenible</h3>
-            </div>
-            <ul className={styles.habitList}>
-              <li>Desayuna alimentos locales y de temporada</li>
-              <li>Usa una taza reutilizable para el café</li>
-              <li>Camina o usa bici para distancias cortas</li>
-              <li>Dúchate en menos de 5 minutos</li>
-            </ul>
-          </div>
-          
-          <div className={styles.habitCard}>
-            <div className={styles.habitHeader}>
-              <span className={styles.habitEmoji}>🌞</span>
-              <h3 className={styles.habitTitle}>Durante el Día</h3>
-            </div>
-            <ul className={styles.habitList}>
-              <li>Lleva tu propia botella de agua</li>
-              <li>Come más vegetales y menos carne</li>
-              <li>Apaga luces y dispositivos innecesarios</li>
-              <li>Usa escaleras en lugar de ascensor</li>
-            </ul>
-          </div>
-          
-          <div className={styles.habitCard}>
-            <div className={styles.habitHeader}>
-              <span className={styles.habitEmoji}>🌙</span>
-              <h3 className={styles.habitTitle}>Noche Consciente</h3>
-            </div>
-            <ul className={styles.habitList}>
-              <li>Recicla y separa residuos correctamente</li>
-              <li>Reflexiona sobre tu impacto diario</li>
-              <li>Desconecta dispositivos antes de dormir</li>
-              <li>Planifica el día siguiente de forma sostenible</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+            {/* ===== PANEL DERECHO - BOT Y LOGROS ===== */}
+            <div className={styles.rightPanel}>
+              {/* Bot de Gato */}
+              <div className={styles.catBot}>
+                <div className={styles.catAvatar} onClick={() => setShowCatTip(!showCatTip)}>
+                  <img 
+                    src={gatoMedico} 
+                    alt="Gato Doctor" 
+                    className={styles.catImage}
+                  />
+                </div>
+                
+                {showCatTip && (
+                  <div className={styles.catTip}>
+                    <p>{currentTip}</p>
+                    <button 
+                      className={styles.closeTipButton}
+                      onClick={() => setShowCatTip(false)}
+                    >
+                      ✕
+                    </button>
+                  </div>
+                )}
+              </div>
 
-      {/* ===== FOOTER MODERNO ===== */}
-      <footer className={styles.footer}>
-        <div className={styles.footerContent}>
-          <div className={styles.footerSection}>
-            <h4>Navegación</h4>
-            <ul>
-              <li><a href="/home">Inicio</a></li>
-              <li><a href="/home/salud-bienestar">Salud y Bienestar</a></li>
-              <li><a href="/home/salud-planeta">Salud del Planeta</a></li>
-              <li><a href="/home/desafios">Desafíos</a></li>
-              <li><a href="/home/comunidad">Comunidad</a></li>
-              <li><a href="/home/avatar/personalizar">Personalizar Avatar</a></li>
-            </ul>
-          </div>
-          
-          <div className={styles.footerSection}>
-            <h4>Recursos</h4>
-            <ul>
-              <li><a href="#">Sobre nosotros</a></li>
-              <li><a href="#">Referentes científicos</a></li>
-              <li><a href="#">Política de privacidad</a></li>
-              <li><a href="#">Guía de hábitos</a></li>
-              <li><a href="#">Calculadora de impacto</a></li>
-              <li><a href="#">Blog de bienestar</a></li>
-            </ul>
-          </div>
-          
-          <div className={styles.footerSection}>
-            <h4>Contacto</h4>
-            <div className={styles.footerContact}>
-              <p>📧 hola@lifelevelup.com</p>
-              <p>🌱 +34 666 PLANETA</p>
-              <p>🌍 España, Europa</p>
-              <p>⏰ Lun-Vie 9:00-18:00</p>
+              {/* Recordatorio de Agua */}
+              <div className={styles.waterReminder}>
+                <span className={styles.waterIcon}>💧</span>
+                <p>Recuerda beber 2 litros de agua al día.</p>
+              </div>
+
+              {/* Panel de Logros */}
+              <div className={styles.achievementsPanel}>
+                <div className={styles.achievementsHeader}>
+                  <span className={styles.trophyIcon}>🏆</span>
+                  <h3>Logros</h3>
+                </div>
+                
+                <div className={styles.achievementsList}>
+                  {achievements.map(achievement => (
+                    <div 
+                      key={achievement.id} 
+                      className={`${styles.achievement} ${achievement.unlocked ? styles.unlocked : styles.locked}`}
+                    >
+                      <span className={styles.achievementIcon}>{achievement.icon}</span>
+                      <span className={styles.achievementName}>{achievement.name}</span>
+                      {achievement.unlocked && <span className={styles.unlockBadge}>✓</span>}
+                    </div>
+                  ))}
+                </div>
+                
+                <button 
+                  className={styles.closeAchievementsButton}
+                  onClick={() => setShowAchievements(false)}
+                >
+                  Cerrar
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-        
-        <div className={styles.footerBottom}>
-          <p>© 2024 LifeLevelUp. Transformamos hábitos diarios en impacto positivo para ti y el planeta.</p>
-        </div>
-      </footer>
-    </div>
+        </section>
+
+        {/* ===== SECCIÓN DE PROGRESO (MOVIDA DESDE HOME) ===== */}
+        <section className={styles.progressSection}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>🎮 Tu Progreso</h2>
+            <p className={styles.sectionSubtitle}>
+              Desbloquea logros y sube de nivel mientras mejoras tus hábitos
+            </p>
+          </div>
+          
+          <div className={styles.progressGrid}>
+            <div className={styles.progressCard}>
+              <div className={styles.progressIcon}>🏆</div>
+              <h3 className={styles.progressTitle}>Nivel Actual</h3>
+              <div className={styles.progressLevel}>Nivel 7 - Eco Guerrero</div>
+              <div className={styles.progressBar}>
+                <div className={styles.progressFill} style={{width: '75%'}}></div>
+              </div>
+              <div className={styles.progressText}>75% completado</div>
+            </div>
+            
+            <div className={styles.progressCard}>
+              <div className={styles.progressIcon}>⭐</div>
+              <h3 className={styles.progressTitle}>Puntos Totales</h3>
+              <div className={styles.progressPoints}>2,847 puntos</div>
+              <div className={styles.progressRank}>Top 15% de usuarios</div>
+            </div>
+            
+            <div className={styles.progressCard}>
+              <div className={styles.progressIcon}>🏅</div>
+              <h3 className={styles.progressTitle}>Insignias Desbloqueadas</h3>
+              <div className={styles.badgesGrid}>
+                <span className={styles.badge}>🌱</span>
+                <span className={styles.badge}>💧</span>
+                <span className={styles.badge}>♻️</span>
+                <span className={styles.badge}>🚶‍♀️</span>
+                <span className={styles.badge}>🥦</span>
+                <span className={styles.badge}>⚡</span>
+              </div>
+              <div className={styles.progressText}>6 de 12 insignias</div>
+            </div>
+          </div>
+        </section>
+
+        {/* ===== SECCIÓN DE HÁBITOS DIARIOS SOSTENIBLES (MOVIDA DESDE HOME) ===== */}
+        <section className={styles.habitsSection}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>💡 Hábitos Diarios Sostenibles</h2>
+            <p className={styles.sectionSubtitle}>
+              Pequeños cambios que generan un gran impacto en tu vida y el planeta
+            </p>
+          </div>
+          
+          <div className={styles.habitsGrid}>
+            <div className={styles.habitCard}>
+              <div className={styles.habitHeader}>
+                <span className={styles.habitEmoji}>🌅</span>
+                <h3 className={styles.habitTitle}>Mañana Sostenible</h3>
+              </div>
+              <ul className={styles.habitList}>
+                <li>Desayuna alimentos locales y de temporada</li>
+                <li>Usa una taza reutilizable para el café</li>
+                <li>Camina o usa bici para distancias cortas</li>
+                <li>Dúchate en menos de 5 minutos</li>
+              </ul>
+            </div>
+            
+            <div className={styles.habitCard}>
+              <div className={styles.habitHeader}>
+                <span className={styles.habitEmoji}>🌞</span>
+                <h3 className={styles.habitTitle}>Durante el Día</h3>
+              </div>
+              <ul className={styles.habitList}>
+                <li>Lleva tu propia botella de agua</li>
+                <li>Come más vegetales y menos carne</li>
+                <li>Apaga luces y dispositivos innecesarios</li>
+                <li>Usa escaleras en lugar de ascensor</li>
+              </ul>
+            </div>
+            
+            <div className={styles.habitCard}>
+              <div className={styles.habitHeader}>
+                <span className={styles.habitEmoji}>🌙</span>
+                <h3 className={styles.habitTitle}>Noche Consciente</h3>
+              </div>
+              <ul className={styles.habitList}>
+                <li>Recicla y separa residuos correctamente</li>
+                <li>Reflexiona sobre tu impacto diario</li>
+                <li>Desconecta dispositivos antes de dormir</li>
+                <li>Planifica el día siguiente de forma sostenible</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </Layout>
   );
 } 
