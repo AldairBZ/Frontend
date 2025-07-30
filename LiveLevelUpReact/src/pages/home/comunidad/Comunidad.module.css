@@ -24,12 +24,29 @@
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Dark mode variables */
+.dark-mode {
+  --text-dark: #e5e7eb;
+  --text-light: #9ca3af;
+  --bg-light: #374151;
+  --bg-white: #1f2937;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+}
+
 /* ===== HERO SECTION MODERNO ===== */
 .heroSection {
   position: relative;
   padding: 120px 0 80px;
   background: var(--bg-gradient);
   overflow: hidden;
+}
+
+/* Dark mode para el contenedor principal */
+.dark-mode .comunidadWrapper {
+  background: linear-gradient(135deg, #1f2937 0%, #374151 50%, #064e3b 100%);
 }
 
 .heroBackground {
@@ -1181,4 +1198,145 @@
     height: 36px;
     font-size: 0.9rem;
   }
+} 
+
+.dark-mode .sectionSubtitle {
+  color: var(--text-light);
+}
+
+/* ===== DARK MODE STYLES ===== */
+.dark-mode .storyCard {
+  background: var(--bg-white);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode .storyName {
+  color: var(--text-dark);
+}
+
+.dark-mode .storyText {
+  color: var(--text-dark);
+}
+
+.dark-mode .storyDate {
+  color: var(--text-light);
+}
+
+.dark-mode .beforeText,
+.dark-mode .afterText {
+  color: var(--text-dark);
+}
+
+.dark-mode .postCard {
+  background: var(--bg-white);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode .postUserName {
+  color: var(--text-dark);
+}
+
+.dark-mode .postDate {
+  color: var(--text-light);
+}
+
+.dark-mode .postTitle {
+  color: var(--text-dark);
+}
+
+.dark-mode .postText {
+  color: var(--text-dark);
+}
+
+.dark-mode .rankingCard {
+  background: var(--bg-white);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode .rankingName {
+  color: var(--text-dark);
+}
+
+.dark-mode .rankingPoints {
+  color: var(--primary-green);
+}
+
+.dark-mode .rankingLevel {
+  color: var(--text-light);
+}
+
+.dark-mode .retoCard {
+  background: var(--bg-white);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode .retoTitle {
+  color: var(--text-dark);
+}
+
+.dark-mode .progressText {
+  color: var(--text-light);
+}
+
+.dark-mode .retoStat {
+  color: var(--text-light);
+}
+
+.dark-mode .userProfileCard,
+.dark-mode .communityStatsCard,
+.dark-mode .quickLinksCard {
+  background: var(--bg-white);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode .userProfileName {
+  color: var(--text-dark);
+}
+
+.dark-mode .userProfileLevel {
+  color: var(--primary-green);
+}
+
+.dark-mode .userStatNumber {
+  color: var(--primary-green);
+}
+
+.dark-mode .userStatLabel {
+  color: var(--text-light);
+}
+
+.dark-mode .communityStatsTitle,
+.dark-mode .quickLinksTitle {
+  color: var(--text-dark);
+}
+
+.dark-mode .communityStatNumber {
+  color: var(--primary-blue);
+}
+
+.dark-mode .communityStatLabel {
+  color: var(--text-light);
+}
+
+.dark-mode .quickLink {
+  background: rgba(16, 185, 129, 0.05);
+  color: var(--text-dark);
+}
+
+.dark-mode .quickLink:hover {
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.dark-mode .tabButton {
+  color: var(--text-light);
+}
+
+.dark-mode .tabButton:hover {
+  color: var(--primary-green);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.dark-mode .activeTab {
+  color: var(--primary-green) !important;
+  background: rgba(16, 185, 129, 0.1) !important;
 } 

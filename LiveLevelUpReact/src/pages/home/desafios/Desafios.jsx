@@ -120,7 +120,7 @@ export default function Desafios() {
             <div className={styles.heroContent}>
               <div className={styles.heroBadge}>
                 <span>🏆</span>
-                Semanales
+                <span>Semanales</span>
               </div>
               <h1 className={styles.heroTitle}>
                 Supera tus
@@ -134,132 +134,76 @@ export default function Desafios() {
           </div>
         </section>
 
-      {/* ===== FILTROS ===== */}
-      <section className={styles.filtersSection}>
-        <div className={styles.filtersContainer}>
-          <div className={styles.filtersTitle}>
-            <span className={styles.filtersIcon}>🔍</span>
-            <h2>Filtrar por categoría</h2>
+        {/* ===== FILTROS ===== */}
+        <section className={styles.filtersSection}>
+          <div className={styles.filtersContainer}>
+            <div className={styles.filtersTitle}>
+              <span className={styles.filtersIcon}>🔍</span>
+              <h2>Filtrar por categoría</h2>
+            </div>
+            <div className={styles.filtersGrid}>
+              {filters.map(filter => (
+                <button
+                  key={filter.id}
+                  className={`${styles.filterButton} ${activeFilter === filter.id ? styles.activeFilter : ''}`}
+                  onClick={() => setActiveFilter(filter.id)}
+                >
+                  <span className={styles.filterIcon}>{filter.icon}</span>
+                  <span className={styles.filterLabel}>{filter.name}</span>
+                </button>
+              ))}
+            </div>
           </div>
-          <div className={styles.filtersGrid}>
-            {filters.map(filter => (
-              <button
-                key={filter.id}
-                className={`${styles.filterButton} ${activeFilter === filter.id ? styles.activeFilter : ''}`}
-                onClick={() => setActiveFilter(filter.id)}
-              >
-                <span className={styles.filterIcon}>{filter.icon}</span>
-                <span className={styles.filterLabel}>{filter.name}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ===== DESAFÍOS ===== */}
-      <main className={styles.main}>
-        <div className={styles.challengesContainer}>
-          <div className={styles.challengesGrid}>
-            {filteredChallenges.map(challenge => (
-              <div key={challenge.id} className={styles.challengeCard}>
-                <div className={styles.challengeHeader}>
-                  <div className={styles.challengeEmoji}>{challenge.icon}</div>
-                  <div className={styles.challengeInfo}>
-                    <h3 className={styles.challengeTitle}>{challenge.title}</h3>
-                    <p className={styles.challengeDescription}>{challenge.description}</p>
-                  </div>
-                </div>
-                
-                <div className={styles.challengeDetails}>
-                  <div className={styles.challengeMeta}>
-                    <div className={styles.challengeDifficulty}>
-                      <span 
-                        className={styles.difficultyDot} 
-                        style={{backgroundColor: getDifficultyColor(challenge.difficulty)}}
-                      ></span>
-                      <span className={styles.difficultyText}>
-                        {challenge.difficulty}
-                      </span>
-                    </div>
-                    <div className={styles.challengeDuration}>
-                      <span className={styles.durationIcon}>⏱️</span>
-                      <span>{challenge.deadline}</span>
+        {/* ===== DESAFÍOS ===== */}
+        <main className={styles.main}>
+          <div className={styles.challengesContainer}>
+            <div className={styles.challengesGrid}>
+              {filteredChallenges.map(challenge => (
+                <div key={challenge.id} className={styles.challengeCard}>
+                  <div className={styles.challengeHeader}>
+                    <div className={styles.challengeEmoji}>{challenge.icon}</div>
+                    <div className={styles.challengeInfo}>
+                      <h3 className={styles.challengeTitle}>{challenge.title}</h3>
+                      <p className={styles.challengeDescription}>{challenge.description}</p>
                     </div>
                   </div>
                   
-                  <div className={styles.challengeReward}>
-                    <div className={styles.rewardInfo}>
-                      <span className={styles.rewardText}>{challenge.rewards.join(' + ')}</span>
-                      <span className={styles.participants}>{challenge.participants} participantes</span>
+                  <div className={styles.challengeDetails}>
+                    <div className={styles.challengeMeta}>
+                      <div className={styles.challengeDifficulty}>
+                        <span 
+                          className={styles.difficultyDot} 
+                          style={{backgroundColor: getDifficultyColor(challenge.difficulty)}}
+                        ></span>
+                        <span className={styles.difficultyText}>
+                          {challenge.difficulty}
+                        </span>
+                      </div>
+                      <div className={styles.challengeDuration}>
+                        <span className={styles.durationIcon}>⏱️</span>
+                        <span>{challenge.deadline}</span>
+                      </div>
                     </div>
-                    <button className={styles.joinButton}>
-                      <span>Unirme</span>
-                      <span className={styles.joinIcon}>→</span>
-                    </button>
+                    
+                    <div className={styles.challengeReward}>
+                      <div className={styles.rewardInfo}>
+                        <span className={styles.rewardText}>{challenge.rewards.join(' + ')}</span>
+                        <span className={styles.participants}>{challenge.participants} participantes</span>
+                      </div>
+                      <button className={styles.joinButton}>
+                        <span>Unirme</span>
+                        <span className={styles.joinIcon}>→</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </main>
-
-      {/* ===== FOOTER MODERNO ===== */}
-      <footer className={styles.footer}>
-        <div className={styles.footerContainer}>
-          <div className={styles.footerBrand}>
-            <h2>LifeLevelUp</h2>
-            <p>Transforma tus hábitos, transforma el mundo. Únete a la revolución sostenible.</p>
-            <div className={styles.footerEmojis}>
-              <span>🏆</span>
-              <span>🌱</span>
-              <span>💚</span>
+              ))}
             </div>
           </div>
-          
-          <div className={styles.footerCol}>
-            <h3>Enlaces rápidos</h3>
-            <ul>
-              <li><a href="/home">Inicio</a></li>
-              <li><a href="/home/salud-bienestar">Salud y Bienestar</a></li>
-              <li><a href="/home/salud-planeta">Salud del Planeta</a></li>
-              <li><a href="/home/desafios">Desafíos</a></li>
-              <li><a href="/home/comunidad">Comunidad</a></li>
-            </ul>
-          </div>
-          
-          <div className={styles.footerCol}>
-            <h3>Recursos</h3>
-            <ul>
-              <li><a href="#">Guía de desafíos</a></li>
-              <li><a href="#">Consejos para completar</a></li>
-              <li><a href="#">Sistema de recompensas</a></li>
-              <li><a href="#">FAQ</a></li>
-            </ul>
-          </div>
-          
-          <div className={styles.footerContact}>
-            <h3>Contacto</h3>
-            <a href="mailto:hola@lifelevelup.com" className={styles.contactItem}>
-              <span className={styles.contactIcon}>📧</span>
-              hola@lifelevelup.com
-            </a>
-            <a href="tel:+346667526382" className={styles.contactItem}>
-              <span className={styles.contactIcon}>🏆</span>
-              +34 666 DESAFIOS
-            </a>
-            <a href="#" className={styles.contactItem}>
-              <span className={styles.contactIcon}>🌍</span>
-              España, Europa
-            </a>
-          </div>
-        </div>
-        
-        <div className={styles.footerBottom}>
-          <p>&copy; 2025 LifeLevelUp. Todos los derechos reservados.</p>
-        </div>
-      </footer>
-    </div>
+        </main>
+      </div>
     </Layout>
   );
 } 

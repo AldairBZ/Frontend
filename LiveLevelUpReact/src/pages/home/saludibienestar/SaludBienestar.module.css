@@ -24,12 +24,30 @@
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Dark mode variables */
+.dark-mode {
+  --text-dark: #e5e7eb;
+  --text-light: #9ca3af;
+  --bg-light: #374151;
+  --bg-white: #1f2937;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+}
+
 /* Contenedor principal */
 .saludBienestarWrapper {
   min-height: 100vh;
   background: linear-gradient(135deg, #f0fdf4 0%, #eff6ff 50%, #fef3c7 100%);
   position: relative;
   overflow-x: hidden;
+  transition: var(--transition);
+}
+
+/* Dark mode para el contenedor principal */
+.dark-mode .saludBienestarWrapper {
+  background: linear-gradient(135deg, #1f2937 0%, #374151 50%, #064e3b 100%);
 }
 
 /* ===== HERO SECTION MODERNO ===== */
@@ -1302,4 +1320,227 @@
   color: var(--primary-green);
   font-weight: bold;
   margin-right: 8px;
+} 
+
+/* ===== DARK MODE STYLES ===== */
+.dark-mode .habitsPanel,
+.dark-mode .actionsPanel {
+  background: var(--bg-white);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode .dropdownButton {
+  background: var(--bg-white);
+  color: var(--text-dark);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode .dropdownButton:hover {
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.dark-mode .dropdownMenu {
+  background: var(--bg-white);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  box-shadow: var(--shadow-lg);
+}
+
+.dark-mode .dropdownItem {
+  color: var(--text-dark);
+}
+
+.dark-mode .dropdownItem:hover {
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.dark-mode .selectedItem {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: var(--text-dark);
+}
+
+.dark-mode .centerPanel {
+  background: var(--bg-white);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode .avatar {
+  background: var(--bg-white);
+  border: 2px solid rgba(16, 185, 129, 0.3);
+}
+
+.dark-mode .healthStatus h3 {
+  color: var(--text-dark);
+}
+
+.dark-mode .impactSimulator h4 {
+  color: var(--text-dark);
+}
+
+.dark-mode .rightPanel {
+  background: var(--bg-white);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode .catBot {
+  background: var(--bg-white);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode .catTip {
+  background: var(--bg-white);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: var(--text-dark);
+}
+
+.dark-mode .catTip p {
+  color: var(--text-dark);
+}
+
+.dark-mode .waterReminder {
+  background: var(--bg-white);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode .waterReminder p {
+  color: var(--text-dark);
+}
+
+.dark-mode .achievementsPanel {
+  background: var(--bg-white);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode .achievementsHeader h3 {
+  color: var(--text-dark);
+}
+
+.dark-mode .achievement {
+  background: var(--bg-white);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: var(--text-dark);
+}
+
+.dark-mode .achievement.unlocked {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: var(--primary-green);
+}
+
+.dark-mode .achievement.locked {
+  background: rgba(107, 114, 128, 0.1);
+  border-color: var(--text-light);
+}
+
+.dark-mode .achievementName {
+  color: var(--text-dark);
+}
+
+.dark-mode .progressCard {
+  background: var(--bg-white);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode .progressTitle {
+  color: var(--text-dark);
+}
+
+.dark-mode .progressLevel {
+  color: var(--text-dark);
+}
+
+.dark-mode .progressPoints {
+  color: var(--text-dark);
+}
+
+.dark-mode .progressRank {
+  color: var(--text-dark);
+}
+
+.dark-mode .badge {
+  background: var(--bg-white);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: var(--text-dark);
+}
+
+.dark-mode .progressText {
+  color: var(--text-dark);
+}
+
+.dark-mode .tipCard {
+  background: var(--bg-white);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode .tipTitle {
+  color: var(--text-dark);
+}
+
+.dark-mode .tipDescription {
+  color: var(--text-dark);
+}
+
+.dark-mode .habitCard {
+  background: var(--bg-white);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode .habitTitle {
+  color: var(--text-dark);
+}
+
+.dark-mode .habitList li {
+  color: var(--text-dark);
+}
+
+.dark-mode .impactCard {
+  background: var(--bg-white);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode .impactNumber {
+  color: var(--text-dark);
+}
+
+.dark-mode .impactLabel {
+  color: var(--text-dark);
+}
+
+.dark-mode .impactDescription {
+  color: var(--text-dark);
+}
+
+.dark-mode .newsletterCard {
+  background: var(--bg-white);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode .newsletterTitle {
+  color: var(--text-dark);
+}
+
+.dark-mode .newsletterText {
+  color: var(--text-dark);
+}
+
+.dark-mode .newsletterInput {
+  background: var(--bg-light);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: var(--text-dark);
+}
+
+.dark-mode .newsletterInput:focus {
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.dark-mode .newsletterDisclaimer {
+  color: var(--text-light);
+}
+
+.dark-mode .sectionTitle {
+  color: var(--text-dark);
+}
+
+.dark-mode .sectionSubtitle {
+  color: var(--text-light);
 } 
