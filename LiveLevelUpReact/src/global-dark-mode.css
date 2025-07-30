@@ -1,0 +1,272 @@
+/* Global Dark Mode Styles */
+/* Este archivo contiene estilos globales para el modo oscuro */
+
+/* Aplicar modo oscuro a todos los elementos base */
+.dark-mode * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Estilos globales para elementos comunes */
+.dark-mode h1, 
+.dark-mode h2, 
+.dark-mode h3, 
+.dark-mode h4, 
+.dark-mode h5, 
+.dark-mode h6 {
+  color: var(--text-dark);
+}
+
+.dark-mode p {
+  color: var(--text-light);
+}
+
+.dark-mode a {
+  color: var(--primary-green);
+}
+
+.dark-mode a:hover {
+  color: var(--secondary-green);
+}
+
+/* Estilos para botones */
+.dark-mode button {
+  background: var(--bg-white);
+  color: var(--text-dark);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode button:hover {
+  background: rgba(16, 185, 129, 0.1);
+}
+
+/* Estilos para inputs */
+.dark-mode input,
+.dark-mode textarea,
+.dark-mode select {
+  background: var(--bg-white);
+  color: var(--text-dark);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode input:focus,
+.dark-mode textarea:focus,
+.dark-mode select:focus {
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* Estilos para cards y contenedores */
+.dark-mode .card,
+.dark-mode .container,
+.dark-mode .panel,
+.dark-mode .section {
+  background: var(--bg-white);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: var(--text-dark);
+}
+
+/* Estilos para modales */
+.dark-mode .modal,
+.dark-mode .modal-content {
+  background: var(--bg-white);
+  color: var(--text-dark);
+}
+
+.dark-mode .modal-overlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* Estilos para tooltips */
+.dark-mode .tooltip {
+  background: var(--bg-white);
+  color: var(--text-dark);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+/* Estilos para dropdowns */
+.dark-mode .dropdown,
+.dark-mode .dropdown-menu {
+  background: var(--bg-white);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: var(--text-dark);
+}
+
+.dark-mode .dropdown-item {
+  color: var(--text-dark);
+}
+
+.dark-mode .dropdown-item:hover {
+  background: rgba(16, 185, 129, 0.1);
+}
+
+/* Estilos para tabs */
+.dark-mode .tab {
+  color: var(--text-light);
+}
+
+.dark-mode .tab:hover {
+  color: var(--primary-green);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.dark-mode .tab.active {
+  color: var(--primary-green);
+  background: rgba(16, 185, 129, 0.1);
+}
+
+/* Estilos para badges */
+.dark-mode .badge {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--primary-green);
+}
+
+/* Estilos para progress bars */
+.dark-mode .progress-bar {
+  background: var(--bg-light);
+}
+
+.dark-mode .progress-fill {
+  background: var(--primary-green);
+}
+
+/* Estilos para scrollbars personalizados */
+.dark-mode ::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dark-mode ::-webkit-scrollbar-track {
+  background: var(--bg-light);
+}
+
+.dark-mode ::-webkit-scrollbar-thumb {
+  background: var(--primary-green);
+  border-radius: 4px;
+}
+
+.dark-mode ::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-green);
+}
+
+/* Estilos para selección de texto */
+.dark-mode ::selection {
+  background: rgba(16, 185, 129, 0.3);
+  color: var(--text-dark);
+}
+
+.dark-mode ::-moz-selection {
+  background: rgba(16, 185, 129, 0.3);
+  color: var(--text-dark);
+}
+
+/* Estilos para placeholders */
+.dark-mode ::placeholder {
+  color: var(--text-light);
+}
+
+.dark-mode ::-webkit-input-placeholder {
+  color: var(--text-light);
+}
+
+.dark-mode ::-moz-placeholder {
+  color: var(--text-light);
+}
+
+/* Estilos para elementos de formulario */
+.dark-mode fieldset {
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode legend {
+  color: var(--text-dark);
+}
+
+/* Estilos para listas */
+.dark-mode ul,
+.dark-mode ol {
+  color: var(--text-dark);
+}
+
+.dark-mode li {
+  color: var(--text-dark);
+}
+
+/* Estilos para tablas */
+.dark-mode table {
+  background: var(--bg-white);
+  color: var(--text-dark);
+}
+
+.dark-mode th,
+.dark-mode td {
+  border-color: rgba(16, 185, 129, 0.2);
+  color: var(--text-dark);
+}
+
+.dark-mode tr:hover {
+  background: rgba(16, 185, 129, 0.05);
+}
+
+/* Estilos para elementos de navegación */
+.dark-mode nav {
+  background: var(--bg-white);
+  color: var(--text-dark);
+}
+
+.dark-mode nav a {
+  color: var(--text-dark);
+}
+
+.dark-mode nav a:hover {
+  color: var(--primary-green);
+}
+
+/* Estilos para elementos de estado */
+.dark-mode .success {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--primary-green);
+  border-color: var(--primary-green);
+}
+
+.dark-mode .error {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border-color: #ef4444;
+}
+
+.dark-mode .warning {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+  border-color: #f59e0b;
+}
+
+.dark-mode .info {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--primary-blue);
+  border-color: var(--primary-blue);
+}
+
+/* Estilos para animaciones */
+.dark-mode .loading {
+  border-color: var(--bg-light);
+  border-top-color: var(--primary-green);
+}
+
+/* Estilos para elementos de interfaz específicos */
+.dark-mode .sidebar {
+  background: var(--bg-white);
+  border-right: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode .main-content {
+  background: var(--bg-light);
+}
+
+.dark-mode .header {
+  background: var(--bg-white);
+  border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode .footer {
+  background: var(--bg-white);
+  border-top: 1px solid rgba(16, 185, 129, 0.2);
+} 
