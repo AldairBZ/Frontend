@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Home.module.css';
-import PanelesInteractivos from './PanelesInteractivos';
 import Layout from '../../components/Layout.jsx';
 import HeroSection from './HeroSection';
 
@@ -20,40 +19,7 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
-  const weeklyChallenges = [
-    {
-      id: 1,
-      emoji: "🥦",
-      title: "5 días sin carne",
-      description: "Reduce tu huella de carbono y mejora tu salud",
-      reward: "50 puntos + Insignia Verde",
-      participants: 342
-    },
-    {
-      id: 2,
-      emoji: "🚶‍♀️",
-      title: "7.000 pasos diarios",
-      description: "Mantén tu cuerpo activo y reduce emisiones",
-      reward: "75 puntos + Insignia Activa",
-      participants: 567
-    },
-    {
-      id: 3,
-      emoji: "🚯",
-      title: "Semana sin plástico",
-      description: "Elimina el plástico de un solo uso",
-      reward: "100 puntos + Insignia Eco",
-      participants: 234
-    },
-    {
-      id: 4,
-      emoji: "💧",
-      title: "Duchas de 5 minutos",
-      description: "Ahorra agua y energía en tu rutina",
-      reward: "60 puntos + Insignia Ahorro",
-      participants: 456
-    }
-  ];
+
 
   const successStories = [
     {
@@ -131,39 +97,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Paneles interactivos (ahora vacíos) */}
-      <PanelesInteractivos />
 
-      {/* Sección de Desafíos Semanales */}
-      <section className={styles.challengesSection}>
-        <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>🏆 Desafíos Semanales</h2>
-          <p className={styles.sectionSubtitle}>
-            Únete a retos divertidos y gana recompensas mientras transformas tus hábitos
-          </p>
-        </div>
-        
-        <div className={styles.challengesGrid}>
-          {weeklyChallenges.map(challenge => (
-            <div key={challenge.id} className={styles.challengeCard}>
-              <div className={styles.challengeHeader}>
-                <span className={styles.challengeEmoji}>{challenge.emoji}</span>
-                <div className={styles.challengeInfo}>
-                  <h3 className={styles.challengeTitle}>{challenge.title}</h3>
-                  <p className={styles.challengeDescription}>{challenge.description}</p>
-                </div>
-              </div>
-              <div className={styles.challengeFooter}>
-                <div className={styles.challengeReward}>
-                  <span className={styles.rewardText}>{challenge.reward}</span>
-                  <span className={styles.participants}>{challenge.participants} participantes</span>
-                </div>
-                <button className={styles.joinButton}>Unirme</button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* Sección de Impacto Colectivo */}
       <section className={styles.impactSection}>

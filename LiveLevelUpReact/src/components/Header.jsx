@@ -70,6 +70,8 @@ export default function Header({ darkMode, toggleTheme }) {
       navigate('/home/salud-bienestar');
     } else if (sectionId === 'planeta') {
       navigate('/home/salud-planeta');
+    } else if (sectionId === 'desafios') {
+      navigate('/home/desafios');
     } else {
       scrollToSection(sectionId);
     }
