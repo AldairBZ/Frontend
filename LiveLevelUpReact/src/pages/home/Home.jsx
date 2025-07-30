@@ -146,59 +146,6 @@ export default function Home() {
         </div>
       </section>
 
-
-
-      {/* Sección de Hábitos Diarios (mejorada) */}
-      <section className={styles.habitsSection}>
-        <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>💡 Hábitos Diarios Sostenibles</h2>
-          <p className={styles.sectionSubtitle}>
-            Pequeños cambios que generan un gran impacto en tu vida y el planeta
-          </p>
-        </div>
-        
-        <div className={styles.habitsGrid}>
-          <div className={styles.habitCard}>
-            <div className={styles.habitHeader}>
-              <span className={styles.habitEmoji}>🌅</span>
-              <h3 className={styles.habitTitle}>Mañana Sostenible</h3>
-            </div>
-            <ul className={styles.habitList}>
-              <li>Desayuna alimentos locales y de temporada</li>
-              <li>Usa una taza reutilizable para el café</li>
-              <li>Camina o usa bici para distancias cortas</li>
-              <li>Dúchate en menos de 5 minutos</li>
-            </ul>
-          </div>
-          
-          <div className={styles.habitCard}>
-            <div className={styles.habitHeader}>
-              <span className={styles.habitEmoji}>🌞</span>
-              <h3 className={styles.habitTitle}>Durante el Día</h3>
-            </div>
-            <ul className={styles.habitList}>
-              <li>Lleva tu propia botella de agua</li>
-              <li>Come más vegetales y menos carne</li>
-              <li>Apaga luces y dispositivos innecesarios</li>
-              <li>Usa escaleras en lugar de ascensor</li>
-            </ul>
-          </div>
-          
-          <div className={styles.habitCard}>
-            <div className={styles.habitHeader}>
-              <span className={styles.habitEmoji}>🌙</span>
-              <h3 className={styles.habitTitle}>Noche Consciente</h3>
-            </div>
-            <ul className={styles.habitList}>
-              <li>Recicla y separa residuos correctamente</li>
-              <li>Reflexiona sobre tu impacto diario</li>
-              <li>Desconecta dispositivos antes de dormir</li>
-              <li>Planifica el día siguiente de forma sostenible</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
       {/* Sección Newsletter (mejorada) */}
       <section className={styles.newsletterSection}>
         <div className={styles.newsletterCard}>

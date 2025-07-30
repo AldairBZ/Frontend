@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './SaludBienestar.module.css';
+import gatoMedico from '../../../assets/gato-medico.png';
 
 export default function SaludBienestar() {
   const navigate = useNavigate();
@@ -316,18 +317,11 @@ export default function SaludBienestar() {
             {/* Bot de Gato */}
             <div className={styles.catBot}>
               <div className={styles.catAvatar} onClick={() => setShowCatTip(!showCatTip)}>
-                <div className={styles.catEars}>
-                  <div className={styles.catEar}></div>
-                  <div className={styles.catEar}></div>
-                </div>
-                <div className={styles.catFace}>
-                  <div className={styles.catEyes}>
-                    <div className={styles.catEye}></div>
-                    <div className={styles.catEye}></div>
-                  </div>
-                  <div className={styles.catNose}></div>
-                  <div className={styles.catMouth}></div>
-                </div>
+                <img 
+                  src={gatoMedico} 
+                  alt="Gato Doctor" 
+                  className={styles.catImage}
+                />
               </div>
               
               {showCatTip && (
@@ -419,6 +413,57 @@ export default function SaludBienestar() {
               <span className={styles.badge}>⚡</span>
             </div>
             <div className={styles.progressText}>6 de 12 insignias</div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== SECCIÓN DE HÁBITOS DIARIOS SOSTENIBLES (MOVIDA DESDE HOME) ===== */}
+      <section className={styles.habitsSection}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>💡 Hábitos Diarios Sostenibles</h2>
+          <p className={styles.sectionSubtitle}>
+            Pequeños cambios que generan un gran impacto en tu vida y el planeta
+          </p>
+        </div>
+        
+        <div className={styles.habitsGrid}>
+          <div className={styles.habitCard}>
+            <div className={styles.habitHeader}>
+              <span className={styles.habitEmoji}>🌅</span>
+              <h3 className={styles.habitTitle}>Mañana Sostenible</h3>
+            </div>
+            <ul className={styles.habitList}>
+              <li>Desayuna alimentos locales y de temporada</li>
+              <li>Usa una taza reutilizable para el café</li>
+              <li>Camina o usa bici para distancias cortas</li>
+              <li>Dúchate en menos de 5 minutos</li>
+            </ul>
+          </div>
+          
+          <div className={styles.habitCard}>
+            <div className={styles.habitHeader}>
+              <span className={styles.habitEmoji}>🌞</span>
+              <h3 className={styles.habitTitle}>Durante el Día</h3>
+            </div>
+            <ul className={styles.habitList}>
+              <li>Lleva tu propia botella de agua</li>
+              <li>Come más vegetales y menos carne</li>
+              <li>Apaga luces y dispositivos innecesarios</li>
+              <li>Usa escaleras en lugar de ascensor</li>
+            </ul>
+          </div>
+          
+          <div className={styles.habitCard}>
+            <div className={styles.habitHeader}>
+              <span className={styles.habitEmoji}>🌙</span>
+              <h3 className={styles.habitTitle}>Noche Consciente</h3>
+            </div>
+            <ul className={styles.habitList}>
+              <li>Recicla y separa residuos correctamente</li>
+              <li>Reflexiona sobre tu impacto diario</li>
+              <li>Desconecta dispositivos antes de dormir</li>
+              <li>Planifica el día siguiente de forma sostenible</li>
+            </ul>
           </div>
         </div>
       </section>

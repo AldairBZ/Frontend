@@ -421,23 +421,6 @@
   margin: 0 auto;
 }
 
-.avatarBody {
-  position: absolute;
-  bottom: -60px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 60px;
-}
-
-.avatarShirt {
-  width: 100%;
-  height: 100%;
-  background: var(--primary-blue);
-  border-radius: 20px 20px 0 0;
-  border: 2px solid var(--secondary-blue);
-}
-
 /* Estados del avatar */
 .avatar.happy .avatarMouth {
   border-radius: 0 0 40px 40px;
@@ -535,14 +518,18 @@
 }
 
 .catAvatar {
-  width: 80px;
-  height: 80px;
-  background: #1f2937;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   position: relative;
   cursor: pointer;
   transition: var(--transition);
   box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .catAvatar:hover {
@@ -550,66 +537,17 @@
   box-shadow: var(--shadow-xl);
 }
 
-.catEars {
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-}
-
-.catEar {
-  width: 0;
-  height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 16px solid #1f2937;
-}
-
-.catFace {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60px;
-  height: 60px;
-}
-
-.catEyes {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
-
-.catEye {
-  width: 8px;
-  height: 8px;
-  background: #10b981;
+.catImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 50%;
-  box-shadow: 0 0 8px #10b981;
-}
-
-.catNose {
-  width: 4px;
-  height: 4px;
-  background: #fbbf24;
-  border-radius: 50%;
-  margin: 0 auto 4px;
-}
-
-.catMouth {
-  width: 16px;
-  height: 8px;
-  border: 2px solid #fbbf24;
-  border-top: none;
-  border-radius: 0 0 16px 16px;
-  margin: 0 auto;
+  transition: var(--transition);
 }
 
 .catTip {
   position: absolute;
-  top: 100px;
+  top: 120px;
   left: 50%;
   transform: translateX(-50%);
   background: var(--bg-white);
@@ -1356,6 +1294,27 @@
     height: 90px;
   }
   
+  /* Gato doctor responsive */
+  .catAvatar {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .catTip {
+    top: 100px;
+    max-width: 180px;
+  }
+  
+  /* Hábitos responsive */
+  .habitsGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .habitCard {
+    padding: 24px 20px;
+  }
+  
   .menu {
     gap: 16px;
   }
@@ -1385,6 +1344,48 @@
     height: 70px;
   }
   
+  /* Gato doctor responsive pequeño */
+  .catAvatar {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .catTip {
+    top: 90px;
+    max-width: 160px;
+    padding: 12px;
+  }
+  
+  .catTip p {
+    font-size: 0.8rem;
+  }
+  
+  /* Hábitos responsive pequeño */
+  .habitCard {
+    padding: 20px 16px;
+  }
+  
+  .habitEmoji {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .habitTitle {
+    font-size: 1.1rem;
+  }
+  
+  .habitList li {
+    font-size: 0.9rem;
+    padding: 6px 0 6px 28px;
+  }
+  
+  .habitList li::before {
+    width: 18px;
+    height: 18px;
+    font-size: 0.7rem;
+  }
+  
   .nav {
     padding: 0 16px;
   }
@@ -1396,4 +1397,101 @@
   .habitsPanel, .actionsPanel, .centerPanel, .achievementsPanel {
     padding: 16px;
   }
+} 
+
+/* ===== SECCIÓN DE HÁBITOS DIARIOS SOSTENIBLES ===== */
+.habitsSection {
+  padding: 80px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.habitsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+  margin-top: 48px;
+}
+
+.habitCard {
+  background: var(--bg-white);
+  border-radius: var(--border-radius-lg);
+  padding: 32px 24px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(16, 185, 129, 0.1);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.habitCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-blue) 0%, var(--primary-green) 100%);
+}
+
+.habitCard:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+}
+
+.habitHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.habitEmoji {
+  font-size: 2rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+  border-radius: 12px;
+}
+
+.habitTitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.habitList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.habitList li {
+  position: relative;
+  padding: 8px 0 8px 32px;
+  color: var(--text-dark);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.habitList li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 20px;
+  height: 20px;
+  background: var(--primary-green);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
 } 
