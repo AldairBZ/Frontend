@@ -1,30 +1,38 @@
-import React, { useState } from 'react';
-import styles from '../Home.module.css';
-import QuienesSomos from '../footer/equipo/QuienesSomos.jsx';
-import Privacidad from '../footer/privacidad/Terminos.jsx';
-import Referentes from '../footer/referentes/Referentes.jsx';
-import MonigoteBase from './MonigoteBase.jsx';
+import React, { useState, useEffect } from 'react';
+import { useTheme } from '../../../contexts/ThemeContext';
 import Layout from '../../../components/Layout.jsx';
+import styles from './Avatar.module.css';
+import MonigoteBase from './MonigoteBase.jsx';
 
 export default function PersonalizarAvatar() {
-  // Estados temporales (formulario)
-  const [modalAbierto, setModalAbierto] = useState(null);
-  const [showOptions, setShowOptions] = useState(false);
-  const [altura, setAltura] = useState(1.70);
-  const [horasSueno, setHorasSueno] = useState(8);
-  const [genero, setGenero] = useState('');
-  const [actividad, setActividad] = useState('');
-  const [dieta, setDieta] = useState('');
-  const [estres, setEstres] = useState('');
-  const [consumo, setConsumo] = useState('');
-  const [animo, setAnimo] = useState('');
-  const [edad, setEdad] = useState(18);
-  const [peso, setPeso] = useState(70);
-  const [nombre, setNombre] = useState('');
-  const [popup, setPopup] = useState('');
-  const [armarioAbierto, setArmarioAbierto] = useState(false);
+  const { darkMode } = useTheme();
+  const [showConfig, setShowConfig] = useState(false);
+  const [activeCategory, setActiveCategory] = useState('cabeza');
+  const [draggedItem, setDraggedItem] = useState(null);
+  const [equippedClothing, setEquippedClothing] = useState({
+    cabeza: null,
+    torso: null,
+    piernas: null,
+    pies: null
+  });
+  const [errorMessage, setErrorMessage] = useState('');
 
-  // Estados guardados (panel de información)
+  // Estados del formulario
+  const [formData, setFormData] = useState({
+    nombre: '',
+    edad: 18,
+    peso: 70,
+    altura: 1.70,
+    genero: '',
+    actividad: '',
+    dieta: '',
+    horasSueno: 8,
+    estres: '',
+    consumo: '',
+    animo: ''
+  });
+
+  // Datos guardados (panel de información)
   const [savedData, setSavedData] = useState({
     nombre: '',
     edad: 18,
@@ -36,379 +44,610 @@ export default function PersonalizarAvatar() {
     horasSueno: 8,
     estres: '',
     consumo: '',
-    animo: '',
+    animo: ''
   });
 
-  // Estilos para transición del armario
-  const armarioWidth = 240;
+  // Ropa disponible por categoría
+  const clothingItems = {
+    cabeza: [
+      { id: 'gorra', name: 'Gorra', icon: '🧢' },
+      { id: 'sombrero', name: 'Sombrero', icon: '🎩' },
+      { id: 'gorro', name: 'Gorro', icon: '🎧' },
+      { id: 'diadema', name: 'Diadema', icon: '👑' }
+    ],
+    torso: [
+      { id: 'camiseta', name: 'Camiseta', icon: '👕' },
+      { id: 'camisa', name: 'Camisa', icon: '👔' },
+      { id: 'sudadera', name: 'Sudadera', icon: '🧥' },
+      { id: 'vestido', name: 'Vestido', icon: '👗' }
+    ],
+    piernas: [
+      { id: 'pantalon', name: 'Pantalón', icon: '👖' },
+      { id: 'falda', name: 'Falda', icon: '👘' },
+      { id: 'shorts', name: 'Shorts', icon: '🩳' },
+      { id: 'leggings', name: 'Leggings', icon: '🧦' }
+    ],
+    pies: [
+      { id: 'zapatos', name: 'Zapatos', icon: '👟' },
+      { id: 'botas', name: 'Botas', icon: '👢' },
+      { id: 'sandalias', name: 'Sandalias', icon: '🩴' },
+      { id: 'tenis', name: 'Tenis', icon: '👞' }
+    ]
+  };
+
+  // Guardar datos en localStorage
+  useEffect(() => {
+    const savedAvatar = localStorage.getItem('avatarData');
+    if (savedAvatar) {
+      const parsed = JSON.parse(savedAvatar);
+      setSavedData(parsed);
+      setFormData(parsed);
+    }
+
+    const savedClothing = localStorage.getItem('avatarClothing');
+    if (savedClothing) {
+      setEquippedClothing(JSON.parse(savedClothing));
+    }
+  }, []);
+
+  const handleDragStart = (e, item, category) => {
+    setDraggedItem({ ...item, category });
+    e.dataTransfer.effectAllowed = 'move';
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  };
+
+  const handleDrop = (e, dropZone) => {
+    e.preventDefault();
+    if (draggedItem) {
+      const newEquippedClothing = { ...equippedClothing };
+      newEquippedClothing[draggedItem.category] = draggedItem;
+      setEquippedClothing(newEquippedClothing);
+      localStorage.setItem('avatarClothing', JSON.stringify(newEquippedClothing));
+      setDraggedItem(null);
+    }
+  };
+
+  const handleSaveData = () => {
+    // Validaciones
+    if (formData.nombre.length > 20) {
+      setErrorMessage('El nombre no puede tener más de 20 caracteres.');
+      return;
+    }
+    if (formData.edad < 5 || formData.edad > 100) {
+      setErrorMessage('La edad debe estar entre 5 y 100 años.');
+      return;
+    }
+    if (formData.peso < 10 || formData.peso > 400) {
+      setErrorMessage('El peso debe estar entre 10 y 400 kg.');
+      return;
+    }
+
+    const camposFaltantes = [];
+    if (!formData.genero) camposFaltantes.push('género');
+    if (!formData.actividad) camposFaltantes.push('actividad física');
+    if (!formData.dieta) camposFaltantes.push('dieta');
+    if (!formData.estres) camposFaltantes.push('estrés');
+    if (!formData.consumo) camposFaltantes.push('consumo');
+    if (!formData.animo) camposFaltantes.push('ánimo');
+
+    if (camposFaltantes.length > 0) {
+      setErrorMessage('Falta seleccionar: ' + camposFaltantes.join(', '));
+      return;
+    }
+
+    setErrorMessage('');
+    setSavedData(formData);
+    localStorage.setItem('avatarData', JSON.stringify(formData));
+  };
+
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const removeClothing = (category) => {
+    const newEquippedClothing = { ...equippedClothing };
+    newEquippedClothing[category] = null;
+    setEquippedClothing(newEquippedClothing);
+    localStorage.setItem('avatarClothing', JSON.stringify(newEquippedClothing));
+  };
 
   return (
     <Layout>
-      <div className={styles.homeWrapper}>
-        {/* Header igual que en Home */}
-        {/* Header eliminado, ahora lo maneja Layout */}
-        {/* Main vacío para personalización */}
-        <main className={styles.main} style={{minHeight: 'calc(100vh - 60px - 48px)', marginTop: 10, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', position: 'relative', overflow: 'visible'}}>
-          <div style={{position: 'relative', width: '40vw', minWidth: 300, maxWidth: 600, height: '60vh', minHeight: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff', borderRadius: 24, boxShadow: '0 4px 32px #0002', margin: '-40px auto 0 auto', transition: 'transform 0.4s cubic-bezier(.4,1.6,.6,1)', transform: showOptions ? 'translateX(-340px)' : 'translateX(0)'}}>
-            {/* Botón de armario dentro del panel blanco, arriba a la izquierda */}
-            <div style={{
-              position: 'absolute',
-              top: 14,
-              left: 14,
-              zIndex: 10,
-            }}>
-              <button
-                type="button"
-                style={{
-                  background: '#5b9cc8',
-                  border: 'none',
-                  borderRadius: '50%',
-                  width: 52,
-                  height: 52,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 2px 8px #0002',
-                  cursor: 'pointer',
-                  transition: 'box-shadow 0.2s',
-                  fontSize: 24,
-                  padding: 0,
-                }}
-                aria-label="Abrir armario"
-                onClick={() => setArmarioAbierto(true)}
-              >
-                {/* Icono de armario SVG proporcionado */}
-                <svg fill="#000" viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M13 10.551v-.678A4.005 4.005 0 0 0 16 6c0-2.206-1.794-4-4-4S8 3.794 8 6h2c0-1.103.897-2 2-2s2 .897 2 2-.897 2-2 2a1 1 0 0 0-1 1v1.551l-8.665 7.702A1.001 1.001 0 0 0 3 20h18a1.001 1.001 0 0 0 .664-1.748L13 10.551zM5.63 18 12 12.338 18.37 18H5.63z"></path>
-                </svg>
-              </button>
-            </div>
-            {/* Panel de información encima del panel principal */}
-            <div style={{position: 'absolute', top: 20, left: '70%', transform: 'translateX(-50%)', background: '#8fc4ea', color: '#fff', borderRadius: 14, boxShadow: '0 2px 8px #0002', width: 240, height: 325, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', fontWeight: 500, fontSize: 15, zIndex: 3, padding: '22px 18px 18px 18px', gap: 6}}>
-              <div style={{fontSize: 18, fontWeight: 700, marginBottom: 10}}>Información</div>
-              <div style={{lineHeight: 1.5}}>
-                <div><b>Nombre:</b> {savedData.nombre || <span style={{opacity: 0.6}}>—</span>}</div>
-                <div><b>Edad:</b> {savedData.edad ? savedData.edad + ' años' : <span style={{opacity: 0.6}}>—</span>}</div>
-                <div><b>Peso:</b> {savedData.peso ? savedData.peso + ' kg' : <span style={{opacity: 0.6}}>—</span>}</div>
-                <div><b>Altura:</b> {savedData.altura ? savedData.altura.toFixed(2) + ' m' : <span style={{opacity: 0.6}}>—</span>}</div>
-                <div><b>Género:</b> {savedData.genero ? (savedData.genero === 'masculino' ? 'Masculino ♂️' : 'Femenino ♀️') : <span style={{opacity: 0.6}}>—</span>}</div>
-                <div><b>Actividad física:</b> {savedData.actividad ? (savedData.actividad.charAt(0).toUpperCase() + savedData.actividad.slice(1)) : <span style={{opacity: 0.6}}>—</span>}</div>
-                <div><b>Dieta:</b> {savedData.dieta ? (savedData.dieta.charAt(0).toUpperCase() + savedData.dieta.slice(1)) : <span style={{opacity: 0.6}}>—</span>}</div>
-                <div><b>Horas de sueño:</b> {savedData.horasSueno ? savedData.horasSueno + ' h' : <span style={{opacity: 0.6}}>—</span>}</div>
-                <div><b>Estrés:</b> {savedData.estres ? (savedData.estres.charAt(0).toUpperCase() + savedData.estres.slice(1)) : <span style={{opacity: 0.6}}>—</span>}</div>
-                <div><b>Consumo:</b> {savedData.consumo ? (savedData.consumo.charAt(0).toUpperCase() + savedData.consumo.slice(1)) : <span style={{opacity: 0.6}}>—</span>}</div>
-                <div><b>Ánimo:</b> {savedData.animo ? (savedData.animo.charAt(0).toUpperCase() + savedData.animo.slice(1)) : <span style={{opacity: 0.6}}>—</span>}</div>
+      <div className={styles.avatarWrapper}>
+        {/* ===== HERO SECTION MODERNO ===== */}
+        <section className={styles.heroSection}>
+          <div className={styles.heroBackground}>
+            <div className={styles.heroParticles}></div>
+            <div className={styles.heroGradient}></div>
+          </div>
+          <div className={styles.heroContainer}>
+            <div className={styles.heroContent}>
+              <div className={styles.heroBadge}>
+                <span>👤</span>
+                Personalizable
               </div>
-            </div>
-            {/* Monigote base pegado a la derecha */}
-            <div style={{position: 'absolute', right: 300, bottom: 0, top: 0, display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', zIndex: 2, pointerEvents: 'none'}}>
-              <MonigoteBase style={{height: '95%', maxHeight: 300, width: 'auto', marginRight: 8, marginBottom: 8}} />
-            </div>
-            {/* Panel vacío para personalización */}
-            {/* Opciones (engranaje) */}
-            <div style={{position: 'absolute', top: -22, right: -22, background: '#fff', borderRadius: 12, boxShadow: '0 2px 8px #0002', width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2, cursor: 'pointer'}} onClick={() => setShowOptions(v => !v)}>
-              <span style={{fontSize: 26, color: '#5b9cc8'}}>⚙️</span>
+              <h1 className={styles.heroTitle}>
+                Personaliza tu
+                <span className={styles.heroTitleHighlight}> avatar</span>
+              </h1>
+              <p className={styles.heroSubtitle}>
+                Crea tu personaje único con diferentes prendas y configura tus datos personales 
+                para una experiencia personalizada en la aplicación.
+              </p>
             </div>
           </div>
-          {/* Panel de opciones grande a la derecha */}
-          <div style={{
-            position: 'absolute',
-            top: '60px',
-            left: 'calc(50% - 10px)',
-            height: '70vh',
-            minHeight: 340,
-            width: showOptions ? '48vw' : 0,
-            maxWidth: 800,
-            background: '#fff',
-            borderRadius: 24,
-            boxShadow: '0 4px 32px #0002',
-            overflow: 'hidden',
-            transition: 'width 0.6s cubic-bezier(.4,1.6,.6,1), opacity 0.6s cubic-bezier(.4,1.6,.6,1), transform 0.6s cubic-bezier(.4,1.6,.6,1)',
-            opacity: showOptions ? 1 : 0,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 3,
-            transform: showOptions ? 'translateX(0)' : 'translateX(100%)',
-          }}>
-            <form style={{width: '90%', maxWidth: 500, display: 'flex', flexDirection: 'column', gap: 8, margin: '0 auto'}}>
-              {/* Nombre */}
-              <label style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
-                Nombre:
-                <input type="text" maxLength={20} value={nombre} onChange={e => setNombre(e.target.value)} style={{maxWidth: 120, width: '100%', padding: 5, borderRadius: 6, border: '1px solid #bcd', fontSize: 13}} />
-              </label>
-              {/* Edad */}
-              <label style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
-                Edad:
-                <input type="number" min={5} max={100} value={edad === '' ? '' : edad} onChange={e => {
-                  const val = e.target.value;
-                  if (val === '') setEdad('');
-                  else setEdad(Number(val));
-                }} style={{width: 55, padding: 5, borderRadius: 6, border: '1px solid #bcd', fontSize: 13}} />
-              </label>
-              {/* Peso */}
-              <label style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
-                Peso:
-                <input type="number" min={10} max={400} value={peso === '' ? '' : peso} onChange={e => {
-                  const val = e.target.value;
-                  if (val === '') setPeso('');
-                  else setPeso(Number(val));
-                }} style={{width: 55, padding: 5, borderRadius: 6, border: '1px solid #bcd', fontSize: 13}} />
-              </label>
-              {/* Altura */}
-              <label style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
-                Altura:
-                <input type="range" min={1} max={2.15} step={0.01} value={altura} onChange={e => setAltura(Number(e.target.value))} style={{flex: 1}} />
-                <span style={{width: 30, textAlign: 'right', fontSize: 12}}>{altura.toFixed(2)}m</span>
-              </label>
-              {/* Género */}
-              <div style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
-                Género:
-                <button type="button" onClick={() => setGenero('masculino')} style={{background: '#8fc4ea', color: '#fff', border: genero === 'masculino' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 9px', fontSize: 13, display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer', boxShadow: genero === 'masculino' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>
-                  <span role="img" aria-label="masculino">♂️</span>
-                </button>
-                <button type="button" onClick={() => setGenero('femenino')} style={{background: '#f7a3c7', color: '#fff', border: genero === 'femenino' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 9px', fontSize: 13, display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer', boxShadow: genero === 'femenino' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>
-                  <span role="img" aria-label="femenino">♀️</span>
-                </button>
-              </div>
-              {/* Nivel de actividad física */}
-              <div style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
-                Nivel de actividad física:
-                <button type="button" onClick={() => setActividad('malo')} style={{background: '#e0e0e0', border: actividad === 'malo' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: actividad === 'malo' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Malo</button>
-                <button type="button" onClick={() => setActividad('neutral')} style={{background: '#ffe680', border: actividad === 'neutral' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: actividad === 'neutral' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Neutral</button>
-                <button type="button" onClick={() => setActividad('bueno')} style={{background: '#b6e6a0', border: actividad === 'bueno' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: actividad === 'bueno' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Bueno</button>
-              </div>
-              {/* Tipo de dieta */}
-              <div style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
-                Tipo de dieta:
-                <button type="button" onClick={() => setDieta('omnivora')} style={{background: '#e0e0e0', border: dieta === 'omnivora' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: dieta === 'omnivora' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Omnívora</button>
-                <button type="button" onClick={() => setDieta('vegetariana')} style={{background: '#b6e6a0', border: dieta === 'vegetariana' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: dieta === 'vegetariana' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Vegetariana</button>
-                <button type="button" onClick={() => setDieta('vegana')} style={{background: '#a0e6d6', border: dieta === 'vegana' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: dieta === 'vegana' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Vegana</button>
-              </div>
-              {/* Horas de sueño */}
-              <label style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
-                Horas de sueño:
-                <input type="range" min={1} max={14} step={1} value={horasSueno} onChange={e => setHorasSueno(Number(e.target.value))} style={{flex: 1}} />
-                <span style={{width: 30, textAlign: 'right', fontSize: 12}}>{horasSueno}h</span>
-              </label>
-              {/* Nivel de estrés */}
-              <div style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
-                Nivel de estrés:
-                <button type="button" onClick={() => setEstres('bajo')} style={{background: '#b6e6a0', border: estres === 'bajo' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: estres === 'bajo' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Bajo</button>
-                <button type="button" onClick={() => setEstres('medio')} style={{background: '#ffe680', border: estres === 'medio' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: estres === 'medio' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Medio</button>
-                <button type="button" onClick={() => setEstres('alto')} style={{background: '#f7a3c7', border: estres === 'alto' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: estres === 'alto' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Alto</button>
-              </div>
-              {/* Consumo de sustancias */}
-              <div style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
-                Consumo de sustancias:
-                <button type="button" onClick={() => setConsumo('ninguno')} style={{background: '#b6e6a0', border: consumo === 'ninguno' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: consumo === 'ninguno' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Ninguno</button>
-                <button type="button" onClick={() => setConsumo('poco')} style={{background: '#e0e0e0', border: consumo === 'poco' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: consumo === 'poco' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Poco</button>
-                <button type="button" onClick={() => setConsumo('habitual')} style={{background: '#ffe680', border: consumo === 'habitual' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: consumo === 'habitual' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Habitual</button>
-                <button type="button" onClick={() => setConsumo('mucho')} style={{background: '#f7a3c7', border: consumo === 'mucho' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: consumo === 'mucho' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Mucho</button>
-              </div>
-              {/* Estado de ánimo general */}
-              <div style={{display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, fontSize: 13}}>
-                Estado de ánimo general:
-                <button type="button" onClick={() => setAnimo('bajo')} style={{background: '#b6e6a0', border: animo === 'bajo' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: animo === 'bajo' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Bajo</button>
-                <button type="button" onClick={() => setAnimo('neutro')} style={{background: '#ffe680', border: animo === 'neutro' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: animo === 'neutro' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Neutro</button>
-                <button type="button" onClick={() => setAnimo('alto')} style={{background: '#8fc4ea', border: animo === 'alto' ? '2px solid #222' : 'none', borderRadius: 6, padding: '5px 7px', fontWeight: 600, fontSize: 12, cursor: 'pointer', boxShadow: animo === 'alto' ? '0 0 8px 2px #222' : 'none', transition: 'box-shadow 0.2s, border 0.2s'}}>Alto</button>
-              </div>
-            </form>
-            {/* Botón Guardar abajo a la derecha */}
-            <div style={{position: 'absolute', bottom: 12, right: 32, zIndex: 4}}>
-              <button
-                type="button"
-                style={{background: '#3498db', color: '#fff', border: 'none', borderRadius: 8, padding: '10px 22px', fontWeight: 600, fontSize: 15, display: 'flex', alignItems: 'center', gap: 8, boxShadow: '0 2px 8px #0001', cursor: 'pointer'}}
-                onClick={() => {
-                  if (nombre.length > 20) {
-                    setPopup('El nombre no puede tener más de 20 caracteres.');
-                    return;
-                  }
-                  if (edad === '' || isNaN(edad)) {
-                    setPopup('La edad no puede estar vacía.');
-                    return;
-                  }
-                  if (edad > 100) {
-                    setPopup('La edad no puede ser mayor de 100 años.');
-                    return;
-                  }
-                  if (edad < 5) {
-                    setPopup('La edad no puede ser menor de 5 años.');
-                    return;
-                  }
-                  if (peso === '' || isNaN(peso)) {
-                    setPopup('El peso no puede estar vacío.');
-                    return;
-                  }
-                  if (peso > 400) {
-                    setPopup('El peso no puede ser mayor de 400 kg.');
-                    return;
-                  }
-                  if (peso < 10) {
-                    setPopup('El peso no puede ser menor de 10 kg.');
-                    return;
-                  }
-                  // Validación de campos obligatorios tipo botón
-                  const camposFaltantes = [];
-                  if (!genero) camposFaltantes.push('género');
-                  if (!actividad) camposFaltantes.push('actividad física');
-                  if (!dieta) camposFaltantes.push('dieta');
-                  if (!estres) camposFaltantes.push('estrés');
-                  if (!consumo) camposFaltantes.push('consumo');
-                  if (!animo) camposFaltantes.push('ánimo');
-                  if (camposFaltantes.length > 0) {
-                    setPopup('Falta seleccionar: ' + camposFaltantes.join(', '));
-                    return;
-                  }
-                  setPopup('');
-                  setSavedData({
-                    nombre,
-                    edad,
-                    peso,
-                    altura,
-                    genero,
-                    actividad,
-                    dieta,
-                    horasSueno,
-                    estres,
-                    consumo,
-                    animo,
-                  });
-                }}
-              >
-                <span role="img" aria-label="imprimir" style={{fontSize: 18}}>🖨️</span>
-                Guardar
-              </button>
-            </div>
-            {/* Pop-up de error */}
-            {popup && (
-              <div style={{position: 'absolute', bottom: 70, right: 32, background: '#fff', color: '#232e43', border: '1.5px solid #3498db', borderRadius: 8, padding: '10px 18px', fontWeight: 600, fontSize: 14, boxShadow: '0 2px 12px #0002', zIndex: 10}}>
-                {popup}
-                <button onClick={() => setPopup('')} style={{marginLeft: 16, background: 'none', border: 'none', color: '#3498db', fontWeight: 700, fontSize: 16, cursor: 'pointer'}}>✕</button>
-              </div>
-            )}
+        </section>
+
+        {/* ===== SECCIÓN PRINCIPAL INTERACTIVA ===== */}
+        <section className={styles.mainInteractiveSection}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>¿Por qué personalizar tu avatar?</h2>
+            <p className={styles.sectionSubtitle}>
+              Un avatar personalizado te ayuda a sentirte más conectado con la aplicación. 
+              Configura tus datos personales y elige tu vestimenta favorita para que tu experiencia 
+              sea única y representativa de ti mismo.
+            </p>
           </div>
-        </main>
-        {/* Panel de armario lateral */}
-        {armarioAbierto && (
-          <>
-            {/* Fondo semitransparente tipo modal */}
-            <div
-              onClick={() => setArmarioAbierto(false)}
-              style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                width: '100vw',
-                height: '100vh',
-                background: 'rgba(0,0,0,0.18)',
-                zIndex: 1999,
-                transition: 'background 0.3s',
-              }}
-            />
-            {/* Panel armario con transición */}
-            <div
-              style={{
-                position: 'fixed',
-                top: '8vh',
-                left: 0,
-                width: armarioWidth,
-                height: '84vh',
-                background: 'linear-gradient(120deg, #deb887 80%, #a0522d 100%)',
-                boxShadow: '4px 0 24px #0004',
-                zIndex: 2000,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-start',
-                borderRadius: '0 18px 18px 0',
-                transition: 'transform 0.4s cubic-bezier(.4,1.6,.6,1)',
-                transform: armarioAbierto ? 'translateX(0)' : `translateX(-${armarioWidth}px)`,
-                overflow: 'hidden',
-              }}
-            >
-              {/* Cabecera del armario */}
-              <div style={{
-                width: '100%',
-                padding: '18px 18px 8px 18px',
-                background: 'rgba(160,82,45,0.12)',
-                borderBottom: '2px solid #a0522d',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 110,
-              }}>
-                <span style={{fontWeight: 700, fontSize: 18, color: '#7b3f00', letterSpacing: 1}}>Armario</span>
-                <button
-                  onClick={() => setArmarioAbierto(false)}
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    color: '#7b3f00',
-                    fontWeight: 700,
-                    fontSize: 22,
-                    cursor: 'pointer',
-                    lineHeight: 1,
-                  }}
-                  aria-label="Cerrar armario"
-                >✕</button>
-              </div>
-              {/* Botones de categorías de ropa arriba */}
-              <div style={{
-                width: '100%',
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '12px 12px 0 12px',
-                gap: 8,
-              }}>
-                {['Cabeza', 'Torso', 'Piernas'].map((cat, idx) => (
-                  <button
-                    key={cat}
-                    style={{
-                      background: 'rgba(255,255,255,0.85)',
-                      border: '1.5px solid #bfa16b',
-                      borderRadius: 7,
-                      padding: '5px 10px',
-                      fontWeight: 600,
-                      fontSize: 13,
-                      color: '#7b3f00',
-                      boxShadow: '0 1px 4px #0001',
-                      cursor: 'pointer',
-                      transition: 'background 0.2s, border 0.2s',
-                      ...(cat === 'Piernas' ? { marginRight: 18 } : {}),
-                    }}
-                  >{cat}</button>
-                ))}
-              </div>
-              {/* Botón de zapatos abajo del todo */}
-              <div style={{
-                width: '100%',
-                position: 'absolute',
-                bottom: 18,
-                left: 0,
-                display: 'flex',
-                justifyContent: 'center',
-                pointerEvents: 'none',
-              }}>
-                <button
-                  style={{
-                    background: 'rgba(255,255,255,0.85)',
-                    border: '1.5px solid #bfa16b',
-                    borderRadius: 7,
-                    padding: '5px 18px',
-                    fontWeight: 600,
-                    fontSize: 13,
-                    color: '#7b3f00',
-                    boxShadow: '0 1px 4px #0001',
-                    cursor: 'pointer',
-                    transition: 'background 0.2s, border 0.2s',
-                    pointerEvents: 'auto',
-                  }}
-                >Zapatos</button>
+
+          <div className={styles.interactiveContainer}>
+            {/* ===== PANEL IZQUIERDO - ARMARIO ===== */}
+            <div className={styles.leftPanel}>
+              <div className={styles.wardrobePanel}>
+                <div className={styles.wardrobeHeader}>
+                  <h3 className={styles.wardrobeTitle}>🛍️ Armario</h3>
+                  <span className={styles.wardrobeIcon}>👕</span>
+                </div>
+
+                <div className={styles.categoryButtons}>
+                  {Object.keys(clothingItems).map(category => (
+                    <button
+                      key={category}
+                      className={`${styles.categoryButton} ${activeCategory === category ? styles.active : ''}`}
+                      onClick={() => setActiveCategory(category)}
+                    >
+                      {category.charAt(0).toUpperCase() + category.slice(1)}
+                    </button>
+                  ))}
+                </div>
+
+                <div className={styles.clothingGrid}>
+                  {clothingItems[activeCategory].map(item => (
+                    <div
+                      key={item.id}
+                      className={styles.clothingItem}
+                      draggable
+                      onDragStart={(e) => handleDragStart(e, item, activeCategory)}
+                    >
+                      <span className={styles.clothingIcon}>{item.icon}</span>
+                      <span className={styles.clothingName}>{item.name}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          </>
-        )}
+
+            {/* ===== PANEL CENTRAL - PERSONAJE ===== */}
+            <div className={styles.centerPanel}>
+              <div className={styles.characterContainer}>
+                <div className={styles.characterBase}>
+                  <MonigoteBase />
+                </div>
+                
+                <div className={styles.characterClothing}>
+                  {Object.entries(equippedClothing).map(([category, item]) => (
+                    item && (
+                      <div key={category} className={styles.clothingLayer}>
+                        <div 
+                          className={styles.clothingItem}
+                          style={{ position: 'absolute', top: 0, left: 0 }}
+                        >
+                          <span className={styles.clothingIcon}>{item.icon}</span>
+                          <button 
+                            onClick={() => removeClothing(category)}
+                            style={{
+                              position: 'absolute',
+                              top: -5,
+                              right: -5,
+                              background: '#ef4444',
+                              color: 'white',
+                              border: 'none',
+                              borderRadius: '50%',
+                              width: '20px',
+                              height: '20px',
+                              fontSize: '12px',
+                              cursor: 'pointer'
+                            }}
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      </div>
+                    )
+                  ))}
+                </div>
+
+                <div 
+                  className={styles.dropZone}
+                  onDragOver={handleDragOver}
+                  onDrop={(e) => handleDrop(e, 'character')}
+                >
+                  Arrastra ropa aquí
+                </div>
+              </div>
+
+              <div className={styles.characterInfo}>
+                <h3 className={styles.characterName}>
+                  {savedData.nombre || 'Tu Avatar'}
+                </h3>
+                <p className={styles.characterStatus}>
+                  Nivel {Math.floor((savedData.edad || 18) / 10) + 1} - {savedData.actividad ? savedData.actividad.charAt(0).toUpperCase() + savedData.actividad.slice(1) : 'Principiante'}
+                </p>
+              </div>
+            </div>
+
+            {/* ===== PANEL DERECHO - INFORMACIÓN Y CONFIGURACIÓN ===== */}
+            <div className={styles.rightPanel}>
+              {/* Panel de Información */}
+              <div className={styles.infoPanel}>
+                <div className={styles.infoHeader}>
+                  <span className={styles.infoIcon}>📊</span>
+                  <h3 className={styles.infoTitle}>Información</h3>
+                </div>
+                
+                <div className={styles.infoList}>
+                  <div className={styles.infoItem}>
+                    <span className={styles.infoLabel}>Nombre:</span>
+                    <span className={styles.infoValue}>
+                      {savedData.nombre || <span className={styles.infoValue + ' empty'}>—</span>}
+                    </span>
+                  </div>
+                  <div className={styles.infoItem}>
+                    <span className={styles.infoLabel}>Edad:</span>
+                    <span className={styles.infoValue}>
+                      {savedData.edad ? savedData.edad + ' años' : <span className={styles.infoValue + ' empty'}>—</span>}
+                    </span>
+                  </div>
+                  <div className={styles.infoItem}>
+                    <span className={styles.infoLabel}>Peso:</span>
+                    <span className={styles.infoValue}>
+                      {savedData.peso ? savedData.peso + ' kg' : <span className={styles.infoValue + ' empty'}>—</span>}
+                    </span>
+                  </div>
+                  <div className={styles.infoItem}>
+                    <span className={styles.infoLabel}>Altura:</span>
+                    <span className={styles.infoValue}>
+                      {savedData.altura ? savedData.altura.toFixed(2) + ' m' : <span className={styles.infoValue + ' empty'}>—</span>}
+                    </span>
+                  </div>
+                  <div className={styles.infoItem}>
+                    <span className={styles.infoLabel}>Género:</span>
+                    <span className={styles.infoValue}>
+                      {savedData.genero ? (savedData.genero === 'masculino' ? 'Masculino ♂️' : 'Femenino ♀️') : <span className={styles.infoValue + ' empty'}>—</span>}
+                    </span>
+                  </div>
+                  <div className={styles.infoItem}>
+                    <span className={styles.infoLabel}>Actividad física:</span>
+                    <span className={styles.infoValue}>
+                      {savedData.actividad ? (savedData.actividad.charAt(0).toUpperCase() + savedData.actividad.slice(1)) : <span className={styles.infoValue + ' empty'}>—</span>}
+                    </span>
+                  </div>
+                  <div className={styles.infoItem}>
+                    <span className={styles.infoLabel}>Dieta:</span>
+                    <span className={styles.infoValue}>
+                      {savedData.dieta ? (savedData.dieta.charAt(0).toUpperCase() + savedData.dieta.slice(1)) : <span className={styles.infoValue + ' empty'}>—</span>}
+                    </span>
+                  </div>
+                  <div className={styles.infoItem}>
+                    <span className={styles.infoLabel}>Horas de sueño:</span>
+                    <span className={styles.infoValue}>
+                      {savedData.horasSueno ? savedData.horasSueno + ' h' : <span className={styles.infoValue + ' empty'}>—</span>}
+                    </span>
+                  </div>
+                  <div className={styles.infoItem}>
+                    <span className={styles.infoLabel}>Estrés:</span>
+                    <span className={styles.infoValue}>
+                      {savedData.estres ? (savedData.estres.charAt(0).toUpperCase() + savedData.estres.slice(1)) : <span className={styles.infoValue + ' empty'}>—</span>}
+                    </span>
+                  </div>
+                  <div className={styles.infoItem}>
+                    <span className={styles.infoLabel}>Consumo:</span>
+                    <span className={styles.infoValue}>
+                      {savedData.consumo ? (savedData.consumo.charAt(0).toUpperCase() + savedData.consumo.slice(1)) : <span className={styles.infoValue + ' empty'}>—</span>}
+                    </span>
+                  </div>
+                  <div className={styles.infoItem}>
+                    <span className={styles.infoLabel}>Ánimo:</span>
+                    <span className={styles.infoValue}>
+                      {savedData.animo ? (savedData.animo.charAt(0).toUpperCase() + savedData.animo.slice(1)) : <span className={styles.infoValue + ' empty'}>—</span>}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Panel de Configuración */}
+              <div className={styles.configPanel}>
+                <button 
+                  className={styles.configButton}
+                  onClick={() => setShowConfig(!showConfig)}
+                >
+                  <span>⚙️ Configuración</span>
+                  <span className={styles.configIcon}>▼</span>
+                </button>
+
+                {showConfig && (
+                  <div className={styles.configDropdown}>
+                    <form className={styles.configForm}>
+                      {/* Nombre */}
+                      <div className={styles.formGroup}>
+                        <label className={styles.formLabel}>Nombre:</label>
+                        <input
+                          type="text"
+                          maxLength={20}
+                          value={formData.nombre}
+                          onChange={(e) => handleInputChange('nombre', e.target.value)}
+                          className={styles.formInput}
+                        />
+                      </div>
+
+                      {/* Edad */}
+                      <div className={styles.formGroup}>
+                        <label className={styles.formLabel}>Edad:</label>
+                        <input
+                          type="number"
+                          min={5}
+                          max={100}
+                          value={formData.edad}
+                          onChange={(e) => handleInputChange('edad', Number(e.target.value))}
+                          className={styles.formInput}
+                        />
+                      </div>
+
+                      {/* Peso */}
+                      <div className={styles.formGroup}>
+                        <label className={styles.formLabel}>Peso (kg):</label>
+                        <input
+                          type="number"
+                          min={10}
+                          max={400}
+                          value={formData.peso}
+                          onChange={(e) => handleInputChange('peso', Number(e.target.value))}
+                          className={styles.formInput}
+                        />
+                      </div>
+
+                      {/* Altura */}
+                      <div className={styles.formGroup}>
+                        <label className={styles.formLabel}>Altura:</label>
+                        <div className={styles.formRange}>
+                          <input
+                            type="range"
+                            min={1}
+                            max={2.15}
+                            step={0.01}
+                            value={formData.altura}
+                            onChange={(e) => handleInputChange('altura', Number(e.target.value))}
+                            className={`${styles.formInput} ${styles.rangeInput}`}
+                          />
+                          <span className={styles.rangeValue}>{formData.altura.toFixed(2)}m</span>
+                        </div>
+                      </div>
+
+                      {/* Género */}
+                      <div className={styles.formGroup}>
+                        <label className={styles.formLabel}>Género:</label>
+                        <div className={styles.buttonGroup}>
+                          <button
+                            type="button"
+                            className={`${styles.optionButton} ${formData.genero === 'masculino' ? styles.selected : ''}`}
+                            onClick={() => handleInputChange('genero', 'masculino')}
+                          >
+                            ♂️ Masculino
+                          </button>
+                          <button
+                            type="button"
+                            className={`${styles.optionButton} ${formData.genero === 'femenino' ? styles.selected : ''}`}
+                            onClick={() => handleInputChange('genero', 'femenino')}
+                          >
+                            ♀️ Femenino
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Actividad física */}
+                      <div className={styles.formGroup}>
+                        <label className={styles.formLabel}>Actividad física:</label>
+                        <div className={styles.buttonGroup}>
+                          <button
+                            type="button"
+                            className={`${styles.optionButton} ${formData.actividad === 'malo' ? styles.selected : ''}`}
+                            onClick={() => handleInputChange('actividad', 'malo')}
+                          >
+                            Malo
+                          </button>
+                          <button
+                            type="button"
+                            className={`${styles.optionButton} ${formData.actividad === 'neutral' ? styles.selected : ''}`}
+                            onClick={() => handleInputChange('actividad', 'neutral')}
+                          >
+                            Neutral
+                          </button>
+                          <button
+                            type="button"
+                            className={`${styles.optionButton} ${formData.actividad === 'bueno' ? styles.selected : ''}`}
+                            onClick={() => handleInputChange('actividad', 'bueno')}
+                          >
+                            Bueno
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Dieta */}
+                      <div className={styles.formGroup}>
+                        <label className={styles.formLabel}>Dieta:</label>
+                        <div className={styles.buttonGroup}>
+                          <button
+                            type="button"
+                            className={`${styles.optionButton} ${formData.dieta === 'omnivora' ? styles.selected : ''}`}
+                            onClick={() => handleInputChange('dieta', 'omnivora')}
+                          >
+                            Omnívora
+                          </button>
+                          <button
+                            type="button"
+                            className={`${styles.optionButton} ${formData.dieta === 'vegetariana' ? styles.selected : ''}`}
+                            onClick={() => handleInputChange('dieta', 'vegetariana')}
+                          >
+                            Vegetariana
+                          </button>
+                          <button
+                            type="button"
+                            className={`${styles.optionButton} ${formData.dieta === 'vegana' ? styles.selected : ''}`}
+                            onClick={() => handleInputChange('dieta', 'vegana')}
+                          >
+                            Vegana
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Horas de sueño */}
+                      <div className={styles.formGroup}>
+                        <label className={styles.formLabel}>Horas de sueño:</label>
+                        <div className={styles.formRange}>
+                          <input
+                            type="range"
+                            min={1}
+                            max={14}
+                            step={1}
+                            value={formData.horasSueno}
+                            onChange={(e) => handleInputChange('horasSueno', Number(e.target.value))}
+                            className={`${styles.formInput} ${styles.rangeInput}`}
+                          />
+                          <span className={styles.rangeValue}>{formData.horasSueno}h</span>
+                        </div>
+                      </div>
+
+                      {/* Estrés */}
+                      <div className={styles.formGroup}>
+                        <label className={styles.formLabel}>Estrés:</label>
+                        <div className={styles.buttonGroup}>
+                          <button
+                            type="button"
+                            className={`${styles.optionButton} ${formData.estres === 'bajo' ? styles.selected : ''}`}
+                            onClick={() => handleInputChange('estres', 'bajo')}
+                          >
+                            Bajo
+                          </button>
+                          <button
+                            type="button"
+                            className={`${styles.optionButton} ${formData.estres === 'medio' ? styles.selected : ''}`}
+                            onClick={() => handleInputChange('estres', 'medio')}
+                          >
+                            Medio
+                          </button>
+                          <button
+                            type="button"
+                            className={`${styles.optionButton} ${formData.estres === 'alto' ? styles.selected : ''}`}
+                            onClick={() => handleInputChange('estres', 'alto')}
+                          >
+                            Alto
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Consumo */}
+                      <div className={styles.formGroup}>
+                        <label className={styles.formLabel}>Consumo:</label>
+                        <div className={styles.buttonGroup}>
+                          <button
+                            type="button"
+                            className={`${styles.optionButton} ${formData.consumo === 'ninguno' ? styles.selected : ''}`}
+                            onClick={() => handleInputChange('consumo', 'ninguno')}
+                          >
+                            Ninguno
+                          </button>
+                          <button
+                            type="button"
+                            className={`${styles.optionButton} ${formData.consumo === 'poco' ? styles.selected : ''}`}
+                            onClick={() => handleInputChange('consumo', 'poco')}
+                          >
+                            Poco
+                          </button>
+                          <button
+                            type="button"
+                            className={`${styles.optionButton} ${formData.consumo === 'habitual' ? styles.selected : ''}`}
+                            onClick={() => handleInputChange('consumo', 'habitual')}
+                          >
+                            Habitual
+                          </button>
+                          <button
+                            type="button"
+                            className={`${styles.optionButton} ${formData.consumo === 'mucho' ? styles.selected : ''}`}
+                            onClick={() => handleInputChange('consumo', 'mucho')}
+                          >
+                            Mucho
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Ánimo */}
+                      <div className={styles.formGroup}>
+                        <label className={styles.formLabel}>Ánimo:</label>
+                        <div className={styles.buttonGroup}>
+                          <button
+                            type="button"
+                            className={`${styles.optionButton} ${formData.animo === 'bajo' ? styles.selected : ''}`}
+                            onClick={() => handleInputChange('animo', 'bajo')}
+                          >
+                            Bajo
+                          </button>
+                          <button
+                            type="button"
+                            className={`${styles.optionButton} ${formData.animo === 'neutro' ? styles.selected : ''}`}
+                            onClick={() => handleInputChange('animo', 'neutro')}
+                          >
+                            Neutro
+                          </button>
+                          <button
+                            type="button"
+                            className={`${styles.optionButton} ${formData.animo === 'alto' ? styles.selected : ''}`}
+                            onClick={() => handleInputChange('animo', 'alto')}
+                          >
+                            Alto
+                          </button>
+                        </div>
+                      </div>
+
+                      <button
+                        type="button"
+                        className={styles.saveButton}
+                        onClick={handleSaveData}
+                      >
+                        <span className={styles.saveIcon}>💾</span>
+                        Guardar Datos
+                      </button>
+
+                      {errorMessage && (
+                        <div className={styles.errorMessage}>
+                          {errorMessage}
+                          <button
+                            className={styles.closeError}
+                            onClick={() => setErrorMessage('')}
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      )}
+                    </form>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </Layout>
   );
