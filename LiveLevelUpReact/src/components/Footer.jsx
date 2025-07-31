@@ -55,6 +55,37 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Información legal y equipo */}
+          <div className="footer-col">
+            <h4>Información</h4>
+            <ul>
+              <li>
+                <button 
+                  className="footer-link-button"
+                  onClick={() => handleModalOpen('equipo')}
+                >
+                  👥 Quiénes somos
+                </button>
+              </li>
+              <li>
+                <button 
+                  className="footer-link-button"
+                  onClick={() => handleModalOpen('privacidad')}
+                >
+                  🔒 Términos y Privacidad
+                </button>
+              </li>
+              <li>
+                <button 
+                  className="footer-link-button"
+                  onClick={() => handleModalOpen('referentes')}
+                >
+                  🌐 Webs de confianza
+                </button>
+              </li>
+            </ul>
+          </div>
+
           {/* Contacto */}
           <div className="footer-col">
             <h4>Contacto</h4>

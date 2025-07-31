@@ -72,7 +72,7 @@
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
   gap: 48px;
   margin-bottom: 48px;
 }
@@ -140,6 +140,26 @@
   font-size: 0.95rem;
 }
 
+/* Botones del footer */
+.footer-link-button {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  text-decoration: none;
+  transition: var(--transition);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+}
+
+.footer-link-button:hover {
+  color: var(--primary-green);
+  transform: translateX(4px);
+}
+
 /* Enlaces rápidos en púrpura */
 .footer-col:nth-child(2) ul li a {
   color: #8b5cf6;
@@ -157,6 +177,16 @@
 
 .footer-col:nth-child(3) ul li a:hover {
   color: #2563eb;
+  transform: translateX(4px);
+}
+
+/* Información en verde */
+.footer-col:nth-child(4) ul li .footer-link-button {
+  color: #10b981;
+}
+
+.footer-col:nth-child(4) ul li .footer-link-button:hover {
+  color: #059669;
   transform: translateX(4px);
 }
 
@@ -294,6 +324,10 @@
   color: #d1d5db;
 }
 
+.dark-mode .footer-link-button {
+  color: #d1d5db;
+}
+
 .dark-mode .footer-col:nth-child(2) ul li a {
   color: #a78bfa;
 }
@@ -308,6 +342,14 @@
 
 .dark-mode .footer-col:nth-child(3) ul li a:hover {
   color: #bfdbfe;
+}
+
+.dark-mode .footer-col:nth-child(4) ul li .footer-link-button {
+  color: #6ee7b7;
+}
+
+.dark-mode .footer-col:nth-child(4) ul li .footer-link-button:hover {
+  color: #34d399;
 }
 
 .dark-mode .footer-contact p {
@@ -330,6 +372,7 @@
 .footer-col:nth-child(2) { animation-delay: 0.2s; }
 .footer-col:nth-child(3) { animation-delay: 0.3s; }
 .footer-col:nth-child(4) { animation-delay: 0.4s; }
+.footer-col:nth-child(5) { animation-delay: 0.5s; }
 
 @keyframes fadeInUp {
   to {
@@ -343,6 +386,13 @@
   background: rgba(16, 185, 129, 0.1);
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+
+.footer-col ul li .footer-link-button:hover {
+  background: rgba(16, 185, 129, 0.1);
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 4px;
 }
 
 .footer-contact p:hover {
